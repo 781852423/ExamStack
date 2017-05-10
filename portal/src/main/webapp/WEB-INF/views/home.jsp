@@ -157,10 +157,10 @@ String basePath = request.getScheme() + "://"
 								<!-- Left column -->
 								<div class="col-l">
 									<p style="text-indent:2em;">
-										ExamStack是国内首款一款基于JAVA与MYSQL开发的网络考试系统。它可以稳定、顺畅的运行在Windows与Linux平台上。您可以通过它快捷方便的创建试题和题库，发布试卷，组织考试，系统自动批改。高度的可配置性和灵活性使得它可以被应用于很多领域。
+										职梦靠岸是国内专注应届生、社会招聘的笔试面试辅导机构，专注做银行、证券、保险等机构笔试面试辅导。
 									</p>
 									<p style="text-indent:2em;">
-										软件采用GPL协议，完全开放且免费，并且有固定的开发团队提供技术支持
+										团队具有相关单位求职和工作经验。
 									</p>
 								</div>
 								<!-- Right column -->
@@ -170,11 +170,11 @@ String basePath = request.getScheme() + "://"
 
 									<!-- <img alt="" src="../resources/images/ad.png"> -->
 									<p>
-										如果您对软件有任何反馈和建议，加入我们的QQ群152258375一起讨论吧
+										如果有任何意见或者建议，请留言给我们。
 									</p>
 
 									<!-- Button -->
-									<a class="btn btn-default btn-cta" href="user-register"><i class="fa fa-arrow-circle-down"></i> 马上加入我们吧</a>
+									<a class="btn btn-default btn-cta" href="user-register"><i class="fa fa-arrow-circle-down"></i> 注册网站看看</a>
 
 								</div>
 							</div>
@@ -235,19 +235,19 @@ String basePath = request.getScheme() + "://"
 						</div>
 						<div class="field-category-text ">
 							<p>
-								医药行业考试
+								国有银行考试
 							</p>
 						</div>
 					</div>
 					<div class="field-category-footer">
 						<div class="field-category-footer-sub">
 							<p class="field-student-subtitle">
-								医药行业考试
+								股份制银行考试
 							</p>
 						</div>
 						<div class="field-category-footer-sub">
 							<i class="fa fa-users"></i>
-							<span class="field-student-num">412</span>
+							<span class="field-student-num">512</span>
 
 							名学员
 						</div>
@@ -260,20 +260,20 @@ String basePath = request.getScheme() + "://"
 						</div>
 						<div class="field-category-text ">
 							<p>
-								公务员申论
+								进出口银行
 							</p>
 						</div>
 					</div>
 					<div class="field-category-footer">
 						<div class="field-category-footer-sub">
 							<p class="field-student-subtitle">
-								公务员申论
+								国家开发银行
 							</p>
 
 						</div>
 						<div class="field-category-footer-sub">
 							<i class="fa fa-users"></i>
-							<span class="field-student-num">2143</span>
+							<span class="field-student-num">1143</span>
 							名学员
 						</div>
 
@@ -285,14 +285,14 @@ String basePath = request.getScheme() + "://"
 						</div>
 						<div class="field-category-text ">
 							<p>
-								驾校考试科目一
+								邮政储蓄银行
 							</p>
 						</div>
 					</div>
 					<div class="field-category-footer">
 						<div class="field-category-footer-sub">
 							<p class="field-student-subtitle">
-								驾校考试科目一
+								城商行
 							</p>
 
 						</div>
@@ -380,7 +380,7 @@ String basePath = request.getScheme() + "://"
 					<div class="col-md-12">
 						<div class="copy">
 							<p>
-								ExamStack Copyright © <a href="http://www.examstack.com/" target="_blank">ExamStack</a> - <a href="." target="_blank">主页</a> | <a href="http://www.examstack.com/" target="_blank">关于我们</a> | <a href="http://www.examstack.com/" target="_blank">FAQ</a> | <a href="http://www.examstack.com/" target="_blank">联系我们</a>
+								职梦靠岸 Copyright © <a href="http://www.51jobpass.com/" target="_blank">职梦靠岸</a> - <a href="." target="_blank">主页</a> | <a href="http://www.51jobpass.com/" target="_blank">关于我们</a> | <a href="http://www.51jobpass.com/" target="_blank">FAQ</a> | <a href="http://www.51jobpass.com/" target="_blank">联系我们</a>
 							</p>
 						</div>
 					</div>

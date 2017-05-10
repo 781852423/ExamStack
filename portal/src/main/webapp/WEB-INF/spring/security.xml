@@ -3,14 +3,15 @@
 	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd 
-               http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd ">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	                    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+                        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd ">
 
-	<!-- New in Spring Security 3.1 -->
-	<!-- <http pattern="/css/**" security="none"/> -->
-
-	<!-- <security:http use-expressions="true"> -->
-	<security:http pattern="/start" security="none" />
+	<!-- 标注哪些页面不需要安全策略 ，静态资源和登录相关-->
+	<security:http pattern="/user-login-page" security="none" />
+	<security:http pattern="/resources/**" security="none" />
+	
 	<security:http use-expressions="true"
 		entry-point-ref="loginUrlAuthenticationEntryPoint">
 		<security:intercept-url pattern="/admin/**"
@@ -33,30 +34,30 @@
 		</security:session-management>
 	</security:http>
 
+<!-- authentication-manager 用来配置用户管理,这里指定userDetailsServiceImpl实现springUserDetails接口，实现方法Spring框架中该接口的loadUserByUsername()方法 -->
 	<security:authentication-manager alias="authenticationManager">
 		
 		<security:authentication-provider
-			user-service-ref="userDetailsServiceImpl">
-			
+			user-service-ref="userDetailsServiceImpl">		
 			<security:password-encoder hash="sha">
 				<security:salt-source user-property="username" />
 			</security:password-encoder>
 		</security:authentication-provider>
+		
 		<security:authentication-provider
 			user-service-ref="userDetailsServiceImpl2" />
 	</security:authentication-manager>
-	<!-- <security:authentication-provider user-service-ref="userDetailsServiceImpl"> 
-		<security:password-encoder hash="sha"> <security:salt-source user-property="username" 
-		/> </security:password-encoder> </security:authentication-provider> -->
+	
 	<bean id="loginUrlAuthenticationEntryPoint"
 		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
 		<property name="loginFormUrl" value="/user-login-page" />
 	</bean>
 	<!-- <bean id="userDetailsServiceImpl" class="com.extr.security.UserDetailsServiceImpl"> 
 		<property name="userService" ref="userService"/> </bean> -->
+	
 	<bean id="securityFilter"
 		class="com.examstack.portal.security.filter.AuthenticationFilter">
-		<!-- <property name="defaultTargetUrl" value="home" /> -->
+		
 		<property name="filterProcessesUrl" value="/j_spring_security_check" />
 		<property name="authenticationManager" ref="authenticationManager" />
 
