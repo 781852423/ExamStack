@@ -26,14 +26,11 @@
 		destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
 		
-		<!-- <property name="jdbcUrl"
-			value="jdbc:mysql://218.93.12.45:33306/examonline?useUnicode=true&amp;characterEncoding=UTF-8" />
-		<property name="user" value="examonline" />
-		<property name="password" value="examonline" /> -->
+		
 		<property name="jdbcUrl"
 			value="jdbc:mysql://localhost:3306/examstack?useUnicode=true&amp;characterEncoding=UTF-8" />
 		<property name="user" value="root" />
-		<property name="password" value="" />
+		<property name="password" value="111111" />
  		
 		
 		<property name="maxPoolSize" value="50"></property>
