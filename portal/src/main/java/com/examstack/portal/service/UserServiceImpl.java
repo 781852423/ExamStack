@@ -1,5 +1,7 @@
 package com.examstack.portal.service;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,13 +30,14 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public int addUser(User user,String authority,int groupId,HashMap<String,Role> roleMap) {
 		try {
-			int userId = -1;
+			int userId = -1; // 声明一个不存在的userId值
 			userMapper.insertUser(user);
 			userId = user.getUserId();
 			userMapper.grantUserRole(userId, roleMap.get(authority).getRoleId());
 			if(user.getDepId() != 0)
 				userMapper.addUser2Dep(userId, user.getDepId());
-			return userId;
+			return userId;	
+			
 		} catch (Exception e) {
 			String cause = e.getCause().getMessage();
 			throw new RuntimeException(cause);

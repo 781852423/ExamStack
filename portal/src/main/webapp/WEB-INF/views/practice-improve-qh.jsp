@@ -1,28 +1,15 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+<%@ page language="java" pageEncoding="utf-8"%>
+<%@include file="include/before_html.jsp" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8" />
-		<base href="<%=basePath%>">
-
-		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
-		Remove this if you use the .htaccess -->
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>ExamStack</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<link rel="shortcut icon" href="<%=basePath%>resources/images/favicon.ico" />
-		<link href="resources/bootstrap/css/bootstrap-huan.css" rel="stylesheet">
-		<link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		
+		<title>练习-精进！</title>
+		
+		<%@include file="include/head_files.jsp" %>
 		<link href="resources/css/exam.css" rel="stylesheet" type="text/css">
-		<link href="resources/css/style.css" rel="stylesheet">
+		
 		
 		<style type="text/css">
 			.question-body {
@@ -45,63 +32,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</style>
 	</head>
 	<body>
-		<header>
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-5">
-						<div class="logo">
-							<h1><a href="#"><img alt="" src="resources/images/logo.png"></a></h1>
-						</div>
-					</div>
-					<div class="col-xs-7" id="login-info">
-						<c:choose>
-							<c:when test="${not empty sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}">
-								<div id="login-info-user">
+		 <%@include file="include/body_header.jsp" %>
+        <!-- Navigation bar starts -->
 
-									<a href="user-detail/${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}" id="system-info-account" target="_blank">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}</a>
-									<span>|</span>
-									<a href="j_spring_security_logout"><i class="fa fa-sign-out"></i> 退出</a>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<a class="btn btn-primary" href="user-register">用户注册</a>
-								<a class="btn btn-success" href="user-login-page">登录</a>
-							</c:otherwise>
-						</c:choose>
-					</div>
-				</div>
-			</div>
-		</header>
-		<!-- Navigation bar starts -->
-
-		<div class="navbar bs-docs-nav" role="banner">
-			<div class="container">
-				<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-					<ul class="nav navbar-nav">
-						<li>
-							<a href="home"><i class="fa fa-home"></i>主页</a>
-						</li>
-						<li>
-							<a href="student/practice-list"><i class="fa fa-edit"></i>试题练习</a>
-						</li>
-						<li>
-							<a href="exam-list"><i class="fa  fa-paper-plane-o"></i>在线考试</a>
-						</li>
-						<li>
-							<a href="training-list"><i class="fa fa-book"></i>培训资料</a>
-						</li>
-						<li>
-							<a href="student/usercenter"><i class="fa fa-dashboard"></i>会员中心</a>
-						</li>
-						<li>
-							<a href="student/setting"><i class="fa fa-cogs"></i>个人设置</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-
-		<!-- Navigation bar ends -->
+        <%@include file="include/commen_naviBar.jsp" %>
+        <!-- Navigation bar ends -->
 
 		<div class="content" style="margin-bottom: 100px;">
 
@@ -201,44 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</form>
 								<div class="comment-total"><span class="comment-total-num">18</span>条评论</div>
 								<ul class="comment-list">
-									<!-- <li class="comment-list-item">
-										<div class="comment-user-container">
-											<div >
-												<img src="resources/images/photo.jpg" class="comment-user-img">
-											</div>
-											<div class="comment-user-info">
-												<div>
-													yanhuan [电能计量]
-												</div>
-												<div class="comment-date">
-													发表于 1天前
-												</div>
-											</div>
-										</div>
-										<p class="comment-user-text">
-											应该选B不是吗？
-										</p>
-										
-									</li>
-									<li class="comment-list-item">
-										<div class="comment-user-container">
-											<div >
-												<img src="resources/images/photo.jpg" class="comment-user-img">
-											</div>
-											<div class="comment-user-info">
-												<div>
-													yanhuan [电能计量]
-												</div>
-												<div class="comment-date">
-													发表于 1天前
-												</div>
-											</div>
-										</div>
-										<p class="comment-user-text">
-											应该选B不是吗？
-										</p>
-										
-									</li> -->
+									
 								</ul>
 								<div id="show-more-div">
 									<input type="hidden" id="idx-hidden" value="1">
@@ -256,29 +154,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 
 		</div>
-		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="copy">
-							<p>
-								ExamStack Copyright © <a href="http://www.examstack.com/" target="_blank">ExamStack</a> - <a href="." target="_blank">主页</a> | <a href="http://www.examstack.com/" target="_blank">关于我们</a> | <a href="http://www.examstack.com/" target="_blank">FAQ</a> | <a href="http://www.examstack.com/" target="_blank">联系我们</a>
-							</p>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-		</footer>
-
-		<!-- Slider Ends -->
-
-		<!-- Javascript files -->
-		<!-- jQuery -->
-		<script type="text/javascript" src="resources/js/jquery/jquery-1.9.0.min.js"></script>
-		<!-- Bootstrap JS -->
-		<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+		 <%@include file="include/footer_cm_js.jsp" %>
+		 
 		<script type="text/javascript" src="resources/js/all.js?v=0712"></script>
 		<script type="text/javascript" src="resources/js/practice-improve-qh.js"></script>
 		<script type="text/javascript" src="resources/js/comment.js"></script>

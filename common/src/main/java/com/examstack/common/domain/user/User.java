@@ -5,6 +5,18 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/*
+ * 用@XMLRootElement注释，表示该类可以支持于xml元素映射，且为xml元素的根元素
+ * 例如：
+ *  @XmlRootElement // 必须要标明这个元素  
+	public class Boy {     
+	    String name = "CY";  
+	    ---getter and setter function
+	}  
+   
+   ===>可以经过输出成 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><boy><name>CY</name></boy> 
+    反之，这样的字符串：<boy><name>David</name></boy> 也可以被转换成上述对象
+ */
 @XmlRootElement
 public class User implements Serializable {
 	private static final long serialVersionUID = 2866441053387084227L;
@@ -133,6 +145,14 @@ public class User implements Serializable {
 	}
 	public void setRoles(String roles) {
 		this.roles = roles;
+	}
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", trueName=" + trueName
+				+ ", nationalId=" + nationalId + ", email=" + email + ", phoneNum=" + phoneNum + ", createTime="
+				+ createTime + ", createBy=" + createBy + ", fieldId=" + fieldId + ", fieldName=" + fieldName
+				+ ", lastLoginTime=" + lastLoginTime + ", loginTime=" + loginTime + ", company=" + company
+				+ ", enabled=" + enabled + ", roles=" + roles + ", depId=" + depId + ", department=" + department + "]";
 	}
 	
 }

@@ -56,8 +56,8 @@ public class ExamAction {
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		try {
 			Exam exam = this.checkExam(examId);
-			//申请考试默认未审核
-			examService.addUserExamHist(userInfo.getUserid(), examId, exam.getExamPaperId(),0);
+			//申请考试默认:设置最后一个参数1，表示已经审核
+			examService.addUserExamHist(userInfo.getUserid(), examId, exam.getExamPaperId(),1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			msg.setResult(e.getMessage());

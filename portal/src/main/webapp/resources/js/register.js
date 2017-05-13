@@ -8,20 +8,21 @@ var create_account = {
 		this.bindSubmitForm();
 	},
 
-	bindSubmitForm : function bindSubmitForm() {
+	bindSubmitForm : function() {
 		$("#btn-reg").click(function() {
+			
 			var result = create_account.verifyInput();
 			if (result) {
 				var data = new Object();
 				data.userName = $(".form-username input").val();
 				data.email = $(".form-email input").val();
 				data.password = $(".form-password input").val();
-				data.fieldId = $("#job-type-input-select").val();
+				/*data.fieldId = $("#job-type-input-select").val();
 				data.company = $(".form-company input").val();
 				data.phoneNum = $(".form-phone input").val();
 				data.nationalId = $(".form-national-id input").val();
 				data.trueName = $(".form-truename input").val();
-				data.depId = $("#department-input-select").val();
+				data.depId = $("#department-input-select").val();*/
 				var action = "add-user";
 				jQuery.ajax({
 					headers : {
@@ -48,7 +49,8 @@ var create_account = {
 							} else if (message.result == "duplicate-phone") {
 								$(".form-phone .form-message").text(message.messageInfo);
 							} else {
-								alert(message.result);
+								$("#reg-result-msg").show();
+								$(".form-reg-msg .form-message").text(message.result);
 							}
 						}
 					}
@@ -59,19 +61,23 @@ var create_account = {
 		});
 	},
 
+	/* 减少注册信息，只要用户名、密码和电子邮箱 */
 	verifyInput : function verifyInput() {
 		$(".form-message").empty();
+		
 		var result = true;
 		var check_u = this.checkUsername();
-		var check_t = this.checkTrueName();
 		var check_e = this.checkEmail();
 		var check_p = this.checkPassword();
 		var check_pc = this.checkConfirmPassword();
-		var check_com = /*this.checkDepartment();*/true;
-		var check_id = this.checkNationalId();
-		var check_phone = this.checkPhoneNum();
-		var check_dep = this.checkDepartment();
-		result = check_u && check_t && check_e && check_p && check_pc && check_com && check_id && check_phone && check_dep;
+		/*var check_t = this.checkTrueName();true;
+		
+		var check_com = this.checkDepartment();true;
+		var check_id = this.checkNationalId();true;
+		var check_phone = this.checkPhoneNum();true
+		var check_dep = this.checkDepartment();true;*/
+		/*result = check_u && check_t && check_e && check_p && check_pc && check_com && check_id && check_phone && check_dep;*/
+		result = check_u && check_e && check_p && check_pc;
 		return result;
 	},
 

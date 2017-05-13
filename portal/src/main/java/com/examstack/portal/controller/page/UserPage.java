@@ -73,8 +73,8 @@ public class UserPage {
 	
 	@RequestMapping(value = { "/user-register" }, method = RequestMethod.GET)
 	public String registerPage(Model model) {
-		List<Department> depList = userService.getDepList(null);
-		model.addAttribute("depList", depList);
+		/*List<Department> depList = userService.getDepList(null);
+		model.addAttribute("depList", depList);*/
 		return "register";
 	}
 	

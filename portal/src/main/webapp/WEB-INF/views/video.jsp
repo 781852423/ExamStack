@@ -1,23 +1,12 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
+<%@ page language="java" pageEncoding="utf-8"%>
+<%@include file="include/before_html.jsp" %>
+
 
 <!DOCTYPE html>
 <html>
 <head>
-	<base href="<%=basePath%>">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="keywords" content="">
-	<script type="text/javascript"
-		src="resources/js/jquery/jquery-1.9.0.min.js"></script>
+	 <%@include file="include/head_files.jsp" %>
+	 <title>视屏</title>
 	<script type="text/javascript" src="resources/js/mediaelement/mediaelement-and-player.min.js"></script>
 	<link href="resources/js/mediaelement/mediaelementplayer.css" rel="stylesheet">
 	<link href="resources/js/mediaelement/mejs-skins.css" rel="stylesheet">
@@ -39,5 +28,8 @@
 	<script>
 		$('video,audio').mediaelementplayer(/* Options */);
 	</script>
+	 <!-- jQuery -->
+    <script type="text/javascript"
+        src="resources/js/jquery/jquery-1.9.0.min.js"></script>
 </body>
 </html>

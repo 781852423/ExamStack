@@ -1,47 +1,20 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
+<%@ page language="java" pageEncoding="utf-8"%>
+<%@include file="include/before_html.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<base href="<%=basePath%>">
-<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
-		Remove this if you use the .htaccess -->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>ExamStack</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="keywords" content="">
-<!--<link rel="shortcut icon" href="http://localhost:8080/Portal/../resources/images/favicon.ico" />-->
-<link href="resources/bootstrap/css/bootstrap-huan.css" rel="stylesheet">
-<link href="resources/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<link href="resources/css/style.css" rel="stylesheet">
 
-<!--[if lt IE 9]> 
-    <script type="text/javascript" src="resources/js/util/html5.js"></script>   
-<![endif-->
-<!-- jQuery -->
-	<script type="text/javascript"
-		src="resources/js/jquery/jquery-1.9.0.min.js"></script>
-	<!-- Bootstrap JS -->
-	<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+	<title>培训</title>
+	
+	<%@include file="include/head_files.jsp" %>
+	
 	<script type="text/javascript" src="resources/js/all.js?v=0712"></script>
 	<script type="text/javascript" src="resources/js/training-comment.js"></script>
 	<!-- <script type="text/javascript" src="resources/js/mediaelement/mediaelement-and-player.min.js"></script>
 	<link href="resources/js/mediaelement/mediaelementplayer.css" rel="stylesheet">
 	<link href="resources/js/mediaelement/mejs-skins.css" rel="stylesheet"> -->
 	<link href="resources/js/videojs/video-js.css" rel="stylesheet">
-	<script type="text/javascript" src="resources/js/videojs/video.js"></script>
 
 	<script type="text/javascript">
 		videojs.options.flash.swf="resources/js/videojs/video-js.swf";
@@ -231,11 +204,12 @@ body, html {
 
 <body>
 
-	<!-- Navigation bar starts -->
+	 <%@include file="include/body_header.jsp" %>
+        <!-- Navigation bar starts -->
 
-
-
-	<!-- Navigation bar ends -->
+        <%@include file="include/commen_naviBar.jsp" %>
+        <!-- Navigation bar ends -->
+	
 
 	<!-- Slider starts -->
 
@@ -338,12 +312,7 @@ body, html {
 		</div>
 	</div>
 
-
-	<!-- Slider Ends -->
-
-	<!-- Javascript files -->
-	
-	
+ <%@include file="include/footer_cm_js.jsp" %>
 	
 </body>
 </html>
