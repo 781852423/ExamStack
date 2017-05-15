@@ -300,7 +300,7 @@ request.setAttribute("leftMenuId",list[3]);
 											<div id="div-file-list">
 											</div>
 											<div class="form-line" id="uploadify"></div>
-											<span class="form-message">请上传png、jpg图片文件，且不能大于100KB。为了使得图片显示正常，请上传的图片长宽比例为2:1</span>
+											<span class="form-message">请上传png、jpg图片文件，且不能大于1000KB。为了使得图片显示正常，请上传的图片长宽比例为2:1</span>
 										</div>
 									</form> 
 								</div>
@@ -337,7 +337,7 @@ request.setAttribute("leftMenuId",list[3]);
 		<!-- jQuery -->
 		<script type="text/javascript" src="resources/js/jquery/jquery-1.9.0.min.js"></script>
 		<script type="text/javascript" src="resources/js/all.js"></script>
-		<script type="text/javascript" src="resources/js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script type="text/javascript" src="resources/js/jquery/jquery-ui-1.9.2.custom.min.js"></script>
 		
 		<script type="text/javascript" src="resources/js/uploadify/jquery.uploadify3.1Fixed.js"></script>
 		<script type="text/javascript" src="resources/js/question-upload-img.js"></script>

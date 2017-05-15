@@ -307,14 +307,19 @@ a.pressed:hover {
 	color: red;
 }
 
-/**璇曢鍥剧墖**/
+
 
 .question-content-img {
-	width: 600px;
-	height: 300px;
-	border: 1px solid #EEE;
-	display: block;
-	margin: 20px 0 20px 0;
+/*  width: 600px;
+    height: 300px; */
+    max-width: 600px;
+    height:auto;
+    width:expression(this.width > 600 ? "600px" : this.width);
+    max-height:590px;
+    height:expression_r(this.height>590?"590px":this.height);
+    border: 1px solid #EEE;
+    display: block;
+    margin: 10px 0 20px 0;
 }
 
 .question-opt-img {

@@ -151,8 +151,8 @@ question_add = {
 			$(".question-content textarea").focus();
 			$(".question-content textarea").addClass("has-error");
 			return false;
-		} else if (content.length > 500) {
-			$(".question-content .form-message").text("内容过长，请保持在500个字符以内");
+		} else if (content.length > 1000) {
+			$(".question-content .form-message").text("内容过长，请保持在1000个字符以内");
 			$(".question-content textarea").focus();
 			$(".question-content textarea").addClass("has-error");
 			return false;
@@ -212,8 +212,8 @@ question_add = {
 		if (content == "") {
 			$(".form-question-answer-text .form-message").text("请输入参考答案");
 			return false;
-		} else if (content.length > 500) {
-			$(".form-question-answer-text .form-message").text("内容过长，请保持在500个字符以内");
+		} else if (content.length > 1000) {
+			$(".form-question-answer-text .form-message").text("内容过长，请保持在1000个字符以内");
 			return false;
 		} else {
 			return true;
@@ -254,10 +254,10 @@ question_add = {
 
 	checkAnalysis : function checkAnalysis() {
 		var content = $(".form-question-analysis textarea").val();
-		if (content.length > 500) {
+		if (content.length > 1000) {
 			$(".form-question-analysis textarea").focus();
 			$(".form-question-analysis textarea").addClass("has-error");
-			$(".form-question-analysis .form-message").text("内容过长，请保持在500个字符以内");
+			$(".form-question-analysis .form-message").text("内容过长，请保持在1000个字符以内");
 			return false;
 		} else
 			return true;

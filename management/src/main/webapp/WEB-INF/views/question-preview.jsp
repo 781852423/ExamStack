@@ -178,7 +178,7 @@
 		src="resources/js/jquery/jquery-1.9.0.min.js"></script>
 	<script type="text/javascript" src="resources/js/all.js"></script>
 	<script type="text/javascript"
-		src="resources/js/jquery-ui-1.9.2.custom.min.js"></script>
+		src="resources/js/jquery/jquery-ui-1.9.2.custom.min.js"></script>
 
 	<script type="text/javascript"
 		src="resources/js/uploadify/jquery.uploadify3.1Fixed.js"></script>

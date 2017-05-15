@@ -51,7 +51,7 @@ var question_upload_img = {
 				'height'	 : '26',
 				'width'	 : '60',
 				'requeueErrors'	: false,
-				'fileSizeLimit'	: '100', // expects input in kb
+				'fileSizeLimit'	: '1000', // expects input in kb
 				'cancelImage'	: document.getElementsByTagName('base')[0].href + 'resources/js/uploadify/cancel.png',
 				
 				overrideEvents:['onSelectError','onDialogClose'],
