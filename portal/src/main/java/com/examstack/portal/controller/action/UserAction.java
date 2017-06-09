@@ -43,7 +43,7 @@ public class UserAction {
 	@RequestMapping(value = { "/add-user" }, method = RequestMethod.POST)
 	public @ResponseBody Message addUser(@RequestBody User user) {
 		user.setCreateTime(new Date());
-		
+		/*服务器端的加密操作 */
 		String password = user.getPassword() + "{" + user.getUserName().toLowerCase() + "}";
 		PasswordEncoder passwordEncoder = new StandardPasswordEncoderForSha1();
 		String resultPassword = passwordEncoder.encode(password);
@@ -83,7 +83,9 @@ public class UserAction {
 				message.setResult(e.getCause().getMessage());
 				e.printStackTrace();
 			}*/
-			message.setResult(e.getMessage());
+			System.out.println(user.getUserName() + "创建注册用户失败，原因" + e.getMessage());
+			e.printStackTrace();
+			message.setResult("创建注册用户失败，原因可能是使用了重复的用户名或者邮箱");
 		}
 		return message;
 	}

@@ -156,6 +156,7 @@ public class QuestionPageAdmin {
 	public String questionAddPage(Model model) {
 		List<Field> fieldList = questionService.getAllField(null);
 		model.addAttribute("fieldList", fieldList);
+		
 		return "question-add";
 	}
 	

@@ -38,23 +38,26 @@
                         <div class="lrform">
                             <h5>登陆 </h5>
                             <div class="form">
-                                <!-- Login form (not working) 
-                                调用com.examstack.portal.security.filter.AuthenticationFilter验证，再security.xml中定义-->
-                                <form class="form-horizontal" action="j_spring_security_check" method="post">
+                                
+                                <form class="form-horizontal" id= "form-login-account" action="j_spring_security_check" method="post">
                                     <!-- Username -->
                                     <div class="form-group">
                                         <label class="control-label col-md-3" for="username">用户名</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" name="j_username">
+                                            <input type="text" class="form-control" name="j_username" id="j_username">
                                         </div>
                                     </div>
                                     <!-- Password -->
                                     <div class="form-group">
                                         <label class="control-label col-md-3" for="password">密码</label>
                                         <div class="col-md-9">
-                                            <input type="password" class="form-control" name="j_password">
+                                            <input type="password" class="form-control" name="j_password" id="j_password">
+                                    
+                                        </div>  
                                         </div>
                                     </div>
+                                     <div>  
+
                                     <!-- Buttons -->
                                     <div class="form-group">
                                         <!-- Buttons -->
@@ -81,6 +84,6 @@
         </div>
         
          <%@include file="include/footer_cm_js.jsp" %>
-
+        
     </body>
 </html>

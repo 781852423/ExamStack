@@ -85,8 +85,8 @@ var create_news = {
 		if (content == "") {
 			$(".form-news-content .form-message").text("姓名不能为空");
 			return false;
-		} else if (content.length > 600 || content.length < 1) {
-			$(".form-news-content .form-message").text("请保持在1-600个字符以内");
+		} else if (content.length > 2000 || content.length < 1) {
+			$(".form-news-content .form-message").text("请保持在1-2000个字符以内");
 			return false;
 		}
 		return true;

@@ -215,7 +215,6 @@ request.setAttribute("leftMenuId",list[3]);
 		<script type="text/javascript" src="resources/js/all.js"></script>
 		<!-- Bootstrap JS -->
 		<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="resources/js/news-list.js"></script>
 		<script type="text/javascript" src="resources/js/add-news.js"></script>
 		<script>
 			$(function() {

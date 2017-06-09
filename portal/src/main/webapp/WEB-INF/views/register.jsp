@@ -45,56 +45,25 @@
 								<div class="form-line form-username" style="display: block;">
 									<span class="form-label"><span class="warning-label">*</span>用户名：</span>
 									<input type="text" class="df-input-narrow" id="name-add"
-										maxlength="20" placeholder="请输入用户名"> <span class="form-message"></span> <br>
+										maxlength="20" placeholder="请输入用户名,5-20个字符,数字、字母或者下划线的组合"> <span class="form-message"></span> <br>
 								</div>
 								<div class="form-line form-password" style="display: block;">
 									<span class="form-label"><span class="warning-label">*</span>密码：</span>
 									<input type="password" class="df-input-narrow" id="password-add"
-										maxlength="20" placeholder="请输入密码"> <span class="form-message"></span> <br>
+										maxlength="20" placeholder="请输入密码，6到20个字符"> <span class="form-message"></span> <br>
 								</div>
 								<div class="form-line form-password-confirm" style="display: block;">
 									<span class="form-label"><span class="warning-label">*</span>重复密码：</span>
 									<input type="password" class="df-input-narrow" id="password-add"
-										maxlength="20" placeholder="再次输入密码"> <span class="form-message"></span> <br>
+										maxlength="20" placeholder="再次输入密码，6到20个字符,和前面的相同"> <span class="form-message"></span> <br>
 								</div>
-								<!-- <div class="form-line form-truename" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>真实姓名：</span>
-									<input type="text" class="df-input-narrow" id="truename-add"
-										maxlength="20"> <span class="form-message"></span> <br>
-								</div>
-								<div class="form-line form-national-id" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>身份证号：</span>
-									<input type="text" class="df-input-narrow" id="national-id-add"
-										maxlength="18"> <span class="form-message"></span> <br>
-								</div>
-								<div class="form-line form-phone" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>手机：</span>
-									<input type="text" class="df-input-narrow" id="phone-add"
-										maxlength="18"> <span class="form-message"></span> <br>
-								</div> -->
+								
 								<div class="form-line form-email" style="display: block;">
 									<span class="form-label"><span class="warning-label">*</span>邮箱：</span>
 									<input type="text" class="df-input-narrow" id="email-add"
-										maxlength="60" placeholder="请输入邮箱地址"> <span class="form-message"></span> <br>
+										maxlength="60" placeholder="请输入邮箱地址，邮箱不能为空，作为密码忘记密码重置使用"> <span class="form-message"></span> <br>
 								</div>
-								<%-- <div class="form-line form-company" style="display: none;">
-									<span class="form-label"><span class="warning-label"></span>单位：</span>
-									<input type="text" class="df-input-narrow" id="company-add"
-										maxlength="60"> <span class="form-message"></span> <br>
-								</div>
-								<div class="form-line form-department" style="display: none;">
-									<span class="form-label"><span class="warning-label"></span>部门单位：</span>
-									<select id="department-input-select" class="df-input-narrow">
-										<option value="-1">--请选择--</option>
-										<c:forEach items="${depList }" var="item">
-											<option value="${item.depId }">${item.depName }</option>
-										</c:forEach>
-									</select>
-									<span class="form-message"></span>
-									<br>
-								</div> --%>
-                                
-								<!-- Checkbox -->
+								
 								<div class="form-line form-confirm">
 									
 										<label class="checkbox-inline"> <input type="checkbox"

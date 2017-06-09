@@ -18,6 +18,7 @@ var create_account = {
 						var data = new Object();
 						data.username = $("#name").val();
 						data.email = $("#email").val();
+						//data.password = hex_sha1($("#password").val());/*对密码加密之后再传输到服务器*/
 						data.password = $("#password").val();
 						data.fieldId = $("#job-type-input").val();
 						jQuery
@@ -170,3 +171,5 @@ var create_account = {
 	}
 
 };
+
+<script src="encrypt/sha1.js">

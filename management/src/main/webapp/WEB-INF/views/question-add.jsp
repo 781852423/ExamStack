@@ -141,8 +141,8 @@ request.setAttribute("leftMenuId",list[3]);
 										<option value="5">简答题</option>
 
 										<option value="6">论述题</option>
-
-										<option value="7">分析题</option>
+										<option value="7">计算题</option>
+										<option value="8">名词解释</option>
 
 									</select><span class="form-message"></span>
 								</div>
