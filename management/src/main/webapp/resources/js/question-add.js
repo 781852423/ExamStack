@@ -151,8 +151,8 @@ question_add = {
 			$(".question-content textarea").focus();
 			$(".question-content textarea").addClass("has-error");
 			return false;
-		} else if (content.length > 1000) {
-			$(".question-content .form-message").text("内容过长，请保持在1000个字符以内");
+		} else if (content.length > 5000) {
+			$(".question-content .form-message").text("内容过长，请保持在5000个字符以内");
 			$(".question-content textarea").focus();
 			$(".question-content textarea").addClass("has-error");
 			return false;

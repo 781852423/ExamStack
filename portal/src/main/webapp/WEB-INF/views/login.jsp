@@ -6,8 +6,7 @@
     <head>
         
         <title>职梦靠岸官网-银行招聘_求职辅导培训_烟草公司招聘笔试面试_真题分享_模拟训练_笔试面试经验分享</title>
-        <meta name="keywords" content="银行招聘,烟草招聘,中石油招聘,中石化招聘,进出口银行,求职辅导培训,烟草公司招聘笔试面试,真题分享,模拟训练,笔试面试经验分享">
-        <meta name="description" content="专注银行、证券、石油、烟草、大型国企招聘求职辅导培训真题分享_模拟训练_笔试面试经验分享">
+
         
        <%@include file="include/head_files.jsp" %>
        

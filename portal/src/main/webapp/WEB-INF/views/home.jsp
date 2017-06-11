@@ -6,8 +6,6 @@
 	<head>
 		
 		<title>职梦靠岸-主页</title>
-		
-		<meta name="keywords" content="">
 		 <%@include file="include/head_files.jsp" %>
 		
 		<style>
@@ -250,7 +248,7 @@
 									<li class="news-list-item clearfix">
 										<a class="home-link-anchor" href="news/${newsList[0].newsId }" target="_blank">
 										<div class="news-list-thumbnail">
-											<img src="http://www.examstack.com/resources/images/index/index3.jpg">
+											<img src="resources/images/news.png">
 										</div>
 										<div class="news-list-content">
 											<div class="news-list-title">
@@ -267,7 +265,7 @@
 									<li class="news-list-item clearfix">
 										<a class="home-link-anchor" href="news/${newsList[0].newsId }" target="_blank">
 										<div class="news-list-thumbnail">
-											<img src="http://www.examstack.com/resources/images/index/index3.jpg">
+											<img src="resources/images/news.png">
 										</div>
 										<div class="news-list-content">
 											<div class="news-list-title"">
@@ -282,7 +280,7 @@
 									<li class="news-list-item clearfix">
 										<a class="home-link-anchor" href="news/${newsList[1].newsId }">
 										<div class="news-list-thumbnail">
-											<img src="http://www.examstack.com/resources/images/index/index2.jpg">
+											<img src="resources/images/news.png">
 										</div>
 										<div class="news-list-content">
 											<div class="news-list-title">
