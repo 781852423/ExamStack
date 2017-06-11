@@ -1,8 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <base href="<%=basePath%>">
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="Pragma">
+    <meta http-equiv="cache-control" content="public">
+   <!--  <meta http-equiv="expires" content="0"> -->
     
     <meta charset="utf-8">
     
