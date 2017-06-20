@@ -220,9 +220,9 @@ public class QuestionServiceImpl implements QuestionService {
 	@Transactional
 	@Override
 	public void uploadQuestions(String filePath, String username, int fieldId) {
-		// TODO Auto-generated method stub
-		String strPath = ",webapps,files,question," + username + ",tmp";
-
+		// comment below line on 2017-06-20解决题库导入的时候文件找不到的问题
+		// String strPath = ",webapps,files,question," + username + ",tmp";
+		String strPath = ",webapps,files,training," + username;
 		filePath = System.getProperty("catalina.base") + strPath.replace(',', File.separatorChar) + File.separatorChar
 				+ filePath;
 		Map<String, KnowledgePoint> pointMap = this.getKnowledgePointMapByFieldId(fieldId, null);

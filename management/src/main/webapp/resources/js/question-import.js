@@ -13,7 +13,7 @@ var question_import={
 			    	'debug'	 : false,
 					'buttonText'	: '点击上传附件',
 					'buttonCursor'	: 'pointer',
-					'uploader'	 : document.getElementsByTagName('base')[0].href + 'secure/upload-uploadify/',
+					'uploader'	 : document.getElementsByTagName('base')[0].href + 'secure/upload-uploadify/', // QuestionAction.java
 					'queueID': 'fileQueue',
 					'swf'	 : document.getElementsByTagName('base')[0].href + 'resources/js/uploadify/uploadify.swf',
 					'multi'	 : false,
@@ -27,11 +27,22 @@ var question_import={
 					overrideEvents:['onSelectError','onDialogClose'],
 					onUploadComplete: function(file) {
 					},
-					onUploadSuccess : function(file, data, response) {  
+					/*onUploadSuccess : function(file, data, response) {  
 						$('#div-file-list').html('<a class=\'file-name\'>' 
 								+ file.name 
 								+ '</a><input type=\'hidden\' value=\'' 
 								+ file.name + '\' />');
+						alert(data + " " + response);
+						
+			        },*/
+					onUploadSuccess : function(file, data, response) {
+						var strRemoveFileName = data.toString().substring(data.toString().lastIndexOf("\\")+1);
+						$('#div-file-list').html('<a class=\'file-name\'>' 
+								+ file.name
+								+ '</a><input type=\'hidden\' value=\'' 
+								+ strRemoveFileName + '\' />');
+						//alert(data + " " + response);
+						
 			        },
 					onSelectError: function(file,errorCode,errorMsg) {
 						if(errorCode==-110){
