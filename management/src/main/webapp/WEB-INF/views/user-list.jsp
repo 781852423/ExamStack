@@ -216,6 +216,7 @@ request.setAttribute("leftMenuId",list[3]);
 													<span class="form-message"></span>
 													<br>
 												</div>
+												<!--  
 												<div class="form-line form-truename" style="display: block;">
 													<span class="form-label"><span class="warning-label">*</span>真实姓名：</span>
 													<input type="text" class="df-input-narrow" id="truename-add" maxlength="20">
@@ -234,13 +235,14 @@ request.setAttribute("leftMenuId",list[3]);
 													<span class="form-message"></span>
 													<br>
 												</div>
+												-->
 												<div class="form-line form-email" style="display: block;">
 													<span class="form-label"><span class="warning-label">*</span>邮箱：</span>
 													<input type="text" class="df-input-narrow" id="email-add" maxlength="90">
 													<span class="form-message"></span>
 													<br>
 												</div>
-												<div class="form-line form-company" style="display: none;">
+												<!-- <div class="form-line form-company" style="display: none;">
 													<span class="form-label"><span class="warning-label"></span>单位：</span>
 													<input type="text" class="df-input-narrow" id="company-add" maxlength="30">
 													<span class="form-message"></span>
@@ -256,7 +258,7 @@ request.setAttribute("leftMenuId",list[3]);
 													</select>
 													<span class="form-message"></span>
 													<br>
-												</div>
+												</div> -->
 
 											</form>
 

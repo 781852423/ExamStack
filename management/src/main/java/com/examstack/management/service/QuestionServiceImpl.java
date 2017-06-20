@@ -224,7 +224,7 @@ public class QuestionServiceImpl implements QuestionService {
 		// String strPath = ",webapps,files,question," + username + ",tmp";
 		String strPath = ",webapps,files,training," + username;
 		filePath = System.getProperty("catalina.base") + strPath.replace(',', File.separatorChar) + File.separatorChar
-				+ filePath;
+				+ filePath.substring(filePath.lastIndexOf("/")+1);
 		Map<String, KnowledgePoint> pointMap = this.getKnowledgePointMapByFieldId(fieldId, null);
 		int index = 2;
 		try {

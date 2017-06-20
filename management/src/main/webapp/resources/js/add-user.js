@@ -16,12 +16,12 @@ var create_account = {
 				data.userName = $(".form-username input").val();
 				data.email = $(".form-email input").val();
 				data.password = $(".form-password input").val();
-				data.fieldId = $("#job-type-input-select").val();
+				/*data.fieldId = $("#job-type-input-select").val();
 				data.company = $(".form-company input").val();
 				data.phoneNum = $(".form-phone input").val();
 				data.nationalId = $(".form-national-id input").val();
 				data.trueName = $(".form-truename input").val();
-				data.depId = $("#department-input-select").val();
+				data.depId = $("#department-input-select").val();*/
 				var action = $(this).data("action") + "-" + $("#user-add-form #group-add-id").val();
 				var url = $(this).data("url");
 				jQuery.ajax({
@@ -65,13 +65,13 @@ var create_account = {
 		$(".form-message").empty();
 		var result = true;
 		var check_u = this.checkUsername();
-		var check_t = this.checkTrueName();
+		var check_t = /*this.checkTrueName()*/true;
 		var check_e = this.checkEmail();
 		var check_p = this.checkPassword();
 		var check_com = /*this.checkCompany();*/true;
-		var check_id = this.checkNationalId();
-		var check_phone = this.checkPhoneNum();
-		var check_dep = this.checkDepartment();
+		var check_id = /*this.checkNationalId();*/true;
+		var check_phone = /*this.checkPhoneNum();*/true;
+		var check_dep =/* this.checkDepartment();*/true;
 		result = check_u && check_t && check_e && check_p && check_com && check_id && check_phone && check_dep;
 		return result;
 	},
