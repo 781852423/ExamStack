@@ -9,66 +9,12 @@
 	
 	<%@include file="include/head_files.jsp" %>
 	
-	<script type="text/javascript" src="resources/js/all.js?v=0712"></script>
-	<script type="text/javascript" src="resources/js/training-comment.js"></script>
-	<!-- <script type="text/javascript" src="resources/js/mediaelement/mediaelement-and-player.min.js"></script>
+	
 	<link href="resources/js/mediaelement/mediaelementplayer.css" rel="stylesheet">
-	<link href="resources/js/mediaelement/mejs-skins.css" rel="stylesheet"> -->
+	<link href="resources/js/mediaelement/mejs-skins.css" rel="stylesheet">
 	<link href="resources/js/videojs/video-js.css" rel="stylesheet">
 
-	<script type="text/javascript">
-		videojs.options.flash.swf="resources/js/videojs/video-js.swf";
-		$(function(){
-			var myPlayer = _V_("my_video");
-			var count = 0;
-			var timer;
-			myPlayer.on('play',function(){
-				timer = setInterval(function(){
-					count ++;
-				},1000);
-			});
-			myPlayer.on('paused',function(){
-				clearInterval(timer);
-			});
-			myPlayer.on('ended',function(){
-				myPlayer.currentTime(0);
-				myPlayer.pause();
-				var duration = parseFloat($("#training-duration").val());
-				var process = 0;
-				if(duration + count >= myPlayer.duration()){
-					//视频播放完毕后，如果持续时间大于视频时间，则培训完成，进度100%
-					process = 1;
-				}else{
-					//视频播放完毕，提交培训历史，进度为持续时间/视频持续时间
-					process = (duration + count) / myPlayer.duration();
-				}
-				var data= new Object();
-				data.sectionId = $("#section-id").val();
-				data.duration = duration + count;
-				data.process = process;
-				data.trainingId = $("#training-id").val();
-				jQuery.ajax({
-					headers : {
-						'Accept' : 'application/json',
-						'Content-Type' : 'application/json'
-					},
-					type : "POST",
-					url : "student/set-training-hist",
-					data : JSON.stringify(data),
-					success : function(message, tst, jqXHR) {
-						if (message.result == "success") {
-							util.success("培训进度上传成功！进度=" + process);
-						} else {
-							util.error("培训进度上传失败！");
-						}
-					},
-					error : function(){
-						util.error("上传培训进度错误，请稍后尝试！");
-					}
-				});
-			});
-		});
-	</script>
+	
 <style>
 .training-top {
 	position: absolute;
@@ -123,7 +69,6 @@ body, html {
 	list-style: none;
 	padding-left: 0;
 	padding-top: 5px;
-	color:#FFF;
 }
 
 .section-list {
@@ -313,6 +258,62 @@ body, html {
 	</div>
 
  <%@include file="include/footer_cm_js.jsp" %>
-	
+    <script type="text/javascript" src="resources/js/all.js?v=0712"></script>
+    <script type="text/javascript" src="resources/js/training-comment.js"></script>
+    <script type="text/javascript" src="resources/js/mediaelement/mediaelement-and-player.min.js"></script>
+    <script type="text/javascript" src="resources/js/videojs/video.js"></script>
+    <script type="text/javascript">
+        videojs.options.flash.swf="resources/js/videojs/video-js.swf";
+        $(function(){
+            var myPlayer = _V_("my_video");
+            var count = 0;
+            var timer;
+            myPlayer.on('play',function(){
+                timer = setInterval(function(){
+                    count ++;
+                },1000);
+            });
+            myPlayer.on('paused',function(){
+                clearInterval(timer);
+            });
+            myPlayer.on('ended',function(){
+                myPlayer.currentTime(0);
+                myPlayer.pause();
+                var duration = parseFloat($("#training-duration").val());
+                var process = 0;
+                if(duration + count >= myPlayer.duration()){
+                    //视频播放完毕后，如果持续时间大于视频时间，则培训完成，进度100%
+                    process = 1;
+                }else{
+                    //视频播放完毕，提交培训历史，进度为持续时间/视频持续时间
+                    process = (duration + count) / myPlayer.duration();
+                }
+                var data= new Object();
+                data.sectionId = $("#section-id").val();
+                data.duration = duration + count;
+                data.process = process;
+                data.trainingId = $("#training-id").val();
+                jQuery.ajax({
+                    headers : {
+                        'Accept' : 'application/json',
+                        'Content-Type' : 'application/json'
+                    },
+                    type : "POST",
+                    url : "student/set-training-hist",
+                    data : JSON.stringify(data),
+                    success : function(message, tst, jqXHR) {
+                        if (message.result == "success") {
+                            util.success("培训进度上传成功！进度=" + process);
+                        } else {
+                            util.error("培训进度上传失败！");
+                        }
+                    },
+                    error : function(){
+                        util.error("上传培训进度错误，请稍后尝试！");
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
