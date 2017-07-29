@@ -1,5 +1,8 @@
 package com.examstack.portal.controller.page;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -253,7 +256,18 @@ public class PracticePage {
 		model.addAttribute("fieldId", fieldId);
 		model.addAttribute("historyMap", historyStatisticMap);
 		model.addAttribute("pointMap", pointMap);
-		model.addAttribute("fieldList", fieldList);
+		// fieldList剔除那些没有相应题目的题库,只要其removeable为1就可以不显示
+		
+		List<Field> NonRemoveableFieldList = new ArrayList<Field>();
+		for(Field fd : fieldList)
+		{
+			if(fd.isRemoveable() == false) 
+			{
+				NonRemoveableFieldList.add(fd);
+			}
+		}
+		
+		model.addAttribute("fieldList", NonRemoveableFieldList);// 只显示有题目的题库
 		return "practice";
 	}
 	
