@@ -32,7 +32,7 @@ var question_upload_img = {
 				'fileTypeDesc': "请选择mp4 flv pdf文件",
 			    'fileTypeExts': '*.mp4;*.flv;*.pdf',
 				'requeueErrors'	: false,
-				'fileSizeLimit'	: '204800000', // expects input in kb
+				'fileSizeLimit'	: 2*1024*1024, // expects input in kb: 这里是2G，如果设置为0表示不限制
 				'cancelImage'	: document.getElementsByTagName('base')[0].href + 'resources/js/uploadify/cancel.png',
 				
 				overrideEvents:['onSelectError','onDialogClose'],
