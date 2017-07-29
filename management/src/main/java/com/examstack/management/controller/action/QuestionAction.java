@@ -1,6 +1,7 @@
 package com.examstack.management.controller.action;
 
 import java.io.FileNotFoundException;
+import java.rmi.server.ServerCloneException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.examstack.common.domain.exam.Message;
 import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.Question;
+import com.examstack.common.domain.question.QuestionContent;
 import com.examstack.common.domain.question.QuestionTag;
 import com.examstack.common.util.file.FileUploadUtil;
 import com.examstack.management.security.UserInfo;
@@ -50,7 +52,16 @@ public class QuestionAction {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Message message = new Message();
 		Gson gson = new Gson();
-		question.setContent(gson.toJson(question.getQuestionContent()));
+		// 把question的内同和解析都进行处理，以符合html的格式输出，主要是content和analysis
+		QuestionContent qContent = question.getQuestionContent();
+		qContent.setTitle(qContent.getTitle().replaceAll("\n", "<br/>").replaceAll("\r\n", "<br/>").replaceAll(" ", "&nbsp;&nbsp;"));
+		
+		String rawQuestionContentString = gson.toJson(qContent);
+		
+		//question.setContent(gson.toJson(question.getQuestionContent()));
+		
+		question.setContent(rawQuestionContentString);
+		question.setAnalysis(question.getAnalysis().replaceAll("\r\n", "<br/>").replaceAll("\n", "<br/>").replaceAll(" ", "&nbsp;&nbsp;"));
 		question.setCreate_time(new Date());
 		question.setCreator(userDetails.getUsername());
 		try {
