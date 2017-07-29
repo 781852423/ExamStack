@@ -3,14 +3,20 @@
 <header>
         <div class="container">
             <div class="row">
-                <div class="col-xs-5">
-                    <div class="logo">
-                        <h1>
-                            <a href="#"><img alt="" src="resources/images/logo.png"></a>
-                        </h1>
+                <div class="col-xs-5" >
+                    <div class="logo"> 
+                          <h1>   
+                            <a href="#"><img alt="职梦靠岸-专注银行、电信、烟草、铁路局招聘笔试面试辅导" src="resources/images/logo.png" class="img-responsive"></a>
+                         </h1>  
+                           
                     </div>
+                   
+                   
                 </div>
+                
+                
                 <div class="col-xs-7" id="login-info">
+                  <a class="btn  btn-danger" href="https://shop106542288.taobao.com/" target="blank">点击进入本站淘宝店铺</a>
                     <c:choose>
                         <c:when
                             test="${not empty sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}">

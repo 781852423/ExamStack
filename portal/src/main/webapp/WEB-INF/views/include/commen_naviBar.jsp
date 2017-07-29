@@ -23,6 +23,11 @@
                         <li>
                             <a href="student/setting"><i class="fa fa-cogs"></i>个人设置</a>
                         </li>
+                        <li>
+                            <a target="_blank" href="http://www.taobao.com/webww/ww.php?ver=3&touid=chenjiexmcxtaobao
+								&siteid=cntaobao&status=1&charset=utf-8"><img border="0" src="http://amos.alicdn.com/online.aw?v=2&uid=chenjiexmcxtaobao
+								&site=cntaobao&s=1&charset=utf-8" alt="联系旺旺客服" />在线客服</a>                            
+                        </li>
                     </ul>
             </nav>
         </div>
