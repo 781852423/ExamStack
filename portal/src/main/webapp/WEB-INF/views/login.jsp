@@ -67,6 +67,7 @@
                                             <button type="reset" class="btn btn-default">
                                                                                                                                 取消
                                             </button>
+                                            <br/>
                                             <span class="form-message">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</span>
                                         </div>
                                     </div>

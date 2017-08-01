@@ -63,6 +63,10 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		if(!userDetails.getRolesName().contains("ROLE_ADMIN") && !userDetails.getRolesName().contains("ROLE_TEACHER")){
 			throw new AuthenticationServiceException("非管理用户，操作无效！");
 		}
+		
+		if(!userDetails.getRolesName().contains("ROLE_ADMIN") && !userDetails.getRolesName().contains("ROLE_TEACHER")){
+			throw new AuthenticationServiceException("非管理用户，操作无效！");
+		}
 		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
 		this.setDetails(request, authRequest);
 		Authentication authentication = null;

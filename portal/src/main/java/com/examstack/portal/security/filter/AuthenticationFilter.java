@@ -19,10 +19,13 @@ import org.springframework.util.StringUtils;
 
 import com.examstack.common.domain.exam.Exam;
 import com.examstack.common.domain.exam.ExamHistory;
+import com.examstack.common.domain.user.User;
 import com.examstack.common.util.StandardPasswordEncoderForSha1;
 import com.examstack.portal.security.UserDetailsServiceImpl;
 import com.examstack.portal.security.UserInfo;
 import com.examstack.portal.service.ExamService;
+import com.examstack.portal.service.UserService;
+import com.examstack.portal.service.UserServiceImpl;
 
 /**
  * 2013-7-13
@@ -41,6 +44,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private static Logger log = Logger.getLogger(AuthenticationFilter.class);
 	@Autowired
 	public ExamService examService;
+	@Autowired
+	public UserService userService;
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
@@ -53,6 +58,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		String sh1Password = password + "{" + username + "}";
 		PasswordEncoder passwordEncoder = new StandardPasswordEncoderForSha1();
 		String result = passwordEncoder.encode(sh1Password);
+		System.out.println("从前台传过来的登录用户名：" + username + " 密码：" + password + "加密后的密码：" + result);
 		log.info(result);
 		if(!request.getMethod().equals("POST")){
 			throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
@@ -112,6 +118,21 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 			
 			if(!userDetails.getRolesName().contains("ROLE_STUDENT")){
 				throw new AuthenticationServiceException("管理用户请从后台管理页面登录！");
+			}
+			
+			// 检查是否过期
+			long expiredTimeInMillis = 0;
+		    
+			User user = userService.getUserByName(username);
+			if( user != null)
+			{
+				if(user.getExpiredTime() != null)
+				{
+					expiredTimeInMillis = user.getExpiredTime().getTime();
+				}
+			}
+			if((expiredTimeInMillis > 0 ) &&  (expiredTimeInMillis < System.currentTimeMillis())){
+				throw new AuthenticationServiceException("用户账户已经过期，请联系客服修改->首页上部菜单点击/在线客服/按钮");
 			}
 			return authentication;
 		}

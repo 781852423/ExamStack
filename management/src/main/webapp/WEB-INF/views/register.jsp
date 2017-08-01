@@ -152,7 +152,7 @@ String basePath = request.getScheme() + "://"
 											<label class="checkbox-inline">
 												<input type="checkbox"
 												id="inlineCheckbox1" value="agree">
-												<a> 同意ExamStack条款</a> </label>
+												<a>同意51jobpass条款</a> </label>
 											<span class="form-message"></span>
 										</div>
 
@@ -202,7 +202,7 @@ String basePath = request.getScheme() + "://"
 		<script type="text/javascript" src="resources/js/jquery/jquery-1.9.0.min.js"></script>
 		<!-- Bootstrap JS -->
 		<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="resources/js/register.js"></script>
+		<script type="text/javascript" src="resources/js/"></script>
 
 	</body>
 </html>

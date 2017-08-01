@@ -33,6 +33,15 @@ public class UserInfo extends User {
 	private String phoneNum;
 	private Date lastLoginTime;
 	private Date loginTime;
+	private Date expiredTime;
+	public Date getExpiredTime() {
+		return expiredTime;
+	}
+
+	public void setExpiredTime(Date expiredTime) {
+		this.expiredTime = expiredTime;
+	}
+
 	private LinkedHashMap<String,MenuItem> menuMap;
 	private HashMap<String,Role> roleMap;
 	//保存考试历史id

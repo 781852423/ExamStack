@@ -11,7 +11,7 @@
 		a.email,a.phone_num phoneNum,a.create_time createTime,a.create_by
 		createBy,
 		a.field_id fieldId,a.last_login_time
-		lastLoginTime,a.company,a.enabled,department,GROUP_CONCAT(c.authority) roles,
+		lastLoginTime,a.company,a.enabled,department,a.expired_time expiredTime,GROUP_CONCAT(c.authority) roles,
 		a.national_id nationalId,(select d.dep_id from et_user_2_department d where d.user_id=a.user_id) depId from
 		et_user a,et_user_2_role b,et_role c
 		where a.user_id=b.user_id and b.role_id=c.id and a.user_name=#{username}
@@ -24,9 +24,9 @@
 		parameterType="com.examstack.common.domain.user.User">
 		insert into
 		et_user(user_name,password,true_name,national_id,email,phone_num,create_time,create_by,field_id,
-		company,department)
+		company,department,expired_time)
 		value
-		(#{userName},#{password},#{trueName},#{nationalId},#{email},#{phoneNum},#{createTime},#{createBy},#{fieldId},#{company},#{department})
+		(#{userName},#{password},#{trueName},#{nationalId},#{email},#{phoneNum},#{createTime},#{createBy},#{fieldId},#{company},#{department},#{expiredTime})
 	</insert>
 	<update id="updateUser" parameterType="com.examstack.common.domain.user.User">
 		update et_user
@@ -42,6 +42,7 @@
 			<if test="user.fieldId != 0">field_id=#{user.fieldId},</if>
 			<if test="user.company != null">company=#{user.company},</if>
 			<if test="user.department != null">department=#{user.department},</if>
+			<if test="user.expiredTime != null">expired_Time=#{user.expiredTime},</if>
 			<if test="user.userId != 0">user_id=#{user.userId}</if>
 		</set>
 		<where>

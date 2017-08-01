@@ -43,6 +43,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		userInfo.setPhoneNum(user.getPhoneNum());
 		userInfo.setNationalId(user.getNationalId());
 		userInfo.setDepId(user.getDepId());
+		userInfo.setExpiredTime(user.getExpiredTime());
 		return userInfo;
 	}
 }

@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.sun.star.util.DateTime;
+
 /*
  * 用@XMLRootElement注释，表示该类可以支持于xml元素映射，且为xml元素的根元素
  * 例如：
@@ -38,6 +40,14 @@ public class User implements Serializable {
 	private String roles;
 	private int depId;
 	private String department;
+	private Date expiredTime;
+	
+	public Date getExpiredTime() {
+		return expiredTime;
+	}
+	public void setExpiredTime(Date expiredTime) {
+		this.expiredTime = expiredTime;
+	}
 	public int getDepId() {
 		return depId;
 	}
@@ -152,7 +162,10 @@ public class User implements Serializable {
 				+ ", nationalId=" + nationalId + ", email=" + email + ", phoneNum=" + phoneNum + ", createTime="
 				+ createTime + ", createBy=" + createBy + ", fieldId=" + fieldId + ", fieldName=" + fieldName
 				+ ", lastLoginTime=" + lastLoginTime + ", loginTime=" + loginTime + ", company=" + company
-				+ ", enabled=" + enabled + ", roles=" + roles + ", depId=" + depId + ", department=" + department + "]";
+				+ ", enabled=" + enabled + ", roles=" + roles + ", depId=" + depId + ", department=" + department 
+				
+				+",expiredTime=" + expiredTime
+				+ "]";
 	}
 	
 }

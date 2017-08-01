@@ -10,21 +10,21 @@ var create_account = {
 
 	bindSubmitForm : function() {
 		$("#btn-reg").click(function() {
-			
+		
 			var result = create_account.verifyInput();
+			
 			if (result) {
+				
 				var data = new Object();
 				data.userName = $(".form-username input").val();
 				data.email = $(".form-email input").val();
-				//data.password = $(".form-password input").val();
-				data.password = hex_sha1($(".form-password input").val());/*对密码加密之后再传输到服务器*/
+				data.password = $(".form-password input").val();
+				//data.password = hex_sha1($(".form-password input").val());/*对密码加密之后再传输到服务器*/
 				/*data.fieldId = $("#job-type-input-select").val();
-				data.company = $(".form-company input").val();
-				data.phoneNum = $(".form-phone input").val();
-				data.nationalId = $(".form-national-id input").val();
-				data.trueName = $(".form-truename input").val();
+				
 				data.depId = $("#department-input-select").val();*/
 				var action = "add-user";
+				
 				jQuery.ajax({
 					headers : {
 						'Accept' : 'application/json',

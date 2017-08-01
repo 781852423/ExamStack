@@ -17,6 +17,7 @@ import com.examstack.common.domain.user.User;
 import com.examstack.common.util.StandardPasswordEncoderForSha1;
 import com.examstack.portal.security.UserInfo;
 import com.examstack.portal.service.UserService;
+import com.sun.star.util.DateTime;
 
 @Controller
 public class UserAction {
@@ -43,10 +44,15 @@ public class UserAction {
 	@RequestMapping(value = { "/add-user" }, method = RequestMethod.POST)
 	public @ResponseBody Message addUser(@RequestBody User user) {
 		user.setCreateTime(new Date());
+		long expiredTimeL = System.currentTimeMillis()+24*60*60*1000; // 这里设置自己注册的账户有一天的有效期
+		user.setExpiredTime(new Date(expiredTimeL));
 		/*服务器端的加密操作 */
+		
 		String password = user.getPassword() + "{" + user.getUserName().toLowerCase() + "}";
 		PasswordEncoder passwordEncoder = new StandardPasswordEncoderForSha1();
+		
 		String resultPassword = passwordEncoder.encode(password);
+		System.out.println("获取前端页面的用户名：" + user.getUserName() + " 密码：" + user.getPassword());
 		user.setPassword(resultPassword);
 		user.setEnabled(true);
 		user.setCreateBy(-1); // 自己注册，创建人：-1
