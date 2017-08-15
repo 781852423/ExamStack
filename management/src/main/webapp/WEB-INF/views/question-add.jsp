@@ -143,6 +143,7 @@ request.setAttribute("leftMenuId",list[3]);
 										<option value="6">论述题</option>
 										<option value="7">计算题</option>
 										<option value="8">名词解释</option>
+										<option value="9">纯题干正文</option>
 
 									</select><span class="form-message"></span>
 								</div>
@@ -163,7 +164,7 @@ request.setAttribute("leftMenuId",list[3]);
 											</div>
 										</div>
 										
-										<div style="text-align:center;margin:10px 0;">
+										<div style="text-align:center;margin:10px 0;" id="knowledgeClassifiedSpan">
 											<button id="add-point-btn" class="btn btn-primary btn-xs">选择知识分类</button>
 											<button id="del-point-btn" class="btn btn-danger btn-xs">删除知识分类</button>
 											<button id="remove-all-point-btn" class="btn btn-warning btn-xs">清除列表</button>
@@ -203,7 +204,7 @@ request.setAttribute("leftMenuId",list[3]);
 											<span class="add-img add-opt-img">添加图片</span> <span><i class="small-icon ques-remove-opt fa fa-minus-square" title="删除此选项"></i></span>
 										</span>
 									</div>
-								<!--	<div class="small-icon" id="ques-add-opt" title="娣诲姞閫夐」"></div>-->
+								
 									<span id="ques-add-opt"><i class="small-icon fa fa-plus-square" title="添加选项"></i></span>
 									<br>
 									<span class="form-message"></span>

@@ -6,7 +6,7 @@
 
 	<!-- 试题列表部分 -->
 	<select id="getQuestionList" resultType="com.examstack.common.domain.question.Question">
-		select a.id,a.name,a.content,a.question_type_id,a.creator,a.answer,a.analysis,a.reference referenceName,group_concat(concat(d.field_name,'-',c.point_name)) pointName,
+		select a.id,a.parentId,a.name,a.content,a.question_type_id,a.creator,a.answer,a.analysis,a.reference referenceName,group_concat(concat(d.field_name,'-',c.point_name)) pointName,
 		e.name
 		questionTypeName, examing_point examingPoint,
 		(select group_concat(m.tag_name,' ') from et_tag m,et_question_2_tag n
@@ -103,10 +103,10 @@
 		useGeneratedKeys="true" keyProperty="id">
 		insert into et_question
 		(name,content,question_type_id,create_time,creator,
-		answer,analysis,reference,examing_point,keyword,points)
+		answer,analysis,reference,examing_point,keyword,points,parentId)
 		values
 		(#{name},#{content},#{question_type_id},#{create_time},#{creator},
-		#{answer},#{analysis},#{referenceName},#{examingPoint},#{keyword},#{points})
+		#{answer},#{analysis},#{referenceName},#{examingPoint},#{keyword},#{points},#{parentId})
 	</insert>
 	<update id="updateQuestion">
 		update et_question
@@ -135,6 +135,9 @@
 			<if test="keyword != null">
 				keyword = #{keyword},
 			</if>
+			<if test="parentId != null">
+                parentId = #{parentId},
+            </if>
 			id = #{id}
 		</set>
 		<where>
@@ -227,8 +230,8 @@
 	</delete>
 
 	<select id="getQuestionByQuestionId" resultType="com.examstack.common.domain.question.Question">
-		select a.id,a.name,a.content,a.question_type_id,a.creator,a.answer,a.analysis,a.reference referenceName,a.keyword keyword,
-		a.examing_point examingPoint from et_question a
+		select a.id,a.parentId,a.name,a.content,a.question_type_id,a.creator,a.answer,a.analysis,a.reference referenceName,a.keyword keyword,
+		a.examing_point examingPoint, b.question_raw_content questionRawContent from et_question a left join et_question_raw_content b on a.parentId=b.id
 		<where>
 			a.id = #{questionId}
 		</where>
@@ -243,7 +246,7 @@
 
 	<select id="getQuestionAnalysisListByIdList"
 		resultType="com.examstack.common.domain.question.QuestionQueryResult">
-		SELECT a.id
+		SELECT a.id,
 		questionId,a.content,a.answer,a.analysis,a.question_type_id
 		questionTypeId,a.reference
 		referenceName,a.examing_point

@@ -8,8 +8,11 @@
                                                                                        职梦靠岸  Copyright © <a href="http://www.51jobpass.com/"
                                 target="_blank">职梦靠岸</a> - <a href="." target="_blank">主页</a>
                             | <a href="http://www.51jobpass.com/" target="_blank">关于我们</a> | <a
-                                href="http://www.51jobpass.com/" target="_blank">FAQ</a> | <a
-                                href="http://www.51jobpass.com/" target="_blank">联系我们</a>
+                                href="http://www.51jobpass.com/" target="_blank">FAQ</a> | 
+                                <a target="_blank" href="http://www.taobao.com/webww/ww.php?ver=3&touid=chenjiexmcxtaobao
+                                &siteid=cntaobao&status=1&charset=utf-8"><img border="0" src="http://amos.alicdn.com/online.aw?v=2&uid=chenjiexmcxtaobao
+                                &site=cntaobao&s=1&charset=utf-8" alt="联系旺旺客服" />联系我们</a> |
+                                <a href="https://shop106542288.taobao.com/" target="blank">淘宝店铺</a>
                         </p>
                     </div>
                 </div>

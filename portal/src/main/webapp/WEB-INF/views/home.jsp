@@ -85,10 +85,11 @@
 								<!-- Left column -->
 								<div class="col-l">
 									<p style="text-indent:2em;">
-										职梦靠岸是国内专注应届生、社会招聘的笔试面试辅导机构，专注做银行、证券、保险等机构笔试面试辅导。
+										职梦靠岸是国内专注应届生、社会招聘的笔试面试辅导机构，专注做银行、证券、保险等机构笔试面试辅导。此网站主要方便考生模拟在线笔试，通过电脑全面模拟机考系统，往年真题、模拟尸体和培训视屏、讲义都在网站上提供。
+										目前支付可以通过顶部链接进入本公司淘宝店铺进行。
 									</p>
 									<p style="text-indent:2em;">
-										团队具有相关单位求职和工作经验。
+										团队具有相关单位求职和工作经验，团队成员目前多数依然供职于这些单位。
 									</p>
 								</div>
 								<!-- Right column -->
@@ -98,7 +99,7 @@
 
 									<!-- <img alt="" src="../resources/images/ad.png"> -->
 									<p>
-										如果有任何意见或者建议，请留言给我们。
+										如果有任何意见或者建议，请通过顶部“在线客服”留言给我们。
 									</p>
 
 									<!-- Button -->
@@ -131,7 +132,17 @@
 							参加正式或者模拟考试，您的教师可以发布正式的考试，您也可以主动申请这些考试
 						</p> 
 					</a>
-					<div class="select-test col-xs-4">
+					
+					<a class="select-test col-xs-4 home-link-anchor" href="training-list">
+                        <div class="select-test-icon">
+                            <i class="fa fa-arrow-circle-o-up"></i>
+                        </div> <h3> 参加培训 </h3>
+                        <p>
+                                                                                  大量针对招聘笔试和面试的培训，全程指导从网申到签约的一系列过程
+                        </p> 
+                    </a>
+                    
+					<!-- <div class="select-test col-xs-4">
 						<div>
 							<h3> 快速考试入口 </h3>
 							<p>
@@ -143,7 +154,7 @@
 							<a class="btn btn-info quick-start-btn" href="quick-start">快速考试入口 <i class="fa fa-arrow-circle-o-right"></i> </a>
 
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -156,83 +167,294 @@
 					</p>
 				</div>
 				<div class="row">
-					<a class="field-category-div col-xs-3 home-link-anchor">
-					<div class="field-category-title" style="background-color: #E97051;">
+					<a class="field-category-div col-xs-3 home-link-anchor" href="https://shop106542288.taobao.com/" target="blank" alt="点击进入淘宝店铺">
+					<div class="field-category-title" style="background-color: #CD3700;">
 						<div class="field-category-inner">
 							<i class="fa fa-medkit"></i>
 						</div>
 						<div class="field-category-text ">
 							<p>
-								国有银行考试
+								商业银行考试
 							</p>
 						</div>
 					</div>
 					<div class="field-category-footer">
 						<div class="field-category-footer-sub">
 							<p class="field-student-subtitle">
-								股份制银行考试
+								参加商业银行(四大行、股份制银行、城商行地方性银行)笔试面试培训和练习的学员
 							</p>
 						</div>
 						<div class="field-category-footer-sub">
 							<i class="fa fa-users"></i>
-							<span class="field-student-num">512</span>
+							
+							<span class="field-student-num">11523</span>
 
-							名学员
+							名学员 
 						</div>
 
 					</div> </a>
-					<a class="field-category-div col-xs-3 home-link-anchor">
-					<div class="field-category-title" style="background-color: #5C78B9;">
+					<a class="field-category-div col-xs-3 home-link-anchor" href="https://shop106542288.taobao.com/" target="blank" alt="点击进入淘宝店铺">
+					<div class="field-category-title" style="background-color: #698B22;">
 						<div class="field-category-inner">
-							<i class="fa fa-trophy"></i>
+							<i class="fa fa-university"></i>
 						</div>
 						<div class="field-category-text ">
 							<p>
-								进出口银行
+								政策性银行
 							</p>
 						</div>
 					</div>
 					<div class="field-category-footer">
 						<div class="field-category-footer-sub">
 							<p class="field-student-subtitle">
-								国家开发银行
+								人民银行、国家开发银行、进出口银行、农业发展银行笔试面试培训和练习的学员
 							</p>
 
 						</div>
 						<div class="field-category-footer-sub">
 							<i class="fa fa-users"></i>
-							<span class="field-student-num">1143</span>
+							<span class="field-student-num">5143</span>
 							名学员
 						</div>
 
 					</div> </a>
-					<a class="field-category-div col-xs-3 home-link-anchor">
+					<a class="field-category-div col-xs-3 home-link-anchor" href="https://shop106542288.taobao.com/" target="blank" alt="点击进入淘宝店铺">
 					<div class="field-category-title" style="background-color: #5BA276;">
 						<div class="field-category-inner">
-							<i class="fa fa-car"></i>
+							<i class="fa fa-leaf"></i>
 						</div>
 						<div class="field-category-text ">
 							<p>
-								邮政储蓄银行
+								烟草系统
 							</p>
 						</div>
 					</div>
 					<div class="field-category-footer">
 						<div class="field-category-footer-sub">
 							<p class="field-student-subtitle">
-								城商行
+								各省份烟草局、烟草公司、烟厂（中烟工业等）笔试面试培训和练习的学员
 							</p>
 
 						</div>
 						<div class="field-category-footer-sub">
 							<i class="fa fa-users"></i>
-							<span class="field-student-num">1213</span>
+							<span class="field-student-num">3253</span>
 							名学员
 						</div>
 
 					</div> </a>
+					
+					<a class="field-category-div col-xs-3 home-link-anchor" href="https://shop106542288.taobao.com/" target="blank" alt="点击进入淘宝店铺">
+                    <div class="field-category-title" style="background-color: #5BA276;">
+                        <div class="field-category-inner">
+                            <i class="fa fa-subway"></i>
+                        </div>
+                        <div class="field-category-text ">
+                            <p>
+                                                                                        铁路、地铁系统
+                            </p>
+                        </div>
+                    </div>
+                    <div class="field-category-footer">
+                        <div class="field-category-footer-sub">
+                            <p class="field-student-subtitle">
+                                                                                   各省份铁路局、城铁地铁轨道系统笔试面试培训和练习的学员
+                            </p>
+
+                        </div>
+                        <div class="field-category-footer-sub">
+                            <i class="fa fa-users"></i>
+                            <span class="field-student-num">7683</span>
+                            名学员
+                        </div>
+
+                    </div> </a>
 
 				</div>
+				
+				<!-- New Line -->
+				<div class="row">
+                    <a class="field-category-div col-xs-3 home-link-anchor" href="https://shop106542288.taobao.com/" target="blank" alt="点击进入淘宝店铺">
+                    <div class="field-category-title" style="background-color: #E97051;">
+                        <div class="field-category-inner">
+                            <i class="fa fa-mobile"></i>
+                        </div>
+                        <div class="field-category-text ">
+                            <p>
+                                                                                             移动电信联通运营商
+                            </p>
+                        </div>
+                    </div>
+                    <div class="field-category-footer">
+                        <div class="field-category-footer-sub">
+                            <p class="field-student-subtitle">
+                                                                                     参加电信行业(中国移动、中国电信、中国联通)笔试面试培训和练习的学员
+                            </p>
+                        </div>
+                        <div class="field-category-footer-sub">
+                            <i class="fa fa-users"></i>
+                            <span class="field-student-num">7593</span>
+
+                            名学员
+                        </div>
+
+                    </div> </a>
+                    <a class="field-category-div col-xs-3 home-link-anchor" href="https://shop106542288.taobao.com/" target="blank" alt="点击进入淘宝店铺">
+                    <div class="field-category-title" style="background-color: #5C78B9;">
+                        <div class="field-category-inner">
+                            <i class="fa fa-signal"></i>
+                        </div>
+                        <div class="field-category-text ">
+                            <p>
+                                                                                            中国铁塔公司
+                            </p>
+                        </div>
+                    </div>
+                    <div class="field-category-footer">
+                        <div class="field-category-footer-sub">
+                            <p class="field-student-subtitle">
+                                                                                 参加中国铁塔公司面试培训和练习的学员
+                            </p>
+
+                        </div>
+                        <div class="field-category-footer-sub">
+                            <i class="fa fa-users"></i>
+                            <span class="field-student-num">9143</span>
+                            名学员
+                        </div>
+
+                    </div> </a>
+                    <a class="field-category-div col-xs-3 home-link-anchor" href="https://shop106542288.taobao.com/" target="blank" alt="点击进入淘宝店铺">
+                    <div class="field-category-title" style="background-color: #5BA276;">
+                        <div class="field-category-inner">
+                            <i class="fa fa-building"></i>
+                        </div>
+                        <div class="field-category-text ">
+                            <p>
+                                                                                            各地农信社
+                            </p>
+                        </div>
+                    </div>
+                    <div class="field-category-footer">
+                        <div class="field-category-footer-sub">
+                            <p class="field-student-subtitle">
+                                                                               各省份农信社笔试面试培训和练习的学员
+                            </p>
+
+                        </div>
+                        <div class="field-category-footer-sub">
+                            <i class="fa fa-users"></i>
+                            <span class="field-student-num">3257</span>
+                            名学员
+                        </div>
+
+                    </div> </a>
+                    
+                    <a class="field-category-div col-xs-3 home-link-anchor" href="https://shop106542288.taobao.com/" target="blank" alt="点击进入淘宝店铺">
+                    <div class="field-category-title" style="background-color: #FA8072;">
+                        <div class="field-category-inner">
+                            <i class="fa fa-certificate"></i>
+                        </div>
+                        <div class="field-category-text ">
+                            <p>
+                                                                                            邮政通信特有职业技能鉴定
+                            </p>
+                        </div>
+                    </div>
+                    <div class="field-category-footer">
+                        <div class="field-category-footer-sub">
+                            <p class="field-student-subtitle">
+                                                                                参加邮政通信特有职业技能鉴定速递业务员出中高级、集邮业务员职业技能鉴定、邮政储汇业务员笔试面试培训和练习的学员
+                            </p>
+
+                        </div>
+                        <div class="field-category-footer-sub">
+                            <i class="fa fa-users"></i>
+                            <span class="field-student-num">7689</span>
+                            名学员
+                        </div>
+
+                    </div> </a>
+                    
+                    <a class="field-category-div col-xs-3 home-link-anchor" href="https://shop106542288.taobao.com/" target="blank" alt="点击进入淘宝店铺">
+                    <div class="field-category-title" style="background-color: #7CCD7C;">
+                        <div class="field-category-inner">
+                            <i class="fa fa-industry"></i>
+                        </div>
+                        <div class="field-category-text ">
+                            <p>
+                                                                                            保险行业
+                            </p>
+                        </div>
+                    </div>
+                    <div class="field-category-footer">
+                        <div class="field-category-footer-sub">
+                            <p class="field-student-subtitle">
+                                                                               中国人寿、太平洋保险、平安保险笔试面试培训和练习的学员
+                            </p>
+
+                        </div>
+                        <div class="field-category-footer-sub">
+                            <i class="fa fa-users"></i>
+                            <span class="field-student-num">7629</span>
+                            名学员
+                        </div>
+
+                    </div> </a>
+                    
+                    <a class="field-category-div col-xs-3 home-link-anchor" href="https://shop106542288.taobao.com/" target="blank" alt="点击进入淘宝店铺">
+                    <div class="field-category-title" style="background-color: #383838;">
+                        <div class="field-category-inner">
+                            <i class="fa fa-ship"></i>
+                        </div>
+                        <div class="field-category-text ">
+                            <p>
+                                                                                            石油石化行业
+                            </p>
+                        </div>
+                    </div>
+                    <div class="field-category-footer">
+                        <div class="field-category-footer-sub">
+                            <p class="field-student-subtitle">
+                                                                                中国石油、中国石化、中海油笔试面试培训和练习的学员
+                            </p>
+
+                        </div>
+                        <div class="field-category-footer-sub">
+                            <i class="fa fa-users"></i>
+                            <span class="field-student-num">17998</span>
+                            名学员
+                        </div>
+
+                    </div> </a>
+                    
+                    <a class="field-category-div col-xs-3 home-link-anchor" href="https://shop106542288.taobao.com/" target="blank" alt="点击进入淘宝店铺">
+                    <div class="field-category-title" style="background-color: #006400;">
+                        <div class="field-category-inner">
+                            <i class="fa fa-bolt"></i>
+                        </div>
+                        <div class="field-category-text ">
+                            <p>
+                                                                                            电力行业
+                            </p>
+                        </div>
+                    </div>
+                    <div class="field-category-footer">
+                        <div class="field-category-footer-sub">
+                            <p class="field-student-subtitle">
+                                                                              参加国家电网各省份招聘、电力公司、电力设计院笔试面试培训学员
+                            </p>
+
+                        </div>
+                        <div class="field-category-footer-sub">
+                            <i class="fa fa-users"></i>
+                            <span class="field-student-num">19684</span>
+                            名学员
+                        </div>
+
+                    </div> </a>
+                    
+                </div><!-- New Line End -->
 			</div>
 		</div>
 		<div class="content" style="padding:30px 0 100px 0;">

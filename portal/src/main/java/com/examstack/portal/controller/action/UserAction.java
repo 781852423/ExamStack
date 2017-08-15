@@ -1,6 +1,10 @@
 package com.examstack.portal.controller.action;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
+import java.io.InputStream;
 import java.util.Date;
+import java.util.Properties;
 
 import org.apache.commons.logging.impl.Log4JLogger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.examstack.common.domain.exam.Message;
 import com.examstack.common.domain.user.User;
 import com.examstack.common.util.StandardPasswordEncoderForSha1;
+import com.examstack.common.util.file.PropertyReaderUtil;
 import com.examstack.portal.security.UserInfo;
 import com.examstack.portal.service.UserService;
+import com.mysql.jdbc.log.Log;
 import com.sun.star.util.DateTime;
 
 @Controller
@@ -44,7 +50,20 @@ public class UserAction {
 	@RequestMapping(value = { "/add-user" }, method = RequestMethod.POST)
 	public @ResponseBody Message addUser(@RequestBody User user) {
 		user.setCreateTime(new Date());
-		long expiredTimeL = System.currentTimeMillis()+24*60*60*1000; // 这里设置自己注册的账户有一天的有效期
+		int expiredDays = 0;
+		try {
+			
+			String path = this.getClass().getClassLoader().getResource("custome.properties").getPath();
+			Properties props = PropertyReaderUtil.getProperties(path);
+			
+			expiredDays = Integer.parseInt(props.getProperty("expiredDays"));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		
+		}
+		
+		long expiredTimeL = System.currentTimeMillis()+expiredDays*24*60*60*1000; // 这里设置自己注册的账户有一天的有效期
 		user.setExpiredTime(new Date(expiredTimeL));
 		/*服务器端的加密操作 */
 		

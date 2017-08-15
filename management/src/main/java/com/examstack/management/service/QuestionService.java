@@ -20,8 +20,8 @@ import com.examstack.common.domain.question.Tag;
 import com.examstack.common.util.Page;
 
 /**
- * @author Ocelot
- * @date 2014年6月8日 下午5:52:44
+ * @author Jackie
+ * @date 2017.8.8
  */
 public interface QuestionService {
 

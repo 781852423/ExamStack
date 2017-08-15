@@ -28,7 +28,17 @@ question_add = {
 				$(".correct-answer").hide();
 				$(".form-question-opt").hide();
 				$(".form-question-answer-boolean").show();
-			} else {
+			} else if(9 == $(this).val()){
+				$("#aq-course1").hide();
+				$("#aq-course2").hide();
+				$("#knowledgeClassifiedSpan").hide();
+				$("#kn-selected").hide();
+				$(".form-question-opt").hide();
+				$(".correct-answer").hide();
+				//9表示纯的提干，没有问，也没有答案，例如阅读理解的正文，综合分析的正文部分
+				
+			}
+			else {
 				$(".correct-answer").hide();
 				$(".form-question-opt").hide();
 				$(".form-question-answer-text").show();
@@ -95,6 +105,10 @@ question_add = {
 		$(".form-message").empty();
 		$(".has-error").removeClass("has-error");
 		var question_type = $("#question-type select").val();
+		if(question_type == 9)
+			{
+				return true; // 如果纯提干，不做任何检查
+			}
 		var result = true;
 		result = result && question_add.checkKnowledge();
 		if (1 == question_type) {
@@ -109,7 +123,8 @@ question_add = {
 		} else if (3 == question_type) {
 			var r_checkContent = question_add.checkContent();
 			result = result && r_checkContent;
-		} else {
+		} 	
+		else {
 			var r_checkContent = question_add.checkContent();
 			var r_checkAnswerText = question_add.checkAnswerText();
 			result = result && r_checkContent && r_checkAnswerText;

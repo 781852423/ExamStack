@@ -10,10 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 
 public class PropertyReaderUtil {
 
-	public static final String PROPERITIES_PATH="/WEB-INF/classes/property.properties";
+	public static final String PROPERITIES_PATH="/custome.properties";
 	public static final String SYS_PROPERITIES_PATH="/WEB-INF/classes/sys-config.properties";
+	/*static
+	{
+		System.out.println("XXXX" + PropertyReaderUtil.class.getClassLoader().getResource("custome.properties")); //发现可以输出东西
+		System.out.println("XXXX" + PropertyReaderUtil.class.getClassLoader().getResource("/custome.properties"));
+	}*/
 	public static Properties getProperties() throws FileNotFoundException{
-		InputStream inputStream = new FileInputStream(PROPERITIES_PATH);
+		
+		InputStream inputStream = new FileInputStream(PropertyReaderUtil.class.getClassLoader().getResource(PROPERITIES_PATH).getPath()); // 测试发现不行，必须设置绝对路径? 2017-8-2
 		
 		Properties pros = new Properties();
 		try {
