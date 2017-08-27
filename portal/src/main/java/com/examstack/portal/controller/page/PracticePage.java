@@ -210,8 +210,15 @@ public class PracticePage {
 		
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
+		
+		/*
+		 * 对应questionMapper的getAllField SQL 查询出的是题库的列表：例如5	商业银行基础知识	商业银行基础知识	0	0
+		 *
+		 */
 		List<Field> fieldList = questionService.getAllField(null);
-		if(fieldId == 0)
+
+		// 目前没有fieldID =0的选项
+		if(fieldId == 0) 
 			fieldId = fieldList.get(0).getFieldId();
 		Map<Integer, Map<Integer, QuestionStatistic>> questionMap = questionService.getTypeQuestionStaticByFieldId(fieldId);
 		Map<Integer, Map<Integer, QuestionStatistic>> historyMap = questionHistoryService.getTypeQuestionHistStaticByFieldId(fieldId, userInfo.getUserid());

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.examstack.management.persistence.QuestionParentMapper">
+
+	<!-- 试题题干列表部分 -->
+	<select id="getQuestionParentList" resultType="com.examstack.common.domain.question.QuestionParent">
+		select a.id, a.name,a.content,a.create_time createTime, a.creator from et_question_parent a;
+	</select>
+
+	
+	<insert id="insertQuestionParent" parameterType="com.examstack.common.domain.question.QuestionParent"
+        useGeneratedKeys="true" keyProperty="id">
+        insert into et_question_parent
+        (name,content,create_time,creator)
+        values
+        (#{name},#{content},#{create_time},#{creator})
+    </insert>
+    
+    <delete id="deleteQuestionParentById">
+        delete from et_question_parent where id=#{id}
+    </delete>
+    
+</mapper>
