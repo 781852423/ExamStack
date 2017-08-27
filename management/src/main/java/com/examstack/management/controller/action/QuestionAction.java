@@ -25,6 +25,7 @@ import com.examstack.common.domain.exam.Message;
 import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.Question;
 import com.examstack.common.domain.question.QuestionContent;
+import com.examstack.common.domain.question.QuestionParentIdAndTitleDesc;
 import com.examstack.common.domain.question.QuestionTag;
 import com.examstack.common.util.file.FileUploadUtil;
 import com.examstack.management.security.UserInfo;
@@ -65,7 +66,37 @@ public class QuestionAction {
 		question.setCreate_time(new Date());
 		question.setCreator(userDetails.getUsername());
 		try {
-			questionService.addQuestion(question);
+			questionService.addQuestion(question); // 对应questionMapper.insertQuestion，在文件QuestionMapper.xml文件
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			message.setResult("error");
+			message.setMessageInfo(e.getClass().getName());
+			e.printStackTrace();
+		}
+
+		return message;
+	}
+	
+	/**
+	 * 添加试题
+	 * 
+	 * @param question
+	 * @return
+	 */
+	@RequestMapping(value = "/secure/question/getParentIDs", method = RequestMethod.GET)
+	public @ResponseBody Message getParentID(Model model) {
+
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Message message = new Message();
+		// Gson gson = new Gson();
+
+		try {
+			// 对应questionMapper.getQuestionParentIdAndTitleDescList，在文件QuestionMapper.xml文件
+			List<QuestionParentIdAndTitleDesc> parentIds = questionService.getQuestionParentIdAndTitleDescList(); 
+			//
+			message.setObject(parentIds);
+			Gson gson = new Gson();
+			String jonString = gson.toJson(parentIds);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			message.setResult("error");

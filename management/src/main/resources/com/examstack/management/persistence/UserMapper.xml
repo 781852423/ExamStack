@@ -122,7 +122,7 @@
 		`password`,a.email as email,a.phone_num as phoneNum,
 		a.create_time as
 		createTime,
-		a.expried_time,
+		a.expired_time,
 		(select user_name from et_user
 		m where m.user_id=a.create_by) as creator,(select field_name from et_field where field_id=a.field_id) as fieldName,
 		a.enabled as enabled,company,national_id nationalId,(select dep_id from et_user_2_department p where p.user_id=a.user_id) depId,

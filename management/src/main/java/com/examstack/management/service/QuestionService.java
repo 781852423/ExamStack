@@ -16,12 +16,14 @@ import com.examstack.common.domain.question.QuestionStatistic;
 import com.examstack.common.domain.question.QuestionStruts;
 import com.examstack.common.domain.question.QuestionTag;
 import com.examstack.common.domain.question.QuestionType;
+import com.examstack.common.domain.question.QuestionParentIdAndTitleDesc;
 import com.examstack.common.domain.question.Tag;
 import com.examstack.common.util.Page;
 
 /**
  * @author Jackie
  * @date 2017.8.8
+ * 17.8.25日再次修改，增加获取question parentIds的服务
  */
 public interface QuestionService {
 
@@ -175,4 +177,7 @@ public interface QuestionService {
 	 * @return
 	 */
 	public List<PointStatistic> getPointCount(int fieldId, Page<PointStatistic> page);
+
+
+	List<QuestionParentIdAndTitleDesc> getQuestionParentIdAndTitleDescList();
 }

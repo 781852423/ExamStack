@@ -246,8 +246,7 @@
 
 	<select id="getQuestionAnalysisListByIdList"
 		resultType="com.examstack.common.domain.question.QuestionQueryResult">
-		SELECT a.id,
-		questionId,a.content,a.answer,a.analysis,a.question_type_id
+		SELECT a.id questionId,a.content,a.answer,a.analysis,a.question_type_id
 		questionTypeId,a.reference
 		referenceName,a.examing_point
 		examingPoint,GROUP_CONCAT(d.field_name,'
@@ -322,4 +321,8 @@
 		select a.field_id fieldId,a.field_name fieldName,b.point_id pointId,b.point_name pointName,count(1) amount from et_field a,et_knowledge_point b,et_question c,et_question_2_point d
 		where a.field_id=b.field_id and b.field_id=#{fieldId} and c.id=d.question_id and d.point_id=b.point_id group by a.field_id,a.field_name, b.point_id,b.point_name
 	</select>
+	
+	<select id="getQuestionParentIdAndTitleDescList" resultType="com.examstack.common.domain.question.QuestionParentIdAndTitleDesc">
+        select a.id  parentId,left(a.name,10)  titleDesc from et_question a where a.question_type_id=9 limit 0,5;
+    </select>
 </mapper>

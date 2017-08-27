@@ -1,5 +1,6 @@
 package com.examstack.common.util;
 
+// 2017-8-25修改，增加了case 为9的题目类型。该类型只有题干，没有答案，也没有问题，只是一个综合分析或者阅读理解的正文部分
 import java.util.Iterator;
 
 import com.examstack.common.domain.exam.AnswerSheetItem;
@@ -96,6 +97,9 @@ public class QuestionAdapter {
 			break;
 		case 8:
 			sb.append("<li class=\"question qt-shortanswer\">");
+			break;
+		case 9:
+			sb.append("<li class=\"question qt-rawTitle\">");
 			break;
 		default:
 			break;
@@ -367,6 +371,32 @@ public class QuestionAdapter {
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
+		case 9:
+			sb.append("rawTitle").append("</span>");
+			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
+			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
+			sb.append("<span>[题目主干]</span>");
+			sb.append("<span class=\"question-point-content\">");
+			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("</span>");
+			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("<span class=\"question-id\" style=\"display:none;\">")
+					.append(questionQueryResult.getQuestionId())
+					.append("</span>");
+			sb.append("</div>");
+			sb.append("<form class=\"question-body\">");
+			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
+			if (questionContent.getTitleImg() != null)
+				if (!questionContent.getTitleImg().trim().equals(""))
+					sb.append(
+							"<img class=\"question-content-img question-img\" src=\"")
+							.append(baseUrl)
+							.append(questionContent.getTitleImg())
+							.append("\" />");
+			sb.append("</p>");
+			sb.append("<textarea class=\"question-textarea\"></textarea>");
+			sb.append("</form>");
+			break;
 		default:
 			break;
 		}
@@ -442,6 +472,9 @@ public class QuestionAdapter {
 			break;
 		case 8:
 			sb.append("<li class=\"question qt-shortanswer\">");
+			break;
+		case 9:
+			sb.append("<li class=\"question qt-rawTitle\">");
 			break;
 		default:
 			break;
@@ -705,6 +738,31 @@ public class QuestionAdapter {
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
+		case 9:
+			sb.append("rawTitle").append("</span>");
+			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
+			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
+			sb.append("<span>[题干]</span>");
+			sb.append("<span class=\"question-point-content\">");
+			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("</span>");
+			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("<span class=\"question-id\" style=\"display:none;\">")
+					.append(questionQueryResult.getQuestionId()).append("</span>");
+			sb.append("</div>");
+			sb.append("<form class=\"question-body\">");
+			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
+			if (questionContent.getTitleImg() != null)
+				if (!questionContent.getTitleImg().trim().equals(""))
+					sb.append(
+							"<img class=\"question-content-img question-img\" src=\"")
+							.append(baseUrl)
+							.append(questionContent.getTitleImg())
+							.append("\" />");
+			sb.append("</p>");
+			sb.append("<textarea class=\"question-textarea\"></textarea>");
+			sb.append("</form>");
+			break;
 		default:
 			break;
 		}
@@ -804,6 +862,8 @@ public class QuestionAdapter {
 		case 8:
 			sb.append("<li class=\"question qt-shortanswer\">");
 			break;
+		case 9: // 只是一个提干，类似阅读理解或者综合分析的正文部分
+			sb.append("<li class=\"question qt-rawTitle\">");
 		default:
 			break;
 		}
@@ -1082,6 +1142,33 @@ public class QuestionAdapter {
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
+		case 9:
+			sb.append("rawTitle").append("</span>");
+			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
+			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
+			sb.append("<span>[题干]</span>");
+			if (showPoint){
+				sb.append("<span class=\"question-point-content\">");
+				sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+				sb.append("</span>");
+			}
+				//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("<span class=\"question-id\" style=\"display:none;\">")
+					.append(questionQueryResult.getQuestionId()).append("</span>");
+			sb.append("</div>");
+			sb.append("<form class=\"question-body\">");
+			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
+			if (questionContent.getTitleImg() != null)
+				if (!questionContent.getTitleImg().trim().equals(""))
+					sb.append(
+							"<img class=\"question-content-img question-img\" src=\"")
+							.append(baseUrl)
+							.append(questionContent.getTitleImg())
+							.append("\" />");
+			sb.append("</p>");
+			sb.append("<textarea class=\"question-textarea\"></textarea>");
+			sb.append("</form>");
+			break;
 		default:
 			break;
 		}
@@ -1180,6 +1267,9 @@ public class QuestionAdapter {
 		case 8:
 			sb.append("<li class=\"question qt-shortanswer\">");
 			break;
+		case 9:
+			sb.append("<li class=\"question qt-rawTitle\">");
+			break;	
 		default:
 			break;
 		}
@@ -1425,6 +1515,32 @@ public class QuestionAdapter {
 			break;
 		case 8:
 			sb.append("shortanswer").append("</span>");
+			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
+			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
+			sb.append("<span>[简答题]</span>");
+			sb.append("<span class=\"question-point-content\">");
+			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("</span>");
+			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("<span class=\"question-id\" style=\"display:none;\">")
+					.append(questionQueryResult.getQuestionId())
+					.append("</span>");
+			sb.append("</div>");
+			sb.append("<form class=\"question-body\">");
+			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
+			if (questionContent.getTitleImg() != null)
+				if (!questionContent.getTitleImg().trim().equals(""))
+					sb.append(
+							"<img class=\"question-content-img question-img\" src=\"")
+							.append(baseUrl)
+							.append(questionContent.getTitleImg())
+							.append("\" />");
+			sb.append("</p>");
+			sb.append("<textarea class=\"question-textarea\"></textarea>");
+			sb.append("</form>");
+			break;
+		case 9:
+			sb.append("rawTitle").append("</span>");
 			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
 			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
 			sb.append("<span>[简答题]</span>");

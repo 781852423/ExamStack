@@ -145,7 +145,19 @@ request.setAttribute("leftMenuId",list[3]);
 										<option value="8">名词解释</option>
 										<option value="9">纯题干正文</option>
 
-									</select><span class="form-message"></span>
+
+									</select>
+                 
+									<span class="form-message"></span>
+								</div>
+								<div class="form-line question-parentId" id="question-parentId">
+								 <a  class="btn-lit" id="searchParentIds"><span>高级查询:题目parentID(表et_question->ParentID)</span></a>
+								    
+                                    <select id="question-parentId-select" class="df-input-narrow">
+
+                                        <option value="" selected="selected">请选择...</option>
+
+                                    </select>
 								</div>
 								<div class="form-line question-knowledge">
 									<span class="form-label"><span class="warning-label">*</span>知识分类：</span>

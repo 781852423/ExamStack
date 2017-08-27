@@ -38,25 +38,18 @@ public class Question implements Serializable {
 	private String tags;
 	private List<QuestionTag> tagList;
 	private List<KnowledgePoint> knowledgePoint;
-	private int parentId;
-	private String questionRawContent; // 适用于那些综合性答题或者阅读理解，专门存储题干
+	private Integer parentId; // 多加一个parentid，如果parentid ！= null，则说明这个稳定有主干的提干，可能是综合分析或者阅读理解
 	
-	public String getQuestionRawContent() {
-		return questionRawContent;
-	}
-	public void   setQuestionRawContent(String questionRawContent) {
-		this.questionRawContent = questionRawContent;
-	}
 	public List<QuestionTag> getTagList() {
 		return tagList;
 	}
 	public void setTagList(List<QuestionTag> tagList) {
 		this.tagList = tagList;
 	}
-	public int getParentId() {
+	public Integer getParentId() {
 		return parentId;
 	}
-	public void setParentId(int parentId) {
+	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
 	}
 	public List<KnowledgePoint> getKnowledgePoint() {

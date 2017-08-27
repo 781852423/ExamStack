@@ -9,6 +9,7 @@ import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.PointStatistic;
 import com.examstack.common.domain.question.Question;
 import com.examstack.common.domain.question.QuestionFilter;
+import com.examstack.common.domain.question.QuestionParentIdAndTitleDesc;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.domain.question.QuestionStatistic;
 import com.examstack.common.domain.question.QuestionStruts;
@@ -148,4 +149,6 @@ public interface QuestionMapper {
 	 * @return
 	 */
 	public List<PointStatistic> getPointCount(@Param("fieldId") int fieldId, @Param("page") Page<PointStatistic> page);
+	
+	public List<QuestionParentIdAndTitleDesc> getQuestionParentIdAndTitleDescList(); // 添加获取最新的一些parentID和描述
 }

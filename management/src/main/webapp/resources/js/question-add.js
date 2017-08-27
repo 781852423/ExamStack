@@ -10,6 +10,7 @@ question_add = {
 		this.bindAddOpt();
 		this.bindRemoveOpt();
 		this.bindSubmit();
+		this.getParentIDs();
 	},
 
 	bindChangeQuestionType : function changeQuestionType() {
@@ -29,12 +30,18 @@ question_add = {
 				$(".form-question-opt").hide();
 				$(".form-question-answer-boolean").show();
 			} else if(9 == $(this).val()){
-				$("#aq-course1").hide();
-				$("#aq-course2").hide();
-				$("#knowledgeClassifiedSpan").hide();
-				$("#kn-selected").hide();
+				//$("#aq-course1").hide();
+				//$("#aq-course2").hide();
+				//$("#knowledgeClassifiedSpan").hide();
+				//$("#kn-selected").hide();
 				$(".form-question-opt").hide();
+				//$(".question-knowledge").hide();
+				//$(".form-question-reference").hide();
+				//$(".form-question-examingpoint").hide();
+				$(".form-question-keyword").hide();
+				$(".form-question-analysis").hide();
 				$(".correct-answer").hide();
+				
 				//9表示纯的提干，没有问，也没有答案，例如阅读理解的正文，综合分析的正文部分
 				
 			}
@@ -50,7 +57,7 @@ question_add = {
 	bindSubmit : function bindSubmit() {
 		$("#question-add-form").submit(function() {
 
-			var verify_result = question_add.verifyInput();
+			var verify_result = question_add.verifyInput();//如果是单独的题目正文，则不做任何检查
 			if (verify_result) {
 				var question_entity = question_add.composeEntity();
 				$.ajax({
@@ -415,6 +422,7 @@ question_add = {
 		question_entity.referenceName = $(".form-question-reference input").val();
 		question_entity.examingPoint = $(".form-question-examingpoint input").val();
 		question_entity.keyword = $(".form-question-keyword input").val();
+		question_entity.parentId=$("#question-parentId-select").val(); // 获取parentId
 		return question_entity;
 	},
 
@@ -465,6 +473,48 @@ question_add = {
 		content.choiceList = choiceMap;
 		
 		return content;
-	}
+	},
+	
+	getParentIDs: function getParentIDs()
+	{
+		$("#searchParentIds").click(function() {
+
+				$.ajax({
+					headers : {
+						'Accept' : 'application/json',
+						'Content-Type' : 'application/json'
+					},
+					type : "GET",
+					url : "secure/question/getParentIDs",
+					success : function(message, tst, jqXHR) {
+						// function里面的参数，第一个是返回的数据，第二个个是返回的状态
+					    
+						if (!util.checkSessionOut(jqXHR))
+							return false;
+						if (message.result == "success") {
+							//alert(message.messageInfo);
+							var parentIdandDescArray = message.object;
+							var optionstring = "";
+							for(var i=0; i<parentIdandDescArray.length; i++)
+							{
+							   optionstring +="<option value=\"" + parentIdandDescArray[i].parentId + "\" >" + parentIdandDescArray[i].titleDesc +"</option>";
+						
+							}
+							//alert(optionstring);
+							$("#question-parentId-select").html("<option value=''>请选择...</option>" + optionstring);
+							
+						} else {
+							util.error("操作失败请稍后尝试");
+						}
+
+					},
+					error : function(jqXHR, textStatus) {
+						util.error("操作失败请稍后尝试");
+					}
+				});
+	
+			
+	});
+}
 };
 

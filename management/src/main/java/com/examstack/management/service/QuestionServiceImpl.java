@@ -19,6 +19,7 @@ import com.examstack.common.domain.question.PointStatistic;
 import com.examstack.common.domain.question.Question;
 import com.examstack.common.domain.question.QuestionContent;
 import com.examstack.common.domain.question.QuestionFilter;
+import com.examstack.common.domain.question.QuestionParentIdAndTitleDesc;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.domain.question.QuestionStatistic;
 import com.examstack.common.domain.question.QuestionStruts;
@@ -62,6 +63,14 @@ public class QuestionServiceImpl implements QuestionService {
 	public List<QuestionType> getQuestionTypeList() {
 		// TODO Auto-generated method stub
 		return questionMapper.getQuestionTypeList();
+	}
+	
+	@Override 
+	
+	public List<QuestionParentIdAndTitleDesc>
+	  getQuestionParentIdAndTitleDescList() {
+		// TODO Auto-generated method stub
+		return questionMapper.getQuestionParentIdAndTitleDescList();
 	}
 
 	@Override
