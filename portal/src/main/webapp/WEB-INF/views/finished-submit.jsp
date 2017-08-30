@@ -5,7 +5,7 @@
 <html>
 	<head>
 		
-		<title考试结束-提交</title>
+		<title>考试结束-提交</title>
 		
 		 <%@include file="include/head_files.jsp" %>
 		 

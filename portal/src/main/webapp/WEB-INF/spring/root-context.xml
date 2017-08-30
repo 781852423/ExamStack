@@ -31,9 +31,9 @@
 		<property name="user" value="examonline" />
 		<property name="password" value="examonline" /> -->
 		<property name="jdbcUrl"
-			value="jdbc:mysql://localhost:3306/examstack?useUnicode=true&amp;characterEncoding=UTF-8" />
-		<property name="user" value="examstack" />
-		<property name="password" value="examstack@panda" />
+			value="jdbc:mysql://101.37.69.135:3306/test?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="user" value="testadbadmin" />
+		<property name="password" value="testadbadmin" />
 		
 		<property name="maxPoolSize" value="50"></property>
 		<property name="minPoolSize" value="10"></property>
