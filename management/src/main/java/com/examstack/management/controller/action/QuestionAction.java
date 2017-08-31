@@ -25,6 +25,7 @@ import com.examstack.common.domain.exam.Message;
 import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.Question;
 import com.examstack.common.domain.question.QuestionContent;
+import com.examstack.common.domain.question.QuestionParent;
 import com.examstack.common.domain.question.QuestionParentIdAndTitleDesc;
 import com.examstack.common.domain.question.QuestionTag;
 import com.examstack.common.util.file.FileUploadUtil;
@@ -66,7 +67,19 @@ public class QuestionAction {
 		question.setCreate_time(new Date());
 		question.setCreator(userDetails.getUsername());
 		try {
-			questionService.addQuestion(question); // 对应questionMapper.insertQuestion，在文件QuestionMapper.xml文件
+			// 在这里分开来，只要是type=9，则说明是questionParent
+			if(question.getQuestion_type_id() != 9)
+			{
+			    questionService.addQuestion(question); // 对应questionMapper.insertQuestion，在文件QuestionMapper.xml文件
+			}else
+			{
+				QuestionParent questionParent = new QuestionParent();
+				questionParent.setName(question.getName());
+				questionParent.setContent(question.getContent());
+				questionParent.setCreator(question.getCreator());
+				questionParent.setCreate_time(question.getCreate_time());
+				questionService.addQuestionParent(questionParent);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			message.setResult("error");

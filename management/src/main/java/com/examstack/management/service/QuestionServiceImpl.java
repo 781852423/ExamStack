@@ -19,6 +19,7 @@ import com.examstack.common.domain.question.PointStatistic;
 import com.examstack.common.domain.question.Question;
 import com.examstack.common.domain.question.QuestionContent;
 import com.examstack.common.domain.question.QuestionFilter;
+import com.examstack.common.domain.question.QuestionParent;
 import com.examstack.common.domain.question.QuestionParentIdAndTitleDesc;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.domain.question.QuestionStatistic;
@@ -29,6 +30,7 @@ import com.examstack.common.domain.question.Tag;
 import com.examstack.common.util.Page;
 import com.examstack.common.util.file.ExcelUtil;
 import com.examstack.management.persistence.QuestionMapper;
+import com.examstack.management.persistence.QuestionParentMapper;
 import com.google.gson.Gson;
 
 /**
@@ -40,6 +42,9 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Autowired
 	private QuestionMapper questionMapper;
+	
+	@Autowired
+	private QuestionParentMapper questionParentMapper;
 
 	@Override
 	public List<Question> getQuestionList(Page<Question> pageModel, QuestionFilter qf) {
@@ -88,15 +93,29 @@ public class QuestionServiceImpl implements QuestionService {
 	@Override
 	@Transactional
 	public void addQuestion(Question question) {
-		// TODO Auto-generated method stub
+	
 		try {
-			questionMapper.insertQuestion(question);
-			for (Integer i : question.getPointList()) {
-				questionMapper.addQuestionKnowledgePoint(question.getId(), i);
-			}
+				questionMapper.insertQuestion(question);
+				for (Integer i : question.getPointList()) {
+					questionMapper.addQuestionKnowledgePoint(question.getId(), i);
+				}
+			
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
+	}
+	
+	@Override
+	@Transactional
+	public void addQuestionParent(QuestionParent questionParent)
+	{
+		// 针对完全是题干的题目，如何添加进去，如下
+		try {
+			questionParentMapper.insertQuestionParent(questionParent);
+		
+	} catch (Exception e) {
+		throw new RuntimeException(e.getMessage());
+	}
 	}
 
 	@Override
@@ -324,7 +343,12 @@ public class QuestionServiceImpl implements QuestionService {
 	
 	@Override
 	public Map<Integer, Map<Integer, QuestionStatistic>> getTypeQuestionStaticByFieldId(int fieldId) {
-		// TODO Auto-generated method stub
+		// 选出的格式如下：
+		/*
+		 * 
+		 * fieldId   pointId   pointName    QuestionTypeId    questionTypeName   amount
+	          7	           13	      判断推理	    1	                                                           单选题	           8
+		 */
 		List<QuestionStatistic> statisticList = questionMapper.getTypeQuestionStaticByFieldId(fieldId);
 		Map<Integer, Map<Integer, QuestionStatistic>> map = new HashMap<Integer, Map<Integer, QuestionStatistic>>();
 		for(QuestionStatistic statistic : statisticList){

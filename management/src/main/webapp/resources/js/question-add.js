@@ -35,9 +35,9 @@ question_add = {
 				//$("#knowledgeClassifiedSpan").hide();
 				//$("#kn-selected").hide();
 				$(".form-question-opt").hide();
-				//$(".question-knowledge").hide();
-				//$(".form-question-reference").hide();
-				//$(".form-question-examingpoint").hide();
+				$(".question-knowledge").hide();
+				$(".form-question-reference").hide();
+				$(".form-question-examingpoint").hide();
 				$(".form-question-keyword").hide();
 				$(".form-question-analysis").hide();
 				$(".correct-answer").hide();

@@ -323,6 +323,6 @@
 	</select>
 	
 	<select id="getQuestionParentIdAndTitleDescList" resultType="com.examstack.common.domain.question.QuestionParentIdAndTitleDesc">
-        select a.id  parentId,left(a.name,10)  titleDesc from et_question a where a.question_type_id=9 limit 0,5;
+        select a.id  parentId,left(a.name,10)  titleDesc from et_question_parent a limit 0,5;;
     </select>
 </mapper>
