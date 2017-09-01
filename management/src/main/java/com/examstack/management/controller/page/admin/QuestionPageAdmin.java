@@ -93,7 +93,7 @@ public class QuestionPageAdmin {
 	}
 	
 	/**
-	 * 题库页面
+	 * 题库页面，在手动编辑试卷时候，可以看到题库的界面
 	 * 
 	 * @param model
 	 * @return

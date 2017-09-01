@@ -16,6 +16,7 @@ public class QuestionAdapter {
 
 	private Question question;
 	private QuestionContent questionContent;
+	private QuestionContent questionParentContent;
 	private AnswerSheetItem answerSheetItem;
 	private QuestionQueryResult questionQueryResult;
 	private String baseUrl;
@@ -45,6 +46,9 @@ public class QuestionAdapter {
 		Gson gson = new Gson();
 		this.questionContent = gson.fromJson(question.getContent(), QuestionContent.class);
 		
+		// 如果parentContent里面是空的，则gson.fromJson将返回为null
+		this.questionParentContent = gson.fromJson(question.getParentContent(), QuestionContent.class);
+		
 		this.baseUrl = baseUrl;
 	}
 	
@@ -54,6 +58,8 @@ public class QuestionAdapter {
 		this.questionQueryResult = questionQueryResult;
 		Gson gson = new Gson();
 		this.questionContent = gson.fromJson(question.getContent(), QuestionContent.class);
+		this.questionParentContent = gson.fromJson(question.getParentContent(), QuestionContent.class);
+		
 		this.baseUrl = baseUrl;
 	}
 
@@ -62,9 +68,34 @@ public class QuestionAdapter {
 		this.questionQueryResult = questionQueryResult;
 		Gson gson = new Gson();
 		this.questionContent = gson.fromJson(questionQueryResult.getContent(), QuestionContent.class);
+		this.questionParentContent = gson.fromJson(question.getParentContent(), QuestionContent.class);
+		
 		this.baseUrl = baseUrl;
 	}
 
+	public String getParentContentTitle()
+	{
+		if(this.questionParentContent != null)
+		{
+			return this.questionParentContent.getTitle();
+		}else
+		{
+			return "";
+		}
+	}
+	
+	public String getParentContentTitleImage()
+	{
+		if(this.questionParentContent != null)
+		{
+			return this.questionParentContent.getTitleImg();
+		}else
+		{
+			return "";
+		}
+	}
+	
+	
 	/**
 	 * 组卷专用
 	 * 
@@ -124,15 +155,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			Iterator<String> it1 = questionContent.getChoiceList().keySet()
 					.iterator();
 			sb.append("<ul class=\"question-opt-list\">");
@@ -172,15 +195,8 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
+			
 			Iterator<String> it2 = questionContent.getChoiceList().keySet()
 					.iterator();
 			sb.append("<ul class=\"question-opt-list\">");
@@ -220,15 +236,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<ul class=\"question-opt-list\">");
 			
 			sb.append("<li class=\"question-list-item\">").append(
@@ -255,15 +263,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -281,15 +281,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -307,15 +299,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -333,15 +317,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p>").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -359,41 +335,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
-			sb.append("<textarea class=\"question-textarea\"></textarea>");
-			sb.append("</form>");
-			break;
-		case 9:
-			sb.append("rawTitle").append("</span>");
-			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
-			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
-			sb.append("<span>[题目主干]</span>");
-			sb.append("<span class=\"question-point-content\">");
-			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("</span>");
-			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("<span class=\"question-id\" style=\"display:none;\">")
-					.append(questionQueryResult.getQuestionId())
-					.append("</span>");
-			sb.append("</div>");
-			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -473,9 +415,7 @@ public class QuestionAdapter {
 		case 8:
 			sb.append("<li class=\"question qt-shortanswer\">");
 			break;
-		case 9:
-			sb.append("<li class=\"question qt-rawTitle\">");
-			break;
+		
 		default:
 			break;
 		}
@@ -499,15 +439,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			Iterator<String> it1 = questionContent.getChoiceList().keySet()
 					.iterator();
 			sb.append("<ul class=\"question-opt-list\">");
@@ -546,15 +478,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			Iterator<String> it2 = questionContent.getChoiceList().keySet()
 					.iterator();
 			sb.append("<ul class=\"question-opt-list\">");
@@ -592,15 +516,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<ul class=\"question-opt-list\">");
 			
 			sb.append("<li class=\"question-list-item\">").append(
@@ -626,15 +542,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -651,15 +559,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -676,15 +576,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -701,15 +593,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -726,43 +610,11 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
-		case 9:
-			sb.append("rawTitle").append("</span>");
-			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
-			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
-			sb.append("<span>[题干]</span>");
-			sb.append("<span class=\"question-point-content\">");
-			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("</span>");
-			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("<span class=\"question-id\" style=\"display:none;\">")
-					.append(questionQueryResult.getQuestionId()).append("</span>");
-			sb.append("</div>");
-			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
-			sb.append("<textarea class=\"question-textarea\"></textarea>");
-			sb.append("</form>");
-			break;
+		
 		default:
 			break;
 		}
@@ -890,15 +742,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			Iterator<String> it1 = questionContent.getChoiceList().keySet()
 					.iterator();
 			sb.append("<ul class=\"question-opt-list\">");
@@ -938,15 +782,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			Iterator<String> it2 = questionContent.getChoiceList().keySet()
 					.iterator();
 			sb.append("<ul class=\"question-opt-list\">");
@@ -986,15 +822,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<ul class=\"question-opt-list\">");
 			
 			sb.append("<li class=\"question-list-item\">").append(
@@ -1022,15 +850,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -1049,15 +869,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -1076,15 +888,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -1103,15 +907,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -1130,42 +926,7 @@ public class QuestionAdapter {
 					.append(questionQueryResult.getQuestionId()).append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
-			sb.append("<textarea class=\"question-textarea\"></textarea>");
-			sb.append("</form>");
-			break;
-		case 9:
-			sb.append("rawTitle").append("</span>");
-			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
-			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
-			sb.append("<span>[题干]</span>");
-			if (showPoint){
-				sb.append("<span class=\"question-point-content\">");
-				sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-				sb.append("</span>");
-			}
-				//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("<span class=\"question-id\" style=\"display:none;\">")
-					.append(questionQueryResult.getQuestionId()).append("</span>");
-			sb.append("</div>");
-			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -1294,15 +1055,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			Iterator<String> it1 = questionContent.getChoiceList().keySet()
 					.iterator();
 			sb.append("<ul class=\"question-opt-list\">");
@@ -1341,15 +1094,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			Iterator<String> it2 = questionContent.getChoiceList().keySet()
 					.iterator();
 			sb.append("<ul class=\"question-opt-list\">");
@@ -1388,15 +1133,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<ul class=\"question-opt-list\">");
 			
 			sb.append("<li class=\"question-list-item\">").append(
@@ -1423,15 +1160,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -1449,15 +1178,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -1475,15 +1196,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -1501,15 +1214,7 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
@@ -1527,49 +1232,48 @@ public class QuestionAdapter {
 					.append("</span>");
 			sb.append("</div>");
 			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
+			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
-		case 9:
-			sb.append("rawTitle").append("</span>");
-			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
-			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
-			sb.append("<span>[简答题]</span>");
-			sb.append("<span class=\"question-point-content\">");
-			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("</span>");
-			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("<span class=\"question-id\" style=\"display:none;\">")
-					.append(questionQueryResult.getQuestionId())
-					.append("</span>");
-			sb.append("</div>");
-			sb.append("<form class=\"question-body\">");
-			sb.append("<p class=\"question-body-text\">").append(questionContent.getTitle());
-			if (questionContent.getTitleImg() != null)
-				if (!questionContent.getTitleImg().trim().equals(""))
-					sb.append(
-							"<img class=\"question-content-img question-img\" src=\"")
-							.append(baseUrl)
-							.append(questionContent.getTitleImg())
-							.append("\" />");
-			sb.append("</p>");
-			sb.append("<textarea class=\"question-textarea\"></textarea>");
-			sb.append("</form>");
-			break;
+		
 		default:
 			break;
 
 		}
 		sb.append("</li>");
 		return sb.toString();
+	}
+	
+	private void setQuestionBody(StringBuilder sb)
+	{
+		// 先把parent题干的内容展示
+					sb.append("<p class=\"question-body-text\">").append(this.getParentContentTitle());
+					if ((this.questionParentContent != null) && (this.questionParentContent.getTitleImg() != null))
+					{
+						if (!this.questionParentContent.getTitleImg().trim().equals(""))
+							{
+							sb.append(
+									"<img class=\"question-content-img question-img\" src=\"")
+									.append(baseUrl)
+									.append(this.questionParentContent.getTitleImg())
+									.append("\" />");
+							}
+					}
+					// 再展示question自己的title和image
+					sb.append("<br>"+questionContent.getTitle());
+					if (questionContent.getTitleImg() != null)
+					{
+						if (!questionContent.getTitleImg().trim().equals(""))
+							{
+							   sb.append(
+							
+									"<img class=\"question-content-img question-img\" src=\"")
+									.append(baseUrl)
+									.append(questionContent.getTitleImg())
+									.append("\" />");
+							}
+					}
+					sb.append("</p>");
 	}
 }

@@ -235,7 +235,7 @@ request.setAttribute("leftMenuId",list[3]);
 								<table class="table-striped table">
 									<thead>
 										<tr>
-											<!-- <td></td> --><td>ID</td><td class="question-name-td" style="width:240px">试题名称</td><td style="width:60px">类型</td><td>专业</td><td>知识类</td><td>创建人</td><td style="width:90px;">操作</td>
+											<td>ID</td><td>题干ID</td><td class="question-name-td" style="width:240px">试题名称</td><td style="width:60px">类型</td><td>专业</td><td>知识类</td><td>创建人</td><td >操作</td>
 										</tr>
 									</thead>
 									<tbody>
@@ -244,7 +244,9 @@ request.setAttribute("leftMenuId",list[3]);
 											<tr>
 												<td style="display:none;">
 												<input type="checkbox" value="${items.id }">
-												</td><td>${items.id }</td>
+												</td>
+												<td>${items.id }</td>
+												<td>${items.parentId }</td>
 												<td>
 													<a href="<%=list[1]%>/question/question-preview/${items.id }" target="_blank" title="预览">${items.name }</a>
 														<div class="question-tags">
