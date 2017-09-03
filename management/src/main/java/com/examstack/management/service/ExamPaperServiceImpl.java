@@ -177,13 +177,17 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 				{
 					String parentTitlePicPath = basePath.replace(',',File.separatorChar);
 					File parentTitlePic = new File(parentTitlePicPath + questionParentContent.getTitleImg());
-					BufferedImage sourceImg = ImageIO.read(new FileInputStream(parentTitlePic));
 					
-					String ind = doc.addPictureData(new FileInputStream(parentTitlePic), XWPFDocument.PICTURE_TYPE_JPEG);
-					rt.setText(parentTitlePic.getAbsolutePath());
-					System.out.println("parentPic: " + parentTitlePic.getAbsolutePath());
-					doc.createPicture(ind,doc.getAllPictures().size() -1, sourceImg.getWidth()/2, sourceImg.getHeight()/2);
-					sourceImg.flush();
+					if(parentTitlePic.exists())
+					{
+						BufferedImage sourceImg = ImageIO.read(new FileInputStream(parentTitlePic));
+						
+						String ind = doc.addPictureData(new FileInputStream(parentTitlePic), XWPFDocument.PICTURE_TYPE_JPEG);
+						rt.setText(parentTitlePic.getAbsolutePath());
+						System.out.println("parentPic: " + parentTitlePic.getAbsolutePath());
+						doc.createPicture(ind,doc.getAllPictures().size() -1, sourceImg.getWidth()/2, sourceImg.getHeight()/2);
+						sourceImg.flush();
+					}
 				}
 			}
 			  
@@ -209,13 +213,17 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 				if(!"".equals(questionContent.getTitleImg()) && questionContent.getTitleImg() != null){
 					String titlePicPath = basePath.replace(',', File.separatorChar);
 					File titlePic = new File(titlePicPath + questionContent.getTitleImg());
-					BufferedImage sourceImg = ImageIO.read(new FileInputStream(titlePic));
-
-					String ind = doc.addPictureData(new FileInputStream(titlePic),
-							XWPFDocument.PICTURE_TYPE_JPEG);
-					doc.createPicture(ind, doc.getAllPictures().size() - 1,
-							sourceImg.getWidth() / 2, sourceImg.getHeight() / 2);
-					sourceImg.flush();
+					
+					if(titlePic.exists())
+					{
+						BufferedImage sourceImg = ImageIO.read(new FileInputStream(titlePic));
+	
+						String ind = doc.addPictureData(new FileInputStream(titlePic),
+								XWPFDocument.PICTURE_TYPE_JPEG);
+						doc.createPicture(ind, doc.getAllPictures().size() - 1,
+								sourceImg.getWidth() / 2, sourceImg.getHeight() / 2);
+						sourceImg.flush();
+					}
 				}
 			}
 			
@@ -241,17 +249,21 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 					rc.setTextPosition(40);
 					rc.setText(entry.getKey() + " " + entry.getValue());
 					
-					if(questionContent.getChoiceImgList().containsKey(entry.getKey())){
+					if(questionContent !=null && questionContent.getChoiceImgList() != null && questionContent.getChoiceImgList().containsKey(entry.getKey())){
 						String picPath = basePath.replace(',', File.separatorChar) + questionContent.getChoiceImgList().get(entry.getKey());
 						System.out.println(picPath);
 						File picture = new File(picPath);
-						BufferedImage sourceImg = ImageIO.read(new FileInputStream(picture));
+						if(picture.exists())
+						{
+						    BufferedImage sourceImg = ImageIO.read(new FileInputStream(picture));
 						
-						String ind = doc.addPictureData(new FileInputStream(picture),
-								XWPFDocument.PICTURE_TYPE_JPEG);
-						doc.createPicture(ind,doc.getAllPictures().size() - 1,
-								sourceImg.getWidth() / 2, sourceImg.getHeight() / 2);
-						sourceImg.flush();
+						
+							String ind = doc.addPictureData(new FileInputStream(picture),
+									XWPFDocument.PICTURE_TYPE_JPEG);
+							doc.createPicture(ind,doc.getAllPictures().size() - 1,
+									sourceImg.getWidth() / 2, sourceImg.getHeight() / 2);
+							sourceImg.flush();
+						}
 					}
 					XWPFParagraph crta = doc.createParagraph();
 					XWPFRun cra = crta.createRun();
