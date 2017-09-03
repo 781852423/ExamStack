@@ -13,6 +13,22 @@ public class QuestionQueryResult {
 	private float questionPoint;
 	private String examingPoint;
 	private int knowledgePointId;
+	
+	private Integer parentId; // 添加题干的说明  on Sep 2, 2017
+	private String parentContent;// 添加题干的说明  on Sep 2, 2017
+	
+	public Integer getParentId() {
+		return parentId;
+	}
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
+	public String getParentContent() {
+		return parentContent;
+	}
+	public void setParentContent(String parentContent) {
+		this.parentContent = parentContent;
+	}
 	public int getKnowledgePointId() {
 		return knowledgePointId;
 	}

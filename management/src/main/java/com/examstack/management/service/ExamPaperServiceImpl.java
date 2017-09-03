@@ -127,6 +127,8 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 		// TODO Auto-generated method stub
 		String basePath = System.getProperty("catalina.base") + ",webapps,";
 		String filePath = basePath + "Management,resources,template,doc_tmp.docx";
+
+		//String filePath = basePath + "files,resources,template,doc_tmp.docx";
 		filePath = filePath.replace(',', File.separatorChar);
 		OPCPackage pack = POIXMLDocument.openPackage(filePath);
 		CustomXWPFDocument doc = new CustomXWPFDocument(pack);
@@ -151,13 +153,14 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 		
 		for(QuestionQueryResult question : questionList){
 			QuestionContent questionContent = gson.fromJson(question.getContent(), QuestionContent.class);
+			QuestionContent questionParentContent = gson.fromJson(question.getParentContent(), QuestionContent.class);
 			// 设置试题标题
-			XWPFParagraph t = doc.createParagraph();
+			XWPFParagraph t = doc.createParagraph(); // 代表一个段落
 			// 设置字体对齐方式
 			t.setAlignment(ParagraphAlignment.LEFT);
 			t.setVerticalAlignment(TextAlignment.TOP);
 			
-			XWPFRun rt = t.createRun();
+			XWPFRun rt = t.createRun(); // 代表具有相同属性的一段文本
 			// 设置字体是否加粗
 			rt.setBold(false);
 			rt.setFontSize(15);
@@ -165,19 +168,57 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 			rt.setFontFamily("Courier");
 			// 设置上下两行之间的间距
 			rt.setTextPosition(40);
-			rt.setText(questionContent.getTitle() + "(" + question.getQuestionPoint() + "分)");
 			
-			if(!"".equals(questionContent.getTitleImg()) && questionContent.getTitleImg() != null){
-				String titlePicPath = basePath.replace(',', File.separatorChar);
-				File titlePic = new File(titlePicPath + questionContent.getTitleImg());
-				BufferedImage sourceImg = ImageIO.read(new FileInputStream(titlePic));
-
-				String ind = doc.addPictureData(new FileInputStream(titlePic),
-						XWPFDocument.PICTURE_TYPE_JPEG);
-				doc.createPicture(doc.getAllPictures().size() - 1,
-						sourceImg.getWidth() / 2, sourceImg.getHeight() / 2);
-				sourceImg.flush();
+			// 设置题目主干的内容
+			if(questionParentContent != null)
+			{
+				rt.setText(questionParentContent.getTitle());
+				if( (! "".equals(questionParentContent.getTitleImg())) && (questionParentContent.getTitleImg() != null) )
+				{
+					String parentTitlePicPath = basePath.replace(',',File.separatorChar);
+					File parentTitlePic = new File(parentTitlePicPath + questionParentContent.getTitleImg());
+					BufferedImage sourceImg = ImageIO.read(new FileInputStream(parentTitlePic));
+					
+					String ind = doc.addPictureData(new FileInputStream(parentTitlePic), XWPFDocument.PICTURE_TYPE_JPEG);
+					rt.setText(parentTitlePic.getAbsolutePath());
+					System.out.println("parentPic: " + parentTitlePic.getAbsolutePath());
+					doc.createPicture(ind,doc.getAllPictures().size() -1, sourceImg.getWidth()/2, sourceImg.getHeight()/2);
+					sourceImg.flush();
+				}
 			}
+			  
+			// 设置试题标题
+			XWPFParagraph t2 = doc.createParagraph();
+			// 设置字体对齐方式
+			t2.setAlignment(ParagraphAlignment.LEFT);
+			t2.setVerticalAlignment(TextAlignment.TOP);
+			
+			XWPFRun rt2 = t2.createRun();
+			// 设置字体是否加粗
+			rt2.setBold(false);
+			rt2.setFontSize(15);
+			// 设置使用何种字体
+			rt2.setFontFamily("Courier");
+			// 设置上下两行之间的间距
+			rt2.setTextPosition(40);
+						
+			if(questionContent != null)
+			{
+				rt2.setText(questionContent.getTitle() + "(" + question.getQuestionPoint() + "分)");
+				
+				if(!"".equals(questionContent.getTitleImg()) && questionContent.getTitleImg() != null){
+					String titlePicPath = basePath.replace(',', File.separatorChar);
+					File titlePic = new File(titlePicPath + questionContent.getTitleImg());
+					BufferedImage sourceImg = ImageIO.read(new FileInputStream(titlePic));
+
+					String ind = doc.addPictureData(new FileInputStream(titlePic),
+							XWPFDocument.PICTURE_TYPE_JPEG);
+					doc.createPicture(ind, doc.getAllPictures().size() - 1,
+							sourceImg.getWidth() / 2, sourceImg.getHeight() / 2);
+					sourceImg.flush();
+				}
+			}
+			
 			XWPFParagraph crt = doc.createParagraph();
 			XWPFRun cr = crt.createRun();
 			cr.setText("");
@@ -208,7 +249,7 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 						
 						String ind = doc.addPictureData(new FileInputStream(picture),
 								XWPFDocument.PICTURE_TYPE_JPEG);
-						doc.createPicture(doc.getAllPictures().size() - 1,
+						doc.createPicture(ind,doc.getAllPictures().size() - 1,
 								sourceImg.getWidth() / 2, sourceImg.getHeight() / 2);
 						sourceImg.flush();
 					}

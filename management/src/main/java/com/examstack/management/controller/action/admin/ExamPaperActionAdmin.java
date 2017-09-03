@@ -213,7 +213,7 @@ public class ExamPaperActionAdmin {
 		String filePath = System.getProperty("catalina.base")
 				+ ",webapps,files,tmp," + userInfo.getUsername() + "," + dateStr;
 		String relativePath = "files,tmp," + userInfo.getUsername() + "," + dateStr;
-		ExamPaper examPaper = examPaperService.getExamPaperById(examPaperId);
+		ExamPaper examPaper = examPaperService.getExamPaperById(examPaperId); // 指向examPaperMapper.xml中getExamPaperById
 		try {
 			examPaperService.generateDoc(examPaper, filePath.replace(",", File.separator));
 			msg.setMessageInfo((relativePath + "," + examPaper.getName() + ".docx").replace(",", File.separator));

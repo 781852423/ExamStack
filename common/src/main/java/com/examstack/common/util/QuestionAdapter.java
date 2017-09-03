@@ -58,7 +58,7 @@ public class QuestionAdapter {
 		this.questionQueryResult = questionQueryResult;
 		Gson gson = new Gson();
 		this.questionContent = gson.fromJson(question.getContent(), QuestionContent.class);
-		this.questionParentContent = gson.fromJson(question.getParentContent(), QuestionContent.class);
+		this.questionParentContent = gson.fromJson(questionQueryResult.getParentContent(), QuestionContent.class);
 		
 		this.baseUrl = baseUrl;
 	}
@@ -67,8 +67,9 @@ public class QuestionAdapter {
 			String baseUrl) {
 		this.questionQueryResult = questionQueryResult;
 		Gson gson = new Gson();
+		
 		this.questionContent = gson.fromJson(questionQueryResult.getContent(), QuestionContent.class);
-		this.questionParentContent = gson.fromJson(question.getParentContent(), QuestionContent.class);
+		this.questionParentContent = gson.fromJson(questionQueryResult.getParentContent(), QuestionContent.class);
 		
 		this.baseUrl = baseUrl;
 	}

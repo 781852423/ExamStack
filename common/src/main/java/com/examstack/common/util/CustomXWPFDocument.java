@@ -33,12 +33,13 @@ public class CustomXWPFDocument extends XWPFDocument {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void createPicture(int id, int width, int height) {
+//	public void createPicture(int id, int width, int height) {
+	public void createPicture(String blipId, int id, int width, int height) {
 		final int EMU = 9525;
 		width *= EMU;
 		height *= EMU;
-		String blipId = getAllPictures().get(id).getPackageRelationship()
-				.getId();
+//		String blipId = getAllPictures().get(id).getPackageRelationship()
+//				.getId();
 
 		CTInline inline = createParagraph().createRun().getCTR()
 				.addNewDrawing().addNewInline();
@@ -98,7 +99,9 @@ public class CustomXWPFDocument extends XWPFDocument {
 
 		CTNonVisualDrawingProps docPr = inline.addNewDocPr();
 		docPr.setId(id);
-		docPr.setName("图片" + id);
-		docPr.setDescr("甩葱玩具");
+		docPr.setName("Picture" + id);
+		docPr.setDescr("Generated");
 	}
+	
+
 }

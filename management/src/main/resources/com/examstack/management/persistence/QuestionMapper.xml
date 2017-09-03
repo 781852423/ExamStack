@@ -249,7 +249,7 @@
 
 	<select id="getQuestionAnalysisListByIdList"
 		resultType="com.examstack.common.domain.question.QuestionQueryResult">
-		SELECT a.id questionId,a.content,a.answer,a.analysis,a.question_type_id
+		select z.*, f.content parentContent  from (SELECT a.id questionId,a.parentId,a.content,a.answer,a.analysis,a.question_type_id
 		questionTypeId,a.reference
 		referenceName,a.examing_point
 		examingPoint,GROUP_CONCAT(d.field_name,'
@@ -281,7 +281,7 @@
 		group by
 		a.id,a.content,a.answer,a.analysis,a.question_type_id,a.reference,
 		a.examing_point
-		order by a.question_type_id,a.id
+		order by a.question_type_id,a.id desc) z left join et_question_parent f on z.parentId=f.id
 	</select>
 	
 	<delete id="deleteQuestionByQuestionId">
