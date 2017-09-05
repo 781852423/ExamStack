@@ -151,6 +151,7 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 		r1.setTextPosition(40);
 		r1.setText(examPaper.getName());
 		
+		if(questionList == null ) return;
 		for(QuestionQueryResult question : questionList){
 			QuestionContent questionContent = gson.fromJson(question.getContent(), QuestionContent.class);
 			QuestionContent questionParentContent = gson.fromJson(question.getParentContent(), QuestionContent.class);

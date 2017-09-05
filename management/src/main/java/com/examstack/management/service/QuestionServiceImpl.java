@@ -99,6 +99,8 @@ public class QuestionServiceImpl implements QuestionService {
 				for (Integer i : question.getPointList()) {
 					questionMapper.addQuestionKnowledgePoint(question.getId(), i);
 				}
+				// 最终落实到xml文件中addQuestionTag
+				addQuestionTag(question.getId(),0,question.getTagList()); // 添加代码添加tags
 			
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
@@ -144,8 +146,10 @@ public class QuestionServiceImpl implements QuestionService {
 			List<Integer> idList = new ArrayList<Integer>();
 			for (QuestionTag t : questionTagList) {
 				idList.add(t.getTagId());
+				t.setQuestionId(questionId); // 原先的questionTagList里面questionId为0
 			}
 			questionMapper.deleteQuestionTag(questionId, userId, idList.size() == 0 ? null : idList);
+			
 			questionMapper.addQuestionTag(questionTagList);
 
 		} catch (Exception e) {

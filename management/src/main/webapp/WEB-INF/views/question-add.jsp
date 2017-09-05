@@ -265,6 +265,20 @@ request.setAttribute("leftMenuId",list[3]);
 									<br>
 
 								</div>
+								
+								<!-- 添加tag部分 -->
+								<div class="form-line exampaper-type" id="aq-tag">
+										<span class="form-label"><span class="warning-label">*</span>标签：</span>
+										<select id="tag-from-select" class="df-input-narrow">
+											<c:forEach items="${tagList }" var="item">
+												<option value="${item.tagId }" data-privatee="${item.privatee }" data-creator="${item.creator}" data-memo="${item.memo }" data-createtime="${item.createTime }">${item.tagName } </option>
+											</c:forEach>
+									
+										</select><a class="add-tag-btn">添加</a><span class="form-message"></span>
+									
+										<div class="q-label-list">
+										</div>
+								</div>
 								<div class="form-line form-question-reference" style="display: block;">
 									<span class="form-label"><span class="warning-label"></span>来源：</span>
 										<input type="text" class="df-input-narrow"><span class="form-message"></span>

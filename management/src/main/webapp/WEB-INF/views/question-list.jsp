@@ -235,7 +235,7 @@ request.setAttribute("leftMenuId",list[3]);
 								<table class="table-striped table">
 									<thead>
 										<tr>
-											<td>ID</td><td>题干ID</td><td class="question-name-td" style="width:240px">试题名称</td><td style="width:60px">类型</td><td>专业</td><td>知识类</td><td>创建人</td><td >操作</td>
+											<td>ID</td><td>题干ID</td><td class="question-name-td" style="width:50%">试题名称</td><td>类型</td><td>专业</td><td >操作</td>
 										</tr>
 									</thead>
 									<tbody>
@@ -257,8 +257,8 @@ request.setAttribute("leftMenuId",list[3]);
 													
 													</td>
 
-												<td>${items.questionTypeName }</td><td>${items.fieldName }</td><td>${items.pointName }</td>
-												<td>${items.creator }</td> 
+												<td>${items.questionTypeName }</td>
+												<td>${items.fieldName }</td>
 												<td>
 													<c:choose>
 														<c:when test="${items.creator == sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}">

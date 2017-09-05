@@ -11,6 +11,7 @@ question_add = {
 		this.bindRemoveOpt();
 		this.bindSubmit();
 		this.getParentIDs();
+		this.getTags();
 	},
 
 	bindChangeQuestionType : function changeQuestionType() {
@@ -59,7 +60,8 @@ question_add = {
 
 			var verify_result = question_add.verifyInput();//如果是单独的题目正文，则不做任何检查
 			if (verify_result) {
-				var question_entity = question_add.composeEntity();
+			//	var question_entity = question_add.composeEntity();
+				var data = question_add.composeEntity();
 				$.ajax({
 					headers : {
 						'Accept' : 'application/json',
@@ -67,7 +69,8 @@ question_add = {
 					},
 					type : "POST",
 					url : "secure/question/question-add",
-					data : JSON.stringify(question_entity),
+//					data : JSON.stringify(question_entity),
+					data : JSON.stringify(data),
 					success : function(message, tst, jqXHR) {
 						if (!util.checkSessionOut(jqXHR))
 							return false;
@@ -390,7 +393,9 @@ question_add = {
 
 	composeEntity : function composeEntity() {
 		var question_entity = new Object();
-		question_entity.name = $(".question-content textarea").val().substring(0, 10);
+		//var data = new Object();
+		
+		question_entity.name = $(".question-content textarea").val().substring(0, 50);
 		question_entity.question_type_id = $(".question-type select").val();
 
 		var pointList = new Array();
@@ -401,6 +406,19 @@ question_add = {
 
 		question_entity.pointList = pointList;
 
+		// 添加代码获取tags jie 20170905
+		var tagList = new Array();
+
+		$(".q-label-item").each(function() {
+			var tag = new Object();
+			tag.tagId = $(this).data("id"); 
+			// questionId可以暂时不用获取，注释掉,传到后台统一添加到表里面即可
+			// tag.questionId = $("#add-update-questionid").text(); 
+			tagList.push(tag);
+		});
+		
+		// data.tags = tags;
+		question_entity.tagList = tagList;
 		if (1 == question_entity.question_type_id) {
 			question_entity.answer = $(".form-question-answer1 select").val();
 		} else if (2 == question_entity.question_type_id) {
@@ -423,6 +441,8 @@ question_add = {
 		question_entity.examingPoint = $(".form-question-examingpoint input").val();
 		question_entity.keyword = $(".form-question-keyword input").val();
 		question_entity.parentId=$("#question-parentId-select").val(); // 获取parentId
+		//data.question = question_entity;
+		
 		return question_entity;
 	},
 
@@ -514,6 +534,30 @@ question_add = {
 				});
 	
 			
+	});
+},
+
+getTags: function getTags()
+{
+	$(".add-tag-btn").click(function() {
+		var label_ids = $(".q-label-item");
+		var flag = 0;
+		label_ids.each(function() {
+			if ($(this).data("id") == $("#tag-from-select").val())
+				flag = 1;
+		});
+		if (flag == 0) {
+			var selected = $("#tag-from-select").find("option:selected");
+
+			$(".q-label-list").append("<span class=\"label label-info q-label-item\" data-privatee=" + selected.data("privatee") + " data-creator=" + selected.data("creator") + " data-memo=" + selected.data("memo") + " data-id=" + $("#tag-from-select").val() + " data-createTime=" + selected.data("createTime") + ">" + $("#tag-from-select :selected").text() + "  <i class=\"fa fa-times\"></i>	</span>");
+		} else {
+			util.error("不能重复添加");
+		}
+	});
+
+
+	$(".q-label-list").on("click", ".fa", function() {
+		$(this).parent().remove();
 	});
 }
 };

@@ -82,7 +82,7 @@ public class QuestionPageAdmin {
 		model.addAttribute("questionList", questionList);
 		
 		model.addAttribute("pageStr", pageStr);
-		model.addAttribute("tagList", questionService.getTags(null));
+		model.addAttribute("tagList", questionService.getTags(null));// 获取所有tags
 		//保存筛选信息，删除后跳转页面时使用
 		model.addAttribute("fieldId", fieldId);
 		model.addAttribute("knowledge", knowledge);
@@ -156,7 +156,7 @@ public class QuestionPageAdmin {
 	public String questionAddPage(Model model) {
 		List<Field> fieldList = questionService.getAllField(null);
 		model.addAttribute("fieldList", fieldList);
-		
+		model.addAttribute("tagList", questionService.getTags(null)); // 把tags都呈现出来
 		return "question-add";
 	}
 	
