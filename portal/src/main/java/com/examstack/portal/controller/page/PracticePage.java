@@ -215,8 +215,9 @@ public class PracticePage {
 		 * 对应questionMapper的getAllField SQL 查询出的是题库的列表：例如5	商业银行基础知识	商业银行基础知识	0	0
 		 *
 		 */
-		List<Field> fieldList = questionService.getAllField(null);
-
+	  System.out.println("用户所在的组号码:" + userInfo.getGroupList());
+		List<Field> fieldList = questionService.getAllField(userInfo.getGroupList());
+        System.out.println("用户获取的题库名称、ID" + fieldList);
 		// 目前没有fieldID =0的选项
 		if(fieldId == 0) 
 			fieldId = fieldList.get(0).getFieldId();
@@ -263,6 +264,7 @@ public class PracticePage {
 		model.addAttribute("fieldId", fieldId);
 		model.addAttribute("historyMap", historyStatisticMap);
 		model.addAttribute("pointMap", pointMap);
+		
 		// fieldList剔除那些没有相应题目的题库,只要其removeable为1就可以不显示
 		
 		List<Field> NonRemoveableFieldList = new ArrayList<Field>();

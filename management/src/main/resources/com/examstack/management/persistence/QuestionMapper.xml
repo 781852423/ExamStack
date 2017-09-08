@@ -49,7 +49,15 @@
 		et_knowledge_point m where m.field_id=a.field_id) then 0
 		else 1 end
 		removeable
-		from et_field a order by field_id desc
+		from et_field a where 
+		a.field_id in (
+		select fieldId from et_group_2_field where groupId in 
+		<foreach collection="array" index="index" item="item" open="("
+				close=")" separator=",">
+				#{item}
+	    </foreach>
+		)
+		order by field_id desc
 	</select>
 
 	<select id="getKnowledgePointByFieldId" resultType="com.examstack.common.domain.question.KnowledgePoint">

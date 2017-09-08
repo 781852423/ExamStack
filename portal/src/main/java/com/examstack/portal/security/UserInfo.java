@@ -22,8 +22,11 @@ public class UserInfo extends User {
 
 	private int userid;
 	private List<Role> roleList;
+	private List<Integer> groupList;
 	private String trueName;
 	private String rolesName;
+	
+
 	private String enabled;
 	private int fieldId;
 	private String fieldName;
@@ -192,6 +195,14 @@ public class UserInfo extends User {
 
 	public void setRoleList(List<Role> roleList) {
 		this.roleList = roleList;
+	}
+	
+	public List<Integer> getGroupList() {
+		return groupList;
+	}
+
+	public void setGroupList(List<Integer> groupList) {
+		this.groupList = groupList;
 	}
 
 	public UserInfo(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked,

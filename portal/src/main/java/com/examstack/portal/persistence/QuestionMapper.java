@@ -65,7 +65,7 @@ public interface QuestionMapper {
 	 * @param page
 	 * @return
 	 */
-	public List<Field> getAllField(@Param("page") Page<Field> page);
+	public List<Field> getAllField(@Param("array") List<Integer> groupIdList);
 
 	/**
 	 * 获取Field下的知识点

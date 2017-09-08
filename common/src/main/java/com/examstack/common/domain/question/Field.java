@@ -40,4 +40,10 @@ public class Field {
 	public void setState(boolean state) {
 		this.state = state;
 	}
+	@Override
+	public String toString() {
+		return "Field [fieldId=" + fieldId + ", fieldName=" + fieldName + ", memo=" + memo + "]";
+	}
+	
+	
 }
