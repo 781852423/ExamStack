@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.examstack.common.domain.question.Field;
+import com.examstack.common.domain.question.Group2Field;
 import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.PointStatistic;
 import com.examstack.common.domain.question.Question;
@@ -443,5 +444,17 @@ public class QuestionServiceImpl implements QuestionService {
 	public List<PointStatistic> getPointCount(int fieldId, Page<PointStatistic> page) {
 		// TODO Auto-generated method stub
 		return questionMapper.getPointCount(fieldId, page);
+	}
+
+	@Override
+	public List<Group2Field> getGroup2FieldByGroupId(int groupId) {
+		// TODO Auto-generated method stub
+		return questionMapper.getGroup2FieldByGroupId(groupId);
+	}
+
+	@Override
+	public List<Group2Field> getGroup2FieldAll() {
+		// TODO Auto-generated method stub
+		return questionMapper.getGroup2FieldAll();
 	}
 }

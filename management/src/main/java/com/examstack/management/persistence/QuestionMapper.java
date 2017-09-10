@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.examstack.common.domain.question.Field;
+import com.examstack.common.domain.question.Group2Field;
 import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.PointStatistic;
 import com.examstack.common.domain.question.Question;
@@ -28,7 +29,8 @@ public interface QuestionMapper {
 			@Param("filter") QuestionFilter filter,
 			@Param("page") Page<Question> page);
 
-	public List<Field> getAllField(@Param("page") Page<Field> page);
+	
+	public List<Field> getAllField(@Param("page") Page<Field> fields);
 
 	public List<KnowledgePoint> getKnowledgePointByFieldId(
 			@Param("fieldId") int fieldId,
@@ -151,4 +153,14 @@ public interface QuestionMapper {
 	public List<PointStatistic> getPointCount(@Param("fieldId") int fieldId, @Param("page") Page<PointStatistic> page);
 	
 	public List<QuestionParentIdAndTitleDesc> getQuestionParentIdAndTitleDescList(); // 添加获取最新的一些parentID和描述
+
+
+	public List<Group2Field> getGroup2FieldByGroupId(int groupId);
+
+
+	public List<Group2Field> getGroup2FieldAll();
+	
+	public void insertGroup2Field(Group2Field group2Field) throws Exception;
+	
+	public void deleteGroup2FieldById(int group2FieldId);
 }

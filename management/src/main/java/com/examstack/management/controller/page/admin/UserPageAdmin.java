@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.examstack.common.domain.question.Field;
+import com.examstack.common.domain.question.Group2Field;
 import com.examstack.common.domain.user.Department;
 import com.examstack.common.domain.user.Group;
 import com.examstack.common.domain.user.User;
@@ -106,6 +107,59 @@ public class UserPageAdmin {
 		model.addAttribute("userList", userList);
 		model.addAttribute("pageStr", pageStr);
 		return "admin/teacher-list";
+	}
+	
+	@RequestMapping(value = { "admin/user/group2field" }, method = RequestMethod.GET)
+	public String group2fieldPage(Model model, HttpServletRequest request) {
+
+		int index = 1;
+		if (request.getParameter("page") != null)
+			index = Integer.parseInt(request.getParameter("page"));
+		Page<User> page = new Page<User>();
+		page.setPageNo(index);
+		page.setPageSize(20);
+		
+		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		List<Group> groupList = userService.getAllGroups(null);
+		
+		String pageStr = PagingUtil.getPagelink(index, page.getTotalPage(), "", "admin/user/group2field");
+		
+		model.addAttribute("groupList", groupList);
+		
+		model.addAttribute("pageStr", pageStr);
+		
+		return "admin/group2field";
+	}
+	
+	@RequestMapping(value = { "admin/user/inner/group2field/{groupId}" }, method = RequestMethod.GET)
+	public String showGroup2FieldListInnerAdminPage(Model model, HttpServletRequest request, @PathVariable Integer groupId) {
+		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		int index = 1;
+		if (request.getParameter("page") != null)
+			index = Integer.parseInt(request.getParameter("page"));
+		Page<User> page = new Page<User>();
+		page.setPageNo(index);
+		page.setPageSize(100);
+		String searchStr = "";
+		if(request.getParameter("searchStr") != null){
+			searchStr = request.getParameter("searchStr");
+		}
+		 // List<Group2Field> user2GroupList = userService.getUserListByGroupIdAndParams(groupId, searchStr, page);
+		List<Group2Field> user2GroupList = userService.getGroup2FieldById(groupId);
+		
+		String pageStr = PagingUtil.getPagelink(index, page.getTotalPage(), null, "admin/user/inner/group2field/" + groupId);
+		
+		List<Field> fieldList = questionService.getAllField(null);
+		
+		model.addAttribute("user2GroupList", user2GroupList);
+		model.addAttribute("pageStr", pageStr);
+		model.addAttribute("fieldList", fieldList);
+		
+		model.addAttribute("groupId", groupId);
+
+
+		return "inner/group2field-list";
 	}
 	
 	/**

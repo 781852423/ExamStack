@@ -65,8 +65,8 @@
 	
 	<!-- group -->
 	<select id="getGroupListByUserId" resultType="com.examstack.common.domain.user.Group">
-		select id groupId,group_name groupName,create_time createTime,is_default defaultt
-		from et_group where user_id=#{userId}
+		select a.group_id groupId, a.user_id userId, b.group_name groupName from et_user_2_group a left join et_group b 
+		on a.group_id=b.id  where a.user_id=#{userId}
 	</select>
 	
 	<insert id="addUserGroup">

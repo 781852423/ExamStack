@@ -143,6 +143,14 @@
 		select id groupId,group_name groupName,create_time createTime,is_default defaultt
 		from et_group where user_id=#{userId} order by id desc
 	</select>
+	
+	<!-- all groups -->
+    <select id="getAllGroups" resultType="com.examstack.common.domain.user.Group">
+        select id groupId,group_name groupName,create_time createTime,is_default defaultt
+        from et_group order by id desc
+    </select>
+    
+    
 	<insert id="addGroup" parameterType="com.examstack.common.domain.user.Group">
 		insert into et_group(group_name,user_id,is_default) values (#{group.groupName},#{group.userId},#{group.defaultt})
 	</insert>
@@ -180,6 +188,8 @@
 	<select id="getDepList" resultType="com.examstack.common.domain.user.Department">
 		select dep_id depId,dep_name depName,memo from et_department order by dep_id desc
 	</select>
+	
+	
 	<insert id="addDep" useGeneratedKeys="true" keyProperty="depId"
 		parameterType="com.examstack.common.domain.user.Department">
 		insert into et_department(dep_name,memo) values(#{depName},#{memo})

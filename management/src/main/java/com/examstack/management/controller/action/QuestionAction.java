@@ -58,8 +58,15 @@ public class QuestionAction {
 		
 		// 把question的内同和解析都进行处理，以符合html的格式输出，主要是content和analysis
 		QuestionContent qContent = question.getQuestionContent();
-		qContent.setTitle(qContent.getTitle().replaceAll("\n", "<br/>").replaceAll("\r\n", "<br/>").replaceAll(" ", "&nbsp;&nbsp;"));
 		
+		
+		if(question.getQuestion_type_id() == 9)
+		{
+			qContent.setTitle(qContent.getTitle().replaceAll("\n", "<br/>").replaceAll("\r\n", "<br/>").replaceAll(" ", "&nbsp;&nbsp;") + "<br/>");
+		}else
+		{
+			qContent.setTitle(qContent.getTitle().replaceAll("\n", "<br/>").replaceAll("\r\n", "<br/>").replaceAll(" ", "&nbsp;&nbsp;"));
+		}
 		String rawQuestionContentString = gson.toJson(qContent);
 		
 		//question.setContent(gson.toJson(question.getQuestionContent()));

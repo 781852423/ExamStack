@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.examstack.common.domain.question.Field;
+import com.examstack.common.domain.question.Group2Field;
 import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.PointStatistic;
 import com.examstack.common.domain.question.Question;
@@ -183,4 +184,14 @@ public interface QuestionService {
 	List<QuestionParentIdAndTitleDesc> getQuestionParentIdAndTitleDescList();
 
 	void addQuestionParent(QuestionParent questionParent);
+	
+	/**
+	 * 根据组ID,获取用户组与题库的映射信息
+	 */
+	
+	public List<Group2Field> getGroup2FieldByGroupId(int groupId);
+	/**
+	 * 获取所有用户组与题库的映射信息
+	 */
+	public List<Group2Field> getGroup2FieldAll();
 }

@@ -44,20 +44,12 @@
 
 	<select id="getAllField" resultType="com.examstack.common.domain.question.Field">
 		select field_id
-		fieldId,field_name fieldName,memo,state,
-		case when exists(select 1 from
-		et_knowledge_point m where m.field_id=a.field_id) then 0
-		else 1 end
-		removeable
-		from et_field a where 
-		a.field_id in (
-		select fieldId from et_group_2_field where groupId in 
-		<foreach collection="array" index="index" item="item" open="("
-				close=")" separator=",">
-				#{item}
-	    </foreach>
-		)
-		order by field_id desc
+        fieldId,field_name fieldName,memo,state,
+        case when exists(select 1 from
+        et_knowledge_point m where m.field_id=a.field_id) then 0
+        else 1 end
+        removeable
+        from et_field a
 	</select>
 
 	<select id="getKnowledgePointByFieldId" resultType="com.examstack.common.domain.question.KnowledgePoint">
@@ -336,4 +328,27 @@
 	<select id="getQuestionParentIdAndTitleDescList" resultType="com.examstack.common.domain.question.QuestionParentIdAndTitleDesc">
         select a.id  parentId,left(a.name,10)  titleDesc from et_question_parent a limit 0,5;;
     </select>
+    
+    <select id="getGroup2FieldByGroupId" resultType="com.examstack.common.domain.question.Group2Field">
+		       select a.id, a.groupId, b.group_name groupName, a.fieldId,c.field_name fieldName from et_group_2_field a left join et_group b on a.groupId=b.id
+		left join et_field c on a.fieldId=c.field_id where a.groupId=#{groupId};
+    </select>
+    
+    <select id="getGroup2FieldAll" resultType="com.examstack.common.domain.question.Group2Field">
+		        select a.id, a.groupId, b.group_name groupName, a.fieldId,c.field_name fieldName from et_group_2_field a left join et_group b on a.groupId=b.id
+		left join et_field c on a.fieldId=c.field_id;
+    </select>
+    
+    <insert id="insertGroup2Field" parameterType="com.examstack.common.domain.question.Group2Field"
+    useGeneratedKeys="true" keyProperty="id">
+	    insert into  et_group_2_field
+	    (groupId,fieldId)
+	    values
+	    (#{groupId},#{fieldId});
+    </insert>
+    
+    <delete id="deleteGroup2FieldById">
+        delete from et_group_2_field where id=#{group2FieldId};
+    </delete>
+    
 </mapper>

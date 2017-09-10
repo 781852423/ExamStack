@@ -68,7 +68,7 @@
 									
 										<label class="checkbox-inline"> <input type="checkbox"
 											id="inlineCheckbox1" value="agree"> <a>
-												自行独立注册的账户有24小时系统使用权限</a>
+												自行独立注册的账户有0.5小时系统使用权限</a>
 										</label> <span class="form-message"></span>
 									
 

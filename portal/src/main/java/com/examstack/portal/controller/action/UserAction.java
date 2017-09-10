@@ -50,20 +50,20 @@ public class UserAction {
 	@RequestMapping(value = { "/add-user" }, method = RequestMethod.POST)
 	public @ResponseBody Message addUser(@RequestBody User user) {
 		user.setCreateTime(new Date());
-		int expiredDays = 0;
+		int expiredHours = 0;
 		try {
 			
 			String path = this.getClass().getClassLoader().getResource("custome.properties").getPath();
 			Properties props = PropertyReaderUtil.getProperties(path);
 			
-			expiredDays = Integer.parseInt(props.getProperty("expiredDays"));
+			expiredHours = Integer.parseInt(props.getProperty("expiredHours"));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		
 		}
 		
-		long expiredTimeL = System.currentTimeMillis()+expiredDays*24*60*60*1000; // 这里设置自己注册的账户有一天的有效期
+		long expiredTimeL = System.currentTimeMillis()+expiredHours*60*60*1000; // 这里设置自己注册的账户有一天的有效期
 		user.setExpiredTime(new Date(expiredTimeL));
 		/*服务器端的加密操作 */
 		

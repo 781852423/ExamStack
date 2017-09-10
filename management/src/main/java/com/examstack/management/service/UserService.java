@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.examstack.common.domain.question.Group2Field;
 import com.examstack.common.domain.user.Department;
 import com.examstack.common.domain.user.Group;
 import com.examstack.common.domain.user.Role;
@@ -40,6 +41,8 @@ public interface UserService {
 	 * @return
 	 */
 	public List<Group> getGroupListByUserId(int userId, Page<Group> page);
+	
+	public List<Group> getAllGroups(Page<Group> page);
 
 	/**
 	 * 添加一个分组
@@ -144,4 +147,8 @@ public interface UserService {
 	 * @param password
 	 */
 	public void updateUserPwd(String userName,String password,String authority) throws Exception;
+
+	List<Group2Field> getAllGroup2Field(Page<Group2Field> page);
+
+	List<Group2Field> getGroup2FieldById(int id);
 }
