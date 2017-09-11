@@ -267,7 +267,7 @@ request.setAttribute("leftMenuId",list[3]);
 											<button type="button" class="btn btn-default" data-dismiss="modal">
 												关闭窗口
 											</button>
-											<button id="add-user-btn" data-action="secure/add-user-ROLE_STUDENT" data-url="secure/user/student-list" type="button" class="btn btn-primary">
+											<button id="add-user-btn" data-action="secure/add-user-ROLE_STUDENT" data-url="admin/user/student-list" type="button" class="btn btn-primary">
 												确定添加
 											</button>
 										</div>
@@ -523,7 +523,8 @@ request.setAttribute("leftMenuId",list[3]);
 					e.preventDefault();
 					return false;
 				});
-
+                //总div: list-group user-group-nav
+                //下面小item：list-group-item group-nav-item
 				$(".user-group-nav .group-nav-item").click(function() {
 					var id = $(this).data("id");
 

@@ -19,10 +19,7 @@ import com.examstack.common.domain.question.QuestionType;
 import com.examstack.common.domain.question.Tag;
 import com.examstack.common.util.Page;
 
-/**
- * @author Ocelot
- * @date 2014年6月8日 下午8:32:33
- */
+
 public interface QuestionMapper {
 
 	public List<Question> getQuestionList(

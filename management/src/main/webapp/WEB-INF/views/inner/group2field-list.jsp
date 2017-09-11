@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<%-- <%@taglib uri="spring.tld" prefix="spring"%> --%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -44,14 +43,14 @@ request.setAttribute("leftMenuId",list[3]);
 			<div class="table-controller">
 
 				<div class="btn-group table-controller-item" style="float: left">
-					<button class="btn btn-default btn-sm" id="add-user-modal-btn">
-						<i class="fa fa-plus-square"></i> 添加题库
+					<button class="btn btn-default btn-sm" id="add-field2group-modal-btn">
+						<i class="fa fa-plus-square"></i> 添加题库权限到用户组
 					</button>
 				</div>
 				
 				<div class="table-search table-controller-item-page">
 					<ul class="pagination pagination-sm">
-						${pageStr}
+						${pageStr }
 					</ul>
 				</div>
 
@@ -125,54 +124,13 @@ request.setAttribute("leftMenuId",list[3]);
 		<script type="text/javascript"
 		src="resources/js/jquery/jquery-1.9.0.min.js"></script>
 		<script type="text/javascript" src="resources/js/all.js"></script>
-		<script type="text/javascript" src="resources/js/user-list-inner.js"></script>
+		<script type="text/javascript" src="resources/js/group2field-list-inner.js"></script>
 
 		<!-- Bootstrap JS -->
 		<script type="text/javascript"
 		src="resources/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
-			$(function() {
-				var btnSearch = $("#btn-search");
-				
-				$(".unlink-group2field-r-btn").click(function(){
-					$.ajax({
-						headers : {
-							'Accept' : 'application/json',
-							'Content-Type' : 'application/json'
-						},
-						type : "GET",
-						url : "secure/delete-user-group-" + $(this).data("id") + "-" + $(this).data("group"),
-						success : function(message, tst, jqXHR) {
-							if (!util.checkSessionOut(jqXHR))
-								return false;
-							if (message.result == "success") {
-								util.success("操作成功", function() {
-									window.location.reload();
-								});
-							} else {
-								util.error("操作失败请稍后尝试:" + message.result);
-							}
-
-						},
-						error : function(jqXHR, textStatus) {
-							util.error("操作失败请稍后尝试");
-						}
-					});
-
-					return false;
-				});
-			});
-
-			function getUrlParam(name) {
-				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-				//构造一个含有目标参数的正则表达式对象
-				var r = window.location.search.substr(1).match(reg);
-				//匹配目标参数
-				if (r != null)
-					return unescape(r[2]);
-				return null;
-				//返回参数值
-			}
+			
 		</script>
 	</body>
 </html>

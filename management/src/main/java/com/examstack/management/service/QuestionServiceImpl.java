@@ -457,4 +457,31 @@ public class QuestionServiceImpl implements QuestionService {
 		// TODO Auto-generated method stub
 		return questionMapper.getGroup2FieldAll();
 	}
+
+	@Override
+	public void addField2Group(List<Group2Field> group2FieldList) {
+		try {
+			for(Group2Field g2f : group2FieldList)
+			{
+				questionMapper.insertGroup2Field(g2f);
+			}	
+			
+		} catch (Exception e) {
+			
+			throw new RuntimeException(e.getClass().getName());
+		}
+		
+	}
+
+	@Override
+	public void delField2Group(int group2FieldId) {
+		try {
+			questionMapper.deleteGroup2FieldById(group2FieldId);
+			
+		} catch (Exception e) {
+			
+			throw new RuntimeException(e.getClass().getName());
+		}
+		
+	}
 }

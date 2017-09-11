@@ -103,22 +103,31 @@ request.setAttribute("leftMenuId",list[3]);
                                     <div class="list-group-item group-nav-item active" data-id="0">
                                         全部分组
                                     </div>
+                                    <!-- 显示组的清单 -->
                                     <c:forEach items="${groupList }" var="item">
                                         <div class="list-group-item group-nav-item" data-id="${item.groupId }">
-                                            ${item.groupName } <span class="action-span"> <i class="fa fa-pencil action-btn edit-group-btn"></i><i class="fa fa-trash-o action-btn delete-group-btn"></i> </span>
+                                            ${item.groupName } 
+                                            <span class="action-span"> 
+                                            <i class="fa fa-pencil action-btn edit-group-btn">
+                                            </i><i class="fa fa-trash-o action-btn delete-group-btn"></i> 
+                                            </span>
                                         </div>
                                     </c:forEach>
 
                                 </div>
+                                <!-- 添加分组 -->
                                 <div class="list-group">
-                                    <a id="add-group" href="javascript:void(0);" class="list-group-item" data-id="13" style="background-color: #47a447;color:#FFF;"><i class="fa fa-plus-square"></i> 添加分组</a>
+                                    <a id="add-group" href="javascript:void(0);" class="list-group-item" data-id="13" style="background-color: #47a447;color:#FFF;">
+                                    <i class="fa fa-plus-square"></i> 添加分组</a>
                                 </div>
                             </div>
 
+					       <!-- 显示出表单包括搜索域等，位于页面右下大块区域，动态获取src -->
                             <div class="col-xs-10">
                                 <iframe width="100%" id="group2field-iframe" style="height: 800px;" frameborder="0" scrolling="no" marginwidth="0" marginheight="0"></iframe>
                             </div>
 
+							<!--  创建分组的模态框 -->
                             <div class="modal fade" id="add-group-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -149,6 +158,7 @@ request.setAttribute("leftMenuId",list[3]);
                                     </div>
                                 </div>
                             </div>
+                            <!-- 修改分组的模态框 -->
                             <div class="modal fade" id="edit-group-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -180,6 +190,7 @@ request.setAttribute("leftMenuId",list[3]);
                                     </div>
                                 </div>
                             </div>
+                            <!-- 添加题库权限到相应的用户组 -->
                             <div class="modal fade" id="add-field2group-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -190,25 +201,34 @@ request.setAttribute("leftMenuId",list[3]);
                                             <h6 class="modal-title" id="myModalLabel">添加题库权限到用户组</h6>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="user-add-form" style="margin-top:40px;"  action="secure/add-user">
+                                            <form id="field-add2group-form" style="margin-top:40px;"  action="admin/common/field2group-add">
+                                                <!-- 这里是添加到的groupId,不显示 -->
                                                 <div class="form-line form-group-id" style="display: none;">
                                                     <span class="form-label"><span class="warning-label">*</span>id：</span>
                                                     <input type="text" class="df-input-narrow" id="group-add-id" value="" disabled="disabled">
                                                     <span class="form-message"></span>
                                                     <br>
                                                 </div>
-                                                <div class="form-line form-group" style="display: block;">
-                                                    <span class="form-label"><span class="warning-label">*</span>添加题库权限到：</span>
-                                                    <input type="text" class="df-input-narrow" id="group-add" value="默认分组" disabled="disabled">
-                                                    <span class="form-message"></span>
-                                                    <br>
-                                                </div>
-                                                <div class="form-line form-username" style="display: block;">
-                                                    <span class="form-label"><span class="warning-label">*</span>题库：</span>
-                                                    <input type="text" class="df-input-narrow" id="name-add" maxlength="20">
-                                                    <span class="form-message"></span>
-                                                    <br>
-                                                </div>
+                                                <!-- 这里是添加到的groupName,显示出来 -->
+                                               	<div class="form-line form-group" style="display: block;">
+													<span class="form-label"><span class="warning-label">*</span>添加用户到：</span>
+													<input type="text" class="df-input-narrow" id="group-add" value="默认分组" disabled="disabled">
+													<span class="form-message"></span>
+													<br>
+												</div>
+												<!-- 添加题库部分 -->
+												<div class="form-line exampaper-type" id="aq-field">
+														<span class="form-label"><span class="warning-label">*</span>题库：</span>
+														<select id="field-from-select" class="df-input-narrow">
+															<c:forEach items="${fieldList }" var="item">
+																<option value="${item.fieldId }" >${item.fieldName } </option>
+															</c:forEach>
+													
+														</select><a class="add-field-btn">添加</a><span id="messageforAddField" class="form-message"></span>
+													
+														<div class="q-label-list" id="fieldlist2group">
+														</div>
+												</div>
 
                                             </form>
 
@@ -217,7 +237,7 @@ request.setAttribute("leftMenuId",list[3]);
                                             <button type="button" class="btn btn-default" data-dismiss="modal">
                                                 关闭窗口
                                             </button>
-                                            <button id="add-field-btn" data-action="secure/add-group2filed" data-url="secure/user/group2filed" type="button" class="btn btn-primary">
+                                            <button id="add-field-btn" data-action="admin/common/field2group-add" data-url="admin/user/group2field" type="button" class="btn btn-primary">
                                                 确定添加
                                             </button>
                                         </div>
@@ -256,8 +276,8 @@ request.setAttribute("leftMenuId",list[3]);
         <!-- Bootstrap JS -->
         <script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="resources/js/group-manage.js"></script>
-        <script type="text/javascript" src="resources/js/add-user.js"></script>
-        <script type="text/javascript" src="resources/js/update-user.js"></script>
+        <script type="text/javascript" src="resources/js/add-field2group.js"></script>
+        <script type="text/javascript" src="resources/js/update-group2field.js"></script>
         <script>
             $(function() {
                 /* $(".left-menu-item-name").hide(); */
@@ -282,11 +302,13 @@ request.setAttribute("leftMenuId",list[3]);
                     e.preventDefault();
                     return false;
                 });
-
-                $(".user-group-nav .group-nav-item").click(function() {
+                // div:list-group user-group-nav
+                // item: list-group-item group-nav-item 
+                // item active: list-group-item group-nav-item active
+                $(".list-group-item.group-nav-item").click(function() {
                     var id = $(this).data("id");
 
-                    document.getElementById('group2field-iframe').src = "<%=list[1]%>/user/inner/user-list/" + id;
+                    document.getElementById('group2field-iframe').src = "<%=list[1]%>/user/inner/group2field-list/" + id;
                     $(".group-nav-item").removeClass("active");
                     $(this).addClass("active");
 
@@ -295,69 +317,8 @@ request.setAttribute("leftMenuId",list[3]);
 
                 var items = $(".group-nav-item");
                 $(items[0]).addClass("active");
-                document.getElementById('group2field-iframe').src = "<%=list[1]%>/user/inner/user-list/" + $(items[0]).data("id");
+                document.getElementById('group2field-iframe').src = "<%=list[1]%>/user/inner/group2field-list/" + $(items[0]).data("id");
 
-                $("#link-user-btn-r").click(function(){
-                    var groupId = $("#group-add-link-r").val();
-                    var userId = $("#name-add-link-r").val();
-                    $.ajax({
-                        headers : {
-                            'Accept' : 'application/json',
-                            'Content-Type' : 'application/json'
-                        },
-                        type : "GET",
-                        url : "secure/add-user-group-" + userId + "-" + groupId,
-                        success : function(message, tst, jqXHR) {
-                            if (!util.checkSessionOut(jqXHR))
-                                return false;
-                            if (message.result == "success") {
-                                
-                                util.success("操作成功", function() {
-                                //  window.location.reload();
-                                
-                                });
-                                $("#link-user-modal-r").modal('hide');
-                            } else {
-                                util.error("操作失败请稍后尝试:" + message.result);
-                            }
-
-                        },
-                        error : function(jqXHR, textStatus) {
-                            util.error("操作失败请稍后尝试");
-                        }
-                    });
-                    return false;
-                });
-                
-                $("#link-user-btn").click(function(){
-                    var groupId = $(".user-group-nav .active").data("id");
-                    var userNames = $("#name-add-link").val();
-                    $.ajax({
-                        headers : {
-                            'Accept' : 'application/json',
-                            'Content-Type' : 'application/json'
-                        },
-                        type : "POST",
-                        data : userNames,
-                        url : "secure/add-user-group-" + groupId,
-                        success : function(message, tst, jqXHR) {
-                            if (!util.checkSessionOut(jqXHR))
-                                return false;
-                            if (message.result == "success") {
-                                util.success("操作成功", function() {
-                                    window.location.reload();
-                                });
-                            } else {
-                                util.error("操作失败请稍后尝试:" + message.result);
-                            }
-
-                        },
-                        error : function(jqXHR, textStatus) {
-                            util.error("操作失败请稍后尝试");
-                        }
-                    });
-                    return false;
-                });
             });
 
         </script>

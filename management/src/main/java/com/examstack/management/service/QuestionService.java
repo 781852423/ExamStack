@@ -194,4 +194,15 @@ public interface QuestionService {
 	 * 获取所有用户组与题库的映射信息
 	 */
 	public List<Group2Field> getGroup2FieldAll();
+	
+	/**
+	 * 添加用户组-题库的关联关系
+	 */
+	
+	public void addField2Group(List<Group2Field> group2FieldList);
+	
+	/*
+	 * 删除用户组-题库的关联关系
+	 */
+	public void delField2Group(int group2FieldId);
 }

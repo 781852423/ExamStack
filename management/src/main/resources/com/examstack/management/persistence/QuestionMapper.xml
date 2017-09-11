@@ -331,7 +331,7 @@
     
     <select id="getGroup2FieldByGroupId" resultType="com.examstack.common.domain.question.Group2Field">
 		       select a.id, a.groupId, b.group_name groupName, a.fieldId,c.field_name fieldName from et_group_2_field a left join et_group b on a.groupId=b.id
-		left join et_field c on a.fieldId=c.field_id where a.groupId=#{groupId};
+		left join et_field c on a.fieldId=c.field_id where a.groupId=#{groupId} or #{groupId}=0 ;
     </select>
     
     <select id="getGroup2FieldAll" resultType="com.examstack.common.domain.question.Group2Field">
