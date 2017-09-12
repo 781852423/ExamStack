@@ -237,7 +237,8 @@ request.setAttribute("leftMenuId",list[3]);
                                             <button type="button" class="btn btn-default" data-dismiss="modal">
                                                 关闭窗口
                                             </button>
-                                            <button id="add-field-btn" data-action="admin/common/field2group-add" data-url="admin/user/group2field" type="button" class="btn btn-primary">
+                                            <!-- data-action被后台js获取到，作为点击后提交的地址 -->
+                                            <button id="add-field2group-modal-btn" data-action="admin/common/field2group-add" data-url="admin/user/group2field" type="submit" class="btn btn-primary">
                                                 确定添加
                                             </button>
                                         </div>

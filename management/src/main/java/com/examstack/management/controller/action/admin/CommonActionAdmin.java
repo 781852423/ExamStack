@@ -72,15 +72,16 @@ public class CommonActionAdmin {
 			
 			int groupId = gson.fromJson(element.getAsJsonObject().get("groupId"), Integer.class);
 			// List<QuestionTag> questionTagList = gson.fromJson(element.getAsJsonObject().get("tags"), new TypeToken<ArrayList<QuestionTag>>(){}.getType());
-			List<Integer> fieldLst = gson.fromJson(element.getAsJsonObject().get("fieldList"), new TypeToken<List<Integer>>(){}.getType());
+			
+			List<Field> fieldLst = gson.fromJson(element.getAsJsonObject().get("fieldList"), new TypeToken<ArrayList<Field>>(){}.getType());
 			
 			// 开始拼凑一个list
 			List<Group2Field> group2FieldList = new ArrayList<Group2Field>();
-			for(Integer i : fieldLst)
+			for(Field f : fieldLst)
 			{
 				Group2Field g = new Group2Field();
 				g.setGroupId(groupId);
-				g.setFieldId(i);
+				g.setFieldId(f.getFieldId());
 				group2FieldList.add(g);
 			}
 			// 调用存储服务		

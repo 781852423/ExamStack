@@ -220,6 +220,13 @@ public class QuestionAction {
 		Message msg = new Message();
 		Gson gson = new Gson();
 		JsonParser parser = new JsonParser();
+		//jsonStr for questionUpdate:{"tags":[{"tagId":12,"questionId":"1096"},
+		//                                    {"tagId":11,"questionId":"1096"},
+		//                                    {"tagId":9,"questionId":"1096"}],
+		//                                    "question":{"pointList":["20"],
+		//                                      "id":"1096","analysis":"","referenceName":"",
+		//                                       "examingPoint":"","keyword":""}}
+		// System.out.println("jsonStr for questionUpdate:" + jsonStr);
 		JsonElement element = parser.parse(jsonStr);
 		List<QuestionTag> questionTagList = gson.fromJson(element.getAsJsonObject().get("tags"), new TypeToken<ArrayList<QuestionTag>>(){}.getType());
 		Question question = gson.fromJson(element.getAsJsonObject().get("question"), Question.class);
