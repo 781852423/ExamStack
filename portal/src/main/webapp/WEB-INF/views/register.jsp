@@ -68,7 +68,7 @@
 									
 										<label class="checkbox-inline"> <input type="checkbox"
 											id="inlineCheckbox1" value="agree"> <a>
-												自行独立注册的账户有0.5小时系统使用权限</a>
+												自行独立注册的账户有30分钟系统使用权限，并且只能看到行测等题库，看不到针对各大公司的题库</a>
 										</label> <span class="form-message"></span>
 									
 

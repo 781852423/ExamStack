@@ -36,6 +36,8 @@ public class UserServiceImpl implements UserService {
 			userMapper.grantUserRole(userId, roleMap.get(authority).getRoleId());
 			if(user.getDepId() != 0)
 				userMapper.addUser2Dep(userId, user.getDepId());
+			// 添加组,一定不能把用户添加到不存在的用户组，用户组et_group表
+			userMapper.addUserGroup(userId, groupId);
 			return userId;	
 			
 		} catch (Exception e) {

@@ -250,8 +250,18 @@ public class PracticePage {
 				
         System.out.println("用户获取的题库名称、ID" + fieldList);
 		// 目前没有fieldID =0的选项
-		if(fieldId == 0) 
-			fieldId = fieldList.get(0).getFieldId();
+		if(fieldId == 0 || fieldList == null)
+		{
+			if(fieldList != null && fieldList.size() > 0)		
+			{
+			    fieldId = fieldList.get(0).getFieldId();
+			}
+			else
+			{
+				return "noPracticeAvailable";
+			}
+		}
+			
 		Map<Integer, Map<Integer, QuestionStatistic>> questionMap = questionService.getTypeQuestionStaticByFieldId(fieldId);
 		Map<Integer, Map<Integer, QuestionStatistic>> historyMap = questionHistoryService.getTypeQuestionHistStaticByFieldId(fieldId, userInfo.getUserid());
 		Map<Integer, QuestionStatistic> historyStatisticMap = questionHistoryService.getQuestionHistStaticByFieldId(fieldId, userInfo.getUserid());
