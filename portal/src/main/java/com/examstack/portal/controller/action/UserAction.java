@@ -52,6 +52,7 @@ public class UserAction {
 	public @ResponseBody Message addUser(@RequestBody User user) {
 		user.setCreateTime(new Date());
 		long expiredMinutes = 0;
+		int groupIdforRegisterAlone = 0;
 		
 		try {
 			
@@ -59,6 +60,8 @@ public class UserAction {
 			Properties props = PropertyReaderUtil.getProperties(path);
 			
 			expiredMinutes = Long.parseLong(props.getProperty("expiredMinutes"));
+			groupIdforRegisterAlone = Integer.parseInt(props.getProperty("groupIdforRegisterAlone"));
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -86,8 +89,10 @@ public class UserAction {
 		// userService.addUser ==> userServiceImpl.addUser
 		try {
 			System.out.println("即将添加的user信息：" + user);
-			// group=2，表示“学员”组，主要都是是自行注册的用户，可以让其使用30分钟试用
-			userService.addUser(user, "ROLE_STUDENT", 2, userService.getRoleMap());
+			// groupID，表示“学员”组，主要都是是自行注册的用户，可以让其使用30分钟试用
+			// 通过配置文件制定
+			
+			userService.addUser(user, "ROLE_STUDENT", groupIdforRegisterAlone, userService.getRoleMap());
 		} catch (Exception e) {
 			
 			System.out.println(user.getUserName() + "创建注册用户失败，原因" + e.getMessage());
