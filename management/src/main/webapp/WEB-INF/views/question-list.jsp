@@ -322,22 +322,7 @@ request.setAttribute("leftMenuId",list[3]);
 														</div>
 														<span class="form-message"></span>
 													</div>
-													<%-- <div class="form-line exampaper-type" id="aq-course1">
-														<span class="form-label"><span class="warning-label">*</span>专业：</span>
-														<select id="field-select" class="df-input-narrow">
-															<c:forEach items="${fieldList}" var="field">
-																<option value="${field.fieldId}">${field.fieldName} </option>
-															</c:forEach>
-														</select><span class="form-message"></span>
-													</div>
-													<div class="form-line exampaper-type" id="aq-course2">
-														<span class="form-label"><span class="warning-label">*</span>知识类：</span>
-														<select id="point-from-select" class="df-input-narrow">
-															<c:forEach items="${knowledgeList}" var="item">
-																<option value="${item.pointId}">${item.pointName} </option>
-															</c:forEach>
-														</select><span class="form-message"></span>
-													</div> --%>
+													
 													<div class="form-line form-question-reference" style="display: block;">
 														<span class="form-label"><span class="warning-label"></span>来源：</span>
 															<input type="text" class="df-input-narrow"><span class="form-message"></span>

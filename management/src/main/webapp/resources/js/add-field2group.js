@@ -27,8 +27,8 @@ var create_field2group = {
 					success : function(message, tst, jqXHR) {
 						if (message.result == "success") {
 							util.success("添加成功！", function() {
-								window.location.reload();
-
+								//window.location.reload();
+								$(".list-group-item.group-nav-item.active").click();
 							});
 						}else 
 						{

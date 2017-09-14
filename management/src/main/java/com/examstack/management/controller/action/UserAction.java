@@ -166,6 +166,8 @@ public class UserAction {
 		return msg;
 	}
 	
+	
+	
 	@RequestMapping(value = "/secure/delete-group-{groupId}", method = RequestMethod.GET)
 	public @ResponseBody Message deleteGroup(@PathVariable("groupId") int groupId){
 		Message msg = new Message();

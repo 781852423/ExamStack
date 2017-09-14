@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.examstack.common.domain.exam.Message;
+import com.examstack.common.domain.question.Field;
+import com.examstack.common.domain.question.Group2Field;
 import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.Question;
 import com.examstack.common.domain.question.QuestionContent;
@@ -328,4 +330,45 @@ public class QuestionAction {
 		
 		return message;
 	}
+	
+	@RequestMapping(value = "/secure/delete-group2field-{Id}", method = RequestMethod.GET)
+	public @ResponseBody Message deleteGroup2FieldLink(@PathVariable("Id") int id){
+		Message msg = new Message();
+		try{
+		     questionService.delField2Group(id);
+			
+		}catch(Exception e){
+			msg.setResult(e.getClass().getName());
+		}
+		return msg;
+	}
+	
+	/**
+	 * 获取试题详细信息
+	 * @param questionId
+	 * @return
+	 */
+	@RequestMapping(value = "/secure/group2Field/group2Field-detail/{groupId}", method = RequestMethod.GET)
+	public @ResponseBody Message getGroupFieldsDetail(@PathVariable("groupId") int groupId) {
+		Message message = new Message();
+		//UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		try {
+			List<Group2Field> group2FieldList = questionService.getGroup2FieldByGroupId(groupId);
+			List<Field> fieldList = new ArrayList<Field>();
+			for(Group2Field g : group2FieldList)
+			{
+				Field f = new Field();
+				f.setFieldId(g.getFieldId());
+				f.setFieldName(g.getFieldName());
+				fieldList.add(f);
+			}
+			message.setObject(fieldList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			message.setResult(e.getCause().getMessage());
+		}
+		return message;
+	}
+	
 }
