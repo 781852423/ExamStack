@@ -103,11 +103,14 @@
         removeable
         from et_field a where 
         a.field_id in (
-        select fieldId from et_group_2_field where groupId in 
-        <foreach collection="array" index="index" item="item" open="("
-                close=")" separator=",">
-                #{item}
-        </foreach>
+        select fieldId from et_group_2_field where 1=1 
+        <if test="array != null">
+		     and  groupId in 
+		        <foreach collection="array" index="index" item="item" open="("
+		                close=")" separator=",">
+		                #{item}
+		        </foreach>
+        </if>
         )
         order by field_id desc
 	</select>
