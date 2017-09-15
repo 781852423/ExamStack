@@ -35,6 +35,17 @@
 	list-style: none;
 }
 
+.r-createtime {
+	color: rgb(96, 106, 108);
+	list-style: none;
+}
+
+.r-expiredtime {
+	color: red;
+	list-style: none;
+}
+
+
 .question-title {
 	height: 33px;
 	background: rgb(232,239,241);

@@ -47,16 +47,6 @@ request.setAttribute("leftMenuId",list[3]);
 					<button class="btn btn-default btn-sm" id="add-user-modal-btn">
 						<i class="fa fa-plus-square"></i> 添加用户
 					</button>
-
-					<!-- <button class="btn btn-default" id="add-user-modal-btn">
-					<i class="icon-plus"></i> 添加用户组
-					</button> -->
-					<!-- <button class="btn btn-default btn-enable ">
-					<i class="icon-ok"></i> 启用
-					</button>
-					<button class="btn btn-danger btn-disable ">
-					<i class="icon-remove"></i> 禁用
-					</button> -->
 				</div>
 				<div class="btn-group table-controller-item" style="float: left">
 					<button class="btn btn-default btn-sm" id="link-user-modal-btn">
@@ -87,11 +77,10 @@ request.setAttribute("leftMenuId",list[3]);
 				<thead>
 					<tr>
 						<td>ID</td>
-						<td>用户名</td>
-						<td>姓名和身份证</td>
+						<td>用户名</td>						
 						<td>手机邮箱</td>
-						<td>部门单位</td>
 						<td>创建时间</td>
+						<td>过期时间</td>
 						<td>状态</td>
 						<td>操作</td>
 					</tr>
@@ -107,14 +96,7 @@ request.setAttribute("leftMenuId",list[3]);
 								</div>
 							
 							</td>
-							<td>
-								<div class="r-truename">
-									${item.trueName }
-								</div>
-								<div class="r-national-id">
-									${item.nationalId }
-								</div>
-							</td>
+							
 							<td>
 								<div class="r-phone">
 									${item.phoneNum }
@@ -124,18 +106,17 @@ request.setAttribute("leftMenuId",list[3]);
 								</div>
 							</td>
 							<td>
-								<div class="r-company" style="display: none;">
-									${item.company }
-								</div>
-								<div class="r-dept">
-									${item.department }
-								</div>
-							</td>
-							<td>
 								<span class="r-createtime">
 									<fmt:formatDate
 									value="${item.createTime }" pattern="yyyy-MM-dd HH:mm" />
 								</span>
+								
+							</td>
+							<td>
+								<span class="r-expiredtime">
+										<fmt:formatDate
+										value="${item.expiredTime }" pattern="yyyy-MM-dd HH:mm" />
+									</span>
 							</td>
 							<td>
 								<c:choose>
@@ -173,12 +154,6 @@ request.setAttribute("leftMenuId",list[3]);
 									</c:otherwise>
 								</c:choose>	
 								
-								<%-- <span class="link-user-r-btn simple-btn" title="关联用户">
-													<i class="fa fa-random"></i>
-								</span>
-								<span class="unlink-user-r-btn simple-btn" title="移出分组" data-id="${item.userId }" data-group="${groupId }">
-													<i class="fa fa-times-circle"></i>
-								</span> --%>
 							</td>
 						</tr>
 

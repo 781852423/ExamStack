@@ -6,12 +6,18 @@ $(function() {
 	var selectGroupId = $(".user-group-nav .active", parent.document).data("id");
 	
 	$("#add-field2group-modal-btn").click(function() {
+		 // 获取活动的点击组
+		var selectGroupId = $(".user-group-nav .active", parent.document).data("id");
+		if(selectGroupId == 0 || selectGroupId == "0")
+		{
+			util.error("好歹选个组吧亲？");
+			return;
+		}
 		$(parent.document.getElementById("add-field2group-modal")).modal({
 			backdrop : true,
 			keyboard : true
 		});
-        // 获取活动的点击组
-		var selectGroupId = $(".user-group-nav .active", parent.document).data("id");
+       
 		var selectGroupName = $(".user-group-nav .active", parent.document).text().trim();
 
 		// groupName是显示的

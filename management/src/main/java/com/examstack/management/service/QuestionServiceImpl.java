@@ -461,10 +461,22 @@ public class QuestionServiceImpl implements QuestionService {
 	@Override
 	public void addField2Group(List<Group2Field> group2FieldList) {
 		try {
-			for(Group2Field g2f : group2FieldList)
+			// 检查一下目前的关联关系里面是否已经有了记录
+			// 目前调用的group2FieldList里面groupId都是一样的，只是fieldId不同
+			if(group2FieldList != null && group2FieldList.size() >0)
 			{
-				questionMapper.insertGroup2Field(g2f);
-			}	
+				List<Group2Field> existingLink = this.getGroup2FieldByGroupId(group2FieldList.get(0).getGroupId());
+				
+				for(Group2Field g2f : group2FieldList)
+				{
+					
+					if( !existingLink.contains(g2f))
+					{
+						questionMapper.insertGroup2Field(g2f);
+					}
+					
+				}
+			}
 			
 		} catch (Exception e) {
 			
