@@ -216,49 +216,13 @@ request.setAttribute("leftMenuId",list[3]);
 													<span class="form-message"></span>
 													<br>
 												</div>
-												<!--  
-												<div class="form-line form-truename" style="display: block;">
-													<span class="form-label"><span class="warning-label">*</span>真实姓名：</span>
-													<input type="text" class="df-input-narrow" id="truename-add" maxlength="20">
-													<span class="form-message"></span>
-													<br>
-												</div>
-												<div class="form-line form-national-id" style="display: block;">
-													<span class="form-label"><span class="warning-label">*</span>身份证号：</span>
-													<input type="text" class="df-input-narrow" id="national-id-add" maxlength="18">
-													<span class="form-message"></span>
-													<br>
-												</div>
-												<div class="form-line form-phone" style="display: block;">
-													<span class="form-label"><span class="warning-label">*</span>手机：</span>
-													<input type="text" class="df-input-narrow" id="phone-add" maxlength="20">
-													<span class="form-message"></span>
-													<br>
-												</div>
-												-->
 												<div class="form-line form-email" style="display: block;">
 													<span class="form-label"><span class="warning-label">*</span>邮箱：</span>
 													<input type="text" class="df-input-narrow" id="email-add" maxlength="90">
 													<span class="form-message"></span>
 													<br>
 												</div>
-												<!-- <div class="form-line form-company" style="display: none;">
-													<span class="form-label"><span class="warning-label"></span>单位：</span>
-													<input type="text" class="df-input-narrow" id="company-add" maxlength="30">
-													<span class="form-message"></span>
-													<br>
-												</div>
-												<div class="form-line form-department" style="display: block;">
-													<span class="form-label"><span class="warning-label"></span>部门单位：</span>
-													<select id="department-input-select" class="df-input-narrow">
-														<option value="-1">--请选择--</option>
-														<c:forEach items="${depList }" var="item">
-															<option value="${item.depId }">${item.depName }</option>
-														</c:forEach>
-													</select>
-													<span class="form-message"></span>
-													<br>
-												</div> -->
+
 
 											</form>
 
@@ -267,7 +231,7 @@ request.setAttribute("leftMenuId",list[3]);
 											<button type="button" class="btn btn-default" data-dismiss="modal">
 												关闭窗口
 											</button>
-											<button id="add-user-btn" data-action="secure/add-user-ROLE_STUDENT" data-url="secure/user/student-list" type="button" class="btn btn-primary">
+											<button id="add-user-btn" data-action="secure/add-user-ROLE_STUDENT" data-url="admin/user/student-list" type="button" class="btn btn-primary">
 												确定添加
 											</button>
 										</div>
@@ -523,7 +487,8 @@ request.setAttribute("leftMenuId",list[3]);
 					e.preventDefault();
 					return false;
 				});
-
+                //总div: list-group user-group-nav
+                //下面小item：list-group-item group-nav-item
 				$(".user-group-nav .group-nav-item").click(function() {
 					var id = $(this).data("id");
 

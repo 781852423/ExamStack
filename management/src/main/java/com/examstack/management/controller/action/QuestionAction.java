@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.examstack.common.domain.exam.Message;
+import com.examstack.common.domain.question.Field;
+import com.examstack.common.domain.question.Group2Field;
 import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.Question;
 import com.examstack.common.domain.question.QuestionContent;
+import com.examstack.common.domain.question.QuestionParent;
 import com.examstack.common.domain.question.QuestionParentIdAndTitleDesc;
 import com.examstack.common.domain.question.QuestionTag;
 import com.examstack.common.util.file.FileUploadUtil;
@@ -48,15 +51,24 @@ public class QuestionAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/secure/question/question-add", method = RequestMethod.POST)
-	public @ResponseBody Message addQuestion(@RequestBody Question question) {
-
+	 public @ResponseBody Message addQuestion(@RequestBody Question question) {
+//	public @ResponseBody Message addQuestion(@RequestBody String jsonStr) {
+       
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Message message = new Message();
 		Gson gson = new Gson();
+		
 		// 把question的内同和解析都进行处理，以符合html的格式输出，主要是content和analysis
 		QuestionContent qContent = question.getQuestionContent();
-		qContent.setTitle(qContent.getTitle().replaceAll("\n", "<br/>").replaceAll("\r\n", "<br/>").replaceAll(" ", "&nbsp;&nbsp;"));
 		
+		
+		if(question.getQuestion_type_id() == 9)
+		{
+			qContent.setTitle(qContent.getTitle().replaceAll("\n", "<br/>").replaceAll("\r\n", "<br/>").replaceAll(" ", "&nbsp;&nbsp;") + "<br/>");
+		}else
+		{
+			qContent.setTitle(qContent.getTitle().replaceAll("\n", "<br/>").replaceAll("\r\n", "<br/>").replaceAll(" ", "&nbsp;&nbsp;"));
+		}
 		String rawQuestionContentString = gson.toJson(qContent);
 		
 		//question.setContent(gson.toJson(question.getQuestionContent()));
@@ -65,8 +77,21 @@ public class QuestionAction {
 		question.setAnalysis(question.getAnalysis().replaceAll("\r\n", "<br/>").replaceAll("\n", "<br/>").replaceAll(" ", "&nbsp;&nbsp;"));
 		question.setCreate_time(new Date());
 		question.setCreator(userDetails.getUsername());
+		
 		try {
-			questionService.addQuestion(question); // 对应questionMapper.insertQuestion，在文件QuestionMapper.xml文件
+			// 在这里分开来，只要是type=9，则说明是questionParent
+			if(question.getQuestion_type_id() != 9)
+			{
+			    questionService.addQuestion(question); // 对应questionMapper.insertQuestion，在文件QuestionMapper.xml文件
+			}else
+			{
+				QuestionParent questionParent = new QuestionParent();
+				questionParent.setName(question.getName());
+				questionParent.setContent(question.getContent());
+				questionParent.setCreator(question.getCreator());
+				questionParent.setCreate_time(question.getCreate_time());
+				questionService.addQuestionParent(questionParent);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			message.setResult("error");
@@ -197,6 +222,13 @@ public class QuestionAction {
 		Message msg = new Message();
 		Gson gson = new Gson();
 		JsonParser parser = new JsonParser();
+		//jsonStr for questionUpdate:{"tags":[{"tagId":12,"questionId":"1096"},
+		//                                    {"tagId":11,"questionId":"1096"},
+		//                                    {"tagId":9,"questionId":"1096"}],
+		//                                    "question":{"pointList":["20"],
+		//                                      "id":"1096","analysis":"","referenceName":"",
+		//                                       "examingPoint":"","keyword":""}}
+		// System.out.println("jsonStr for questionUpdate:" + jsonStr);
 		JsonElement element = parser.parse(jsonStr);
 		List<QuestionTag> questionTagList = gson.fromJson(element.getAsJsonObject().get("tags"), new TypeToken<ArrayList<QuestionTag>>(){}.getType());
 		Question question = gson.fromJson(element.getAsJsonObject().get("question"), Question.class);
@@ -298,4 +330,45 @@ public class QuestionAction {
 		
 		return message;
 	}
+	
+	@RequestMapping(value = "/secure/delete-group2field-{Id}", method = RequestMethod.GET)
+	public @ResponseBody Message deleteGroup2FieldLink(@PathVariable("Id") int id){
+		Message msg = new Message();
+		try{
+		     questionService.delField2Group(id);
+			
+		}catch(Exception e){
+			msg.setResult(e.getClass().getName());
+		}
+		return msg;
+	}
+	
+	/**
+	 * 获取试题详细信息
+	 * @param questionId
+	 * @return
+	 */
+	@RequestMapping(value = "/secure/group2Field/group2Field-detail/{groupId}", method = RequestMethod.GET)
+	public @ResponseBody Message getGroupFieldsDetail(@PathVariable("groupId") int groupId) {
+		Message message = new Message();
+		//UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		try {
+			List<Group2Field> group2FieldList = questionService.getGroup2FieldByGroupId(groupId);
+			List<Field> fieldList = new ArrayList<Field>();
+			for(Group2Field g : group2FieldList)
+			{
+				Field f = new Field();
+				f.setFieldId(g.getFieldId());
+				f.setFieldName(g.getFieldName());
+				fieldList.add(f);
+			}
+			message.setObject(fieldList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			message.setResult(e.getCause().getMessage());
+		}
+		return message;
+	}
+	
 }

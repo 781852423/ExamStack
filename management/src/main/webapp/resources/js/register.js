@@ -172,4 +172,4 @@ var create_account = {
 
 };
 
-<script src="encrypt/sha1.js">
+<script src="encrypt/sha1.js"/>

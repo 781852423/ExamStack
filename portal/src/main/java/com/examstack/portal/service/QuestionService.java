@@ -29,7 +29,8 @@ public interface QuestionService {
 	 * @param page
 	 * @return
 	 */
-	public List<Field> getAllField(Page<Field> page);
+	//public List<Field> getAllField(Page<Field> page);
+	public List<Field> getAllField(List<Integer> groupIdList);
 	
 	/**
 	 * 获取Field下的知识点

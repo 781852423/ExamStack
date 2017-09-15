@@ -160,8 +160,8 @@ question_add = {
 				$(question_opt_items[i]).addClass("has-error");
 				result = false;
 				break;
-			} else if (item_value.length > 100) {
-				$(".form-question-opt .form-message").text("选项内容请保持在100个字符以内");
+			} else if (item_value.length > 300) {
+				$(".form-question-opt .form-message").text("选项内容请保持在300个字符以内");
 				$(question_opt_items[i]).focus();
 				$(question_opt_items[i]).addClass("has-error");
 				result = false;

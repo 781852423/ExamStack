@@ -6,15 +6,19 @@
 
 	<!-- 用户 登录，用户用户登录并获取用户信息 -->
 	<select id="getUserByName" resultType="com.examstack.common.domain.user.User">
-		select a.user_id userId,a.user_name
+		select a.user_id userId,
+		GROUP_CONCAT(d.group_id)  groups,
+		a.user_name
 		userName,a.`password`,a.true_name trueName,a.national_id nationalId,
 		a.email,a.phone_num phoneNum,a.create_time createTime,a.create_by
 		createBy,
 		a.field_id fieldId,a.last_login_time
 		lastLoginTime,a.company,a.enabled,department,a.expired_time expiredTime,GROUP_CONCAT(c.authority) roles,
 		a.national_id nationalId,(select d.dep_id from et_user_2_department d where d.user_id=a.user_id) depId from
-		et_user a,et_user_2_role b,et_role c
-		where a.user_id=b.user_id and b.role_id=c.id and a.user_name=#{username}
+		et_user a,et_user_2_role b,et_role c,et_user_2_group d
+		where a.user_id=b.user_id and b.role_id=c.id and 
+		a.user_id=d.user_id and
+		a.user_name=#{username}
 		
 	</select>
 	
@@ -61,8 +65,8 @@
 	
 	<!-- group -->
 	<select id="getGroupListByUserId" resultType="com.examstack.common.domain.user.Group">
-		select id groupId,group_name groupName,create_time createTime,is_default defaultt
-		from et_group where user_id=#{userId}
+		select a.group_id groupId, a.user_id userId, b.group_name groupName from et_user_2_group a left join et_group b 
+		on a.group_id=b.id  where a.user_id=#{userId}
 	</select>
 	
 	<insert id="addUserGroup">

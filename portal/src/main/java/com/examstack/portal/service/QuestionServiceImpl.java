@@ -49,10 +49,11 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionMapper.getQuestionAnalysisListByPointIdAndTypeId(typeId, pointId);
 	}
 
+	// 修改此处的做法，把Page<FieldId>修改成List<Integer> groupIdList
 	@Override
-	public List<Field> getAllField(Page<Field> page) {
+	public List<Field> getAllField(List<Integer> groupIdList) {
 		// TODO Auto-generated method stub
-		return questionMapper.getAllField(page);
+		return questionMapper.getAllField(groupIdList);
 	}
 
 	@Override

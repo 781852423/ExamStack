@@ -161,7 +161,7 @@ request.setAttribute("leftMenuId",list[3]);
 								<table class="table-striped table">
 									<thead>
 										<tr>
-											<td></td><td>ID</td><td class="question-name-td">试题名称</td><td>试题类型</td><td>专业</td><td>知识类</td><td>创建人</td>
+											<td></td><td>ID</td><td>题干ID</td><td class="question-name-td">试题名称</td><td>试题类型</td>
 										</tr>
 									</thead>
 									<tbody>
@@ -172,12 +172,15 @@ request.setAttribute("leftMenuId",list[3]);
 												<input type="checkbox" value="${items.id }">
 												</td>
 												<td class="question-id">${items.id }</td>
+												<td class="question-id">${items.parentId }</td>
 												<td>
 													<a href="<%=list[1]%>/question/question-preview/${items.id }" target="_blank" title="预览">${items.name }</a>
 													<span class="examing-point">${items.examingPoint} </span>
 												</td>
 												
-												<td>${items.questionTypeName }</td><td>${items.fieldName }</td><td>${items.pointName }</td><td>${items.creator }</td>
+												<td>${items.questionTypeName }</td>
+												
+
 											</tr>
 										</c:forEach>
 										

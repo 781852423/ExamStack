@@ -1,12 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@include file="include/before_html.jsp""%>
+<%@ include file="include/before_html.jsp"%>
 
 
 <!DOCTYPE html>
 <html>
   <head>
     	
-    	<%@include file="include/head_files.jsp"%>
+    	<%@ include file="include/head_files.jsp"%>
 		<title>统计分析</title>
 		
 		<meta name="keywords" content="">

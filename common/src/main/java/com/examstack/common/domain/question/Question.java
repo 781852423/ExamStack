@@ -27,6 +27,10 @@ public class Question implements Serializable {
 	private float difficulty;
 	private String analysis;
 	private QuestionContent questionContent;
+	
+	private String parentContent;// Jie add this para on 2018.8.31
+	private QuestionContent questionParentContent;// Jie add this para on 2018.8.31
+	
 	private String pointName;
 	private String fieldName;
 	private String questionTypeName;
@@ -39,6 +43,19 @@ public class Question implements Serializable {
 	private List<QuestionTag> tagList;
 	private List<KnowledgePoint> knowledgePoint;
 	private Integer parentId; // 多加一个parentid，如果parentid ！= null，则说明这个稳定有主干的提干，可能是综合分析或者阅读理解
+	
+	public String getParentContent() {
+		return parentContent;
+	}
+	public void setParentContent(String parentContent) {
+		this.parentContent = parentContent;
+	}
+	public QuestionContent getQuestionParentContent() {
+		return questionParentContent;
+	}
+	public void setQuestionParentContent(QuestionContent questionParentContent) {
+		this.questionParentContent = questionParentContent;
+	}
 	
 	public List<QuestionTag> getTagList() {
 		return tagList;

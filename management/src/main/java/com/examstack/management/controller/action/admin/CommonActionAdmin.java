@@ -16,12 +16,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.examstack.common.domain.exam.Message;
 import com.examstack.common.domain.question.Field;
+import com.examstack.common.domain.question.Group2Field;
 import com.examstack.common.domain.question.KnowledgePoint;
+import com.examstack.common.domain.question.QuestionTag;
 import com.examstack.common.domain.question.Tag;
 import com.examstack.common.domain.user.Department;
 import com.examstack.management.security.UserInfo;
 import com.examstack.management.service.QuestionService;
 import com.examstack.management.service.UserService;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 @Controller
 public class CommonActionAdmin {
@@ -41,6 +47,45 @@ public class CommonActionAdmin {
 		Message message = new Message();
 		try{
 			questionService.addField(field);
+		}catch(Exception e){
+			message.setResult(e.getClass().getName());
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+	/*
+	 * 添加group2field关联关系
+	 * 
+	 */
+	@RequestMapping(value="/admin/common/field2group-add",method=RequestMethod.POST)
+	public @ResponseBody Message addField2Group(@RequestBody String group2fieldStr)
+	{
+		// 根据json字符串解析出groupId和fieldList
+		
+		Message message = new Message();
+		try
+		{
+			Gson gson = new Gson();
+			JsonParser parser = new JsonParser();
+			JsonElement element = parser.parse(group2fieldStr);
+			
+			int groupId = gson.fromJson(element.getAsJsonObject().get("groupId"), Integer.class);
+			// List<QuestionTag> questionTagList = gson.fromJson(element.getAsJsonObject().get("tags"), new TypeToken<ArrayList<QuestionTag>>(){}.getType());
+			
+			List<Field> fieldLst = gson.fromJson(element.getAsJsonObject().get("fieldList"), new TypeToken<ArrayList<Field>>(){}.getType());
+			
+			// 开始拼凑一个list
+			List<Group2Field> group2FieldList = new ArrayList<Group2Field>();
+			for(Field f : fieldLst)
+			{
+				Group2Field g = new Group2Field();
+				g.setGroupId(groupId);
+				g.setFieldId(f.getFieldId());
+				group2FieldList.add(g);
+			}
+			// 调用存储服务		
+		    questionService.addField2Group(group2FieldList);
 		}catch(Exception e){
 			message.setResult(e.getClass().getName());
 			e.printStackTrace();

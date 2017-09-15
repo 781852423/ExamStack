@@ -6,7 +6,7 @@
 
 	<!-- 试题列表部分 -->
 	<select id="getQuestionList" resultType="com.examstack.common.domain.question.Question">
-		select a.id,a.parentId,a.name,a.content,a.question_type_id,a.creator,a.answer,a.analysis,a.reference referenceName,group_concat(concat(d.field_name,'-',c.point_name)) pointName,
+		select z.*,  f.content parentContent from  (select a.id,a.parentId, a.name,a.content,a.question_type_id,a.creator,a.answer,a.analysis,a.reference referenceName,group_concat(concat(d.field_name,'-',c.point_name)) pointName,
 		e.name
 		questionTypeName, examing_point examingPoint,
 		(select group_concat(m.tag_name,' ') from et_tag m,et_question_2_tag n
@@ -19,6 +19,7 @@
 			a.id=b.question_id and b.point_id=c.point_id and
 			c.field_id=d.field_id
 			and a.question_type_id=e.id
+			
 			<if test="filter.fieldId != 0">
 				and c.field_id = #{filter.fieldId}
 			</if>
@@ -36,18 +37,19 @@
 				and instr(a.name,#{filter.searchParam})&lt;&gt;0
 			</if>
 		</where>
-		group by a.id,a.name,a.content,a.question_type_id,a.creator,a.answer,a.analysis,a.reference,a.examing_point,e.`name`,a.examing_point,tags
-		order by a.id desc
+		group by a.id,a.name,a.content,a.question_type_id,a.creator,a.answer,a.analysis,a.reference,a.examing_point,e.`name`,a.examing_point,tags)
+		 z left join et_question_parent f
+        on z.parentId=f.id order by z.id desc
 	</select>
 
 	<select id="getAllField" resultType="com.examstack.common.domain.question.Field">
 		select field_id
-		fieldId,field_name fieldName,memo,state,
-		case when exists(select 1 from
-		et_knowledge_point m where m.field_id=a.field_id) then 0
-		else 1 end
-		removeable
-		from et_field a order by field_id desc
+        fieldId,field_name fieldName,memo,state,
+        case when exists(select 1 from
+        et_knowledge_point m where m.field_id=a.field_id) then 0
+        else 1 end
+        removeable
+        from et_field a
 	</select>
 
 	<select id="getKnowledgePointByFieldId" resultType="com.examstack.common.domain.question.KnowledgePoint">
@@ -231,7 +233,8 @@
 
 	<select id="getQuestionByQuestionId" resultType="com.examstack.common.domain.question.Question">
 		select a.id,a.parentId,a.name,a.content,a.question_type_id,a.creator,a.answer,a.analysis,a.reference referenceName,a.keyword keyword,
-		a.examing_point examingPoint, b.question_raw_content questionRawContent from et_question a left join et_question_raw_content b on a.parentId=b.id
+				a.examing_point examingPoint, f.content parentContent from et_question a left join et_question_parent f
+		 on a.parentId=f.id 
 		<where>
 			a.id = #{questionId}
 		</where>
@@ -246,7 +249,7 @@
 
 	<select id="getQuestionAnalysisListByIdList"
 		resultType="com.examstack.common.domain.question.QuestionQueryResult">
-		SELECT a.id questionId,a.content,a.answer,a.analysis,a.question_type_id
+		select z.*, f.content parentContent  from (SELECT a.id questionId,a.parentId,a.content,a.answer,a.analysis,a.question_type_id
 		questionTypeId,a.reference
 		referenceName,a.examing_point
 		examingPoint,GROUP_CONCAT(d.field_name,'
@@ -278,7 +281,7 @@
 		group by
 		a.id,a.content,a.answer,a.analysis,a.question_type_id,a.reference,
 		a.examing_point
-		order by a.question_type_id,a.id
+		order by a.question_type_id,a.id desc) z left join et_question_parent f on z.parentId=f.id
 	</select>
 	
 	<delete id="deleteQuestionByQuestionId">
@@ -323,6 +326,29 @@
 	</select>
 	
 	<select id="getQuestionParentIdAndTitleDescList" resultType="com.examstack.common.domain.question.QuestionParentIdAndTitleDesc">
-        select a.id  parentId,left(a.name,10)  titleDesc from et_question a where a.question_type_id=9 limit 0,5;
+        select a.id  parentId,left(a.name,10)  titleDesc from et_question_parent a limit 0,5;;
     </select>
+    
+    <select id="getGroup2FieldByGroupId" resultType="com.examstack.common.domain.question.Group2Field">
+		       select a.id, a.groupId, b.group_name groupName, a.fieldId,c.field_name fieldName from et_group_2_field a left join et_group b on a.groupId=b.id
+		left join et_field c on a.fieldId=c.field_id where a.groupId=#{groupId} or #{groupId}=0 ;
+    </select>
+    
+    <select id="getGroup2FieldAll" resultType="com.examstack.common.domain.question.Group2Field">
+		        select a.id, a.groupId, b.group_name groupName, a.fieldId,c.field_name fieldName from et_group_2_field a left join et_group b on a.groupId=b.id
+		left join et_field c on a.fieldId=c.field_id;
+    </select>
+    
+    <insert id="insertGroup2Field" parameterType="com.examstack.common.domain.question.Group2Field"
+    useGeneratedKeys="true" keyProperty="id">
+	    insert into  et_group_2_field
+	    (groupId,fieldId)
+	    values
+	    (#{groupId},#{fieldId});
+    </insert>
+    
+    <delete id="deleteGroup2FieldById">
+        delete from et_group_2_field where id=#{group2FieldId};
+    </delete>
+    
 </mapper>

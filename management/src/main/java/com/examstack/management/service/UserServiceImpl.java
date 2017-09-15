@@ -9,12 +9,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.examstack.common.domain.question.Group2Field;
 import com.examstack.common.domain.user.Department;
 import com.examstack.common.domain.user.Group;
 import com.examstack.common.domain.user.Role;
 import com.examstack.common.domain.user.User;
 import com.examstack.common.util.Page;
 import com.examstack.common.util.StandardPasswordEncoderForSha1;
+import com.examstack.management.persistence.QuestionMapper;
+
 import com.examstack.management.persistence.UserMapper;
 
 /**
@@ -26,7 +29,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	public UserMapper userMapper;
-
+	@Autowired QuestionMapper questionMapper;
+	
 	@Override
 	@Transactional
 	public int addUser(User user,String authority,int groupId,HashMap<String,Role> roleMap) {
@@ -199,5 +203,26 @@ public class UserServiceImpl implements UserService {
 		tmpUser.setPassword(password);
 		userMapper.updateUser(tmpUser, null);
 		
+	}
+
+	@Override
+	public List<Group> getAllGroups(Page<Group> page) {
+		// TODO Auto-generated method stub
+		List<Group> groupList = userMapper.getAllGroups(page);
+		return groupList;
+	}
+	
+	@Override
+	public List<Group2Field> getAllGroup2Field(Page<Group2Field> page)
+	{
+		List<Group2Field> group2FieldList = questionMapper.getGroup2FieldAll();
+		return group2FieldList;
+	}
+	
+	@Override
+	public List<Group2Field> getGroup2FieldById(int id)
+	{
+		List<Group2Field> group2FieldList = questionMapper.getGroup2FieldByGroupId(id);
+		return group2FieldList;
 	}
 }

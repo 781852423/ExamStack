@@ -70,12 +70,18 @@ $(function() {
 	}
 	
 	$("#add-user-modal-btn").click(function() {
+		var selectGroupId = $(".user-group-nav .active", parent.document).data("id");
+		if(selectGroupId == 0 || selectGroupId == "0")
+		{
+			util.error("好歹选个组呗？");
+			return;
+		}
 		$(parent.document.getElementById("add-user-modal")).modal({
 			backdrop : true,
 			keyboard : true
 		});
 
-		var selectGroupId = $(".user-group-nav .active", parent.document).data("id");
+		
 		var selectGroupName = $(".user-group-nav .active", parent.document).text().trim();
 
 		$("#user-add-form #group-add", parent.document).val(selectGroupName);

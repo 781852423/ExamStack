@@ -44,23 +44,6 @@ var examing = {
 					
 				}
 				
-				
-
-				/*var nav = $("#question-navi");
-				var attr = nav.attr("style");
-
-				if (nav.css("position") == "fixed") {
-					if (nav.css("bottom") == "0px") {
-						nav.css({
-							bottom : "-" + naviheight + "px"
-						});
-					} else {
-						nav.css({
-							bottom : 0
-						});
-					}
-
-				}*/
 
 			});
 

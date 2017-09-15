@@ -28,10 +28,12 @@ import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.domain.question.QuestionStatistic;
 import com.examstack.common.domain.question.QuestionType;
+import com.examstack.common.domain.user.Group;
 import com.examstack.common.util.QuestionAdapter;
 import com.examstack.portal.security.UserInfo;
 import com.examstack.portal.service.QuestionHistoryService;
 import com.examstack.portal.service.QuestionService;
+import com.examstack.portal.service.UserService;
 
 @Controller
 public class PracticePage {
@@ -40,6 +42,8 @@ public class PracticePage {
 	private QuestionService questionService;
 	@Autowired
 	private QuestionHistoryService questionHistoryService;
+	@Autowired
+	private UserService userService;
 	/**
 	 * 强化练习
 	 * @param model
@@ -210,9 +214,54 @@ public class PracticePage {
 		
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
-		List<Field> fieldList = questionService.getAllField(null);
-		if(fieldId == 0)
-			fieldId = fieldList.get(0).getFieldId();
+		
+		/*
+		 * 对应questionMapper的getAllField SQL 查询出的是题库的列表：例如5	商业银行基础知识	商业银行基础知识	0	0
+		 *
+		 */
+		List<Group> userGroups = userService.getGroupListByUserId(userInfo.getUserid(), null);
+		
+		
+		List<Integer> groupList = new ArrayList<Integer>();
+		
+		if(userGroups != null)
+		{
+			for(Group g : userGroups)
+			{
+				groupList.add(g.getGroupId());
+			}
+		}
+		
+	     System.out.println("用户所在的组号码:" + groupList);
+		List<Field> fieldList = questionService.getAllField(groupList);
+		
+		// fieldList剔除那些没有相应题目的题库,只要其removeable为1就可以不显示
+		
+		List<Field> NonRemoveableFieldList = new ArrayList<Field>();
+		for(Field fd : fieldList)
+		{
+			if(fd.isRemoveable() == false) 
+			{
+				NonRemoveableFieldList.add(fd);
+			}
+		}
+		
+		fieldList = NonRemoveableFieldList;
+				
+        System.out.println("用户获取的题库名称、ID" + fieldList);
+		// 目前没有fieldID =0的选项
+		if(fieldId == 0 || fieldList == null)
+		{
+			if(fieldList != null && fieldList.size() > 0)		
+			{
+			    fieldId = fieldList.get(0).getFieldId();
+			}
+			else
+			{
+				return "noPracticeAvailable";
+			}
+		}
+			
 		Map<Integer, Map<Integer, QuestionStatistic>> questionMap = questionService.getTypeQuestionStaticByFieldId(fieldId);
 		Map<Integer, Map<Integer, QuestionStatistic>> historyMap = questionHistoryService.getTypeQuestionHistStaticByFieldId(fieldId, userInfo.getUserid());
 		Map<Integer, QuestionStatistic> historyStatisticMap = questionHistoryService.getQuestionHistStaticByFieldId(fieldId, userInfo.getUserid());
@@ -256,18 +305,10 @@ public class PracticePage {
 		model.addAttribute("fieldId", fieldId);
 		model.addAttribute("historyMap", historyStatisticMap);
 		model.addAttribute("pointMap", pointMap);
-		// fieldList剔除那些没有相应题目的题库,只要其removeable为1就可以不显示
 		
-		List<Field> NonRemoveableFieldList = new ArrayList<Field>();
-		for(Field fd : fieldList)
-		{
-			if(fd.isRemoveable() == false) 
-			{
-				NonRemoveableFieldList.add(fd);
-			}
-		}
 		
-		model.addAttribute("fieldList", NonRemoveableFieldList);// 只显示有题目的题库
+		
+		model.addAttribute("fieldList", fieldList);// 只显示有题目的题库
 		return "practice";
 	}
 	

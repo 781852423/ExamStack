@@ -3,6 +3,7 @@ package com.examstack.portal.controller.action;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Properties;
 
@@ -50,20 +51,25 @@ public class UserAction {
 	@RequestMapping(value = { "/add-user" }, method = RequestMethod.POST)
 	public @ResponseBody Message addUser(@RequestBody User user) {
 		user.setCreateTime(new Date());
-		int expiredDays = 0;
+		long expiredMinutes = 0;
+		int groupIdforRegisterAlone = 0;
+		
 		try {
 			
 			String path = this.getClass().getClassLoader().getResource("custome.properties").getPath();
 			Properties props = PropertyReaderUtil.getProperties(path);
 			
-			expiredDays = Integer.parseInt(props.getProperty("expiredDays"));
+			expiredMinutes = Long.parseLong(props.getProperty("expiredMinutes"));
+			groupIdforRegisterAlone = Integer.parseInt(props.getProperty("groupIdforRegisterAlone"));
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		
 		}
 		
-		long expiredTimeL = System.currentTimeMillis()+expiredDays*24*60*60*1000; // 这里设置自己注册的账户有一天的有效期
+		long expiredTimeL = System.currentTimeMillis()+expiredMinutes*60*1000; // 自行注册的账户有效期
+		
 		user.setExpiredTime(new Date(expiredTimeL));
 		/*服务器端的加密操作 */
 		
@@ -71,8 +77,11 @@ public class UserAction {
 		PasswordEncoder passwordEncoder = new StandardPasswordEncoderForSha1();
 		
 		String resultPassword = passwordEncoder.encode(password);
-		System.out.println("获取前端页面的用户名：" + user.getUserName() + " 密码：" + user.getPassword());
+		System.out.println("获取前端页面的用户名：" + user.getUserName() + " 密码：" + user.getPassword() );
+		
 		user.setPassword(resultPassword);
+		System.out.println("前端页面在userAction中加密后的密码：" + user.getPassword());
+		
 		user.setEnabled(true);
 		user.setCreateBy(-1); // 自己注册，创建人：-1
 		user.setUserName(user.getUserName().toLowerCase());
@@ -80,34 +89,12 @@ public class UserAction {
 		// userService.addUser ==> userServiceImpl.addUser
 		try {
 			System.out.println("即将添加的user信息：" + user);
+			// groupID，表示“学员”组，主要都是是自行注册的用户，可以让其使用30分钟试用
+			// 通过配置文件制定
 			
-			userService.addUser(user, "ROLE_STUDENT", 0, userService.getRoleMap());
+			userService.addUser(user, "ROLE_STUDENT", groupIdforRegisterAlone, userService.getRoleMap());
 		} catch (Exception e) {
 			
-			/*if(user != null && user.getUserId() > 0)
-			{
-				if(e.getMessage().contains(user.getUserName())){
-					message.setResult("duplicate-username");
-					message.setMessageInfo("重复的用户名");
-				} 
-				else if(e.getMessage().contains(user.getNationalId())){
-					message.setResult("duplicate-national-id");
-					message.setMessageInfo("重复的身份证");
-				} 
-				else if(e.getMessage().contains(user.getEmail())){
-					message.setResult("duplicate-email");
-					message.setMessageInfo("重复的邮箱");
-				} 
-				else if(e.getMessage().contains(user.getPhoneNum())){
-					message.setResult("duplicate-phone");
-					message.setMessageInfo("重复的电话");
-				}
-			}
-			else
-			{
-				message.setResult(e.getCause().getMessage());
-				e.printStackTrace();
-			}*/
 			System.out.println(user.getUserName() + "创建注册用户失败，原因" + e.getMessage());
 			e.printStackTrace();
 			message.setResult("创建注册用户失败，原因可能是使用了重复的用户名或者邮箱");

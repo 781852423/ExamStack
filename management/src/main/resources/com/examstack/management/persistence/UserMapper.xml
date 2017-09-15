@@ -22,7 +22,7 @@
 		a.email,a.phone_num phoneNum,a.create_time createTime,a.create_by
 		createBy,
 		a.field_id fieldId,a.last_login_time
-		lastLoginTime,a.company,a.enabled,department,expired_time from
+		lastLoginTime,a.company,a.enabled,department,expired_time expiredTime from
 		et_user a,et_user_2_role b,et_role c
 		where a.user_id=b.user_id and b.role_id=c.id and (a.user_name in
 		<foreach collection="array" open="(" close=")" index="index" item="item" separator=",">
@@ -52,7 +52,7 @@
 		a.email,a.phone_num phoneNum,a.create_time createTime,a.create_by
 		createBy,
 		a.field_id fieldId,a.last_login_time
-		lastLoginTime,a.company,a.enabled,department,expired_time from
+		lastLoginTime,a.company,a.enabled,department,expired_time expiredTime from
 		et_user a,et_user_2_role b,et_role c
 		where a.user_id=b.user_id and b.role_id=c.id and a.user_id in(select user_id from et_user_2_group where group_id in
 		<foreach collection="array" open="(" close=")" index="index" item="item" separator=",">
@@ -65,7 +65,7 @@
 		select a.user_id userId,a.user_name
 		userName,a.`password`,a.true_name trueName,a.national_id nationalId,
 		a.email,a.phone_num phoneNum,a.create_time createTime,a.create_by
-		createBy,a.expired_time,
+		createBy,a.expired_time expiredTime,
 		a.field_id fieldId,a.last_login_time
 		lastLoginTime,a.company,a.enabled,(select dep_id from et_user_2_department p where p.user_id=a.user_id) depId,
 		(select dep_name from et_user_2_department m,et_department n
@@ -122,7 +122,7 @@
 		`password`,a.email as email,a.phone_num as phoneNum,
 		a.create_time as
 		createTime,
-		a.expired_time,
+		a.expired_time expiredTime,
 		(select user_name from et_user
 		m where m.user_id=a.create_by) as creator,(select field_name from et_field where field_id=a.field_id) as fieldName,
 		a.enabled as enabled,company,national_id nationalId,(select dep_id from et_user_2_department p where p.user_id=a.user_id) depId,
@@ -143,6 +143,14 @@
 		select id groupId,group_name groupName,create_time createTime,is_default defaultt
 		from et_group where user_id=#{userId} order by id desc
 	</select>
+	
+	<!-- all groups -->
+    <select id="getAllGroups" resultType="com.examstack.common.domain.user.Group">
+        select id groupId,group_name groupName,create_time createTime,is_default defaultt
+        from et_group order by id desc
+    </select>
+    
+    
 	<insert id="addGroup" parameterType="com.examstack.common.domain.user.Group">
 		insert into et_group(group_name,user_id,is_default) values (#{group.groupName},#{group.userId},#{group.defaultt})
 	</insert>
@@ -180,6 +188,8 @@
 	<select id="getDepList" resultType="com.examstack.common.domain.user.Department">
 		select dep_id depId,dep_name depName,memo from et_department order by dep_id desc
 	</select>
+	
+	
 	<insert id="addDep" useGeneratedKeys="true" keyProperty="depId"
 		parameterType="com.examstack.common.domain.user.Department">
 		insert into et_department(dep_name,memo) values(#{depName},#{memo})

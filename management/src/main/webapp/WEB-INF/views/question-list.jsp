@@ -235,7 +235,7 @@ request.setAttribute("leftMenuId",list[3]);
 								<table class="table-striped table">
 									<thead>
 										<tr>
-											<!-- <td></td> --><td>ID</td><td class="question-name-td" style="width:240px">试题名称</td><td style="width:60px">类型</td><td>专业</td><td>知识类</td><td>创建人</td><td style="width:90px;">操作</td>
+											<td>ID</td><td>题干ID</td><td class="question-name-td" style="width:50%">试题名称</td><td>类型</td><td>专业</td><td >操作</td>
 										</tr>
 									</thead>
 									<tbody>
@@ -244,7 +244,9 @@ request.setAttribute("leftMenuId",list[3]);
 											<tr>
 												<td style="display:none;">
 												<input type="checkbox" value="${items.id }">
-												</td><td>${items.id }</td>
+												</td>
+												<td>${items.id }</td>
+												<td>${items.parentId }</td>
 												<td>
 													<a href="<%=list[1]%>/question/question-preview/${items.id }" target="_blank" title="预览">${items.name }</a>
 														<div class="question-tags">
@@ -255,8 +257,8 @@ request.setAttribute("leftMenuId",list[3]);
 													
 													</td>
 
-												<td>${items.questionTypeName }</td><td>${items.fieldName }</td><td>${items.pointName }</td>
-												<td>${items.creator }</td> 
+												<td>${items.questionTypeName }</td>
+												<td>${items.fieldName }</td>
 												<td>
 													<c:choose>
 														<c:when test="${items.creator == sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}">
@@ -320,22 +322,7 @@ request.setAttribute("leftMenuId",list[3]);
 														</div>
 														<span class="form-message"></span>
 													</div>
-													<%-- <div class="form-line exampaper-type" id="aq-course1">
-														<span class="form-label"><span class="warning-label">*</span>专业：</span>
-														<select id="field-select" class="df-input-narrow">
-															<c:forEach items="${fieldList}" var="field">
-																<option value="${field.fieldId}">${field.fieldName} </option>
-															</c:forEach>
-														</select><span class="form-message"></span>
-													</div>
-													<div class="form-line exampaper-type" id="aq-course2">
-														<span class="form-label"><span class="warning-label">*</span>知识类：</span>
-														<select id="point-from-select" class="df-input-narrow">
-															<c:forEach items="${knowledgeList}" var="item">
-																<option value="${item.pointId}">${item.pointName} </option>
-															</c:forEach>
-														</select><span class="form-message"></span>
-													</div> --%>
+													
 													<div class="form-line form-question-reference" style="display: block;">
 														<span class="form-label"><span class="warning-label"></span>来源：</span>
 															<input type="text" class="df-input-narrow"><span class="form-message"></span>

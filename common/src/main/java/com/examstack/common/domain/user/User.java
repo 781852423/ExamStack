@@ -38,6 +38,8 @@ public class User implements Serializable {
 	private String company;
 	private boolean enabled;
 	private String roles;
+	private String groups;
+	
 	private int depId;
 	private String department;
 	private Date expiredTime;
@@ -156,16 +158,23 @@ public class User implements Serializable {
 	public void setRoles(String roles) {
 		this.roles = roles;
 	}
+	
+	public String getGroups() {
+		return groups;
+	}
+	public void setGroups(String groups) {
+		this.groups = groups;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", trueName=" + trueName
 				+ ", nationalId=" + nationalId + ", email=" + email + ", phoneNum=" + phoneNum + ", createTime="
 				+ createTime + ", createBy=" + createBy + ", fieldId=" + fieldId + ", fieldName=" + fieldName
 				+ ", lastLoginTime=" + lastLoginTime + ", loginTime=" + loginTime + ", company=" + company
-				+ ", enabled=" + enabled + ", roles=" + roles + ", depId=" + depId + ", department=" + department 
-				
-				+",expiredTime=" + expiredTime
-				+ "]";
+				+ ", enabled=" + enabled + ", roles=" + roles + ", groups=" + groups + ", depId=" + depId
+				+ ", department=" + department + ", expiredTime=" + expiredTime + "]";
 	}
+	
 	
 }

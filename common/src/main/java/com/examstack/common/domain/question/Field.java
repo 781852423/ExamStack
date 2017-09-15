@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Field {
 
-	private int fieldId;
+	private Integer fieldId;
 	private String fieldName;
 	private String memo;
 	private boolean state;
@@ -16,10 +16,10 @@ public class Field {
 	public void setRemoveable(boolean removeable) {
 		this.removeable = removeable;
 	}
-	public int getFieldId() {
+	public Integer getFieldId() {
 		return fieldId;
 	}
-	public void setFieldId(int fieldId) {
+	public void setFieldId(Integer fieldId) {
 		this.fieldId = fieldId;
 	}
 	public String getFieldName() {
@@ -40,4 +40,10 @@ public class Field {
 	public void setState(boolean state) {
 		this.state = state;
 	}
+	@Override
+	public String toString() {
+		return "Field [fieldId=" + fieldId + ", fieldName=" + fieldName + ", memo=" + memo + "]";
+	}
+	
+	
 }
