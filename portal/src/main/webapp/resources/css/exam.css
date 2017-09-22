@@ -598,3 +598,8 @@ a.navi-item-success{
 	right:0;
 }
 
+.correctAnswer{
+	/*outline: 4px solid #1f7a1f;*/
+	outline: 4px solid #d9534f;
+}
+

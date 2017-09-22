@@ -75,5 +75,12 @@ public class UserQuestionHistory {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+	@Override
+	public String toString() {
+		return "UserQuestionHistory [questionId=" + questionId + ", userId=" + userId + ", right=" + right
+				+ ", createTime=" + createTime + ", pointId=" + pointId + ", pointName=" + pointName + ", fieldId="
+				+ fieldId + ", fieldName=" + fieldName + ", questionTypeId=" + questionTypeId + ", questionTypeName="
+				+ questionTypeName + "]";
+	}
 	
 }

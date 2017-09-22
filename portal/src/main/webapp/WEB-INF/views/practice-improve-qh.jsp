@@ -97,6 +97,7 @@
 									</div> -->
 
 								</div>
+								<!-- 题目内容包括答案全部从服务器载入 -->
 								<ul id="exampaper-body">
 									${questionStr }
 								</ul>
@@ -112,7 +113,7 @@
 												下一题 <i class="fa fa-chevron-circle-right"></i>
 										</button>
 										<button class="btn-warning btn" id="submit-q-btn" style="width:160px;float:right;">
-												<i class="fa fa-check-circle-o"></i>提交答案
+												<i class="fa fa-check-circle-o"></i>交卷并查看结果
 										</button>
 									</div>
 									<div id="question-navi">

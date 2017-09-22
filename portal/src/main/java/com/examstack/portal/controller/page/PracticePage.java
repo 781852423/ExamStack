@@ -312,47 +312,4 @@ public class PracticePage {
 		return "practice";
 	}
 	
-	/*public void appendBaseInfo(Model model,int fieldId){
-		
-		Object userInfo = SecurityContextHolder.getContext()
-			    .getAuthentication()
-			    .getPrincipal();
-		
-		if(!(userInfo instanceof String)){
-						
-			Map<Integer,List<UserQuestionHistory>> histMap = questionHistoryService.getUserQuestionHist(((UserInfo)userInfo).getUserid(), fieldId);
-			
-			Map<Integer,KnowledgePoint> pointMap = questionService.getKnowledgePointByFieldId(fieldId,null);
-			Map<Integer,QuestionType> typeMap = questionService.getQuestionTypeMap();
-			int wrongCount = 0;
-			for(Map.Entry<Integer,List<UserQuestionHistory>> entry : histMap.entrySet()){
-				wrongCount += entry.getValue().size();
-				
-			}
-			
-			//获取每个知识点已做题数目
-			Map<Integer,Map<Integer,Integer>> doneNumMap = new HashMap<Integer,Map<Integer,Integer>>();
-			for(Map.Entry<Integer,List<UserQuestionHistory>> entry : histMap.entrySet()){
-				Map<Integer,Integer> tmp = doneNumMap.get(entry.getKey());
-				if(tmp == null)
-					tmp = new HashMap<Integer,Integer>();
-				
-				for(UserQuestionHistory history : entry.getValue()){
-					int count = 1;
-					count += !tmp.containsKey(history.getQuestionTypeId()) ? 0 : tmp.get(history.getQuestionTypeId());
-					tmp.put(history.getQuestionTypeId(), count);
-				}
-				doneNumMap.put(entry.getKey(), tmp);
-			}
-			
-			Map<Integer, Map<Integer,List<QuestionQueryResult>>> questionMap = questionService.getQuestionMapByFieldId(fieldId, null);
-			model.addAttribute("histMap", histMap);
-			model.addAttribute("wrongCount", wrongCount);
-			model.addAttribute("pointMap", pointMap);
-			model.addAttribute("typeMap", typeMap);
-			model.addAttribute("questionMap", questionMap);
-			model.addAttribute("doneNumMap", doneNumMap);
-			model.addAttribute("fieldId", fieldId);
-		}		
-	}*/
 }

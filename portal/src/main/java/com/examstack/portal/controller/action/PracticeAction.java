@@ -1,5 +1,8 @@
 package com.examstack.portal.controller.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -45,6 +48,48 @@ public class PracticeAction {
 			questionHistoryService.addUserQuestionHist(history);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			msg.setResult(e.getClass().getName());
+			e.printStackTrace();
+		}
+
+		return msg;
+	}
+	
+	/**
+	 * 练习模式处理答案提交，处理多道题目回答情况
+	 * 
+	 * @param sp
+	 * @return
+	 */
+	@RequestMapping(value = "/student/practice-improve/savePractiveHistory", method = RequestMethod.POST)
+	public @ResponseBody Message submitBulkPractice(@RequestBody List<QuestionHistory> qhList) {
+		Message msg = new Message();
+		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		List<UserQuestionHistory> userHistoryList = new ArrayList<UserQuestionHistory>();
+		if(qhList == null || qhList.size() == 0)
+		{
+			msg.setMessageInfo("后台没有接到合适的数据");
+			return msg;
+		}
+		
+		for(QuestionHistory qh : qhList)
+		{
+			UserQuestionHistory history = new UserQuestionHistory();
+			history.setQuestionId(qh.getQuestionId());
+			history.setUserId(userInfo.getUserid());
+			history.setQuestionTypeId(qh.getQuestionTypeId());
+			boolean isRight = qh.getAnswer().equals(qh.getMyAnswer()) ? true : false;
+			history.setRight(isRight);
+			userHistoryList.add(history);
+		}
+		
+		
+		try {
+			System.out.println("收到前台提交的答题信息：" + userHistoryList);
+			questionHistoryService.addUserQuestionHist(userHistoryList);
+		} catch (Exception e) {
+			
 			msg.setResult(e.getClass().getName());
 			e.printStackTrace();
 		}

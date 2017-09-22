@@ -35,7 +35,7 @@ public class QuestionAdapter {
 	 * @param answerSheetItem
 	 *            答题卡
 	 * @param questionQueryResult
-	 *            试题描述
+	 *            试题描述：正确于判断题，数据库里面存储的答案是”T“表示正确，”F“表示错误
 	 */
 	public QuestionAdapter(Question question, AnswerSheetItem answerSheetItem,
 			QuestionQueryResult questionQueryResult, String baseUrl) {
@@ -345,12 +345,12 @@ public class QuestionAdapter {
 		}
 		sb.append("<div class=\"answer-desc\">");
 		sb.append("<div class=\"answer-desc-summary\">");
-		sb.append("<span>正确答案：</span>");
+		sb.append("<span class='answerResultDesc'></span></span><span>参考答案：</span>");
 		if (questionQueryResult.getQuestionTypeId() == 3) {
 			if (questionQueryResult.getAnswer().equals("T"))
-				sb.append("<span class=\"answer_value\">").append("对").append("</span><br>");
+				sb.append("<span class=\"answer_value\">").append("正确").append("</span><br>");
 			else if (questionQueryResult.getAnswer().equals("F"))
-				sb.append("<span class=\"answer_value\">").append("错").append("</span><br>");
+				sb.append("<span class=\"answer_value\">").append("错误").append("</span><br>");
 			else
 				sb.append("<span class=\"answer_value\">").append(questionQueryResult.getAnswer())
 						.append("</span><br>");
@@ -621,12 +621,12 @@ public class QuestionAdapter {
 		}
 		sb.append("<div class=\"answer-desc\">");
 		sb.append("<div class=\"answer-desc-summary\">");
-		sb.append("<span>正确答案：</span>");
+		sb.append("<span class='answerResultDesc'></span><span>参考答案：</span>");
 		if (questionQueryResult.getQuestionTypeId() == 3) {
 			if (questionQueryResult.getAnswer().equals("T"))
-				sb.append("<span class=\"answer_value\">").append("对").append("</span><br>");
+				sb.append("<span class=\"answer_value\">").append("正确").append("</span><br>");
 			else if (questionQueryResult.getAnswer().equals("F"))
-				sb.append("<span class=\"answer_value\">").append("错").append("</span><br>");
+				sb.append("<span class=\"answer_value\">").append("错误").append("</span><br>");
 			else
 				sb.append("<span class=\"answer_value\">").append(questionQueryResult.getAnswer())
 						.append("</span><br>");
@@ -637,9 +637,9 @@ public class QuestionAdapter {
 		sb.append("<span>  你的解答：</span>");
 		if (answerSheetItem.getQuestionTypeId() == 3) {
 			if (answerSheetItem.getAnswer().trim().equals("T"))
-				sb.append("<span>").append("对").append("</span>");
+				sb.append("<span>").append("正确").append("</span>");
 			else if (answerSheetItem.getAnswer().trim().equals("F"))
-				sb.append("<span>").append("错").append("</span>");
+				sb.append("<span>").append("错误").append("</span>");
 			else
 				sb.append("<span>").append(answerSheetItem.getAnswer())
 						.append("</span>");
@@ -938,12 +938,12 @@ public class QuestionAdapter {
 		sb.append("<div class=\"answer-desc-summary\">");
 		if (showAnswer) {
 
-			sb.append("<span>正确答案：</span>");
+			sb.append("<span class='answerResultDesc'></span><span>参考答案：</span>");
 			if (questionQueryResult.getQuestionTypeId() == 3) {
 				if (questionQueryResult.getAnswer().equals("T"))
-					sb.append("<span class=\"answer_value\">").append("对").append("</span><br>");
+					sb.append("<span class=\"answer_value\">").append("正确").append("</span><br>");
 				else if (questionQueryResult.getAnswer().equals("F"))
-					sb.append("<span class=\"answer_value\">").append("错").append("</span><br>");
+					sb.append("<span class=\"answer_value\">").append("错误").append("</span><br>");
 				else
 					sb.append("<span class=\"answer_value\">").append(questionQueryResult.getAnswer())
 							.append("</span><br>");
@@ -957,9 +957,9 @@ public class QuestionAdapter {
 			sb.append("<span>  你的解答：</span>");
 			if (answerSheetItem.getQuestionTypeId() == 3) {
 				if (answerSheetItem.getAnswer().trim().equals("T"))
-					sb.append("<span>").append("对").append("</span>");
+					sb.append("<span>").append("正确").append("</span>");
 				else if (answerSheetItem.getAnswer().trim().equals("F"))
-					sb.append("<span>").append("错").append("</span>");
+					sb.append("<span>").append("错误").append("</span>");
 				else
 					sb.append("<span>").append(answerSheetItem.getAnswer())
 							.append("</span>");
