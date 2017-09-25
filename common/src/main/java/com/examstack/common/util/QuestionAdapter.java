@@ -99,7 +99,7 @@ public class QuestionAdapter {
 	
 	/**
 	 * 组卷专用
-	 * 
+	 * 被practice调用
 	 * @return
 	 */
 	public String getStringFromXML() {
@@ -1001,6 +1001,9 @@ public class QuestionAdapter {
 		return sb.toString();
 	}
 
+	/*
+	 * 学生选择模拟考试，系统提供的针对试卷试题的adapter
+	 */
 	public String getUserExamPaper() {
 		StringBuilder sb = new StringBuilder();
 
@@ -1242,6 +1245,71 @@ public class QuestionAdapter {
 			break;
 
 		}
+		// --jie add below lines to add answer sheet on 20170925
+		
+		sb.append("<div class=\"answer-desc\">");
+		sb.append("<div class=\"answer-desc-summary\">");
+		// 显示答案
+			sb.append("<span class='answerResultDesc'></span><span>参考答案：</span>");
+			if (questionQueryResult.getQuestionTypeId() == 3) {
+				if (questionQueryResult.getAnswer().equals("T"))
+					sb.append("<span class=\"answer_value\">").append("正确").append("</span><br>");
+				else if (questionQueryResult.getAnswer().equals("F"))
+					sb.append("<span class=\"answer_value\">").append("错误").append("</span><br>");
+				else
+					sb.append("<span class=\"answer_value\">").append(questionQueryResult.getAnswer())
+							.append("</span><br>");
+			} else
+				sb.append("<span class=\"answer_value\">").append(questionQueryResult.getAnswer())
+						.append("</span><br>");
+		
+
+		if (answerSheetItem != null) {
+
+			sb.append("<span>  你的解答：</span>");
+			if (answerSheetItem.getQuestionTypeId() == 3) {
+				if (answerSheetItem.getAnswer().trim().equals("T"))
+					sb.append("<span>").append("正确").append("</span>");
+				else if (answerSheetItem.getAnswer().trim().equals("F"))
+					sb.append("<span>").append("错误").append("</span>");
+				else
+					sb.append("<span>").append(answerSheetItem.getAnswer())
+							.append("</span>");
+			} else
+				sb.append("<span>").append(answerSheetItem.getAnswer())
+						.append("</span>");
+
+		}
+		sb.append("</div>");
+		
+		// 显示答题分析
+			sb.append("<div class=\"answer-desc-detail\">");
+			sb.append("<label class=\"label label-info\">");
+			sb.append("<i class=\"fa fa-paw\"></i><span> 来源</span>");
+			sb.append("</label>");
+			sb.append("<div class=\"answer-desc-content\">");
+			sb.append("<p>");
+			sb.append(questionQueryResult.getReferenceName());
+			sb.append("</p></div></div>");
+			sb.append("<div class=\"answer-desc-detail\">");
+			sb.append("<label class=\"label label-warning\">");
+			sb.append("<i class=\"fa fa-flag\"></i><span> 解析</span>");
+			sb.append("</label>");
+			sb.append("<div class=\"answer-desc-content\">");
+			sb.append("<p>");
+			sb.append(questionQueryResult.getAnalysis());
+			sb.append("</p></div></div>");
+			sb.append("<div class=\"answer-desc-detail\">");
+			sb.append("<label class=\"label label-success\">");
+			sb.append("<i class=\"fa fa-bookmark\"></i><span> 考点</span>");
+			sb.append("</label>");
+			sb.append("<div class=\"answer-desc-content\">");
+			sb.append("<p>");
+			sb.append(questionQueryResult.getPointName());
+			sb.append("</p></div></div>");
+			sb.append("</div>");
+		
+
 		sb.append("</li>");
 		return sb.toString();
 	}

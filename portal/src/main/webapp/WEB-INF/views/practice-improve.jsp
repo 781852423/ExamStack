@@ -5,7 +5,7 @@
 <html>
 	<head>
 		
-		<title>练习-精进！</title>
+		<title>题库练习-精进！</title>
 		 <%@include file="include/head_files.jsp" %>
 		<link href="resources/css/exam.css" rel="stylesheet" type="text/css">
 		<style type="text/css">
@@ -54,10 +54,7 @@
 									<div>
 										<span id="practice-type" class="pt-singlechoice">${questionTypeName }[ 共 <span class="pt-tno">${amount }</span> 题 ]<span class="pt-qcode" style="display:none;">qt-singlechoice</span></span>
 									</div>
-									<!-- <span style="color:#428bca;">学习进度：</span>
-									<div class="h-progress" style="margin-top:5px;" title="50%">
-										<span></span>
-									</div> -->
+
 									<span id="exam-timestamp" style="display:none;">0</span>
 									<div id="answer-save-info"></div>
 
@@ -84,11 +81,7 @@
 										<span id="exampaper-title-name"> ${fieldName } - ${practiceName } </span>
 
 									</div>
-									<!-- <div id="exampaper-desc-container">
-									<div id="exampaper-desc" class="exampaper-filter">
 
-									</div>
-									</div> -->
 
 								</div>
 								<ul id="exampaper-body">
@@ -114,7 +107,7 @@
 									<div id="question-navi">
 										<div id="question-navi-controller">
 											<i class="fa fa-arrow-circle-down"></i>
-											<span>答题卡</span>
+											<span>答题卡[点击可展开]</span>
 										</div>
 										<div id="question-navi-content" ></div>
 									</div>

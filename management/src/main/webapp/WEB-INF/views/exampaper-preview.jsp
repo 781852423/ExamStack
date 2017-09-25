@@ -150,7 +150,7 @@ request.setAttribute("leftMenuId",list[3]);
 										<div id="question-navi">
 										<div id="question-navi-controller">
 											<i class="fa fa-arrow-circle-down"></i>
-											<span>答题卡</span>
+											<span>答题卡[点击可展开]</span>
 										</div>
 										<div id="question-navi-content">
 										</div>

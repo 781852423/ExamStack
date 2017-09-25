@@ -5,7 +5,7 @@
 <html>
 	<head>
 		
-		<title>考试</title>
+		<title>模拟考试</title>
 		 <%@include file="include/head_files.jsp" %>
 		 <link href="resources/css/exam.css" rel="stylesheet" type="text/css">
 		<style type="text/css">
@@ -25,7 +25,7 @@
 
 			<div class="container">
 				<div class="row">
-					<div class="col-xs-2" style="padding-right: 0px;padding-bottom:15px;">
+					<div class="col-xs-3" style="padding-right: 0px;padding-bottom:15px;">
 						<div class="def-bk" id="bk-exam-control">
 
 							<div class="def-bk-content" id="exam-control">
@@ -45,7 +45,15 @@
 									<button class="btn-success btn" style="width:100%;">
 										我要交卷
 									</button>
+									
 								</div>
+								<div id="question-recyle">
+									<button class="btn-danger btn" id="recyleExambtn" style="width:100%;">
+										重新开始答题[清除答案重新计时]
+									</button>
+									
+								</div>
+								
 								<div id="exam-info" style="display:none;">
 									<span id="answer-hashcode"></span>
 								</div>
@@ -61,7 +69,9 @@
 								<div id="exampaper-header">
 									<div id="exampaper-title">
 										<i class="fa fa-send"></i>
-										<span id="exampaper-title-name"> 模拟试卷 </span>
+										<span id="exampaper-title-name"> 模拟试卷 [每页展示同类题型，点击下行题目类型可以预览题目]</span>
+										<br/>
+										<span>系统会在题目倒计时结束后，自动提交试卷，如果需要重新做题，可以点击按钮“重新开始”</span>
 										<span style="display:none;" id="exampaper-id">1</span>
 									</div>
 									<div id="exampaper-desc-container">
@@ -82,7 +92,7 @@
 									<div id="question-navi">
 										<div id="question-navi-controller">
 											<i class="fa fa-arrow-circle-down"></i>
-											<span>答题卡</span>
+											<span>答题卡[点击可展开]</span>
 										</div>
 										<div id="question-navi-content">
 										</div>

@@ -86,6 +86,9 @@ public class ExamAction {
 		return exam;
 	}
 	
+	/*
+	 * 前台做完试卷后，提交到此函数
+	 */
 	@RequestMapping(value = "/student/exam-submit", method = RequestMethod.POST)
 	public @ResponseBody Message finishExam(@RequestBody AnswerSheet answerSheet) {
 

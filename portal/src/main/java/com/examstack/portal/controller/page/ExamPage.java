@@ -82,8 +82,8 @@ public class ExamPage {
 	 * @param examId
 	 * @return
 	 */
-	@RequestMapping(value = "/student/exam-start/{examId}", method = RequestMethod.GET)
-	public String examStartPage(Model model, HttpServletRequest request, @PathVariable("examId") int examId) {
+	@RequestMapping(value = "/student/exam-start/{examId}/{bfromhistory}", method = RequestMethod.GET)
+	public String examStartPage(Model model, HttpServletRequest request, @PathVariable("examId") int examId, @PathVariable("bfromhistory") Integer bfromhistory) {
 
 		//TO-DO:学员开始考试时，将开始时间传到消息队列，用户更新用户开始考试的时间。如果数据库中时间不为空，则不更新
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -100,8 +100,16 @@ public class ExamPage {
 
 		ExamHistory examHistory = examService
 				.getUserExamHistByUserIdAndExamId(userInfo.getUserid(), examId, 0, 1, 2, 3);
-		Date startTime = examHistory.getStartTime() == null ? new Date() : examHistory.getStartTime();
-		switch (examHistory.getApproved()) {
+		Date startTime;
+		
+		if(bfromhistory == 1)
+			{
+				startTime = examHistory.getStartTime() == null ? new Date() : examHistory.getStartTime();
+			}else
+			{
+				startTime = new Date();
+			}
+/*		switch (examHistory.getApproved()) {
 		case 0:
 			model.addAttribute("errorMsg", "考试未审核");
 			return "error";
@@ -111,7 +119,7 @@ public class ExamPage {
 		case 3:
 			model.addAttribute("errorMsg", "已阅卷，不能重复考试");
 			return "error";
-		}
+		}*/
 		ExamPaper examPaper = examPaperService.getExamPaperById(examHistory.getExamPaperId());
 		String content = examPaper.getContent();
 

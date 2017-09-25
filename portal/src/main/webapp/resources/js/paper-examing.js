@@ -7,7 +7,7 @@ $(function() {
 var examing = {
 	initial : function initial() {
 		$(window).scroll(examing.fixSideBar);
-		
+		this.initialModel();
 		this.refreshNavi();
 		this.bindNaviBehavior();
 		this.addNumber();
@@ -22,6 +22,27 @@ var examing = {
 		this.loadAnswerSheet();
 		this.startTimer();
 		this.bindSubmit();
+	},
+	
+	initialModel : function initialModel(){
+		$(".answer-desc").hide();
+		$(".question-point-content").hide();
+		
+		$(".answer-desc").hide();
+		$(".qt-finished .answer-desc").show();
+		
+		$(".question-body input").removeAttr("disabled");
+		$(".qt-finished .question-body input").attr("disabled","disabled");
+		
+		$(function(){
+			$("#recyleExambtn").click(function(){
+				//window.location.reload();
+				var currentURL = window.location.href;
+				window.location.href= currentURL.substring(0,currentURL.lastIndexOf('/')) + '/0';
+				console.log('访问新的地址' + window.location.href);
+				window.location.load();
+			});
+		});
 	},
 	
 	fixSideBar : function fixSideBar() {
@@ -100,37 +121,7 @@ var examing = {
 			"z-index" : '1'	
 		});
 
-		// nav.attr("style", "position : \"fixed\";bottom:-" + naviheight +
-		// "px;");
-
-		/*$(window).scroll(function() {
-			var nav = $("#question-navi");
-			var scrollBottom = document.body.scrollHeight - $(this).scrollTop() - $(window).height();
-			if (scrollBottom > scrollBottomRated) {
-				// nav.addClass("fixed-navi");
-				var naviheight = $("#question-navi").height() - 33;
-				// nav.attr("style", "bottom:-" + naviheight + "px;");
-				if (nav.css("position") == "relative") {
-					nav.css({
-						position : 'fixed',
-						bottom : "-" + naviheight + "px"
-					});
-				}
-				// nav.css({
-				// // position : 'fixed',
-				// bottom : "-" + naviheight + "px"
-				// });
-
-			} else {
-				// nav.removeClass("fixed-navi");
-				// nav.attr("style", "");
-				nav.css({
-					position : 'relative',
-					bottom : 0
-				});
-			}
-
-		});*/
+		
 
 		$("#question-navi-controller").click(function() {
 			var scrollBottom = document.body.scrollHeight - $(window).scrollTop() - $(window).height();
@@ -158,9 +149,7 @@ var examing = {
 	securityHandler : function securityHandler() {
 		// 右键禁用
 		if (document.addEventListener) {
-			document.addEventListener("contextmenu", function(e) {
-				 e.preventDefault();
-			 }, false);
+			document.addEventListener("contextmenu", function(e) {e.preventDefault();}, false);
 		} else {
 			document.attachEvent("contextmenu", function(e) {
 				 e.preventDefault();
@@ -284,13 +273,18 @@ var examing = {
 		}, 1000);
 	},
 	
+	
 	/**
 	 * 考试时间到
 	 * @param int
 	 */
 	examTimeOut : function examTimeOut (int){
 		clearInterval(int); 
-		examing.finishExam();
+		// 提示考试时间到，要交卷
+		alert("考试时间到，关闭此窗口自动交卷，如需重新做题，点击页面上部'重新开始’按钮");
+		setTimeout(examing.finishExam(),6000);
+		examing.ShowAnswerResult();
+	
 	},
 
 	/**
@@ -334,16 +328,10 @@ var examing = {
 	 * 切换考题类型事件
 	 */
 	bindQuestionFilter : function bindQuestionFilter() {
-		// $(".exampaper-filter-item").bi
-// 		
-		// $("span.efi-selected").find(".efi-qcode").text();
+
 		$("#exampaper-desc").delegate("span.exampaper-filter-item", "click", function() {
 			var qtype = $(this).find(".efi-qcode").text();
-			// var questions = $("li.question");
-			// questions.hide();
-			// $("#exampaper-body ." + qtype).show();
-			// $(".exampaper-filter-item").removeClass("efi-selected");
-			// $(this).addClass("efi-selected");
+
 			examing.doQuestionFilt(qtype);
 		});
 	},
@@ -368,9 +356,157 @@ var examing = {
 		
 	},
 
+	// 显示题目的正确答案和答题是否正确，同时在panel上显示出合适的标志
+	// 对题目的答案，如果是客观题，则标注北京颜色到相应的图标上
+	ShowAnswerResult: function ShowAnswerResult()
+	{
+		// 遍历每一个题目的答题情况
+		var allQuestion = $("li.question");
+		var allQuestionLength = allQuestion.length;
+		
+		for( var index = 0; index < allQuestionLength; index++ )
+		{
+			var thisquestion  = $(allQuestion[index]);
+			
+			thisquestion.addClass("qt-finished");
+			thisquestion.find(".question-body input").attr("disabled","disabled");
+			thisquestion.find(".answer-desc").show();
+			
+			// 判断是否是客观题
+			var ActiveQuestionTypeId = thisquestion.find(".question-type-id").text();
+			var myAnswer = examing.getAnswerValue(thisquestion);
+			var correctAnswer = thisquestion.find(".answer_value").text();
+			console.log("你的答案:" + myAnswer + " 参考答案：" + correctAnswer);
+			
+			if(ActiveQuestionTypeId <= 3 )
+			{
+				// 本题正确、错误的选项标注颜色
+				   examing.tagCorrectAndYourAnswer(thisquestion);
+				   
+				    if(myAnswer == undefined || myAnswer == "" || myAnswer == null)
+				    	{
+				    	  $(thisquestion).find(".answerResultDesc").html("<strong>本题未答</strong><br/>");
+				    	}
+				    else
+				    	{
+					    	if( myAnswer == correctAnswer)
+							{
+				        	    console.log("第" + (index+1) + "题回答正确");
+								$(thisquestion).find(".answerResultDesc").html("<strong>回答正确</strong><br/>");
+								$(thisquestion).find(".answer-desc-summary").addClass("answer-desc-success");
+								$($("a.question-navi-item")[index + 1]).addClass("qni-success");
+							}else
+							{
+								 console.log("第" + (index+1) + "题回答错误");
+								$(thisquestion).find(".answerResultDesc").html("<strong>回答错误</strong><br/>" +
+				                 "你的回答：" + myAnswer);	
+								$(thisquestion).find(".answer-desc-summary").addClass("answer-desc-error");
+								$($("a.question-navi-item")[index + 1]).addClass("qni-error");
+								$(thisquestion).find(".answerResultDesc").css({color:"red"})
+							}
+				    	}
+			           
+			}else
+			{
+			    $(thisquestion).find(".answerResultDesc").html("<strong>此题为客观题，请根据以下参考答案自行判断答题是否正确</strong><br/>");	
+			}
+			
+		}
+		
+	},
+	// 调用这个函数的前提是，该题目是客观题
+	tagCorrectAndYourAnswer: function tagCorrectAndYourAnswer(thisquestion)
+	{
+		// 找到本题正确答案,标记出来
+		if(thisquestion == null || thisquestion == "")
+			{
+				console.log('没有传入题目，无法对答案标记tag');
+				return false;
+			}
+		var correctAnswer = $(thisquestion).find(".answer_value").text();
+		var myAnswer = examing.getAnswerValue(thisquestion);
+		var optionList = $(thisquestion).find(".question-list-item input");
+		var optionNum = optionList.length;
+		// console.log('tagCorrectAndYourAnswer ' + optionNum + '个选项');
+		// 如果相同，则标注参考答案的颜色，省去你的选项，否则都标注
+		var optionValue = "";
+		// 遍历每个选项，只要里面的选项value值 in correctAnswer内，就把它颜色标注来
+		for(var index=0; index < optionNum; index++)
+		{
+			optionValue = $(optionList[index]).val();
+			if(correctAnswer.indexOf(optionValue) >= 0)
+			{
+				$(optionList[index]).addClass("correctAnswer");
+				// console.log('option ' + optionValue + '被标注');
+			}
+		}
+		
+	},
+	
+	getAnswerValue : function getAnswerValue(questionVar) {
+		
+		var thisquestion;
+		if(questionVar == undefined || questionVar == null || questionVar == "")
+		{
+			console.log("传进来的信息是空的，因此选择目前可见的题目\n")
+		    return;
+		}else
+		{
+			thisquestion = questionVar;
+		}
+	
+		
+		var answer;
+		
+		if(thisquestion.hasClass("qt-singlechoice")){
+			var radio_checked = $(thisquestion).find("input[type=radio]:checked");
+			var radio_all = $(thisquestion).find("input[type=radio]");
+			if(radio_checked.length == 0){
+				answer = "";
+			}else{
+				var current_index = $(radio_all).index(radio_checked);
+				answer = String.fromCharCode(65 + current_index);
+			}
+			
+		}else 	if( $(thisquestion).hasClass("qt-multiplechoice")){
+			
+			var checkbox_checked = $(thisquestion).find("input[type=checkbox]:checked");
+			var checkbox_all = $(thisquestion).find("input[type=checkbox]");
+			if(checkbox_checked.length == 0){
+				answer = "";
+			}else{
+				var tm_answer = "";
+				for(var l = 0 ; l < checkbox_checked.length; l++){
+					var current_index = $(checkbox_all).index($(checkbox_checked[l]));
+					tm_answer = tm_answer + String.fromCharCode(65 + current_index);
+				}
+				answer = tm_answer;
+			}
+		} else 	if( $(thisquestion).hasClass("qt-trueorfalse")){
+			
+			var radio_checked = $(thisquestion).find("input[type=radio]:checked");
+			var radio_all = $(thisquestion).find("input[type=radio]");
+			if(radio_checked.length == 0){
+				answer = "";
+			}else{
+				var current_index = $(radio_all).index(radio_checked);
+				answer = (current_index==0)?"正确":"错误";
+			}
+		}else{
+			answer = $(thisquestion).find("textarea").val();
+		}
+		console.log("getAnswerValue获得了你的答案：" + answer + "\n")
+		return answer;
+	},
+	
+	disableInput : function disableInput(questionIndex){
+		
+	},
+
 	bindSubmit : function bindSubmit() {
 		$("#question-submit button").click(function() {
 			if (confirm("确认交卷吗？")) {
+				examing.ShowAnswerResult();
 				examing.finishExam();
 			}
 		});
@@ -409,9 +545,9 @@ var examing = {
 				return false;
 			if (message.result == "success") {
 				$(window).unbind('beforeunload');
-				util.success("交卷成功！", function() {
-					window.location.replace(document.getElementsByTagName('base')[0].href + 'student/finished-submit');
-
+				util.success("交卷成功,可以查看页面参考答案！", function() {
+					// window.location.replace(document.getElementsByTagName('base')[0].href + 'student/finished-submit');
+					$("#question-submit button").text("已完成交卷");
 				});
 			} else {
 				util.error(message.result);
@@ -486,10 +622,7 @@ var examing = {
 			}
 			answerSheetItem.point = 0;
 			answerSheetItem.questionId = $(questions[i]).find(".question-id").text();
-/*			var tmpkey = $(questions[i]).find(".question-id").text();
-			var tmpvalue = answerSheetItem;
 
-			as[tmpkey] = tmpvalue;*/
 			
 			answerSheetItems.push(answerSheetItem);
 		}
@@ -511,11 +644,6 @@ var examing = {
 				$(this).find("input").click();
 			}
 			
-		/*	if($(this).find("input").prop("checked")){
-				$(this).find("input").prop("checked", false);
-			}else{
-				$(this).find("input").prop("checked", true);
-			}*/
 			
 		});
 		
@@ -525,6 +653,7 @@ var examing = {
 		console.log(eval(answerSheet));
 		this.mergeQuestionAnswer(answerSheet);
 	},
+	
 	saveAnswerSheet : function saveAnswerSheet(){
 		console.log("answerSheet saving...");
 
@@ -551,16 +680,10 @@ var examing = {
 		if (answerSheet==null||answerSheet.examHistroyId != $("#hist-id").val())
 			return false;
 		var questions = $("li.question");
-		/*	var questionMap = new Object();
-		
-		for(var i=0;i<questions.length; i++){
-			var key = $(questions[i]).find(".question-id").text();
-			questionMap[key] = questions[i];
-		}
-		*/
+
 		
 		$("#exam-timestamp").text(answerSheet.duration);
-//		var timestamp = parseInt($("#exam-timestamp").text());
+
 		
 		
 		var list = answerSheet.answerSheetItems;

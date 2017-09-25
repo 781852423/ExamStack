@@ -381,7 +381,8 @@ a.pressed:hover {
 .exampaper-filter-item {
 	padding: 5px 0px;
 	margin-right: 5px;
-	color: #B1B1B1;
+	color: red;
+	background-color:#1ba1e2;
 	cursor: pointer;
 }
 

@@ -341,7 +341,7 @@ a.pressed:hover {
 	background: rgb(255, 255, 255);
 	border-radius: 0px 3px 3px 3px;
 	box-shadow: 1px 2px 2px rgb(226, 226, 226);
-	padding: 20px;
+	padding: 5px;
 	border: 1px solid rgb(206, 206, 206);
 }
 
@@ -365,14 +365,16 @@ a.pressed:hover {
 
 .efi-selected {
 	border-bottom: solid 2px #1ba1e2;
-	color: #666 !important;
+	color: rgb(255,255,255);
+	background:#1ba1e2;
 }
 
 .exampaper-filter-item {
 	padding: 5px 0px;
 	margin-right: 5px;
-	color: #B1B1B1;
+	color: #ff0000;
 	cursor: pointer;
+
 }
 
 .exampaper-filter-item:hover {
@@ -389,7 +391,7 @@ a.pressed:hover {
 
 #question-navi-controller {
 	padding: 4px 0px 4px 10px;
-	width: 120px;
+	/*width: 120px;*/
 	font-weight: normal;
 	background: #1ba1e2;
 	position: relative;

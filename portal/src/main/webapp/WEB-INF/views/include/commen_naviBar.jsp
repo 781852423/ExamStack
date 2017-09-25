@@ -9,10 +9,10 @@
                             <a href="home"><i class="fa fa-home"></i>主页</a>
                         </li>
                         <li>
-                            <a href="student/practice-list"><i class="fa fa-edit"></i>试题练习</a>
+                            <a href="student/practice-list"><i class="fa fa-edit"></i>题库练习</a>
                         </li>
                         <li>
-                            <a href="exam-list"><i class="fa  fa-paper-plane-o"></i>在线考试</a>
+                            <a href="exam-list"><i class="fa  fa-paper-plane-o"></i>模拟考试</a>
                         </li>
                         <li>
                             <a href="training-list"><i class="fa fa-book"></i>培训资料</a>
