@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public class PropertyReaderUtil {
 
-	public static final String PROPERITIES_PATH="/custome.properties";
-	public static final String SYS_PROPERITIES_PATH="/WEB-INF/classes/sys-config.properties";
+	public static final String PROPERITIES_PATH="custome.properties";
+	public static final String SYS_PROPERITIES_PATH="sys-config.properties";
 	/*static
 	{
 		System.out.println("XXXX" + PropertyReaderUtil.class.getClassLoader().getResource("custome.properties")); //发现可以输出东西
@@ -19,7 +19,7 @@ public class PropertyReaderUtil {
 	}*/
 	public static Properties getProperties() throws FileNotFoundException{
 		
-		InputStream inputStream = new FileInputStream(PropertyReaderUtil.class.getClassLoader().getResource(PROPERITIES_PATH).getPath()); // 测试发现不行，必须设置绝对路径? 2017-8-2
+		InputStream inputStream = new FileInputStream(PropertyReaderUtil.class.getClassLoader().getResource(PROPERITIES_PATH).getPath());
 		
 		Properties pros = new Properties();
 		try {
@@ -32,7 +32,7 @@ public class PropertyReaderUtil {
 	}
 	
 	public static Properties getSysProperties() throws FileNotFoundException{
-		InputStream inputStream = new FileInputStream(SYS_PROPERITIES_PATH);
+		InputStream inputStream = new FileInputStream(PropertyReaderUtil.class.getClassLoader().getResource(SYS_PROPERITIES_PATH).getPath());
 		
 		Properties pros = new Properties();
 		try {

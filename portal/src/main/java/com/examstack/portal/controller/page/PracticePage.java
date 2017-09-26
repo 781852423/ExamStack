@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,7 @@ import com.examstack.common.domain.question.QuestionStatistic;
 import com.examstack.common.domain.question.QuestionType;
 import com.examstack.common.domain.user.Group;
 import com.examstack.common.util.QuestionAdapter;
+import com.examstack.common.util.file.PropertyReaderUtil;
 import com.examstack.portal.security.UserInfo;
 import com.examstack.portal.service.QuestionHistoryService;
 import com.examstack.portal.service.QuestionService;
@@ -208,7 +210,11 @@ public class PracticePage {
 		model.addAttribute("practiceName", "随机练习");
 		return "practice-improve";
 	}
-	
+	/*
+	 * 
+	 * 前台获取练习的题目，题库练习,如果fieldId不为空，则说明返回的是某个专业的题库
+	 * 需要再完善当题目类型是性格测试时候的情况，去掉错题练习的部分
+	 */
 	@RequestMapping(value = "/student/practice-list", method = RequestMethod.GET)
 	public String practiceListPage(Model model, HttpServletRequest request, @RequestParam(value="fieldId",required=false,defaultValue="0") int fieldId){
 		
@@ -261,6 +267,31 @@ public class PracticePage {
 				return "noPracticeAvailable";
 			}
 		}
+		
+		boolean isChacactorFalg = false;
+		// 如果是性格测试，则需要重新返回其他的view
+				try {
+					Properties props = PropertyReaderUtil.getProperties();
+					
+					if(props != null && 
+					   props.getProperty("charactorTestFieldIds") != null)
+					{
+						String[] charactorFieldStrings = props.getProperty("charactorTestFieldIds").split(",");
+						
+						for(String str : charactorFieldStrings)
+						{
+							if(str.equals( Integer.toString(fieldId)) )
+							{
+								// 找到了，是性格测试的题目
+								isChacactorFalg = true;
+								break;
+							}
+						}
+					}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			
 		Map<Integer, Map<Integer, QuestionStatistic>> questionMap = questionService.getTypeQuestionStaticByFieldId(fieldId);
 		Map<Integer, Map<Integer, QuestionStatistic>> historyMap = questionHistoryService.getTypeQuestionHistStaticByFieldId(fieldId, userInfo.getUserid());
@@ -309,6 +340,7 @@ public class PracticePage {
 		
 		
 		model.addAttribute("fieldList", fieldList);// 只显示有题目的题库
+		
 		return "practice";
 	}
 	

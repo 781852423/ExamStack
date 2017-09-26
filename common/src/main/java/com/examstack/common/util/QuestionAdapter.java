@@ -133,6 +133,9 @@ public class QuestionAdapter {
 		case 9:
 			sb.append("<li class=\"question qt-rawTitle\">");
 			break;
+		case 10:
+			sb.append("<li class=\"question qt-singlechoice\">"); // 目前考虑性格测试也是单选题
+			break;
 		default:
 			break;
 		}
@@ -340,6 +343,45 @@ public class QuestionAdapter {
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
 			sb.append("</form>");
 			break;
+		case 10:
+			sb.append("singlechoice").append("</span>");
+			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
+			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
+			sb.append("<span>[单选题]</span>");
+			sb.append("<span class=\"question-point-content\">");
+			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("</span>");
+			sb.append("<span class=\"question-id\" style=\"display:none;\">")
+					.append(questionQueryResult.getQuestionId())
+					.append("</span>");
+			sb.append("</div>");
+			sb.append("<form class=\"question-body\">");
+			setQuestionBody(sb);
+			Iterator<String> it10 = questionContent.getChoiceList().keySet()
+					.iterator();
+			sb.append("<ul class=\"question-opt-list\">");
+			while (it10.hasNext()) {
+				sb.append("<li class=\"question-list-item\">");
+				String key = it10.next();
+				String value = questionContent.getChoiceList().get(key);
+				sb.append("<input type=\"radio\" value=\"")
+						.append(key)
+						.append("\" name=\"question-radio1\" class=\"question-input\">");
+				sb.append("<span class=\"question-li-text\">");
+				sb.append(key).append(": ").append(value);
+				if (questionContent.getChoiceImgList() != null)
+					if (questionContent.getChoiceImgList().containsKey(key))
+						sb.append(
+								"<img class=\"question-opt-img question-img\" src=\"")
+								.append(baseUrl)
+								.append(questionContent.getChoiceImgList().get(
+										key)).append("\" />");
+				sb.append("</span>");
+				sb.append("</li>");
+			}
+			sb.append("</ul>");
+			sb.append("</form>");
+			break;
 		default:
 			break;
 		}
@@ -354,9 +396,17 @@ public class QuestionAdapter {
 			else
 				sb.append("<span class=\"answer_value\">").append(questionQueryResult.getAnswer())
 						.append("</span><br>");
-		} else
+		} else if(questionQueryResult.getQuestionTypeId() == 10)
+		{
+			sb.append("<span class=\"answer_value\">").append("性格测试，无标准答案，只是推测性格特征")
+			.append("</span><br>");
+		}
+		else
+		{
 			sb.append("<span class=\"answer_value\">").append(questionQueryResult.getAnswer())
-					.append("</span><br>");
+			.append("</span><br>");
+		}
+			
 		sb.append("</div>");
 		sb.append("<div class=\"answer-desc-detail\">");
 		sb.append("<label class=\"label label-info\">");

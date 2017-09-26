@@ -409,7 +409,7 @@ var examing = {
 			var myAnswer = examing.getAnswerValue(thisquestion);
 			var correctAnswer = thisquestion.find(".answer_value").text();
 			
-			if(ActiveQuestionTypeId <= 3 )
+			if(ActiveQuestionTypeId <= 3 || ActiveQuestionTypeId == 10)
 			{
 				// 本题正确、错误的选项标注颜色
 				   examing.tagCorrectAndYourAnswer(thisquestion);

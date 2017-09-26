@@ -490,6 +490,7 @@ question_add = {
 		else {
 			question_entity.answer = $(".form-question-answer-text textarea").val();
 		}
+		
 		question_entity.questionContent = question_add.composeContent();
 
 		question_entity.analysis = $(".form-question-analysis textarea").val();
@@ -520,7 +521,7 @@ question_add = {
 		if (content_img.length > 0) {
 			content.titleImg = content_img_string;
 		}
-		if (1 == question_type_id) {
+		if (1 == question_type_id || 10 == question_type_id) {
 			var add_opt_items = $(".add-opt-item");
 
 			for (var i = 0; i < add_opt_items.length; i++) {
