@@ -39,9 +39,16 @@ public class Question implements Serializable {
 	private String creator;
 	private String examingPoint;
 	private String keyword;
+	
 	private String tags;
+	
+	private String charactorTypes;
 	private List<QuestionTag> tagList;
+	private List<charactorType> charactorTypeList;
+	
+	
 	private List<KnowledgePoint> knowledgePoint;
+	
 	private Integer parentId; // 多加一个parentid，如果parentid ！= null，则说明这个稳定有主干的提干，可能是综合分析或者阅读理解
 	
 	public String getParentContent() {
@@ -230,6 +237,19 @@ public class Question implements Serializable {
 	}
 	public void setCreator(String creator) {
 		this.creator = creator;
+	}
+	
+	public String getCharactorTypes() {
+		return charactorTypes;
+	}
+	public void setCharactorTypes(String charactorTypes) {
+		this.charactorTypes = charactorTypes;
+	}
+	public List<charactorType> getCharactorTypeList() {
+		return charactorTypeList;
+	}
+	public void setCharactorTypeList(List<charactorType> charactorTypeList) {
+		this.charactorTypeList = charactorTypeList;
 	}
 	
 }

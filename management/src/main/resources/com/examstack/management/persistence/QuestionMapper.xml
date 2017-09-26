@@ -351,4 +351,22 @@
         delete from et_group_2_field where id=#{group2FieldId};
     </delete>
     
+    <delete id="deleteQuestionCharactorTypeByQuestionId">
+		delete from et_question_2_charactorType where question_id=#{questionId}
+	</delete>
+    
+    <insert id="addQuestionCharactorType" parameterType="com.examstack.common.domain.question.charactorType"
+		useGeneratedKeys="true">
+		replace into et_question_2_charactorType(question_id,charactor_id)
+		values
+		<foreach collection="array" index="index" item="item" open=""
+			close="" separator=",">
+			(#{item.questionId},#{item.charactorTypeId})
+		</foreach>
+
+	</insert>
+	<!-- 获取所有的性格特征,xuepaiId=1表示是九型人格理论 -->
+    <select id="getCharactorTypes" resultType="com.examstack.common.domain.question.charactorType">
+	        select a.id charactorTypeId, a.name from et_charactor_type a where xuepaiId =1;
+    </select>
 </mapper>

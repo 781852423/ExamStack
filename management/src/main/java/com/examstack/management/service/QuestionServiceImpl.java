@@ -28,6 +28,7 @@ import com.examstack.common.domain.question.QuestionStruts;
 import com.examstack.common.domain.question.QuestionTag;
 import com.examstack.common.domain.question.QuestionType;
 import com.examstack.common.domain.question.Tag;
+import com.examstack.common.domain.question.charactorType;
 import com.examstack.common.util.Page;
 import com.examstack.common.util.file.ExcelUtil;
 import com.examstack.management.persistence.QuestionMapper;
@@ -102,12 +103,35 @@ public class QuestionServiceImpl implements QuestionService {
 				}
 				// 最终落实到xml文件中addQuestionTag
 				addQuestionTag(question.getId(),0,question.getTagList()); // 添加代码添加tags
-			
+				// 添加charactor
+				addQuestionCharactorType(question.getId(),0,question.getCharactorTypeList())
+;			
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
 	
+	private void addQuestionCharactorType(int questionId, int userId, List<charactorType> charactorTypeList) {
+		
+		try {
+			List<Integer> idList = new ArrayList<Integer>();
+			if(charactorTypeList == null || charactorTypeList.size() == 0)
+			{
+				return;
+			}
+			for (charactorType t : charactorTypeList) {
+				//idList.add(t.getCharactorTypeId());	
+				t.setQuestionId(questionId);
+			}
+			questionMapper.deleteQuestionCharactorTypeByQuestionId(questionId);
+			
+			questionMapper.addQuestionCharactorType(charactorTypeList);
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	@Override
 	@Transactional
 	public void addQuestionParent(QuestionParent questionParent)
@@ -142,9 +166,13 @@ public class QuestionServiceImpl implements QuestionService {
 	@Override
 	@Transactional
 	public void addQuestionTag(int questionId, int userId, List<QuestionTag> questionTagList) {
-		// TODO Auto-generated method stub
+		
 		try {
 			List<Integer> idList = new ArrayList<Integer>();
+			if(questionTagList == null || questionTagList.size() == 0)
+			{
+				return;
+			}
 			for (QuestionTag t : questionTagList) {
 				idList.add(t.getTagId());
 				t.setQuestionId(questionId); // 原先的questionTagList里面questionId为0
@@ -495,5 +523,11 @@ public class QuestionServiceImpl implements QuestionService {
 			throw new RuntimeException(e.getClass().getName());
 		}
 		
+	}
+
+	@Override
+	public List<charactorType> getCharactorTypes() {
+		// TODO Auto-generated method stub
+		return questionMapper.getCharactorTypes();
 	}
 }

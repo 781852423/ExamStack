@@ -5,6 +5,7 @@ $(function() {
 
 question_add = {
 	initial : function initial() {
+		this.commonInit();
 		this.bindAddPoint();
 		this.bindChangeQuestionType();
 		this.bindAddOpt();
@@ -12,29 +13,46 @@ question_add = {
 		this.bindSubmit();
 		this.getParentIDs();
 		this.getTags();
+		this.getCharactorTypes();
 	},
-
+	
+	commonInit: function commonInit()
+	{
+		$("div.form-line.form-question-answer1.correct-answer").hide();
+		$("div.form-line.form-question-reference").hide();
+		$("div.form-line.form-question-examingpoint").hide();
+		$("div.form-line.form-question-keyword").hide();
+	},
+/**
+ * 
+<option value="1">单选题</option>
+<option value="2">多选题</option>
+<option value="3">判断题</option>
+<option value="4">填空题</option>
+<option value="5">简答题</option>
+<option value="6">论述题</option>							
+<option value="7">计算题</option>							
+<option value="8">名词解释</option>							
+<option value="9">QuestionParent</option>						
+<option value="10">性格测试</option>
+ */
 	bindChangeQuestionType : function changeQuestionType() {
 		$("#question-type select").change(function() {
 			if (1 == $(this).val()) {
 				$(".correct-answer").hide();
 				$(".form-question-opt").show();
 				$(".form-question-answer1").show();
-				copyToAnswer();
+				question_add.copyToAnswer();
 			} else if (2 == $(this).val()) {
 				$(".correct-answer").hide();
 				$(".form-question-opt").show();
 				$(".form-question-answer-muti").show();
-				copyToAnswer();
+				question_add.copyToAnswer();
 			} else if (3 == $(this).val()) {
 				$(".correct-answer").hide();
 				$(".form-question-opt").hide();
 				$(".form-question-answer-boolean").show();
 			} else if(9 == $(this).val()){
-				//$("#aq-course1").hide();
-				//$("#aq-course2").hide();
-				//$("#knowledgeClassifiedSpan").hide();
-				//$("#kn-selected").hide();
 				$(".form-question-opt").hide();
 				$(".question-knowledge").hide();
 				$(".form-question-reference").hide();
@@ -45,6 +63,18 @@ question_add = {
 				
 				//9表示纯的提干，没有问，也没有答案，例如阅读理解的正文，综合分析的正文部分
 				
+			}else if (10 == $(this).val()) {
+				$(".correct-answer").hide();
+				
+				$("div.form-line.form-question-answer1.correct-answer").hide();
+				
+				$("div.form-line.form-question-analysis").hide();
+				console.log('10');
+				$(".form-question-opt").show();
+				//$(".form-question-answer1").show();
+				//question_add.copyToAnswer();
+				//去掉D选项
+				$($('.add-opt-items .add-opt-item')[3]).remove();
 			}
 			else {
 				$(".correct-answer").hide();
@@ -69,7 +99,6 @@ question_add = {
 					},
 					type : "POST",
 					url : "secure/question/question-add",
-//					data : JSON.stringify(question_entity),
 					data : JSON.stringify(data),
 					success : function(message, tst, jqXHR) {
 						if (!util.checkSessionOut(jqXHR))
@@ -103,7 +132,12 @@ question_add = {
 		$(".form-question-examingpoint input").val("");
 		$(".form-question-keyword input").val("");
 		$(".form-question-analysis input").val("");
-		$(".form-question-opt-item").val("");
+		// 如果不是性格测试，就清空
+		if($("#question-type select").val() != 10)
+		{
+			$(".form-question-opt-item").val("");
+		}
+		
 		
 		$("body").scrollTop(0);
 	},
@@ -115,10 +149,11 @@ question_add = {
 		$(".form-message").empty();
 		$(".has-error").removeClass("has-error");
 		var question_type = $("#question-type select").val();
-		if(question_type == 9)
-			{
-				return true; // 如果纯提干，不做任何检查
-			}
+		if(question_type == 9 || question_type == 10)
+		{
+			return true; // 如果纯提干，不做任何检查;如果是10，性格测试，也尽量不要限制
+		}
+		
 		var result = true;
 		result = result && question_add.checkKnowledge();
 		if (1 == question_type) {
@@ -401,7 +436,8 @@ question_add = {
 		var pointList = new Array();
 		var pointOpts = $("#point-to-select option");
 		for (var i = 0; i < pointOpts.length; i++) {
-			pointList.push($(pointOpts[i]).attr("value"));
+			
+			pointList.push($(pointOpts[i]).attr("value")); //知识点部分
 		}
 
 		question_entity.pointList = pointList;
@@ -409,7 +445,7 @@ question_add = {
 		// 添加代码获取tags jie 20170905
 		var tagList = new Array();
 
-		$(".q-label-item").each(function() {
+		$(".q-tag-label-list .q-label-item").each(function() {
 			var tag = new Object();
 			tag.tagId = $(this).data("id"); 
 			// questionId可以暂时不用获取，注释掉,传到后台统一添加到表里面即可
@@ -419,6 +455,22 @@ question_add = {
 		
 		// data.tags = tags;
 		question_entity.tagList = tagList;
+		
+		// 添加代码获取性格特征 jie 20170926
+		var charactorTypeList = new Array();
+
+		$(".q-charactorType-label-list .q-label-item").each(function() {
+			var charactorType = new Object();
+			// charactorTypeId
+			charactorType.charactorTypeId = $(this).data("id"); 
+			// questionId可以暂时不用获取，注释掉,传到后台统一添加到表里面即可
+			// tag.questionId = $("#add-update-questionid").text(); 
+			charactorTypeList.push(charactorType);
+		});
+		
+		// data.charactorTypeList = charactorTypeList;
+		question_entity.charactorTypeList = charactorTypeList;
+		
 		if (1 == question_entity.question_type_id) {
 			question_entity.answer = $(".form-question-answer1 select").val();
 		} else if (2 == question_entity.question_type_id) {
@@ -431,7 +483,11 @@ question_add = {
 
 		} else if (3 == question_entity.question_type_id) {
 			question_entity.answer = $(".form-question-answer-boolean select").val();
-		} else {
+		} else if(10 == question_entity.question_type_id) // 性格测试没有标准答案
+			{
+				question_entity.answer = '';
+			}
+		else {
 			question_entity.answer = $(".form-question-answer-text textarea").val();
 		}
 		question_entity.questionContent = question_add.composeContent();
@@ -446,6 +502,7 @@ question_add = {
 		return question_entity;
 	},
 
+	// 获取选项部分
 	composeContent : function composeContent() {
 		
 		var question_type_id = $(".question-type select").val();
@@ -549,14 +606,37 @@ getTags: function getTags()
 		if (flag == 0) {
 			var selected = $("#tag-from-select").find("option:selected");
 
-			$(".q-label-list").append("<span class=\"label label-info q-label-item\" data-privatee=" + selected.data("privatee") + " data-creator=" + selected.data("creator") + " data-memo=" + selected.data("memo") + " data-id=" + $("#tag-from-select").val() + " data-createTime=" + selected.data("createTime") + ">" + $("#tag-from-select :selected").text() + "  <i class=\"fa fa-times\"></i>	</span>");
+			$(".q-tag-label-list").append("<span class=\"label label-info q-label-item\" data-privatee=" + selected.data("privatee") + " data-creator=" + selected.data("creator") + " data-memo=" + selected.data("memo") + " data-id=" + $("#tag-from-select").val() + " data-createTime=" + selected.data("createTime") + ">" + $("#tag-from-select :selected").text() + "  <i class=\"fa fa-times\"></i>	</span>");
 		} else {
 			util.error("不能重复添加");
 		}
 	});
 
 
-	$(".q-label-list").on("click", ".fa", function() {
+	$(".q-tag-label-list").on("click", ".fa", function() {
+		$(this).parent().remove();
+	});
+},
+getCharactorTypes: function getCharactorTypes()
+{
+	$(".add-charactorType-btn").click(function() {
+		var label_ids = $(".q-label-item");
+		var flag = 0;
+		label_ids.each(function() {
+			if ($(this).data("id") == $("#charactortype-from-select").val())
+				flag = 1;
+		});
+		if (flag == 0) {
+			var selected = $("#charactortype-from-select").find("option:selected");
+
+			$(".q-charactorType-label-list").append("<span class=\"label label-info q-label-item\"  data-id=" + $("#charactortype-from-select").val() + ">" + $("#charactortype-from-select :selected").text() + "  <i class=\"fa fa-times\"></i>	</span>");
+		} else {
+			util.error("不能重复添加");
+		}
+	});
+
+
+	$(".q-charactorType-label-list").on("click", ".fa", function() {
 		$(this).parent().remove();
 	});
 }

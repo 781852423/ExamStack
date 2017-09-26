@@ -141,9 +141,14 @@ request.setAttribute("leftMenuId",list[3]);
 										<option value="5">简答题</option>
 
 										<option value="6">论述题</option>
+										
 										<option value="7">计算题</option>
+										
 										<option value="8">名词解释</option>
+										
 										<option value="9">QuestionParent</option>
+										
+										<option value="10">性格测试</option>
 
 
 									</select>
@@ -276,7 +281,21 @@ request.setAttribute("leftMenuId",list[3]);
 									
 										</select><a class="add-tag-btn">添加</a><span class="form-message"></span>
 									
-										<div class="q-label-list">
+										<div class="q-tag-label-list">
+										</div>
+								</div>
+								
+								<!-- 添加属性部分，目前有性格测试使用，知名该题目是为哪种性格做测试 -->
+								<div class="form-line exampaper-type" id="aq-tag-charactortype">
+										<span class="form-label"><span class="warning-label">*</span>性格类型：</span>
+										<select id="charactortype-from-select" class="df-input-narrow">
+											<c:forEach items="${CharactorTypeList }" var="item">
+												<option value="${item.charactorTypeId }" data-privatee="${item.name }" >${item.name } </option>
+											</c:forEach>
+									
+										</select><a class="add-charactorType-btn">添加</a><span class="form-message"></span>
+									
+										<div class="q-charactorType-label-list">
 										</div>
 								</div>
 								<div class="form-line form-question-reference" style="display: block;">

@@ -157,6 +157,7 @@ public class QuestionPageAdmin {
 		List<Field> fieldList = questionService.getAllField(null);
 		model.addAttribute("fieldList", fieldList);
 		model.addAttribute("tagList", questionService.getTags(null)); // 把tags都呈现出来
+		model.addAttribute("CharactorTypeList", questionService.getCharactorTypes()); // 把可能的所属性格都呈现出来
 		return "question-add";
 	}
 	

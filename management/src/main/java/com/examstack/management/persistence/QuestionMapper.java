@@ -17,6 +17,7 @@ import com.examstack.common.domain.question.QuestionStruts;
 import com.examstack.common.domain.question.QuestionTag;
 import com.examstack.common.domain.question.QuestionType;
 import com.examstack.common.domain.question.Tag;
+import com.examstack.common.domain.question.charactorType;
 import com.examstack.common.util.Page;
 
 
@@ -160,4 +161,13 @@ public interface QuestionMapper {
 	public void insertGroup2Field(Group2Field group2Field) throws Exception;
 	
 	public void deleteGroup2FieldById(int group2FieldId);
+
+
+	public void deleteQuestionCharactorTypeByQuestionId(int questionId);
+
+
+	public void addQuestionCharactorType(@Param("array") List<charactorType> array);
+
+
+	public List<charactorType> getCharactorTypes();
 }

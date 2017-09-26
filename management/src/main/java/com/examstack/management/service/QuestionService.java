@@ -20,6 +20,7 @@ import com.examstack.common.domain.question.QuestionTag;
 import com.examstack.common.domain.question.QuestionType;
 import com.examstack.common.domain.question.QuestionParentIdAndTitleDesc;
 import com.examstack.common.domain.question.Tag;
+import com.examstack.common.domain.question.charactorType;
 import com.examstack.common.util.Page;
 
 /**
@@ -205,4 +206,6 @@ public interface QuestionService {
 	 * 删除用户组-题库的关联关系
 	 */
 	public void delField2Group(int group2FieldId);
+
+	public  List<charactorType> getCharactorTypes();
 }
