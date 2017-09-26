@@ -10,3 +10,17 @@ target
 management/src/main/webapp/WEB-INF/spring/root-context.xml
 portal/src/main/webapp/WEB-INF/spring/root-context.xml
 portal/src/main/webapp/WEB-INF/spring/root-context.xml
+syntax: glob
+*.class
+*~
+*.bak
+*.off
+*.old
+.DS_Store
+
+# building
+
+# IDEA
+*.iml
+*.ipr
+*.iws
