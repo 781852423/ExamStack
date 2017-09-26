@@ -7,3 +7,6 @@ Desktop.ini
 target
 .classpath
 */root-context.xml
+management/src/main/webapp/WEB-INF/spring/root-context.xml
+portal/src/main/webapp/WEB-INF/spring/root-context.xml
+portal/src/main/webapp/WEB-INF/spring/root-context.xml

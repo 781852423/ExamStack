@@ -408,7 +408,7 @@ a.pressed:hover {
 .fixed {
 	position: fixed;
 	top: 0px;
-	width: 180px;
+	/*width: 180px;*/
 }
 
 .exampaper-title-fixed{
@@ -603,5 +603,10 @@ a.navi-item-success{
 .correctAnswer{
 	/*outline: 4px solid #1f7a1f;*/
 	outline: 4px solid #d9534f;
+}
+
+#bk-exam-control
+{
+	z-index:100;
 }
 

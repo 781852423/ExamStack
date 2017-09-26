@@ -1,33 +1,47 @@
 $(function() {
+	$(document).ready(function(){
 	modal.prepare();
 	examing.initial();
+	});
 
 });
 
 var examing = {
 	initial : function initial() {
 		$(window).scroll(examing.fixSideBar);
+
 		this.initialModel();
+
 		this.refreshNavi();
+
 		this.bindNaviBehavior();
+
 		this.addNumber();
-//		this.securityHandler();
 
 		this.bindOptClick();
+
 		this.updateSummery();
+	
 		this.bindQuestionFilter();
+
 		this.bindfocus();
+	
 		this.bindFinishOne();
+		
 		this.initMarker();
+
 		this.loadAnswerSheet();
+	
 		this.startTimer();
+
 		this.bindSubmit();
+	
 	},
 	
 	initialModel : function initialModel(){
 		$(".answer-desc").hide();
 		$(".question-point-content").hide();
-		
+		//$('.firstrow-col2').css("height",$('.firstrow-col1').height())
 		$(".answer-desc").hide();
 		$(".qt-finished .answer-desc").show();
 		
@@ -257,6 +271,7 @@ var examing = {
 	 */
 	startTimer : function startTimer() {
 		var timestamp = parseInt($("#exam-timestamp").text());
+		console.log("timestamp=" + timestamp);
 		var int = setInterval(function() {
 			$("#exam-timestamp").text(timestamp);
 			$("#exam-clock").text(examing.toHHMMSS(timestamp));
@@ -266,7 +281,7 @@ var examing = {
 				exam_clock.addClass("question-time-warning");
 			}
 			var period = timestamp % 60;
-	//		console.log("period :" + period);
+			console.log("period :" + period);
 			if(period == 0)
 				examing.saveAnswerSheet();
 			timestamp-- || examing.examTimeOut(int); 
@@ -394,14 +409,14 @@ var examing = {
 				        	    console.log("第" + (index+1) + "题回答正确");
 								$(thisquestion).find(".answerResultDesc").html("<strong>回答正确</strong><br/>");
 								$(thisquestion).find(".answer-desc-summary").addClass("answer-desc-success");
-								$($("a.question-navi-item")[index + 1]).addClass("qni-success");
+								$($("a.question-navi-item")[index]).addClass("qni-success");
 							}else
 							{
 								 console.log("第" + (index+1) + "题回答错误");
 								$(thisquestion).find(".answerResultDesc").html("<strong>回答错误</strong><br/>" +
 				                 "你的回答：" + myAnswer);	
 								$(thisquestion).find(".answer-desc-summary").addClass("answer-desc-error");
-								$($("a.question-navi-item")[index + 1]).addClass("qni-error");
+								$($("a.question-navi-item")[index]).addClass("qni-error");
 								$(thisquestion).find(".answerResultDesc").css({color:"red"})
 							}
 				    	}
@@ -650,7 +665,7 @@ var examing = {
 	},
 	loadAnswerSheet : function loadAnswerSheet(){
 		var answerSheet = eval('(' + localStorage.answerSheet + ')');
-		console.log(eval(answerSheet));
+		// console.log(eval(answerSheet));
 		this.mergeQuestionAnswer(answerSheet);
 	},
 	
@@ -677,13 +692,16 @@ var examing = {
 	},
 	
 	mergeQuestionAnswer : function mergeQuestionAnswer(answerSheet){
-		if (answerSheet==null||answerSheet.examHistroyId != $("#hist-id").val())
+		// 如果做试卷的人希望从头开始做,endsWith 0,那么也不要启用localStorage
+		if (answerSheet==null || answerSheet.examHistroyId != $("#hist-id").val() || window.location.href.endsWith("0"))
 			return false;
 		var questions = $("li.question");
 
-		
-		$("#exam-timestamp").text(answerSheet.duration);
-
+		// 如果是从新开始的计算时间，则不要本地存储的duration
+		if(!window.location.href.endsWith("0"))
+		{
+		    $("#exam-timestamp").text(answerSheet.duration);
+		}
 		
 		
 		var list = answerSheet.answerSheetItems;
