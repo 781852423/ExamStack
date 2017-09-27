@@ -156,7 +156,7 @@ public class ExamPage {
 	 * @param xuepaiId
 	 * @return
 	 */
-	@RequestMapping(value = "/student/personalitytest-start/{examId}/{xuepaiId}/", method = RequestMethod.GET)
+	@RequestMapping(value = "/student/personalitytest-start/{examId}/{xuepaiId}", method = RequestMethod.GET)
 	public String personalitytestStartPage(Model model, HttpServletRequest request, @PathVariable("examId") int examId, @PathVariable("xuepaiId") int xuepaiId) {
 
 		//TO-DO:学员开始考试时，将开始时间传到消息队列，用户更新用户开始考试的时间。如果数据库中时间不为空，则不更新

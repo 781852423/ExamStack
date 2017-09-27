@@ -417,13 +417,13 @@ var examing = {
 				        	   
 								$(thisquestion).find(".answerResultDesc").html("<strong>回答正确</strong><br/>");
 								$(thisquestion).find(".answer-desc-summary").addClass("answer-desc-success");
-								$($("a.question-navi-item")[index + 1]).addClass("qni-success");
+								$($("a.question-navi-item")[index]).addClass("qni-success");
 							}else
 							{
 								$(thisquestion).find(".answerResultDesc").html("<strong>回答错误</strong><br/>" +
 				                 "你的回答：" + myAnswer);	
 								$(thisquestion).find(".answer-desc-summary").addClass("answer-desc-error");
-								$($("a.question-navi-item")[index + 1]).addClass("qni-error");
+								$($("a.question-navi-item")[index]).addClass("qni-error");
 								$(thisquestion).find(".answerResultDesc").css({color:"red"})
 							}
 				    	}

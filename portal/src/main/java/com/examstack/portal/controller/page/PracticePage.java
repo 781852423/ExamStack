@@ -332,9 +332,16 @@ public class PracticePage {
 				.getAuthentication().getPrincipal();
 		
 		List<PersonalityTestXuepai> xuepaiList = questionService.getPersonalityTestXuepai();
-		
-		model.addAttribute("xuepaiList", xuepaiList); // 只显示有题目的题库
-		return "personality-list";
+		if(xuepaiList != null && xuepaiList.size() > 0)
+		{
+				model.addAttribute("xuepaiList", xuepaiList);
+				return "personality-list";
+		}else
+		{
+			model.addAttribute("errorMsg", "没有找到心理测试对应的题目");
+			return "error";
+			
+		}
 	}
 	
 }

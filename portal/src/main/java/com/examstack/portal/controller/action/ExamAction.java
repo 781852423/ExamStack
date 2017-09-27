@@ -1,6 +1,13 @@
 package com.examstack.portal.controller.action;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.concurrent.LinkedBlockingDeque;
 
 import org.codehaus.jackson.JsonProcessingException;
 import org.springframework.amqp.AmqpException;
@@ -16,9 +23,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.examstack.common.Constants;
 import com.examstack.common.domain.exam.AnswerSheet;
+import com.examstack.common.domain.exam.AnswerSheetItem;
 import com.examstack.common.domain.exam.Exam;
 import com.examstack.common.domain.exam.ExamHistory;
 import com.examstack.common.domain.exam.Message;
+import com.examstack.common.domain.personality.PersonalityQuestionItem;
+import com.examstack.common.domain.personality.PersonalityScore;
 import com.examstack.portal.security.UserInfo;
 import com.examstack.portal.service.ExamService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -105,6 +115,47 @@ public class ExamAction {
 			message.setResult("交卷失败");
 			message.setMessageInfo(e.toString());
 		}
+		return message;
+	}
+	
+	/*
+	 * 前台做完性格测试后，提交到这里
+	 */
+	@RequestMapping(value = "/student/personalitytest-submit", method = RequestMethod.POST)
+	public @ResponseBody Message finishPersonalityTest(@RequestBody AnswerSheet answerSheet) {
+
+		Message message = new Message();
+		ObjectMapper om = new ObjectMapper();
+		int questionId = 0;
+		String answer = "";
+		// 初始化其大小为128，一般性格测试的题目也够多了	
+		List<PersonalityQuestionItem> personalityQuestionItemList = new ArrayList<PersonalityQuestionItem>(128);
+		PersonalityQuestionItem pItem = new PersonalityQuestionItem();
+		try {
+			// 获取answerSheet的内容，然后匹配分数
+			List<AnswerSheetItem> aSheetItems= answerSheet.getAnswerSheetItems();
+			
+			for(AnswerSheetItem item : aSheetItems)
+			{
+				questionId = item.getQuestionId();
+				answer = item.getAnswer();
+				
+				pItem.setQuestionId(questionId);
+				pItem.setAnswer(answer);
+				
+				personalityQuestionItemList.add(pItem);
+			}
+			
+			// 题目和答案都有了，开始进行计算，丢给examService处理
+			// TODO 把获得的分数按照不同性格参照进行排列，并在前台页面展示出来，用个大饼图？可以参照网上方案试试
+			List<PersonalityScore> PersonalityScoreList = examService.getPersonalityTestingResult(personalityQuestionItemList);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			message.setResult("交卷失败");
+			message.setMessageInfo(e.toString());
+		}
+		
 		return message;
 	}
 	

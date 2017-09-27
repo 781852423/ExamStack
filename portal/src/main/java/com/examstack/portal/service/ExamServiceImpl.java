@@ -1,7 +1,10 @@
 package com.examstack.portal.service;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,8 @@ import org.springframework.stereotype.Service;
 import com.examstack.common.domain.exam.Exam;
 import com.examstack.common.domain.exam.ExamHistory;
 import com.examstack.common.domain.exam.ExamPaper;
+import com.examstack.common.domain.personality.PersonalityQuestionItem;
+import com.examstack.common.domain.personality.PersonalityScore;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.util.Page;
 import com.examstack.common.util.StringUtil;
@@ -98,7 +103,15 @@ public class ExamServiceImpl implements ExamService {
 	}
 	@Override
 	public List<QuestionQueryResult> getPersonalityTestQuestionQueryResultByXuepaiId(int xuepaiId) {
-		// TODO Auto-generated method stub
+
 		return examMapper.getPersonalityTestQuestionQueryResultByXuepaiId(xuepaiId);
+	}
+	
+	@Override
+	public List<PersonalityScore> getPersonalityTestingResult(List<PersonalityQuestionItem> pQuestionScoreList)
+	{
+		// 获取这些问题Id对应的性格类别，计算得分
+		// TODO 需要根据传进来的quesionId和answer，来计算其每道题的得分，并获取每道题的性格代码charactorID和对应的学派
+		return null;
 	}
 }

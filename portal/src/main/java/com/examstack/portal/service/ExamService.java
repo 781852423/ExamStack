@@ -1,9 +1,12 @@
 package com.examstack.portal.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.examstack.common.domain.exam.Exam;
 import com.examstack.common.domain.exam.ExamHistory;
+import com.examstack.common.domain.personality.PersonalityQuestionItem;
+import com.examstack.common.domain.personality.PersonalityScore;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.util.Page;
 
@@ -79,4 +82,6 @@ public interface ExamService {
 	public List<Exam> getExamList(Page<Exam> page,int ... typeIdList);
 
 	public List<QuestionQueryResult> getPersonalityTestQuestionQueryResultByXuepaiId(int xuepaiId);
+
+	List<PersonalityScore> getPersonalityTestingResult(List<PersonalityQuestionItem> pQuestionScoreList);
 }
