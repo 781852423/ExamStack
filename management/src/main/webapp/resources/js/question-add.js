@@ -69,12 +69,16 @@ question_add = {
 				$("div.form-line.form-question-answer1.correct-answer").hide();
 				
 				$("div.form-line.form-question-analysis").hide();
-				console.log('10');
+				
 				$(".form-question-opt").show();
 				//$(".form-question-answer1").show();
 				//question_add.copyToAnswer();
 				//去掉D选项
 				$($('.add-opt-items .add-opt-item')[3]).remove();
+				// ABC都设置上默认的内容
+				$($('.add-opt-items .add-opt-item input')[0]).val("很符合");
+				$($('.add-opt-items .add-opt-item input')[1]).val("一般符合");
+				$($('.add-opt-items .add-opt-item input')[2]).val("不符合");
 			}
 			else {
 				$(".correct-answer").hide();
@@ -483,9 +487,9 @@ question_add = {
 
 		} else if (3 == question_entity.question_type_id) {
 			question_entity.answer = $(".form-question-answer-boolean select").val();
-		} else if(10 == question_entity.question_type_id) // 性格测试没有标准答案
+		} else if(10 == question_entity.question_type_id) // 性格测试没有标准答案,用四个NNNN代替
 			{
-				question_entity.answer = '';
+				question_entity.answer = 'NNNN';
 			}
 		else {
 			question_entity.answer = $(".form-question-answer-text textarea").val();

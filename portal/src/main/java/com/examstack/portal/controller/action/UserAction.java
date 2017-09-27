@@ -54,13 +54,9 @@ public class UserAction {
 		long expiredMinutes = 0;
 		int groupIdforRegisterAlone = 0;
 		
-		try {
-			
-			String path = this.getClass().getClassLoader().getResource("custome.properties").getPath();
-			Properties props = PropertyReaderUtil.getProperties(path);
-			
-			expiredMinutes = Long.parseLong(props.getProperty("expiredMinutes"));
-			groupIdforRegisterAlone = Integer.parseInt(props.getProperty("groupIdforRegisterAlone"));
+		try {	
+			expiredMinutes = Long.parseLong(PropertyReaderUtil.getCustomPropertyByPropertyStr("expiredMinutes"));
+			groupIdforRegisterAlone = Integer.parseInt(PropertyReaderUtil.getCustomPropertyByPropertyStr("groupIdforRegisterAlone"));
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -77,10 +73,9 @@ public class UserAction {
 		PasswordEncoder passwordEncoder = new StandardPasswordEncoderForSha1();
 		
 		String resultPassword = passwordEncoder.encode(password);
-		System.out.println("获取前端页面的用户名：" + user.getUserName() + " 密码：" + user.getPassword() );
-		
+	
 		user.setPassword(resultPassword);
-		System.out.println("前端页面在userAction中加密后的密码：" + user.getPassword());
+	
 		
 		user.setEnabled(true);
 		user.setCreateBy(-1); // 自己注册，创建人：-1

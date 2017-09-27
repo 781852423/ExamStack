@@ -146,6 +146,40 @@ public class ExamPage {
 		userInfo.setHistId(0);
 		return "examing";
 	}
+	
+	
+	/**
+	 * 开始性格测试，分不同的学术类别
+	 * @param model
+	 * @param request
+	 * @param examId
+	 * @param xuepaiId
+	 * @return
+	 */
+	@RequestMapping(value = "/student/personalitytest-start/{examId}/{xuepaiId}/", method = RequestMethod.GET)
+	public String personalitytestStartPage(Model model, HttpServletRequest request, @PathVariable("examId") int examId, @PathVariable("xuepaiId") int xuepaiId) {
+
+		//TO-DO:学员开始考试时，将开始时间传到消息队列，用户更新用户开始考试的时间。如果数据库中时间不为空，则不更新
+		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String strUrl = "http://" + request.getServerName() // 服务器地址
+				+ ":" + request.getServerPort() + "/";
+
+		int duration = 60; // 设定时间是60分钟
+
+		List<QuestionQueryResult> questionList = examService.getPersonalityTestQuestionQueryResultByXuepaiId(xuepaiId);
+
+		StringBuilder sb = new StringBuilder();
+		for (QuestionQueryResult question : questionList) {
+			QuestionAdapter adapter = new QuestionAdapter(question, strUrl);
+			sb.append(adapter.getUserExamPaper());
+		}
+		model.addAttribute("duration", duration * 60);
+		model.addAttribute("htmlStr", sb.toString());
+
+		userInfo.setHistId(0);
+		
+		return "examing-personalitytest";
+	}
 
 	/**
 	 * 模拟考试

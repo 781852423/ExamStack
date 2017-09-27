@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import com.examstack.common.domain.exam.Exam;
 import com.examstack.common.domain.exam.ExamHistory;
+import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.util.Page;
 
 public interface ExamMapper {
@@ -77,4 +78,6 @@ public interface ExamMapper {
 	 * @return
 	 */
 	public List<Exam> getExamList(@Param("array") int[] idList,@Param("page") Page<Exam> page);
+
+	public List<QuestionQueryResult> getPersonalityTestQuestionQueryResultByXuepaiId(int xuepaiId);
 }

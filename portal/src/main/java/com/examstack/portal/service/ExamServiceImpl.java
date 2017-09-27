@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.examstack.common.domain.exam.Exam;
 import com.examstack.common.domain.exam.ExamHistory;
 import com.examstack.common.domain.exam.ExamPaper;
+import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.util.Page;
 import com.examstack.common.util.StringUtil;
 import com.examstack.portal.persistence.ExamMapper;
@@ -94,5 +95,10 @@ public class ExamServiceImpl implements ExamService {
 		if(typeIdList != null && typeIdList.length == 0)
 			typeIdList = null;
 		return examMapper.getUserExamHistByUserId(userId, typeIdList, page);
+	}
+	@Override
+	public List<QuestionQueryResult> getPersonalityTestQuestionQueryResultByXuepaiId(int xuepaiId) {
+		// TODO Auto-generated method stub
+		return examMapper.getPersonalityTestQuestionQueryResultByXuepaiId(xuepaiId);
 	}
 }

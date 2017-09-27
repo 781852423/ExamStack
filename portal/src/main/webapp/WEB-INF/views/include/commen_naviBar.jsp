@@ -15,6 +15,9 @@
                             <a href="exam-list"><i class="fa  fa-paper-plane-o"></i>模拟考试</a>
                         </li>
                         <li>
+                            <a href="student/personality-list"><i class="fa  fa-paper-plane-o"></i>职业性格测试</a>
+                        </li>
+                        <li>
                             <a href="training-list"><i class="fa fa-book"></i>培训资料</a>
                         </li>
                         <li>

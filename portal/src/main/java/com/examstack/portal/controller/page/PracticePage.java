@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.examstack.common.domain.exam.UserQuestionHistory;
+import com.examstack.common.domain.personality.PersonalityTestXuepai;
 import com.examstack.common.domain.practice.KnowledgePointAnalysisResult;
 import com.examstack.common.domain.practice.TypeAnalysis;
 import com.examstack.common.domain.question.Field;
@@ -31,6 +32,7 @@ import com.examstack.common.domain.question.QuestionStatistic;
 import com.examstack.common.domain.question.QuestionType;
 import com.examstack.common.domain.user.Group;
 import com.examstack.common.util.QuestionAdapter;
+import com.examstack.common.util.QuestionFilterUtil;
 import com.examstack.common.util.file.PropertyReaderUtil;
 import com.examstack.portal.security.UserInfo;
 import com.examstack.portal.service.QuestionHistoryService;
@@ -47,7 +49,7 @@ public class PracticePage {
 	@Autowired
 	private UserService userService;
 	/**
-	 * 强化练习
+	 * 强化练习，点击页面‘参加练习’按钮触发返回练习的页面
 	 * @param model
 	 * @param request
 	 * @param knowledgePointId
@@ -213,7 +215,7 @@ public class PracticePage {
 	/*
 	 * 
 	 * 前台获取练习的题目，题库练习,如果fieldId不为空，则说明返回的是某个专业的题库
-	 * 需要再完善当题目类型是性格测试时候的情况，去掉错题练习的部分
+	 * 剔除性格测试的题目在强化练习处的展示
 	 */
 	@RequestMapping(value = "/student/practice-list", method = RequestMethod.GET)
 	public String practiceListPage(Model model, HttpServletRequest request, @RequestParam(value="fieldId",required=false,defaultValue="0") int fieldId){
@@ -237,19 +239,19 @@ public class PracticePage {
 				groupList.add(g.getGroupId());
 			}
 		}
-		
-	     System.out.println("用户所在的组号码:" + groupList);
 		List<Field> fieldList = questionService.getAllField(groupList);
 		
 		// fieldList剔除那些没有相应题目的题库,只要其removeable为1就可以不显示
-		
+		// 剔除掉性格测试的题目
 		List<Field> NonRemoveableFieldList = new ArrayList<Field>();
 		for(Field fd : fieldList)
 		{
-			if(fd.isRemoveable() == false) 
+			// 有题目，并且不是性格测试题，就加入强化练习的队列
+			if(fd.isRemoveable() == false && !QuestionFilterUtil.checkIfFieldIsPersonalityTest(fd.getFieldId())) 
 			{
 				NonRemoveableFieldList.add(fd);
 			}
+		
 		}
 		
 		fieldList = NonRemoveableFieldList;
@@ -267,31 +269,6 @@ public class PracticePage {
 				return "noPracticeAvailable";
 			}
 		}
-		
-		boolean isChacactorFalg = false;
-		// 如果是性格测试，则需要重新返回其他的view
-				try {
-					Properties props = PropertyReaderUtil.getProperties();
-					
-					if(props != null && 
-					   props.getProperty("charactorTestFieldIds") != null)
-					{
-						String[] charactorFieldStrings = props.getProperty("charactorTestFieldIds").split(",");
-						
-						for(String str : charactorFieldStrings)
-						{
-							if(str.equals( Integer.toString(fieldId)) )
-							{
-								// 找到了，是性格测试的题目
-								isChacactorFalg = true;
-								break;
-							}
-						}
-					}
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			
 		Map<Integer, Map<Integer, QuestionStatistic>> questionMap = questionService.getTypeQuestionStaticByFieldId(fieldId);
 		Map<Integer, Map<Integer, QuestionStatistic>> historyMap = questionHistoryService.getTypeQuestionHistStaticByFieldId(fieldId, userInfo.getUserid());
@@ -342,6 +319,22 @@ public class PracticePage {
 		model.addAttribute("fieldList", fieldList);// 只显示有题目的题库
 		
 		return "practice";
+	}
+	
+	/*
+	 * 
+	 * 前台获取性格测试的题目在强化练习处的展示
+	 */
+	@RequestMapping(value = "/student/personality-list", method = RequestMethod.GET)
+	public String personlityTestPage(Model model, HttpServletRequest request){
+		
+		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		
+		List<PersonalityTestXuepai> xuepaiList = questionService.getPersonalityTestXuepai();
+		
+		model.addAttribute("xuepaiList", xuepaiList); // 只显示有题目的题库
+		return "personality-list";
 	}
 	
 }

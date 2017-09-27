@@ -115,32 +115,43 @@
 		<div class="content" style="padding:30px 0 0 0;">
 			<div class="container">
 				<div class="row">
-					<a class="select-test col-xs-4 home-link-anchor" href="student/practice-list">
+					<a class="select-test col-xs-3 home-link-anchor" href="student/practice-list">
 						<div class="select-test-icon">
 							<i class="fa fa-book"></i>
 	
-						</div> <h3> 试题练习 </h3>
+						</div> <h3> 题库强化练习 </h3>
 						<p>
 							您可以免费获取对应专业的培训视频或者文档资料，通过在线练习可以考察您的知识掌握程度。
 						</p> 
 					</a>
-					<a class="select-test col-xs-4 home-link-anchor" href="exam-list">
+					<a class="select-test col-xs-3 home-link-anchor" href="exam-list">
 						<div class="select-test-icon">
 							<i class="fa fa-trophy"></i>
-						</div> <h3> 在线考试 </h3>
+						</div> <h3> 在线模拟考试 </h3>
 						<p>
 							参加正式或者模拟考试，您的教师可以发布正式的考试，您也可以主动申请这些考试
 						</p> 
 					</a>
 					
-					<a class="select-test col-xs-4 home-link-anchor" href="training-list">
+					 <a class="select-test col-xs-3 home-link-anchor" href="student/personality-list">
+                        <div class="select-test-icon">
+                            <i class="fa fa-arrow-circle-o-up"></i>
+                        </div> <h3> 职业性格测试 </h3>
+                        <p>
+                                                                 我性格中的优势和劣势是什么？我的性格有什么特点？用主流的性格测试方法为你定位性格特征？
+                        </p> 
+                    </a>
+                    
+					<a class="select-test col-xs-3 home-link-anchor" href="training-list">
                         <div class="select-test-icon">
                             <i class="fa fa-arrow-circle-o-up"></i>
                         </div> <h3> 参加培训 </h3>
                         <p>
-                                                                                  大量针对招聘笔试和面试的培训，全程指导从网申到签约的一系列过程
+                                                                                  大量针对招聘简历修改与写作、笔试和面试的培训，全程指导从网申到签约的一系列过程
                         </p> 
                     </a>
+                    
+                   
                     
 					<!-- <div class="select-test col-xs-4">
 						<div>

@@ -12,11 +12,12 @@ public class PropertyReaderUtil {
 
 	public static final String PROPERITIES_PATH="custome.properties";
 	public static final String SYS_PROPERITIES_PATH="sys-config.properties";
-	/*static
-	{
-		System.out.println("XXXX" + PropertyReaderUtil.class.getClassLoader().getResource("custome.properties")); //发现可以输出东西
-		System.out.println("XXXX" + PropertyReaderUtil.class.getClassLoader().getResource("/custome.properties"));
-	}*/
+
+	/**
+	 * 读取properties并返回所有的pros对象
+	 * @return
+	 * @throws FileNotFoundException
+	 */
 	public static Properties getProperties() throws FileNotFoundException{
 		
 		InputStream inputStream = new FileInputStream(PropertyReaderUtil.class.getClassLoader().getResource(PROPERITIES_PATH).getPath());
@@ -29,6 +30,29 @@ public class PropertyReaderUtil {
 			e.printStackTrace();
 		}
 		return pros;
+	}
+
+	/**
+	 * 读取custome.properties文件，根据key查找value并返回，如果没有查到，则返回null
+	 * @param propertyStr
+	 * @return strPropertyValue
+	 * @throws FileNotFoundException
+	 */
+public static String getCustomPropertyByPropertyStr(String propertyStr) throws FileNotFoundException{
+		
+
+		Properties pros = new Properties();
+		String strPropertyValue = null;
+		
+		try {
+			pros = getProperties();
+			strPropertyValue = pros.getProperty(propertyStr);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return strPropertyValue;
 	}
 	
 	public static Properties getSysProperties() throws FileNotFoundException{

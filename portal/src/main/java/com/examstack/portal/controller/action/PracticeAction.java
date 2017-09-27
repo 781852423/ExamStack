@@ -27,7 +27,7 @@ public class PracticeAction {
 	private QuestionHistoryService questionHistoryService;
 	/**
 	 * 练习模式完成一道题
-	 * 
+	 * 页面“参加练习”后，处理提交按钮
 	 * @param sp
 	 * @return
 	 */

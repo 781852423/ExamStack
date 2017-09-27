@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.examstack.common.domain.personality.PersonalityTestXuepai;
 import com.examstack.common.domain.question.Field;
 import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.Question;
@@ -18,8 +19,8 @@ import com.examstack.common.util.Page;
 import com.examstack.portal.persistence.QuestionMapper;
 
 /**
- * @author Ocelot
- * @date 2014年6月8日 下午8:21:13
+ * @author jie
+ * @date 20170927
  */
 @Service("questionService")
 public class QuestionServiceImpl implements QuestionService {
@@ -120,6 +121,13 @@ public class QuestionServiceImpl implements QuestionService {
 			map.put(statistic.getPointId(), tmp);
 		}
 		return map;
+	}
+
+	@Override
+	public List<PersonalityTestXuepai> getPersonalityTestXuepai() {
+		// TODO Auto-generated method stub
+		List<PersonalityTestXuepai> xiePaiList = questionMapper.getPersonalityTestXuepai();
+		return xiePaiList;
 	}
 
 }

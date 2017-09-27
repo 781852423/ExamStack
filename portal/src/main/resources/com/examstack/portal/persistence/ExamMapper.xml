@@ -126,4 +126,40 @@
 		</if>
 		order by start_time desc
 	</select>
+	
+	<!-- 获取性格测试的题目，根据学派的类型来确定 -->
+	<select id="getPersonalityTestQuestionQueryResultByXuepaiId"
+		resultType="com.examstack.common.domain.question.QuestionQueryResult">
+		SELECT a.id
+		questionId,a.content,a.answer,a.analysis,a.question_type_id
+		questionTypeId,a.reference
+		referenceName,a.examing_point
+		examingPoint,b.point_id knowledgePointId,GROUP_CONCAT(d.field_name,'
+		&gt; ',c.point_name,' &gt; ',
+		a.examing_point ,case when a.keyword is
+		null then '' else
+		CONCAT('
+		知识关键点：',a.keyword) end)
+		pointName,GROUP_CONCAT(d.field_name)
+		fieldName
+		from et_question
+		a,et_question_2_point
+		b,et_knowledge_point
+		c,et_field d
+		<where>
+			a.id=b.question_id and
+			b.point_id=c.point_id and
+			c.field_id=d.field_id and
+			a.id in ( 
+			          select a.question_id from et_question_2_charactorType a where a.charactor_id in 
+            (select id from  et_charactor_type where xuepaiId=#{xuepaiId})
+			)
+				
+
+		</where>
+		group by
+		a.id,a.content,a.answer,a.analysis,a.question_type_id,a.reference,
+		a.examing_point,b.point_id
+		order by a.question_type_id,a.id
+	</select>
 </mapper>

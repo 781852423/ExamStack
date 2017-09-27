@@ -3,6 +3,7 @@ package com.examstack.portal.service;
 import java.util.List;
 import java.util.Map;
 
+import com.examstack.common.domain.personality.PersonalityTestXuepai;
 import com.examstack.common.domain.question.Field;
 import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.Question;
@@ -68,4 +69,6 @@ public interface QuestionService {
 	 * @return
 	 */
 	public Map<Integer,Map<Integer,QuestionStatistic>> getTypeQuestionStaticByFieldId(int fieldId);
+
+	public List<PersonalityTestXuepai> getPersonalityTestXuepai();
 }

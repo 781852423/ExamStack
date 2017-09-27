@@ -1053,6 +1053,7 @@ public class QuestionAdapter {
 
 	/*
 	 * 学生选择模拟考试，系统提供的针对试卷试题的adapter
+	 * 针对性格测试，需要再修改代码，性格测试type=10
 	 */
 	public String getUserExamPaper() {
 		StringBuilder sb = new StringBuilder();
@@ -1085,6 +1086,9 @@ public class QuestionAdapter {
 		case 9:
 			sb.append("<li class=\"question qt-rawTitle\">");
 			break;	
+		case 10:
+			sb.append("<li class=\"question qt-singlechoice\">");
+			break;
 		default:
 			break;
 		}
@@ -1288,6 +1292,45 @@ public class QuestionAdapter {
 			sb.append("<form class=\"question-body\">");
 			setQuestionBody(sb);
 			sb.append("<textarea class=\"question-textarea\"></textarea>");
+			sb.append("</form>");
+			break;
+		case 10:
+			sb.append("singlechoice").append("</span>");
+			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
+			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
+			sb.append("<span>[单选题]</span>");
+			sb.append("<span class=\"question-point-content\">");
+			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("</span>");
+			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("<span class=\"question-id\" style=\"display:none;\">")
+					.append(questionQueryResult.getQuestionId())
+					.append("</span>");
+			sb.append("</div>");
+			sb.append("<form class=\"question-body\">");
+			setQuestionBody(sb);
+			Iterator<String> it10 = questionContent.getChoiceList().keySet()
+					.iterator();
+			sb.append("<ul class=\"question-opt-list\">");
+			while (it10.hasNext()) {
+				sb.append("<li class=\"question-list-item\">");
+				String key = it10.next();
+				String value = questionContent.getChoiceList().get(key);
+				sb.append("<input type=\"radio\" value=\"")
+						.append(key)
+						.append("\" name=\"question-radio1\" class=\"question-input\">");
+				sb.append(key).append(": ").append(value);
+				if (questionContent.getChoiceImgList() != null)
+					if (questionContent.getChoiceImgList().containsKey(key))
+						sb.append(
+								"<img class=\"question-opt-img question-img\" src=\"")
+								.append(baseUrl)
+								.append(questionContent.getChoiceImgList().get(
+										key)).append("\" />");
+				sb.append("</span>");
+				sb.append("</li>");
+			}
+			sb.append("</ul>");
 			sb.append("</form>");
 			break;
 		
