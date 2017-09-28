@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.examstack.common.domain.exam.AnswerSheet;
@@ -185,9 +186,14 @@ public class ExamPage {
 		return "examing-personalitytest";
 	}
 
-	@RequestMapping(value = "/student/getPersonalityTestReport", method = RequestMethod.GET)
-	public String getPersonalityTestReport(Model model, HttpServletRequest request, @RequestBody List<PersonalityScore> PersonalityScoreList) 
+	@RequestMapping(value = "/student/getPersonalityTestReport", method = RequestMethod.POST)
+	public String getPersonalityTestReport(Model model, HttpServletRequest request,@RequestParam String PersonalityScoreListStr) 
 	{
+		//	List<QuestionQueryResult> questionList = gson.fromJson(content, new TypeToken<List<QuestionQueryResult>>() {
+	//}.getType());
+		Gson gson = new Gson();
+		List<PersonalityScore> PersonalityScoreList = gson.fromJson(PersonalityScoreListStr, new TypeToken<List<PersonalityScore>>(){}.getType());
+		
 		model.addAttribute("PersonalityScoreList",PersonalityScoreList);
 		return "PersonalityTestReport";
 	}

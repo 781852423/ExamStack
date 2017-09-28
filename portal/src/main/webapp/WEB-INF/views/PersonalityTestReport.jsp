@@ -25,7 +25,7 @@
 					</div>
 					<ol class="nav nav-pills " style="margin: 20px 0;">
 						<c:forEach items="${PersonalityScoreList }" var="item">
-							<li role="presentation" ><span>${item.name }:{item.danxiangScore}</span></li>
+							<li role="presentation" ><span>${item.name }:${item.danxiangScore}</span></li>
 						</c:forEach>
 					</ol>
 				</div>

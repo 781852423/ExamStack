@@ -430,8 +430,9 @@ var examing = {
 					form = $("<form method='post' action='student/getPersonalityTestReport'></form>");
 				    str = JSON.stringify(message.object);
 				    console.log('str:' + str);
-					input = $("<input type='text'>").val(str).attr('name','PersonalityScoreList')
+					input = $("<input type='text'>").val(str).attr('name','PersonalityScoreListStr')
 					form.append(input);
+					$(document.body).append(form);
 					form.submit()
 				});
 			} else {
