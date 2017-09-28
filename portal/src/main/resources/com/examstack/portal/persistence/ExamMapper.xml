@@ -162,4 +162,22 @@
 		a.examing_point,b.point_id
 		order by a.question_type_id,a.id
 	</select>
+	
+	<!-- 根据questionId获取该性格测试题对应的性格特征参数 -->
+	<select id="getPersonalityQuestionItems" resultType="com.examstack.common.domain.personality.PersonalityQuestionItem">
+		select  a.question_id questionId,
+		a.charactor_id charactorId,
+		b.xuepaiId,
+		b.name charactorName, 
+		c.name xuepaiName  
+		from et_question_2_charactorType a left join et_charactor_type b on a.charactor_id=b.id 
+		left join et_charactor_xuepai c on b.xuepaiId=c.id 
+		where 1=1
+		<if test="array != null">
+			and a.question_id in
+			<foreach collection="array" index="index" item="item" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+		</if>
+	</select>
 </mapper>

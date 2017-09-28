@@ -3,6 +3,7 @@ package com.examstack.portal.service;
 import static org.hamcrest.CoreMatchers.nullValue;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.examstack.common.util.Page;
 import com.examstack.common.util.StringUtil;
 import com.examstack.portal.persistence.ExamMapper;
 import com.examstack.portal.persistence.ExamPaperMapper;
+import com.examstack.portal.persistence.QuestionMapper;
 import com.examstack.portal.service.ExamService;
 
 @Service("examService")
@@ -27,6 +29,8 @@ public class ExamServiceImpl implements ExamService {
 
 	@Autowired
 	private ExamMapper examMapper;
+	@Autowired
+	private QuestionMapper questionMapper;
 	@Autowired
 	private ExamPaperMapper examPaperMapper;
 	@Override
@@ -108,10 +112,54 @@ public class ExamServiceImpl implements ExamService {
 	}
 	
 	@Override
-	public List<PersonalityScore> getPersonalityTestingResult(List<PersonalityQuestionItem> pQuestionScoreList)
+	public List<PersonalityScore> getPersonalityTestingResult(List<PersonalityQuestionItem> pQuestionScoreList, int xuepaiId)
 	{
 		// 获取这些问题Id对应的性格类别，计算得分
 		// TODO 需要根据传进来的quesionId和answer，来计算其每道题的得分，并获取每道题的性格代码charactorID和对应的学派
-		return null;
+	
+		HashMap<Integer, String> questionIdAndScoreMap = new HashMap<Integer,String>(pQuestionScoreList.size());
+		for(PersonalityQuestionItem it : pQuestionScoreList)
+		{
+			questionIdAndScoreMap.put(it.getQuestionId(), it.getAnswer());
+		}
+		List<PersonalityQuestionItem> pQLst =  examMapper.getPersonalityQuestionItems(questionIdAndScoreMap.keySet());
+		
+		// 以上返回的只有answer和score还没赋值，开始填充
+		for(PersonalityQuestionItem pt : pQLst)
+		{
+			String answer = questionIdAndScoreMap.get(pt.getQuestionId());
+			pt.setAnswer(answer);
+			if(answer != null && answer.equalsIgnoreCase("A"))
+			{
+				pt.setScore(2);
+			}else if(answer != null && answer.equalsIgnoreCase("B"))
+			{
+				pt.setScore(1);
+			}else
+			{
+				pt.setScore(0);
+			}
+		}
+		// 每一个都有了分数了，计算不同种类的总分
+		List<PersonalityScore> pScoreLst = null;
+		
+        pScoreLst = questionMapper.getPersonalityLst(xuepaiId);
+        int charactorId = 0;
+        int danxiangScore = 0;
+        for(PersonalityScore ps : pScoreLst)
+        {
+        	charactorId = ps.getId();
+        	danxiangScore = 0;
+        	// 一个个计算性格属性的分数
+        	for(PersonalityQuestionItem pt : pQLst)
+        	{
+        		if(pt.getCharactorId() == charactorId)
+        		{
+        			danxiangScore += pt.getScore();
+        		}
+        	}
+        	ps.setDanxiangScore(danxiangScore);
+        }
+		return pScoreLst;
 	}
 }

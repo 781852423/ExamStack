@@ -169,4 +169,9 @@
 	<select id="getPersonalityTestXuepai" resultType="com.examstack.common.domain.personality.PersonalityTestXuepai">
 		select id, name from et_charactor_xuepai;
 	</select>
+	
+	<!-- getPersonalityLst 获取性格测试的学派分支下的性格元素种类，为省事，把分数也放到model里面，但没有值 -->
+		<select id="getPersonalityLst" resultType="com.examstack.common.domain.personality.PersonalityScore">
+		select a.id Id, a.name, a.xuepaiId from et_charactor_type a;
+	</select>
 </mapper>

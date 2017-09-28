@@ -113,7 +113,7 @@
 		</div> <!--  ends content -->
 		 <%@include file="include/footer_cm_js.jsp" %>
 		<script type="text/javascript" src="resources/js/all.js?v=0712"></script>
-		<script type="text/javascript" src="resources/js/examing-personalitytest"></script>
+		<script type="text/javascript" src="resources/js/examing-personalitytest.js"></script>
 
 		
 

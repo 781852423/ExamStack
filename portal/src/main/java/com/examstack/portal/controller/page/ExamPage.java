@@ -15,15 +15,19 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.examstack.common.domain.exam.AnswerSheet;
 import com.examstack.common.domain.exam.AnswerSheetItem;
 import com.examstack.common.domain.exam.Exam;
 import com.examstack.common.domain.exam.ExamHistory;
 import com.examstack.common.domain.exam.ExamPaper;
+import com.examstack.common.domain.exam.Message;
 import com.examstack.common.domain.exam.UserQuestionHistory;
+import com.examstack.common.domain.personality.PersonalityScore;
 import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.domain.question.QuestionStatistic;
@@ -181,6 +185,12 @@ public class ExamPage {
 		return "examing-personalitytest";
 	}
 
+	@RequestMapping(value = "/student/getPersonalityTestReport", method = RequestMethod.GET)
+	public String getPersonalityTestReport(Model model, HttpServletRequest request, @RequestBody List<PersonalityScore> PersonalityScoreList) 
+	{
+		model.addAttribute("PersonalityScoreList",PersonalityScoreList);
+		return "PersonalityTestReport";
+	}
 	/**
 	 * 模拟考试
 	 * 

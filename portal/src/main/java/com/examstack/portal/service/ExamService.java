@@ -83,5 +83,5 @@ public interface ExamService {
 
 	public List<QuestionQueryResult> getPersonalityTestQuestionQueryResultByXuepaiId(int xuepaiId);
 
-	List<PersonalityScore> getPersonalityTestingResult(List<PersonalityQuestionItem> pQuestionScoreList);
+	List<PersonalityScore> getPersonalityTestingResult(List<PersonalityQuestionItem> pQuestionScoreList, int xuepaiId);
 }

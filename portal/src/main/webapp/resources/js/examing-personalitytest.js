@@ -261,7 +261,6 @@ var examing = {
 		// 提示考试时间到，要交卷
 		alert("考试时间到，关闭此窗口自动交卷，如需重新做题，点击页面上部'重新开始’按钮");
 		setTimeout(examing.finishExam(),6000);
-		examing.ShowAnswerResult();
 	
 	},
 
@@ -387,7 +386,6 @@ var examing = {
 	bindSubmit : function bindSubmit() {
 		$("#question-submit button").click(function() {
 			if (confirm("确认交卷吗？")) {
-				examing.ShowAnswerResult();
 				examing.finishExam();
 			}
 		});
@@ -426,9 +424,15 @@ var examing = {
 				return false;
 			if (message.result == "success") {
 				$(window).unbind('beforeunload');
-				util.success("交卷成功,可以查看页面参考答案！", function() {
+				util.success("交卷成功,请查看报告！", function() {
 					// window.location.replace(document.getElementsByTagName('base')[0].href + 'student/finished-submit');
 					$("#question-submit button").text("已完成交卷");
+					form = $("<form method='post' action='student/getPersonalityTestReport'></form>");
+				    str = JSON.stringify(message.object);
+				    console.log('str:' + str);
+					input = $("<input type='text'>").val(str).attr('name','PersonalityScoreList')
+					form.append(input);
+					form.submit()
 				});
 			} else {
 				util.error(message.result);

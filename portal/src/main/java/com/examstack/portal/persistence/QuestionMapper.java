@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.examstack.common.domain.personality.PersonalityScore;
 import com.examstack.common.domain.personality.PersonalityTestXuepai;
 import com.examstack.common.domain.question.Field;
 import com.examstack.common.domain.question.KnowledgePoint;
@@ -107,4 +108,6 @@ public interface QuestionMapper {
 	 * 获取性格测试的学派信息，例如九型人格等
 	 */
 	public List<PersonalityTestXuepai> getPersonalityTestXuepai();
+
+	public List<PersonalityScore> getPersonalityLst(int xuepaiId);
 }

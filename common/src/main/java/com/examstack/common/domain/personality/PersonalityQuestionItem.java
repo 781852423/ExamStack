@@ -12,13 +12,27 @@ public class PersonalityQuestionItem implements Serializable{
 	private Integer charactorId;
 	private String answer; // 答案
 	private Integer score; // 这个答案占多少分？
-	private Integer xuePaiId;
+	private Integer xuepaiId;
+	private String charactorName;
+	private String xuepaiName;
 	
-	public Integer getXuePaiId() {
-		return xuePaiId;
+	public String getCharactorName() {
+		return charactorName;
 	}
-	public void setXuePaiId(Integer xuePaiId) {
-		this.xuePaiId = xuePaiId;
+	public void setCharactorName(String charactorName) {
+		this.charactorName = charactorName;
+	}
+	public String getXuepaiName() {
+		return xuepaiName;
+	}
+	public void setXuepaiName(String xuepaiName) {
+		this.xuepaiName = xuepaiName;
+	}
+	public Integer getXuepaiId() {
+		return xuepaiId;
+	}
+	public void setXuepaiId(Integer xuePaiId) {
+		this.xuepaiId = xuePaiId;
 	}
 	public Integer getQuestionId() {
 		return questionId;
@@ -44,5 +58,12 @@ public class PersonalityQuestionItem implements Serializable{
 	public void setScore(Integer score) {
 		this.score = score;
 	}
+	@Override
+	public String toString() {
+		return "\nPersonalityQuestionItem [questionId=" + questionId + ", charactorId=" + charactorId + ", answer="
+				+ answer + ", score=" + score + ", xuepaiId=" + xuepaiId + ", charactorName=" + charactorName
+				+ ", xuepaiName=" + xuepaiName + "]\n";
+	}
+	
 	
 }

@@ -1,10 +1,12 @@
 package com.examstack.portal.persistence;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 import com.examstack.common.domain.exam.Exam;
 import com.examstack.common.domain.exam.ExamHistory;
+import com.examstack.common.domain.personality.PersonalityQuestionItem;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.util.Page;
 
@@ -80,4 +82,6 @@ public interface ExamMapper {
 	public List<Exam> getExamList(@Param("array") int[] idList,@Param("page") Page<Exam> page);
 
 	public List<QuestionQueryResult> getPersonalityTestQuestionQueryResultByXuepaiId(int xuepaiId);
+
+	public List<PersonalityQuestionItem> getPersonalityQuestionItems(@Param("array") Set<Integer> questionIdLst);
 }

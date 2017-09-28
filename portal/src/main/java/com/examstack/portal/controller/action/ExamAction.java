@@ -130,13 +130,15 @@ public class ExamAction {
 		String answer = "";
 		// 初始化其大小为128，一般性格测试的题目也够多了	
 		List<PersonalityQuestionItem> personalityQuestionItemList = new ArrayList<PersonalityQuestionItem>(128);
-		PersonalityQuestionItem pItem = new PersonalityQuestionItem();
+		
 		try {
 			// 获取answerSheet的内容，然后匹配分数
 			List<AnswerSheetItem> aSheetItems= answerSheet.getAnswerSheetItems();
 			
 			for(AnswerSheetItem item : aSheetItems)
 			{
+				PersonalityQuestionItem pItem = new PersonalityQuestionItem();
+				
 				questionId = item.getQuestionId();
 				answer = item.getAnswer();
 				
@@ -148,7 +150,10 @@ public class ExamAction {
 			
 			// 题目和答案都有了，开始进行计算，丢给examService处理
 			// TODO 把获得的分数按照不同性格参照进行排列，并在前台页面展示出来，用个大饼图？可以参照网上方案试试
-			List<PersonalityScore> PersonalityScoreList = examService.getPersonalityTestingResult(personalityQuestionItemList);
+			System.out.println("提交的url获取参数personalityQuestionItemList：" + personalityQuestionItemList);
+			List<PersonalityScore> PersonalityScoreList = examService.getPersonalityTestingResult(personalityQuestionItemList,1);
+			PersonalityScoreList.sort(null);// 按照顺序排序
+			message.setObject(PersonalityScoreList);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -10,7 +10,7 @@ public class PersonalityScore implements Serializable,Comparable<PersonalityScor
 	 * 
 	 */
 	private static final long serialVersionUID = -679391215492956874L;
-	private Integer Id;
+	private Integer Id; // 表示et_charactor中的ID，主键
 	private String name;
 	private Integer xuepaiId;
 	private Integer danxiangScore;
@@ -38,15 +38,19 @@ public class PersonalityScore implements Serializable,Comparable<PersonalityScor
 	public void setDanxiangScore(Integer danxiangScore) {
 		this.danxiangScore = danxiangScore;
 	}
+	/*
+	 * 采用倒序排序，分数高的排前面
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
 	public int compareTo(PersonalityScore o) {
 		// TODO Auto-generated method stub
 		if(danxiangScore < o.danxiangScore)
 		{
-			return -1;
+			return 1;
 		}else if(danxiangScore > o.danxiangScore)
 		{
-			return 1;
+			return -1;
 		}
 		
 		return 0;
