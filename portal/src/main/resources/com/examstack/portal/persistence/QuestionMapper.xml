@@ -172,6 +172,10 @@
 	
 	<!-- getPersonalityLst 获取性格测试的学派分支下的性格元素种类，为省事，把分数也放到model里面，但没有值 -->
 		<select id="getPersonalityLst" resultType="com.examstack.common.domain.personality.PersonalityScore">
-		select a.id Id, a.name, a.xuepaiId from et_charactor_type a;
+		select a.id Id, a.name, a.xuepaiId, a.summary from et_charactor_type a;
+	</select>
+	<!-- 根据ID获取相应的性格特征数据，主要是九型人格数据 -->
+	<select id="getPersonalityTestCharactorById" resultType="com.examstack.common.domain.personality.PersonalityCharactor">
+		select id, name,xuepaiId, summary from et_charactor_type where id=#{charactorId};
 	</select>
 </mapper>

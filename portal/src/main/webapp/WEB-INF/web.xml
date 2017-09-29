@@ -35,18 +35,18 @@
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
 	</filter-mapping>
+	<!-- spring框架在加载web配置文件的时候。首先加载的是context-param配置的内容 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml /WEB-INF/spring/security.xml /WEB-INF/spring/scheduler.xml</param-value>
 	</context-param>
+	<!-- 配置Spring容器，ContextLoaderListener实现了ServletContextListener接口，该类
+	作为Listener使用，在创建时查找web-inf下的applicationContext.xml文件，因此，如只有一个配置文件，并且
+	文件名也是applicationContext.xml，则只要在web.xml文件中增加以下配置即可 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-<!-- 	<listener>
-		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
-	</listener> -->
-	<!-- <listener> <listener-class>com.extr.listener.BaseListener</listener-class> 
-		</listener> -->
+
 	<servlet>
 		<servlet-name>Kaptcha</servlet-name>
 		<servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>

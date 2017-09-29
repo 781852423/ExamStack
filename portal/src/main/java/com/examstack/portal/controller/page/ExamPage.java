@@ -28,6 +28,7 @@ import com.examstack.common.domain.exam.ExamHistory;
 import com.examstack.common.domain.exam.ExamPaper;
 import com.examstack.common.domain.exam.Message;
 import com.examstack.common.domain.exam.UserQuestionHistory;
+import com.examstack.common.domain.personality.PersonalityCharactor;
 import com.examstack.common.domain.personality.PersonalityScore;
 import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.QuestionQueryResult;
@@ -193,8 +194,16 @@ public class ExamPage {
 	//}.getType());
 		Gson gson = new Gson();
 		List<PersonalityScore> PersonalityScoreList = gson.fromJson(PersonalityScoreListStr, new TypeToken<List<PersonalityScore>>(){}.getType());
-		
+		int totalScore = 0;
+		for(PersonalityScore item : PersonalityScoreList)
+		{
+			totalScore += item.getDanxiangScore();
+		}
+	
+		model.addAttribute("resultCharactorName",PersonalityScoreList.get(0).getName());
+		model.addAttribute("totalScore",totalScore);
 		model.addAttribute("PersonalityScoreList",PersonalityScoreList);
+		model.addAttribute("resultCharactorSummary",PersonalityScoreList.get(0).getSummary());
 		return "PersonalityTestReport";
 	}
 	/**

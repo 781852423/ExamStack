@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.examstack.common.domain.personality.PersonalityCharactor;
 import com.examstack.common.domain.personality.PersonalityScore;
 import com.examstack.common.domain.personality.PersonalityTestXuepai;
 import com.examstack.common.domain.question.Field;
@@ -110,4 +111,6 @@ public interface QuestionMapper {
 	public List<PersonalityTestXuepai> getPersonalityTestXuepai();
 
 	public List<PersonalityScore> getPersonalityLst(int xuepaiId);
+
+	public PersonalityCharactor getPersonalityTestCharactorById(int charactorId);
 }

@@ -609,4 +609,16 @@ a.navi-item-success{
 {
 	z-index:100;
 }
+.personalityTestreportParagrahTitle
+{
+	background-color: #5cb85c;
+    border-color: #4cae4c;
+    color: #fff;
+}
+
+.personalityTestreportSummary
+{
+    font-size: 14px;
+    font-weight: normal;
+}
 

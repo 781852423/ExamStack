@@ -12,6 +12,8 @@ public class PersonalityScore implements Serializable,Comparable<PersonalityScor
 	private static final long serialVersionUID = -679391215492956874L;
 	private Integer Id; // 表示et_charactor中的ID，主键
 	private String name;
+	private String summary;
+	
 	private Integer xuepaiId;
 	private Integer danxiangScore;
 	public Integer getId() {
@@ -55,6 +57,11 @@ public class PersonalityScore implements Serializable,Comparable<PersonalityScor
 		
 		return 0;
 	}
-	
+	public String getSummary() {
+		return summary;
+	}
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 	
 }

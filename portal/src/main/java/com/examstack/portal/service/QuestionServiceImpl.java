@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.examstack.common.domain.personality.PersonalityCharactor;
 import com.examstack.common.domain.personality.PersonalityTestXuepai;
 import com.examstack.common.domain.question.Field;
 import com.examstack.common.domain.question.KnowledgePoint;
@@ -128,6 +129,12 @@ public class QuestionServiceImpl implements QuestionService {
 		// TODO Auto-generated method stub
 		List<PersonalityTestXuepai> xiePaiList = questionMapper.getPersonalityTestXuepai();
 		return xiePaiList;
+	}
+
+	@Override
+	public PersonalityCharactor getPersonalityTestCharactor(int charactorId) {
+		// TODO Auto-generated method stub
+		return questionMapper.getPersonalityTestCharactorById(charactorId);
 	}
 
 }
