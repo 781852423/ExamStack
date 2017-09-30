@@ -59,5 +59,5 @@ public interface TrainingMapper {
 	 */
 	public List<TrainingSectionProcess> getTrainingSectionProcessListByUserId(@Param("userId") int userId,@Param("page") Page<TrainingSectionProcess> page);
 
-	public User2TrainingAuthMap getWatchAuthByUserIdAndTrainingId(int userid, int trainingId);
+	public User2TrainingAuthMap getWatchAuthByUserIdAndTrainingId(@Param("userid")int userid, @Param("trainingId") int trainingId);
 }

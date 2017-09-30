@@ -4,7 +4,7 @@
 <html>
 	<head>
 		
-		<title>对不起，出现错误！</title>
+		<title>不好意思，页面出现错误或者访问受限!</title>
 		<%@include file="include/head_files.jsp"%>
 		
 		<style>
@@ -74,8 +74,8 @@
 
 		<div class="full-slider">
 			<!-- Slider (Flex Slider) -->
-
-			<div class="container">
+            <h3 style="color: #FFF;">不好意思，页面出现错误或者访问受限,欢迎联系右上角在线客服解决</h3>
+			<div class="container errMsg">
 				${errorMsg }
 			</div>
 		</div>

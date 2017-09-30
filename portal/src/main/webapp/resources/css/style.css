@@ -2605,6 +2605,13 @@ ul.default-sidenav li.active a{
 pre {
 	white-space: pre-wrap;
 	word-wrap: break-word;
-	font-family: Microsoft YaHei,'ËÎÌå' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+	font-family: Microsoft YaHei,'ï¿½ï¿½ï¿½ï¿½' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+
+
+.errMsg
+{
+    color:rgb(255,255,255);
+    font-weight:bold;
 }
 

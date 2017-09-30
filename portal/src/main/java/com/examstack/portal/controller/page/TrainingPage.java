@@ -63,7 +63,7 @@ public class TrainingPage {
 		boolean isAuthorized = trainingService.checkWatchAuthByUserIdAndTrainingId(userInfo.getUserid(), trainingId);
 		if(!isAuthorized)
 		{
-			model.addAttribute("errorMsg", "不好意思，你需要申请培训材料的访问权限");
+			model.addAttribute("errorMsg", "不好意思，你的访问受限，你需要联系客服购买培训视屏、课件的观看权限");
 			return "error";
 		}
 		List<TrainingSection> sectionList = trainingService.getTrainingSectionByTrainingId(trainingId, null);
