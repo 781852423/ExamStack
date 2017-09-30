@@ -39,4 +39,9 @@
 		where c.user_id=#{userId} and c.section_id=a.section_id) process from et_training_section a,et_training b
 		where a.training_id=b.training_id
 	</select>
+	
+		<select id="getWatchAuthByUserIdAndTrainingId" resultType="com.examstack.common.domain.training.User2TrainingAuthMap">
+	     select a.id, a.userId, a.trainingId, a.isAllowWatch from user2TrainingAuthMap a 
+	     where a.userid=#{userid} and a.trainingId=#{trainingId} and a.isAllowWatch=1;
+	</select>
 </mapper>

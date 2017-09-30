@@ -118,16 +118,7 @@ request.setAttribute("leftMenuId",list[3]);
 												<td>培训列表</td>
 											</tr>
 										</thead>
-										<!-- <thead>
-											<tr>
-												<td></td>
-												<td style="display:none;">ID</td>
-												<td>培训名</td>
-												<td>创建时间</td>
-												<td>创建人</td>
-												<td>操作</td>
-											</tr>
-										</thead> -->
+
 										<tbody>
 											<c:forEach items="${trainingList }" var="item">
 												<tr>

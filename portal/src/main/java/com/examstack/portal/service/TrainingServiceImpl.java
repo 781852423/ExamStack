@@ -14,6 +14,7 @@ import com.examstack.common.domain.training.TrainingSectionProcess;
 import com.examstack.common.domain.training.UserTrainingHistory;
 import com.examstack.common.util.Page;
 import com.examstack.portal.persistence.TrainingMapper;
+import com.examstack.common.domain.training.User2TrainingAuthMap;
 
 @Service("trainingService")
 public class TrainingServiceImpl implements TrainingService {
@@ -62,5 +63,17 @@ public class TrainingServiceImpl implements TrainingService {
 			map.put(process.getTrainingId(), tmpList);
 		}
 		return map;
+	}
+
+	@Override
+	public boolean checkWatchAuthByUserIdAndTrainingId(int userid, int trainingId) {
+		// TODO Auto-generated method stub
+		User2TrainingAuthMap user2TrainingAuthMap= trainingMapper.getWatchAuthByUserIdAndTrainingId(userid,trainingId);
+		if(user2TrainingAuthMap != null)
+		{
+			return true;
+		}
+		
+		return false;
 	}
 }

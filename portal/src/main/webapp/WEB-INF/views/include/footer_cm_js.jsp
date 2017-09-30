@@ -29,3 +29,5 @@
     <!-- Bootstrap JS -->
     <script type="text/javascript"
         src="resources/bootstrap/js/bootstrap.min.js"></script>
+     <!--  all.js -->
+	<script type="text/javascript" src="resources/js/all.js?v=0712"></script>

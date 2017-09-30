@@ -13,6 +13,14 @@ public class PersonalityTestXuepai implements Serializable {
 	private static final long serialVersionUID = -2966360365441837397L;
 	private Integer id;
 	private String name;
+	private String summary;
+	
+	public String getSummary() {
+		return summary;
+	}
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 	public Integer getId() {
 		return id;
 	}

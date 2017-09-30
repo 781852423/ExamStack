@@ -28,8 +28,14 @@ public class TrainingPage {
 	
 	@Autowired
 	private TrainingService trainingService;
+	
 	@RequestMapping(value = "/training-list", method = RequestMethod.GET)
-	public String trainingListPage(Model model, HttpServletRequest request, @RequestParam(value="page",required=false,defaultValue="1") int page) {
+	public String questionListPage(Model model) {
+
+		return "redirect:training-list/1";
+	}
+	@RequestMapping(value = "/training-list/{page}", method = RequestMethod.GET)
+	public String trainingListPage(Model model, HttpServletRequest request, @PathVariable("page") int page) {
 		
 		Page<Training> pageModel = new Page<Training>();
 		pageModel.setPageNo(page);
@@ -42,12 +48,24 @@ public class TrainingPage {
 		return "training-list";
 	}
 	
+	/*
+	 * 在这里确定，是否要向该用户组授权播放该视屏
+	 */
 	@RequestMapping(value = "/student/training/{trainingId}", method = RequestMethod.GET)
 	public String trainingPage(Model model, HttpServletRequest request, @PathVariable("trainingId") int trainingId, @RequestParam(value="sectionId",required=false,defaultValue="-1") int sectionId) {
 		
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext()
 			    .getAuthentication()
 			    .getPrincipal();
+		/*
+		 *检查这个人有没有权限看视屏或者文件 
+		 */
+		boolean isAuthorized = trainingService.checkWatchAuthByUserIdAndTrainingId(userInfo.getUserid(), trainingId);
+		if(!isAuthorized)
+		{
+			model.addAttribute("errorMsg", "不好意思，你需要申请培训材料的访问权限");
+			return "error";
+		}
 		List<TrainingSection> sectionList = trainingService.getTrainingSectionByTrainingId(trainingId, null);
 		if(sectionList == null){
 			model.addAttribute("errorMsg", "章节不存在！");

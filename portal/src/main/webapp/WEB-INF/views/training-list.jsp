@@ -46,7 +46,6 @@
 										<td style="display:none;">ID</td>
 										<td>培训名称</td>
 										<td>描述</td>
-										<!-- <td>创建人</td> -->
 										<td>截止时间</td>
 										<td>操作</td>
 									</tr>
@@ -68,11 +67,6 @@
 											<td><fmt:formatDate value="${item.expTime}"
 													pattern="yyyy-MM-dd" /></td>
 											
-											<%-- <td>${item.trainingDesc }</td> --%>
-											<%-- <td><fmt:formatDate value="${item.createTime}"
-													pattern="yyyy-MM-dd" /></td> --%>
-										<%-- 	<td><fmt:formatDate value="${item.expTime}"
-													pattern="yyyy-MM-dd" /></td> --%>
 											<td ><a class="btn btn-success approved-btn" data-id="${item.trainingId }" href="student/training/${item.trainingId }">参加培训</a></td>
 
 										</tr>
@@ -94,5 +88,6 @@
 		</div>
 
 		 <%@include file="include/footer_cm_js.jsp" %>
+		 <script type="text/javascript" src="resources/js/training-list.js"></script>
 	</body>
 </html>

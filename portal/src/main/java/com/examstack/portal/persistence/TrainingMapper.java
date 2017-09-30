@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.examstack.common.domain.training.Training;
 import com.examstack.common.domain.training.TrainingSection;
 import com.examstack.common.domain.training.TrainingSectionProcess;
+import com.examstack.common.domain.training.User2TrainingAuthMap;
 import com.examstack.common.domain.training.UserTrainingHistory;
 import com.examstack.common.util.Page;
 
@@ -57,4 +58,6 @@ public interface TrainingMapper {
 	 * @return
 	 */
 	public List<TrainingSectionProcess> getTrainingSectionProcessListByUserId(@Param("userId") int userId,@Param("page") Page<TrainingSectionProcess> page);
+
+	public User2TrainingAuthMap getWatchAuthByUserIdAndTrainingId(int userid, int trainingId);
 }

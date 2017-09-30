@@ -2601,3 +2601,10 @@ ul.default-sidenav li.active a{
 	cursor: pointer;
 	color: rgb(102, 102, 102);
 }
+ 
+pre {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	font-family: Microsoft YaHei,'ËÎÌו' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+

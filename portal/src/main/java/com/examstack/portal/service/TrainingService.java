@@ -6,6 +6,7 @@ import java.util.Map;
 import com.examstack.common.domain.training.Training;
 import com.examstack.common.domain.training.TrainingSection;
 import com.examstack.common.domain.training.TrainingSectionProcess;
+import com.examstack.common.domain.training.User2TrainingAuthMap;
 import com.examstack.common.domain.training.UserTrainingHistory;
 import com.examstack.common.util.Page;
 
@@ -54,4 +55,6 @@ public interface TrainingService {
 	 * @return
 	 */
 	public Map<Integer, List<TrainingSectionProcess>> getTrainingSectionProcessMapByUserId(int userId);
+
+	public boolean checkWatchAuthByUserIdAndTrainingId(int userid, int trainingId);
 }
