@@ -10,6 +10,7 @@
 
 	<!-- 标注哪些页面不需要安全策略 ，静态资源和登录相关-->
 	<security:http pattern="/user-login-page" security="none" />
+	<security:http pattern="/users/online" security="none" />
 	<security:http pattern="/resources/**" security="none" />
 	
 	<security:http use-expressions="true"
@@ -25,7 +26,7 @@
 		<security:custom-filter position="FORM_LOGIN_FILTER"
 			ref="securityFilter" />
 		<security:logout logout-url="/j_spring_security_logout"
-			logout-success-url="/home" delete-cookies="true" />
+			logout-success-url="/home" delete-cookies="true" invalidate-session="true" />
 		<security:session-management
 			invalid-session-url="/user-login-page"
 			session-authentication-error-url="/user-login-page">

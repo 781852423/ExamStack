@@ -134,6 +134,10 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 			if((expiredTimeInMillis > 0 ) &&  (expiredTimeInMillis < System.currentTimeMillis())){
 				throw new AuthenticationServiceException("用户账户已经过期，请联系客服修改->首页上部菜单点击/在线客服/按钮");
 			}
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("username", user.getUserName());
+
 			return authentication;
 		}
 		

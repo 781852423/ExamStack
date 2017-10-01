@@ -183,7 +183,7 @@
 		<session-timeout>120</session-timeout>
 	</session-config>
 	
-	<error-page>
+	   <error-page>
             <error-code>404</error-code>
             <location>/WEB-INF/views/error.jsp</location>
         </error-page>
@@ -203,4 +203,8 @@
             <error-code>400</error-code>
             <location>/WEB-INF/views/error.jsp</location>
         </error-page>
+        <!-- 配置监听器，监听Session的建立和销毁等动作 -->
+        <listener>
+            <listener-class>com.examstack.listener.SessionListener</listener-class>
+        </listener>
 </web-app>

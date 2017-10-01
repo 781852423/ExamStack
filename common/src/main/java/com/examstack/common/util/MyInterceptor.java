@@ -1,8 +1,10 @@
 package com.examstack.common.util;
 
+import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.logging.Log;
@@ -19,7 +21,12 @@ import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
 import java.sql.Connection;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 @Intercepts({
@@ -27,7 +34,7 @@ import java.sql.Connection;
 		Connection.class
 	})
 })
-public class MyInterceptor implements Interceptor {
+public class MyInterceptor implements Interceptor{
 
 	private Page<?> page;
 	private static Log log = LogFactory.getLog(MyInterceptor.class);
