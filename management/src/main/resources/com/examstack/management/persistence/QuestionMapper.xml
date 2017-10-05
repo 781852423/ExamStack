@@ -326,7 +326,7 @@
 	</select>
 	
 	<select id="getQuestionParentIdAndTitleDescList" resultType="com.examstack.common.domain.question.QuestionParentIdAndTitleDesc">
-        select a.id  parentId,left(a.name,10)  titleDesc from et_question_parent a limit 0,5;;
+        select a.id  parentId,left(a.name,20)  titleDesc from et_question_parent a order by a.id desc limit 0,5;
     </select>
     
     <select id="getGroup2FieldByGroupId" resultType="com.examstack.common.domain.question.Group2Field">
