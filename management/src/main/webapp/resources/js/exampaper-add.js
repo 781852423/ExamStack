@@ -237,8 +237,8 @@ exampaper_add = {
 				$(".add-update-exampaper-scope .form-message").text("至少选择一个知识点");
 				$("#point-to-select").addClass("has-error");
 				result = false;
-			} else if ($("#point-to-select option").length > 10) {
-				$(".add-update-exampaper-scope .form-message").text("知识点数量不应该超过10个");
+			} else if ($("#point-to-select option").length > 20) {
+				$(".add-update-exampaper-scope .form-message").text("知识点数量不应该超过20个");
 				$("#point-to-select").addClass("has-error");
 				result = false;
 			}
