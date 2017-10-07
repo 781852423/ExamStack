@@ -1410,9 +1410,12 @@ public class QuestionAdapter {
 	private void setQuestionBody(StringBuilder sb)
 	{
 		// 先把parent题干的内容展示
-					sb.append("<p class=\"question-body-text\">").append(this.getParentContentTitle());
+					sb.append("<p class=\"question-body-text\">");
+					sb.append("<div class=\"parentQuestion\">").
+					append(this.getParentContentTitle());
 					if ((this.questionParentContent != null) && (this.questionParentContent.getTitleImg() != null))
 					{
+						
 						if (!this.questionParentContent.getTitleImg().trim().equals(""))
 							{
 							sb.append(
@@ -1422,6 +1425,7 @@ public class QuestionAdapter {
 									.append("\" />");
 							}
 					}
+					sb.append("</div>");
 					// 再展示question自己的title和image
 					sb.append("<br>"+questionContent.getTitle());
 					if (questionContent.getTitleImg() != null)
