@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.examstack.common.domain.exam.AnswerSheetItem;
 import com.examstack.common.domain.exam.ExamPaper;
 import com.examstack.common.domain.question.Field;
 import com.examstack.common.domain.question.QuestionQueryResult;
@@ -59,13 +60,22 @@ public class ExamPaperPageAdmin {
 	 * @param request
 	 * @return
 	 */
+//	@RequestMapping(value = "/admin/exampaper/exampaper-add", method = RequestMethod.GET)
+//	private String examPaperAddPage(Model model, HttpServletRequest request){
+//		
+//		List<Field> fieldList = questionService.getAllField(null);
+//		model.addAttribute("fieldList", fieldList);
+//		return "exampaper-add";
+//	}
+
 	@RequestMapping(value = "/admin/exampaper/exampaper-add", method = RequestMethod.GET)
 	private String examPaperAddPage(Model model, HttpServletRequest request){
 		
 		List<Field> fieldList = questionService.getAllField(null);
 		model.addAttribute("fieldList", fieldList);
-		return "exampaper-add";
+		return "exampaper-add2";
 	}
+	
 	
 	/**
 	 * 修改试卷
@@ -74,6 +84,7 @@ public class ExamPaperPageAdmin {
 	 * @param exampaperId
 	 * @return
 	 */
+	/*
 	@RequestMapping(value = "/admin/exampaper/exampaper-edit/{exampaperId}", method = RequestMethod.GET)
 	private String examPaperEditPage(Model model, HttpServletRequest request, @PathVariable int exampaperId){
 		String strUrl = "http://" + request.getServerName() // 服务器地址
@@ -85,10 +96,37 @@ public class ExamPaperPageAdmin {
 			Gson gson = new Gson();
 			List<QuestionQueryResult> questionList = gson.fromJson(examPaper.getContent(), new TypeToken<List<QuestionQueryResult>>(){}.getType());
 			for(QuestionQueryResult question : questionList){
-				/*AnswerSheetItem as = new AnswerSheetItem();
+				AnswerSheetItem as = new AnswerSheetItem();
 				as.setAnswer(question.getAnswer());
 				as.setQuestion_type_id(question.getQuestionTypeId());
-				as.setPoint(question.getQuestionPoint());*/
+				as.setPoint(question.getQuestionPoint());
+				QuestionAdapter adapter = new QuestionAdapter(question,strUrl);
+				sb.append(adapter.getStringFromXML());
+			}
+		}
+		
+		model.addAttribute("htmlStr", sb);
+		model.addAttribute("exampaperid", exampaperId);
+		model.addAttribute("exampapername", examPaper.getName());
+		return "exampaper-edit";
+	}*/
+	
+	
+	@RequestMapping(value = "/admin/exampaper/exampaper-edit/{exampaperId}", method = RequestMethod.GET)
+	private String examPaperEditPage(Model model, HttpServletRequest request, @PathVariable int exampaperId){
+		String strUrl = "http://" + request.getServerName() // 服务器地址
+				+ ":" + request.getServerPort() + "/";
+		
+		ExamPaper examPaper = examPaperService.getExamPaperById(exampaperId);
+		StringBuilder sb = new StringBuilder();
+		if(examPaper.getContent() != null && !examPaper.getContent().equals("")){
+			Gson gson = new Gson();
+			List<QuestionQueryResult> questionList = gson.fromJson(examPaper.getContent(), new TypeToken<List<QuestionQueryResult>>(){}.getType());
+			for(QuestionQueryResult question : questionList){
+				AnswerSheetItem as = new AnswerSheetItem();
+				as.setAnswer(question.getAnswer());
+				as.setQuestionTypeId(question.getQuestionTypeId());
+				as.setPoint(question.getQuestionPoint());
 				QuestionAdapter adapter = new QuestionAdapter(question,strUrl);
 				sb.append(adapter.getStringFromXML());
 			}
@@ -99,7 +137,6 @@ public class ExamPaperPageAdmin {
 		model.addAttribute("exampapername", examPaper.getName());
 		return "exampaper-edit";
 	}
-	
 	/**
 	 * 预览试卷
 	 * @param model
