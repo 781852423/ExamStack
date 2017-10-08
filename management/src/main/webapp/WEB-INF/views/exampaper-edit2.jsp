@@ -142,7 +142,7 @@ request.setAttribute("leftMenuId",list[3]);
 											</div>
 											<div style="margin-top: 5px;">
 												<span>试卷总分：</span><span id="exampaper-total-point" style="margin-right:20px;"></span>
-												<span id="add-more-qt-to-paper"><i class="small-icon fa fa-plus-square" title="添加选项"></i><span>增加更多题目</span></span>
+												
 											</div>
 											<div style="float: right;position: relative;top: -50px;">
 											<button class="btn btn-danger save-paper-btn"><i class="fa fa-save"></i>保存试卷</button>
@@ -151,9 +151,13 @@ request.setAttribute("leftMenuId",list[3]);
 									</div>
 									<ul id="exampaper-body" style="padding:0px;">
 										<c:forEach items="${paperParts}" var="PaperPart">
-                                            <div class="paperPart" id="PaperPart.id">
-                                               <a><h3>PaperPart.name</h3></a>
-                                               <h4>PaperPart.summary</h4>
+                                            <div class="paperPart" id="${PaperPart.id}" style="border:1px solid red">
+                                               <h3>${ PaperPart.name}</h3>
+                                               <h4>${PaperPart.summary}</h4>
+                                               <span id="add-more-qt-to-paper">
+                                                   <i class="small-icon fa fa-plus-square" title="添加选项"></i>
+                                                   <span>增加更多题目</span>
+                                               </span>
                                             </div>
                                         </c:forEach>
 									</ul>
