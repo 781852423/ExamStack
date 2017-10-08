@@ -2,7 +2,13 @@ package com.examstack.common.domain.exam;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+/**
+ * 
+ * @author Administrator
+ * 2017-10-8修改本类，添加List<paperPart>的类型，表示每个试卷由不同的部分组成
+ */
 public class ExamPaper implements Serializable {
 
 	private static final long serialVersionUID = -3878176097815638534L;
@@ -26,6 +32,16 @@ public class ExamPaper implements Serializable {
 	protected String paper_type;
 	protected int field_id;
 	protected int field_name;
+
+	protected List<PaperPart> paperParts;
+	
+	public List<PaperPart> getPaperParts() {
+		return paperParts;
+	}
+
+	public void setPaperParts(List<PaperPart> paperParts) {
+		this.paperParts = paperParts;
+	}
 
 	public int getField_id() {
 		return field_id;

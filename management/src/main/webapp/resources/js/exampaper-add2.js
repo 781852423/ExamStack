@@ -16,8 +16,13 @@ exampaper_add = {
 				var partName =$('#partName').val();
 				var partSummary = $('#partSummary').val();
 				var pointPerQuestion = $('#pointPerQuestion').val();
+				var questionNumber = $('#questionNumber').val();
 				// 添加到table里面
-				
+				addTr2('partsTable',partName,partSummary,pointPerQuestion,questionNumber);
+				$('#partName').val('');
+				$('#partSummary').val('');
+				$('#pointPerQuestion').val('');
+				 $('#questionNumber').val('');
 			});
 			$("#form-exampaper-add").submit(function() {
 				
@@ -40,7 +45,7 @@ exampaper_add = {
 								return false;
 							if (message.result == "success") {
 								util.success("添加成功", function() {
-									document.location.href = document.getElementsByTagName('base')[0].href + util.getCurrentRole() + '/exampaper/exampaper-edit/' + message.generatedId;
+									// document.location.href = document.getElementsByTagName('base')[0].href + util.getCurrentRole() + '/exampaper/exampaper-edit/' + message.generatedId;
 								});
 							} else {
 								util.error("操作失败请稍后尝试:" + message.result);
@@ -176,8 +181,8 @@ exampaper_add = {
 				$(".add-update-exampapername input").focus();
 				$(".add-update-exampapername input").addClass("has-error");
 				return false;
-			} else if (name.length > 10) {
-				$(".add-update-exampapername .form-message").text("内容过长，请保持在10个字符以内");
+			} else if (name.length > 50) {
+				$(".add-update-exampapername .form-message").text("内容过长，请保持在50个字符以内");
 				$(".add-update-exampapername input").focus();
 				$(".add-update-exampapername input").addClass("has-error");
 				return false;
@@ -296,6 +301,22 @@ exampaper_add = {
 			
 			paperParam.questionKnowledgePointRate = rateMap;
 			
+			// 添加parts
+			var parts = new Array();
+			// 便利table
+			$('#partsTable tbody').find('tr').each(function(){
+				var tdArr = $(this).children();
+				var PaperPart = new Object();
+				PaperPart.name = tdArr.eq(1).text();
+				PaperPart.summary = tdArr.eq(2).text();
+				PaperPart.pointPerQuestion = tdArr.eq(3).text();
+				PaperPart.questionCount = tdArr.eq(4).text();
+				
+				parts.push(PaperPart);
+			});
+			
+			paperParam.parts=parts;
+			
 			return paperParam;
 		},
 		
@@ -311,6 +332,54 @@ exampaper_add = {
 		
 
 };
+
+
+  
+ function delTr(ckb){
+    //获取选中的复选框，然后循环遍历删除
+    var ckbs=$("input[name="+ckb+"]:checked");
+    if(ckbs.size()==0){
+       alert("要删除指定行，需选中要删除的行！");
+       return;
+    }
+          ckbs.each(function(){
+             $(this).parent().parent().remove();
+          });
+ }
+  
+ /**
+  * 全选
+  * 
+  * allCkb 全选复选框的id
+  * items 复选框的name
+  */
+ function allCheck(allCkb, items){
+  $("#"+allCkb).click(function(){
+     $('[name='+items+']:checkbox').attr("checked", this.checked );
+  });
+ }
+  
+ ////////添加一行、删除一行测试方法///////
+ $(function(){
+  //全选
+  allCheck("allCkb", "ckb");
+ });
+  
+ function addTr2(tableId, partName, partSummary, pointPerQuestion,questionNumber){
+   var trHtml="<tr><td><input type='checkbox' name='ckb'/></td>" +
+   "<td>" + partName +"</td>" +
+   "<td>" + partSummary + "</td>" +
+    "<td>" + pointPerQuestion + "</td>" +
+    "<td>" + questionNumber + "</td>" +
+   "</tr>";
+   
+   $("#"+tableId+" tbody").append(trHtml);
+
+ }
+  
+ function delTr2(){
+    delTr('ckb');
+ }
 
 
 

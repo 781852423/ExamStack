@@ -254,30 +254,41 @@ request.setAttribute("leftMenuId",list[3]);
 									</fieldset>
 									<span class="form-message"></span>
 								</div>
-								<div class="form-line add-parts">
-									<span class="form-label"><span class="warning-label">*</span>题型名称(例如选择题/填空题/简答题等)：</span>
-									<input id="partName" type="text" class="df-input-narrow">
-									<span class="form-message"></span>
-									
-									<span class="form-label"><span class="warning-label">*</span>题型介绍(对该部分题型的介绍)：</span>
-									<input id="partSummary" type="text" class="df-input-narrow">
-									<span class="form-message"></span>
-									
-									<span class="form-label"><span class="warning-label">*</span>每题多少分：</span>
-									<input id="pointPerQuestion" type="text" class="df-input-narrow">
-									<span class="form-message"></span>
-									
-									<div>
-										<input value="确定添加" type="button" id="addPartBtn" class="btn btn-primary">
-									</div>
-									
-									<table id="partsTable">
-										<thead><th>名称</th><th>介绍</th><th>每道题分数</th></thead>
-										<tbody>
-										</tbody>
-									</table>
-									
-								</div>
+								<div class="add-parts" style="border:1px solid red">
+								
+								<div class="form-line">
+                                    <span class="form-label"><span class="warning-label">*</span>题型名称：</span>
+                                    <input id="partName" type="text" class="df-input-narrow">
+                                    <span class="form-message"></span>
+                                 </div>   
+                                 <div class="form-line">
+                                    <span class="form-label"><span class="warning-label">*</span>题型介绍：</span>
+                                    <input id="partSummary" type="text" class="df-input-narrow">
+                                    <span class="form-message"></span>
+                                  </div>  
+                                  <div class="form-line">   
+                                    <span class="form-label"><span class="warning-label">*</span>每题多少分：</span>
+                                    <input id="pointPerQuestion" type="text" class="df-input-narrow">
+                                    <span class="form-message"></span>
+                                    </div>   
+                                    <div class="form-line">   
+	                                    <span class="form-label"><span class="warning-label">*</span>题目数量：</span>
+	                                    <input id="questionNumber" type="text" class="df-input-narrow">
+	                                    <span class="form-message"></span>
+                                     </div>   
+                                    <div>
+                                        <input value="确定添加" type="button" id="addPartBtn" class="btn btn-primary">
+                                    </div>
+                                    
+                                    <table id="partsTable" class="table-striped table">
+                                        <thead><tr><th><input id="allCkb" type="checkbox" /></th><th>名称</th><th>介绍</th><th>每道题分数</th><th>题目数量</th><tr></thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <input type="button" onclick="delTr2()" value="删除" class="btn btn-danger">
+                                    
+                                </div>
+								
 								<div class="form-line">
 									<input value="下一步" type="submit" class="df-submit btn btn-info">
 								</div>

@@ -27,6 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.examstack.common.domain.exam.ExamPaper;
 import com.examstack.common.domain.exam.Paper;
+import com.examstack.common.domain.exam.Paper2Part;
+import com.examstack.common.domain.exam.PaperPart;
 import com.examstack.common.domain.question.QuestionContent;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.domain.question.QuestionStruts;
@@ -55,8 +57,38 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 
 	@Override
 	public void insertExamPaper(ExamPaper examPaper) {
-		// TODO Auto-generated method stub
+		// 根据examPaper再插入其他表中
 		examPaperMapper.insertExamPaper(examPaper);
+		
+		List<PaperPart> parts = examPaper.getPaperParts();
+		int paperId = examPaper.getId();
+		for(PaperPart pp : parts)
+		{
+			pp.setPaperId(paperId);
+		}
+		
+		// 插入这些试题组成部分的内容，但还没做与paper的关联
+		if(parts != null && parts.size() > 0)
+		{
+			for(PaperPart p : parts)
+			{
+				examPaperMapper.insertPaperPart(p);
+			}
+			
+		}
+			
+		//List<Paper2Part> p2plist = new ArrayList<Paper2Part>();
+		// 插入关联关系
+		for(PaperPart p2 : parts)
+		{
+			Paper2Part p2p = new Paper2Part();
+			p2p.setPaperId(p2.getPaperId());
+			p2p.setPaperPartId(p2.getId());
+			
+			examPaperMapper.insertPaper2PartRelation(p2p);
+			//p2plist.add(p2p);
+		}
+		
 	}
 
 	@Override
@@ -101,7 +133,12 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 	@Override
 	public ExamPaper getExamPaperById(int examPaperId) {
 		// TODO Auto-generated method stub
-		return examPaperMapper.getExamPaperById(examPaperId);
+		ExamPaper ep = new ExamPaper();
+		ep = examPaperMapper.getExamPaperById(examPaperId);
+		// 获取ep的parts
+		List<PaperPart> ppList= examPaperMapper.getParts(examPaperId);
+		ep.setPaperParts(ppList);
+		return ep;
 	}
 
 	@Override

@@ -44,13 +44,8 @@ public class ExamPaperActionAdmin {
 	@Autowired
 	private QuestionService questionService;
 
-	/**
-	 * 自动或者手动组卷(插入一张空试卷)
-	 * 
-	 * @param examPaperParam
-	 * @return
-	 */
-	@RequestMapping(value = "admin/exampaper-add", method = RequestMethod.POST)
+	
+	/*@RequestMapping(value = "admin/exampaper-add", method = RequestMethod.POST)
 	public @ResponseBody
 	Message createExamPaper(@RequestBody PaperCreatorParam param) {
 
@@ -67,6 +62,67 @@ public class ExamPaperActionAdmin {
 		examPaper.setIs_subjective(true);
 		
 		//手工组卷
+		if(param.getQuestionKnowledgePointRate().size() == 0){
+			try{
+				
+				examPaperService.insertExamPaper(examPaper);
+			}catch(Exception ex){
+				message.setResult(ex.getMessage());
+			}
+			message.setGeneratedId(examPaper.getId());
+			return message;
+		}
+		List<Integer> idList = new ArrayList<Integer>();
+
+		HashMap<Integer, Float> knowledgeMap = param
+				.getQuestionKnowledgePointRate();
+		Iterator<Integer> it = knowledgeMap.keySet().iterator();
+		while(it.hasNext()){
+			idList.add(it.next());
+		}
+
+		HashMap<Integer, HashMap<Integer, List<QuestionStruts>>> questionMap = questionService
+				.getQuestionStrutsMap(idList);
+		
+		try{
+			examPaperService.createExamPaper(questionMap, param.getQuestionTypeNum(),
+					param.getQuestionTypePoint(),
+					param.getQuestionKnowledgePointRate(), examPaper);
+			message.setGeneratedId(examPaper.getId());
+		}catch(Exception e){
+			//e.printStackTrace();
+			message.setResult(e.getMessage());
+		}
+		
+		
+		return message;
+	}*/
+	
+	/**
+	 * 自动或者手动组卷(插入一张空试卷)
+	 * 
+	 * @param examPaperParam
+	 * @return
+	 */
+	@RequestMapping(value = "admin/exampaper-add", method = RequestMethod.POST)
+	public @ResponseBody
+	Message createExamPaper(@RequestBody PaperCreatorParam param) {
+
+		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		System.out.println(param);
+		Message message = new Message();
+		ExamPaper examPaper = new ExamPaper();
+		examPaper.setName(param.getPaperName());
+		examPaper.setDuration(param.getTime());
+		examPaper.setPass_point(param.getPassPoint());
+		examPaper.setField_id(param.getPaperType());
+		examPaper.setCreator(userInfo.getUsername());
+		examPaper.setTotal_point(param.getPaperPoint());
+		examPaper.setIs_subjective(false);
+		examPaper.setPaperParts(param.getParts());
+		
+		//手工组卷,手工组卷完毕后直接返回
 		if(param.getQuestionKnowledgePointRate().size() == 0){
 			try{
 				
@@ -183,7 +239,7 @@ public class ExamPaperActionAdmin {
 		return message;
 	}
 	
-	@RequestMapping(value = "admin/exampaper/paper-delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/exampaper/paper-delete", method = RequestMethod.POST)
 	public @ResponseBody Message deleteExamPaper(@RequestBody Integer examPaperId){
 		Message message = new Message();
 		try{

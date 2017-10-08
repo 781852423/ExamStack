@@ -31,6 +31,22 @@
 		values
 		(#{name},#{group_id},#{content},#{duration},#{pass_point},#{summary},#{total_point},#{is_subjective},#{answer_sheet},#{creator},#{field_id});
 	</insert>
+	
+	<!-- 添加paper所述的part insertPaperParts -> delete s-->
+	<insert id="insertPaperPart" parameterType="com.examstack.common.domain.exam.PaperPart"
+        useGeneratedKeys="true" keyProperty="id">
+    	      
+	    insert into paperPart (name,pointPerQuestion,summary)   
+	    values (#{name},#{pointPerQuestion},#{summary}) 
+	   
+    </insert>
+    
+    <!-- 添加paper2part relation -->
+    <insert id="insertPaper2PartRelation" parameterType="com.examstack.common.domain.exam.Paper2Part"   
+    useGeneratedKeys="true" keyProperty="id">
+    insert into examPaper_2_part(paperId, paperPartId) values (#{paperId},#{paperPartId});
+    </insert>
+    
 	<select id="getExamPaperById" resultType="com.examstack.common.domain.exam.ExamPaper">
 		select id,name,content,duration,pass_point,total_point,status,summary,is_visible,answer_sheet,group_id from et_exam_paper
 		<where>
@@ -68,4 +84,13 @@
 	<delete id="deleteExamPaper">
 		delete from et_exam_paper where id=#{id} and status=0
 	</delete>
+	
+	<select id="getParts" resultType="com.examstack.common.domain.exam.PaperPart">
+        select id, name, pointPerQuestion, summary from paperPart where id in
+        (select paperPartId from examPaper_2_part
+        <where>
+            paperId = #{examPaperId}
+        </where>
+        );
+    </select>
 </mapper>

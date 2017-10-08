@@ -34,6 +34,7 @@ public class MenuPage {
 
 		List<MenuItem> list = new ArrayList<MenuItem>();
 
+		
 		if (userInfo != null) {
 			LinkedHashMap<String, MenuItem> map = userInfo.getMenuMap();
 			for (Map.Entry<String, MenuItem> entry : map.entrySet()) {

@@ -118,24 +118,12 @@ public class ExamPaperPageAdmin {
 				+ ":" + request.getServerPort() + "/";
 		
 		ExamPaper examPaper = examPaperService.getExamPaperById(exampaperId);
-		StringBuilder sb = new StringBuilder();
-		if(examPaper.getContent() != null && !examPaper.getContent().equals("")){
-			Gson gson = new Gson();
-			List<QuestionQueryResult> questionList = gson.fromJson(examPaper.getContent(), new TypeToken<List<QuestionQueryResult>>(){}.getType());
-			for(QuestionQueryResult question : questionList){
-				AnswerSheetItem as = new AnswerSheetItem();
-				as.setAnswer(question.getAnswer());
-				as.setQuestionTypeId(question.getQuestionTypeId());
-				as.setPoint(question.getQuestionPoint());
-				QuestionAdapter adapter = new QuestionAdapter(question,strUrl);
-				sb.append(adapter.getStringFromXML());
-			}
-		}
 		
-		model.addAttribute("htmlStr", sb);
+		// 展示题目的各个部分
+		model.addAttribute("paperParts", examPaper.getPaperParts());
 		model.addAttribute("exampaperid", exampaperId);
 		model.addAttribute("exampapername", examPaper.getName());
-		return "exampaper-edit";
+		return "exampaper-edit2";
 	}
 	/**
 	 * 预览试卷

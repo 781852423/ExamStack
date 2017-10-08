@@ -1,10 +1,12 @@
 package com.examstack.common.domain.exam;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PaperCreatorParam {
 
+	
 	/**
 	 * 试卷名
 	 */
@@ -38,6 +40,12 @@ public class PaperCreatorParam {
 	 */
 	private float paperPoint;
 	private int paperType;
+	
+	/*
+	 * 试卷的几个部分
+	 */
+	private List<PaperPart> parts;
+	
 	public int getPaperType() {
 		return paperType;
 	}
@@ -93,4 +101,23 @@ public class PaperCreatorParam {
 	public void setTime(int time) {
 		this.time = time;
 	}
+	
+	public List<PaperPart> getParts() {
+		return parts;
+	}
+	public void setParts(List<PaperPart> parts) {
+		this.parts = parts;
+	}
+	@Override
+	public String toString() {
+		return "PaperCreatorParam [paperName=" + paperName
+				+ ", questionTypeNum=" + questionTypeNum
+				+ ", questionTypePoint=" + questionTypePoint
+				+ ", questionKnowledgePointRate=" + questionKnowledgePointRate
+				+ ", paperDifficulty=" + paperDifficulty + ", passPoint="
+				+ passPoint + ", time=" + time + ", paperPoint=" + paperPoint
+				+ ", paperType=" + paperType + ", parts=" + parts + "]";
+	}
+	
+	
 }
