@@ -21,7 +21,7 @@ public class QuestionAdapter {
 	private QuestionQueryResult questionQueryResult;
 	private String baseUrl;
 
-	public String pointStrFormat(float point){
+	public String pointStrFormat(double point){
 		
 		if(point > (int)point){
 			return point + "";

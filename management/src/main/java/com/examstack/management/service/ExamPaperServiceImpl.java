@@ -336,4 +336,11 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 		// TODO Auto-generated method stub
 		return examPaperMapper.getPaperPartById(partId);
 	}
+
+	@Override
+	public void updateExamPartQuestions(PaperPart pp) {
+		
+		examPaperMapper.updateExamPartQuestions();
+		
+	}
 }

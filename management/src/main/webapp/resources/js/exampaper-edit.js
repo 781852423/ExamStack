@@ -240,45 +240,54 @@ var examing = {
 		},
 		
 		composeEntity : function composeEntity(){
-			var forms = $(".question");
-			var map = new Object();
-			forms.each(function(){
-				var question_point = $(this).find("span.question-point").text();
-				var question_id = $(this).find("span.question-id").text();
-				map[question_id] = question_point;
-			});
-			return map;
+			//先查找每个part,然后在对part下面的questionId找到
+			var parts = $("#exampaper-body").find('div.part');
+			var partObj = new Object();
+			var partObjArray = new Array();
+			
+			/**
+			 * 生成partObjArray对象，里面对象有两个属性：partId和questionIdList
+			 */
+			for(var index = 0; index < parts.length; index++)
+			{
+				var thisPart = $(parts[index]);
+				var partId = $(thisPart).attr('id');
+				partObj.id = partId;
+				var questions4part = $(thisPart).find('li.question');
+				var partQuestiodArray=new Array();
+				
+				for (var qIndex = 0; qIndex < questions4part.length; qIndex++)
+					{
+						var questionId = $(questions4part[qIndex]).find('span.question-id').text();
+						var Question = new Object();
+						Question.id=questionId;
+						partQuestiodArray.push(Question);
+					}
+				partObj.questions = partQuestiodArray;
+				
+				partObjArray.push(partObj);
+				partObj = new Object(); // 新生成对象
+			}
+			
+			
+		
+			return partObjArray;
 		},
 		// 试题保存
 		bindSavePaper : function bindSavePaper(){
 			var btn = $(".save-paper-btn");
 			btn.click(function(){
 				
-				var map = examing.composeEntity();
-				var count = 0;
-				for (var k in map) {
-				    if (map.hasOwnProperty(k)) {
-				       ++count;
-				    }
-				}
-				if(examing.getType($("#exampaper-total-point").text())=="float"){
-					util.error("总分不能有小数");
-					return false;
-				}
-				
-				
-				if(count!=  $(".question").length){
-					util.error("存在重复的题目，请检查");
-					return false;
-				}else{
-					var request = $.ajax({
+				var partObjArray = examing.composeEntity();
+				// 判断是否存在重复的题目，没有重复的，则继续往下
+				var request = $.ajax({
 						headers : {
 							'Accept' : 'application/json',
 							'Content-Type' : 'application/json'
 						},
 						type : "POST",
 						url : util.getCurrentRole() + '/exampaper/update-exampaper/' + $("#exampaper-id").text(),
-						data : JSON.stringify(map)
+						data : JSON.stringify(partObjArray)
 					});
 					
 					request.done(function(message,tst,jqXHR) {
@@ -311,7 +320,7 @@ var examing = {
 					util.notify("请选择需要添加的试题!");
 				}else{
 					var partId=$('#partIdSpanInModelDailog').text();
-					if(!isNaN(partId))
+					if(isNaN(partId))
 					{
 					  util.error("partId没有获取到，获取到的partId=" + partId +"不能添加成功");
 					  return false;

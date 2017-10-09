@@ -1,5 +1,7 @@
 package com.examstack.management.controller.action.admin;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -195,50 +197,34 @@ public class ExamPaperActionAdmin {
 		return returnList;
 	}
 	
+	/*
+	 * 根据前台js传过来的试题part参数（partId和questions(只有ID获取到了)进行接收，更新数据库的信息）
+	 * 这里不更新对应paper与part的关系，这些在创建paper时候就已经确定了，只对各个part对应questions做更新
+	 */
 	@RequestMapping(value = "/admin/exampaper/update-exampaper/{examPaperId}", method = RequestMethod.POST)
 	public @ResponseBody
 	Message exampaperOnUpdate(Model model,
 			@PathVariable("examPaperId") int examPaperId,
-			@RequestBody HashMap<Integer, Float> questionPointMap) {
-		
+			@RequestBody List<PaperPart> parts) {
 		
 		Message message = new Message();
 		try{
 			ExamPaper examPaper = new ExamPaper();
-			List<Integer> idList = new ArrayList<Integer>();
-			Iterator<Integer> it = questionPointMap.keySet().iterator();
-			float sum = 0;
-			while(it.hasNext()){
-				int key = it.next();
-				idList.add(key);
-			}
-			List<QuestionQueryResult> questionList = questionService.getQuestionDescribeListByIdList(idList);
-			AnswerSheet as = new AnswerSheet();
-			as.setExamPaperId(examPaperId);
-			List<AnswerSheetItem> asList = new ArrayList<AnswerSheetItem>();
-			for(QuestionQueryResult q : questionList){
-				AnswerSheetItem item = new AnswerSheetItem();
-				item.setAnswer(q.getAnswer());
-				item.setQuestionId(q.getQuestionId());
-				item.setPoint(questionPointMap.get(q.getQuestionId()));
-				item.setQuestionTypeId(q.getQuestionTypeId());
-				q.setQuestionPoint(questionPointMap.get(q.getQuestionId()));
-				sum += questionPointMap.get(q.getQuestionId());
-				asList.add(item);
-			}
-			as.setPointMax(sum);
-			as.setAnswerSheetItems(asList);
-			Gson gson = new Gson();
-			String content = gson.toJson(questionList);
-			String answerSheet = gson.toJson(as);
-			examPaper.setAnswer_sheet(answerSheet);
-			examPaper.setContent(content);
-			examPaper.setTotal_point(sum);
+			// 总分根据每个part计算得来
+			int totalPoint = 0;
+			
+		    for(PaperPart pp : parts)
+		    {
+		    	PaperPart tmp = examPaperService.getPaperPartById(pp.getId());
+		    	totalPoint += tmp.getQuestionCount()*tmp.getPointPerQuestion();
+		    	
+		    	// 主要是更新每个part对应的题目
+				examPaperService.updateExamPartQuestions(pp); // 删掉之前的关联，然后插入新的关联关系
+		    }
+			examPaper.setTotal_point(totalPoint);
 			examPaper.setId(examPaperId);
 			
-			//这两个属性区别试卷是否可用
-			//examPaper.setIs_subjective(true);
-			//examPaper.setStatus(1);
+			
 			examPaperService.updateExamPaper(examPaper);
 		}catch(Exception e){
 			message.setResult(e.getLocalizedMessage());
