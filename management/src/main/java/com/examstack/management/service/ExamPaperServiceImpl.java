@@ -330,4 +330,10 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public PaperPart getPaperPartById(int partId) {
+		// TODO Auto-generated method stub
+		return examPaperMapper.getPaperPartById(partId);
+	}
 }

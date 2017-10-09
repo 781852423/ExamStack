@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.examstack.common.domain.exam.ExamPaper;
 import com.examstack.common.domain.question.QuestionStruts;
 import com.examstack.common.util.Page;
+import com.examstack.common.domain.exam.PaperPart;;
 
 public interface ExamPaperService {
 	/**
@@ -72,4 +73,5 @@ public interface ExamPaperService {
 	 * @throws Exception
 	 */
 	public void generateDoc(ExamPaper examPaper,String path) throws Exception;
+	public PaperPart getPaperPartById(int partId);
 }

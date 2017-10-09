@@ -62,16 +62,9 @@ var examing = {
 		 * 切换考题类型事件
 		 */
 		bindQuestionFilter : function bindQuestionFilter() {
-			// $(".exampaper-filter-item").bi
-//	 		
-			// $("span.efi-selected").find(".efi-qcode").text();
+
 			$("#exampaper-desc").delegate("span.exampaper-filter-item", "click", function() {
 				var qtype = $(this).find(".efi-qcode").text();
-				// var questions = $("li.question");
-				// questions.hide();
-				// $("#exampaper-body ." + qtype).show();
-				// $(".exampaper-filter-item").removeClass("efi-selected");
-				// $(this).addClass("efi-selected");
 				examing.doQuestionFilt(qtype);
 			});
 		},
@@ -91,30 +84,6 @@ var examing = {
 		 * 更新题目简介信息
 		 */
 		updateSummery : function updateSummery() {
-			if ($(".question").length === 0) {
-				$("#exampaper-desc").empty();
-				$("#exampaper-total-point").text(0);
-				return false;
-			}
-			var questiontypes = this.questiontypes;
-			
-			var summery = "";
-			for (var i = 0; i < questiontypes.length; i++) {
-				var question_sum_q = $("." + questiontypes[i].code).length;
-				if (question_sum_q == 0) {
-					continue;
-				} else {
-					summery = summery + "<span class=\"exampaper-filter-item efi-" + questiontypes[i].code + "\">" 
-					+ questiontypes[i].name + "[<span class=\"efi-tno\">" 
-					+ $("." + questiontypes[i].code).length + "</span>]<span class=\"efi-qcode\" style=\"display:none;\">" 
-					+ questiontypes[i].code + "</span></span>";
-				}
-			}
-			$("#exampaper-desc").html(summery);
-			
-			examing.doQuestionFilt($($(".exampaper-filter-item")[0]).find(".efi-qcode").text());
-			
-			
 			examing.refreshTotalPoint();
 		},
 		/**
@@ -136,7 +105,7 @@ var examing = {
 		},
 		
 		/**
-		 *切换到指定的题型 
+		 *切换到指定的题目部分
 		 */
 		doQuestionFilt : function doQuestionFilt(questiontype) {
 			
@@ -176,7 +145,10 @@ var examing = {
 		
 		bindOpenModal : function bindOpenModal(){
 				$("#add-more-qt-to-paper").click(function() {
-				
+					// 定位此时的partId,在本行第二个td
+					var partId= $(this).parent().parent().children("td").eq(1).text();
+					console.log('获取到该partId=' + partId);
+				     $("#partIdSpanInModelDailog").text(partId);
 					$("#question-selector-modal").modal({backdrop:true,keyboard:true});
 				
 				});
@@ -277,7 +249,7 @@ var examing = {
 			});
 			return map;
 		},
-		
+		// 试题保存
 		bindSavePaper : function bindSavePaper(){
 			var btn = $(".save-paper-btn");
 			btn.click(function(){
@@ -328,6 +300,7 @@ var examing = {
 		
 		bindAddQustionToPaper : function bindAddQustionToPaper(){
 			$("button#add-list-to-exampaper").click(function() {
+				
 				var values = new Array();
 				var checkboxs = $("#qt-selector-iframe").contents().find("table input:checked");
 				$.each(checkboxs, function() {
@@ -337,13 +310,19 @@ var examing = {
 				if (checkboxs.length == 0) {
 					util.notify("请选择需要添加的试题!");
 				}else{
+					var partId=$('#partIdSpanInModelDailog').text();
+					if(!isNaN(partId))
+					{
+					  util.error("partId没有获取到，获取到的partId=" + partId +"不能添加成功");
+					  return false;
+					}
 					var request = $.ajax({
 						headers : {
 							'Accept' : 'application/json',
 							'Content-Type' : 'application/json'
 						},
 						type : "POST",
-						url : util.getCurrentRole() + '/exampaper/get-question-detail4add',
+						url : util.getCurrentRole() + '/exampaper/get-question-detail4add/'+partId,
 						data : JSON.stringify(values)
 					});
 					request.done(function(questionList,tst,jqXHR) {
@@ -351,19 +330,12 @@ var examing = {
 						for(var i=0;i<questionList.length;i++){
 							var question=questionList[i];
 							var deletehtml = "<a class=\"tmp-ques-remove\" title=\"删除此题\">删除</a>";
-							
-							/*var current_answer = "";
-							if(question.question_type_id==3){
-								current_answer = question.answer == "T"? "正确":"错误";
-							}else{
-								current_answer = question.answer;
-							}*/
-							
-							/*var answerhtml = "<div class=\"tmp-correct-answer\"><span>正确答案：</span><p>"+ current_answer +"</p></div>";*/
+                            
 							var newquestion = $('<div/>').html(question.content).contents();
-						/*	newquestion.append(answerhtml);*/
 							newquestion.find(".question-title").append(deletehtml);
-							$("#exampaper-body").append(newquestion);
+							// 找到此行对应的partId，根据此id，定位到相应div
+							var partId=$('#partIdSpanInModelDailog').text();
+							$("#exampaper-body div#"+partId+" div.questions4part").append(newquestion);
 						}
 						examing.refreshNavi();
 						examing.addNumber();

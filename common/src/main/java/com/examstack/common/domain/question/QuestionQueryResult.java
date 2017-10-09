@@ -10,7 +10,7 @@ public class QuestionQueryResult {
 	private String referenceName;
 	private String pointName;
 	private String fieldName;
-	private float questionPoint;
+	private double questionPoint;
 	private String examingPoint;
 	private int knowledgePointId;
 	
@@ -41,10 +41,10 @@ public class QuestionQueryResult {
 	public void setExamingPoint(String examingPoint) {
 		this.examingPoint = examingPoint;
 	}
-	public float getQuestionPoint() {
+	public double getQuestionPoint() {
 		return questionPoint;
 	}
-	public void setQuestionPoint(float questionPoint) {
+	public void setQuestionPoint(double questionPoint) {
 		this.questionPoint = questionPoint;
 	}
 	public int getQuestionTypeId() {

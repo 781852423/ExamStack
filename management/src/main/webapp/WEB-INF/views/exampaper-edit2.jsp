@@ -148,19 +148,40 @@ request.setAttribute("leftMenuId",list[3]);
 											<button class="btn btn-danger save-paper-btn"><i class="fa fa-save"></i>保存试卷</button>
 											</div>
 										</div>
+										<table class="table">
+										<thead><tr><th>选择</th><th>ID</th><th>名称</th><th>每题分数</th><th>题目数量</th><th>添加题目</th></tr></thead>
+										<tbody>
+											<c:forEach items="${paperParts}" var="PaperPart">
+											 <tr>
+											     <td><input type='checkbox' name='ckb'/></td>
+											     <td>${PaperPart.id}</td>
+	                                             <td>${PaperPart.name}</td>
+	                                             <td>${PaperPart.pointPerQuestion}</td>
+	                                             <td>${PaperPart.questionCount}</td>
+	                                             <td>
+	                                             	  <span id="add-more-qt-to-paper">
+	                                                     <i class="small-icon fa fa-plus-square" title="添加选项"></i>
+	                                                     <span>增加更多题目</span>
+	                                                   </span>
+	                                             </td>	                                          
+	                                           </tr>
+	                                        </c:forEach>
+										</tbody>
+										</table>
 									</div>
-									<ul id="exampaper-body" style="padding:0px;">
+									<div id="exampaper-body" style="padding:0px;">
 										<c:forEach items="${paperParts}" var="PaperPart">
-                                            <div class="paperPart" id="${PaperPart.id}" style="border:1px solid red">
-                                               <h3>${ PaperPart.name}</h3>
-                                               <h4>${PaperPart.summary}</h4>
-                                               <span id="add-more-qt-to-paper">
-                                                   <i class="small-icon fa fa-plus-square" title="添加选项"></i>
-                                                   <span>增加更多题目</span>
-                                               </span>
-                                            </div>
-                                        </c:forEach>
-									</ul>
+										<div id="${PaperPart.id}" class="part">
+											<div class="partTitle">
+											 <h3>${PaperPart.name}</h3>
+											 <h3>${PaperPart.pointPerQuestion}</h3>
+											</div>
+										    <div class="questions4part">
+										    </div>
+										</div>
+										</c:forEach>
+										
+									</div>
 									<div id="exampaper-footer">
 										<div id="question-navi">
 										<div id="question-navi-controller">
@@ -185,7 +206,7 @@ request.setAttribute("leftMenuId",list[3]);
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						        <h4 class="modal-title">选择试题添加到试卷中</h4>
+						        <h4 class="modal-title">选择试题添加到该试题PartId：</h4><span id="partIdSpanInModelDailog"></span>
 						      </div>
 						      <div class="modal-body">
 						        <iframe  id="qt-selector-iframe" src="<%=list[1]%>/question/question-list/filterdialog-0-0-0-0-1.html" width="100%"></iframe>

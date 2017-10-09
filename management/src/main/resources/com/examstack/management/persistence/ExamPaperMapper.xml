@@ -93,4 +93,8 @@
         </where>
         );
     </select>
+    
+    <select id="getPaperPartById" resultType="com.examstack.common.domain.exam.PaperPart">
+    	select id, name, pointPerQuestion, summary from paperPart where id=#{partId}
+    </select>
 </mapper>

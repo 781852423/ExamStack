@@ -27,6 +27,7 @@ import com.examstack.common.domain.exam.AnswerSheetItem;
 import com.examstack.common.domain.exam.ExamPaper;
 import com.examstack.common.domain.exam.Message;
 import com.examstack.common.domain.exam.PaperCreatorParam;
+import com.examstack.common.domain.exam.PaperPart;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.domain.question.QuestionStruts;
 import com.examstack.common.util.QuestionAdapter;
@@ -160,13 +161,16 @@ public class ExamPaperActionAdmin {
 	}
 	
 	/**
-	 * 批量添加试题
+	 * 批量添加试题，返回json字符串对象
 	 * @param model
 	 * @param idList
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/exampaper/get-question-detail4add", method = RequestMethod.POST)
-	public @ResponseBody List<QuestionQueryResult> getQuestion5add(Model model, HttpServletRequest request, @RequestBody List<Integer> idList) {
+	@RequestMapping(value = "/admin/exampaper/get-question-detail4add/{partId}", method = RequestMethod.POST)
+	public @ResponseBody List<QuestionQueryResult> getQuestion5add(
+			Model model, HttpServletRequest request, 
+			@PathVariable("partId") int partId,
+			@RequestBody List<Integer> idList) {
 		String strUrl = "http://" + request.getServerName() // 服务器地址
 				+ ":" + request.getServerPort() + "/";
 		
@@ -179,9 +183,12 @@ public class ExamPaperActionAdmin {
 		while(it.hasNext()){
 			idList.add(it.next());
 		}
+		// 每道题的分数由part决定
+		PaperPart pp = examPaperService.getPaperPartById(partId);
 		List<QuestionQueryResult> returnList = questionService.getQuestionDescribeListByIdList(idList);
 		
 		for(QuestionQueryResult question : returnList){
+			question.setQuestionPoint(pp.getPointPerQuestion());
 			QuestionAdapter adapter = new QuestionAdapter(question, strUrl);
 			question.setContent(adapter.getStringFromXML());
 		}

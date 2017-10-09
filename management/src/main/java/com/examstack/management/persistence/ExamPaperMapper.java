@@ -28,4 +28,6 @@ public interface ExamPaperMapper {
 	public void insertPaper2PartRelation(Paper2Part p2p);
 
 	public List<PaperPart> getParts(int examPaperId);
+
+	public PaperPart getPaperPartById(int partId);
 }

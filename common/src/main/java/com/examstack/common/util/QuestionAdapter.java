@@ -1407,12 +1407,19 @@ public class QuestionAdapter {
 		return sb.toString();
 	}
 	
+	/**
+	 * 以parentQuestion的div作为其背景材料
+	 * @param sb
+	 */
 	private void setQuestionBody(StringBuilder sb)
 	{
 		// 先把parent题干的内容展示
 					sb.append("<p class=\"question-body-text\">");
-					sb.append("<div class=\"parentQuestion\">").
-					append(this.getParentContentTitle());
+					sb.append("<div class=\"parentQuestion\">"); //如果parentId和之前的题目相同，则页面就隐藏整个parentQuestion部分的div
+					sb.append("<span style=\"display:none\" class=\"parentIdSpan\">" + this.questionQueryResult.getParentId() +"</span>");
+					
+					sb.append(this.getParentContentTitle());
+					
 					if ((this.questionParentContent != null) && (this.questionParentContent.getTitleImg() != null))
 					{
 						
