@@ -159,7 +159,7 @@ request.setAttribute("leftMenuId",list[3]);
 	                                             <td>${PaperPart.pointPerQuestion}</td>
 	                                             <td>${PaperPart.questionCount}</td>
 	                                             <td>
-	                                             	  <span id="add-more-qt-to-paper">
+	                                             	  <span class="add-more-qt-to-paper">
 	                                                     <i class="small-icon fa fa-plus-square" title="添加选项"></i>
 	                                                     <span>增加更多题目</span>
 	                                                   </span>
@@ -170,17 +170,7 @@ request.setAttribute("leftMenuId",list[3]);
 										</table>
 									</div>
 									<div id="exampaper-body" style="padding:0px;">
-										<c:forEach items="${paperParts}" var="PaperPart">
-										<div id="${PaperPart.id}" class="part">
-											<div class="partTitle">
-											 <h3>${PaperPart.name}</h3>
-											 <h3>${PaperPart.pointPerQuestion}</h3>
-											</div>
-										    <div class="questions4part">
-										    </div>
-										</div>
-										</c:forEach>
-										
+										${paperPartsStr}
 									</div>
 									<div id="exampaper-footer">
 										<div id="question-navi">

@@ -179,17 +179,19 @@ public class ExamPaper implements Serializable {
 		this.pass_point = pass_point;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "ExamPaper [id=" + id + ", name=" + name + ", content="
-				+ content + ", duration=" + duration + ", pass_point="
-				+ pass_point + ", total_point=" + total_point
-				+ ", create_time=" + create_time + ", status=" + status
-				+ ", subjective=" + is_subjective + ", summary=" + summary
-				+ ", is_visible=" + is_visible + ", group_id=" + group_id + "]";
+		return "ExamPaper [id=" + id + ", name=" + name + ", content=" + content + ", duration=" + duration
+				+ ", pass_point=" + pass_point + ", total_point=" + total_point + ", create_time=" + create_time
+				+ ", status=" + status + ", summary=" + summary + ", is_visible=" + is_visible + ", group_id="
+				+ group_id + ", is_subjective=" + is_subjective + ", answer_sheet=" + answer_sheet + ", creator="
+				+ creator + ", paper_type=" + paper_type + ", field_id=" + field_id + ", field_name=" + field_name
+				+ ", paperParts=" + paperParts + "]";
 	}
+
+
+
+	
 	
 	
 	

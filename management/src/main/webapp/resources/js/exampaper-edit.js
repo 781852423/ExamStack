@@ -144,7 +144,7 @@ var examing = {
 		}),
 		
 		bindOpenModal : function bindOpenModal(){
-				$("#add-more-qt-to-paper").click(function() {
+				$("span.add-more-qt-to-paper").click(function() {
 					// 定位此时的partId,在本行第二个td
 					var partId= $(this).parent().parent().children("td").eq(1).text();
 					console.log('获取到该partId=' + partId);
@@ -303,8 +303,8 @@ var examing = {
 					request.fail(function(jqXHR, textStatus) {
 						util.error("操作失败请稍后尝试");
 					});
-				}
-			});
+				})
+
 		},
 		
 		bindAddQustionToPaper : function bindAddQustionToPaper(){

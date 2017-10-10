@@ -151,9 +151,9 @@ public class QuestionAdapter {
 			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
 			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
 			sb.append("<span>[单选题]</span>");
-			sb.append("<span class=\"question-point-content\">");
+/*			sb.append("<span class=\"question-point-content\">");
 			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("</span>");
+			sb.append("</span>");*/
 			sb.append("<span class=\"question-id\" style=\"display:none;\">")
 					.append(questionQueryResult.getQuestionId())
 					.append("</span>");
@@ -190,10 +190,10 @@ public class QuestionAdapter {
 			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
 			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
 			sb.append("<span>[多选题]</span>");
-			sb.append("<span class=\"question-point-content\">");
+/*			sb.append("<span class=\"question-point-content\">");
 			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("</span>");
-			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("</span>");*/
+	
 			sb.append("<span class=\"question-id\" style=\"display:none;\">")
 					.append(questionQueryResult.getQuestionId())
 					.append("</span>");
@@ -231,10 +231,10 @@ public class QuestionAdapter {
 			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
 			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
 			sb.append("<span>[判断题]</span>");
-			sb.append("<span class=\"question-point-content\">");
+/*			sb.append("<span class=\"question-point-content\">");
 			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("</span>");
-			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("</span>");*/
+
 			sb.append("<span class=\"question-id\" style=\"display:none;\">")
 					.append(questionQueryResult.getQuestionId())
 					.append("</span>");
@@ -258,10 +258,10 @@ public class QuestionAdapter {
 			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
 			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
 			sb.append("<span>[填空题]</span>");
-			sb.append("<span class=\"question-point-content\">");
+/*			sb.append("<span class=\"question-point-content\">");
 			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("</span>");
-			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("</span>");*/
+		
 			sb.append("<span class=\"question-id\" style=\"display:none;\">")
 					.append(questionQueryResult.getQuestionId())
 					.append("</span>");
@@ -276,10 +276,10 @@ public class QuestionAdapter {
 			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
 			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
 			sb.append("<span>[简答题]</span>");
-			sb.append("<span class=\"question-point-content\">");
+/*			sb.append("<span class=\"question-point-content\">");
 			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("</span>");
-			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("</span>");*/
+
 			sb.append("<span class=\"question-id\" style=\"display:none;\">")
 					.append(questionQueryResult.getQuestionId())
 					.append("</span>");
@@ -294,10 +294,10 @@ public class QuestionAdapter {
 			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
 			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
 			sb.append("<span>[论述题]</span>");
-			sb.append("<span class=\"question-point-content\">");
+/*			sb.append("<span class=\"question-point-content\">");
 			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("</span>");
-			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("</span>");*/
+
 			sb.append("<span class=\"question-id\" style=\"display:none;\">")
 					.append(questionQueryResult.getQuestionId())
 					.append("</span>");
@@ -312,10 +312,10 @@ public class QuestionAdapter {
 			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
 			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
 			sb.append("<span>[计算题]</span>");
-			sb.append("<span class=\"question-point-content\">");
+/*			sb.append("<span class=\"question-point-content\">");
 			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("</span>");
-			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("</span>");*/
+			
 			sb.append("<span class=\"question-id\" style=\"display:none;\">")
 					.append(questionQueryResult.getQuestionId())
 					.append("</span>");
@@ -330,10 +330,10 @@ public class QuestionAdapter {
 			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
 			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
 			sb.append("<span>[名词解释]</span>");
-			sb.append("<span class=\"question-point-content\">");
+/*			sb.append("<span class=\"question-point-content\">");
 			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("</span>");
-			//sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
+			sb.append("</span>");*/
+		
 			sb.append("<span class=\"question-id\" style=\"display:none;\">")
 					.append(questionQueryResult.getQuestionId())
 					.append("</span>");
@@ -348,9 +348,9 @@ public class QuestionAdapter {
 			sb.append("<span class=\"knowledge-point-id\" style=\"display: none;\">").append(questionQueryResult.getKnowledgePointId()).append("</span>");
 			sb.append("<span class=\"question-type-id\" style=\"display: none;\">").append(questionQueryResult.getQuestionTypeId()).append("</span>");
 			sb.append("<span>[单选题]</span>");
-			sb.append("<span class=\"question-point-content\">");
+/*			sb.append("<span class=\"question-point-content\">");
 			sb.append("<span>(</span><span class=\"question-point\">").append(pointStrFormat(questionQueryResult.getQuestionPoint())).append("</span><span>分)</span>");
-			sb.append("</span>");
+			sb.append("</span>");*/
 			sb.append("<span class=\"question-id\" style=\"display:none;\">")
 					.append(questionQueryResult.getQuestionId())
 					.append("</span>");
@@ -409,12 +409,8 @@ public class QuestionAdapter {
 			
 		sb.append("</div>");
 		sb.append("<div class=\"answer-desc-detail\">");
-		sb.append("<label class=\"label label-info\">");
-		sb.append("<i class=\"fa fa-paw\"></i><span> 来源</span>");
-		sb.append("</label>");
 		sb.append("<div class=\"answer-desc-content\">");
 		sb.append("<p>");
-		sb.append(questionQueryResult.getReferenceName());
 		sb.append("</p></div></div>");
 		sb.append("<div class=\"answer-desc-detail\">");
 		sb.append("<label class=\"label label-warning\">");

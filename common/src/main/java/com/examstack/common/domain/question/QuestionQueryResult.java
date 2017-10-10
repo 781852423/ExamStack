@@ -17,6 +17,24 @@ public class QuestionQueryResult {
 	private Integer parentId; // 添加题干的说明  on Sep 2, 2017
 	private String parentContent;// 添加题干的说明  on Sep 2, 2017
 	
+	public QuestionQueryResult(Question question)
+	{
+		this.questionId = question.getId();
+		this.content=question.getContent();
+		this.answer = question.getAnswer();
+		this.analysis = question.getAnalysis();
+		this.questionTypeId = question.getQuestion_type_id();
+		this.referenceName = question.getReferenceName();
+		this.pointName = question.getPointName();
+		this.fieldName = question.getFieldName();
+		this.questionPoint = question.getPoints();
+		this.examingPoint = question.getExamingPoint();
+		this.parentId = question.getParentId();
+		this.parentContent = question.getParentContent();
+	}
+	
+	public QuestionQueryResult(){}
+	
 	public Integer getParentId() {
 		return parentId;
 	}

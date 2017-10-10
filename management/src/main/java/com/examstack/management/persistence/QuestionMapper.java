@@ -27,6 +27,8 @@ public interface QuestionMapper {
 			@Param("filter") QuestionFilter filter,
 			@Param("page") Page<Question> page);
 
+	public List<Question> getQuestionListByIdList(
+			@Param("ids") List<Integer> ids);
 	
 	public List<Field> getAllField(@Param("page") Page<Field> fields);
 

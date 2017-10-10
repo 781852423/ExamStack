@@ -16,6 +16,7 @@ import com.examstack.common.domain.exam.AnswerSheetItem;
 import com.examstack.common.domain.exam.ExamPaper;
 import com.examstack.common.domain.question.Field;
 import com.examstack.common.domain.question.QuestionQueryResult;
+import com.examstack.common.util.ExamPaperAdapter;
 import com.examstack.common.util.Page;
 import com.examstack.common.util.PagingUtil;
 import com.examstack.common.util.QuestionAdapter;
@@ -111,16 +112,21 @@ public class ExamPaperPageAdmin {
 		return "exampaper-edit";
 	}*/
 	
-	
+	/*
+	 * 展示题目
+	 */
 	@RequestMapping(value = "/admin/exampaper/exampaper-edit/{exampaperId}", method = RequestMethod.GET)
 	private String examPaperEditPage(Model model, HttpServletRequest request, @PathVariable int exampaperId){
 		String strUrl = "http://" + request.getServerName() // 服务器地址
 				+ ":" + request.getServerPort() + "/";
-		
+		// 获取试卷对象
 		ExamPaper examPaper = examPaperService.getExamPaperById(exampaperId);
-		
-		// 展示题目的各个部分
+		// 调用试卷对象的adapter，去生成试卷的列表单
+		ExamPaperAdapter epa = new ExamPaperAdapter(examPaper);
+		// 展示题目的各个部分paperParts
 		model.addAttribute("paperParts", examPaper.getPaperParts());
+		model.addAttribute("paperPartsStr", epa.getPaper2String(strUrl));
+		// 针对paperPart的adapter
 		model.addAttribute("exampaperid", exampaperId);
 		model.addAttribute("exampapername", examPaper.getName());
 		return "exampaper-edit2";

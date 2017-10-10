@@ -75,4 +75,5 @@ public interface ExamPaperService {
 	public void generateDoc(ExamPaper examPaper,String path) throws Exception;
 	public PaperPart getPaperPartById(int partId);
 	public void updateExamPartQuestions(PaperPart pp);
+	public List<PaperPart> getPaperPartsByPaperId(int exampaperId);
 }

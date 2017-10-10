@@ -251,5 +251,20 @@ public class Question implements Serializable {
 	public void setCharactorTypeList(List<charactorType> charactorTypeList) {
 		this.charactorTypeList = charactorTypeList;
 	}
+	@Override
+	public String toString() {
+		return "Question [id=" + id + ", name=" + name + ", content=" + content + ", duration=" + duration + ", points="
+				+ points + ", is_visible=" + is_visible + ", create_time=" + create_time + ", last_modify="
+				+ last_modify + ", answer=" + answer + ", group_id=" + group_id + ", question_type_id="
+				+ question_type_id + ", expose_times=" + expose_times + ", right_times=" + right_times
+				+ ", wrong_times=" + wrong_times + ", difficulty=" + difficulty + ", analysis=" + analysis
+				+ ", questionContent=" + questionContent + ", parentContent=" + parentContent
+				+ ", questionParentContent=" + questionParentContent + ", pointName=" + pointName + ", fieldName="
+				+ fieldName + ", questionTypeName=" + questionTypeName + ", pointList=" + pointList + ", referenceName="
+				+ referenceName + ", creator=" + creator + ", examingPoint=" + examingPoint + ", keyword=" + keyword
+				+ ", tags=" + tags + ", charactorTypes=" + charactorTypes + ", tagList=" + tagList
+				+ ", charactorTypeList=" + charactorTypeList + ", knowledgePoint=" + knowledgePoint + ", parentId="
+				+ parentId + "]";
+	}
 	
 }

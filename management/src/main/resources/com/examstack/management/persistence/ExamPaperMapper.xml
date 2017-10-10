@@ -75,9 +75,8 @@
 			total_point=#{total_point},
 		</if>
 		<if test="status != -1">
-			status=#{status},
+			status=#{status}
 		</if>
-		id=#{id}
 		where id=#{id}
 	</update>
 	
@@ -85,16 +84,30 @@
 		delete from et_exam_paper where id=#{id} and status=0
 	</delete>
 	
-	<select id="getParts" resultType="com.examstack.common.domain.exam.PaperPart">
-        select id, name, pointPerQuestion, summary from paperPart where id in
-        (select paperPartId from examPaper_2_part
-        <where>
-            paperId = #{examPaperId}
-        </where>
-        );
-    </select>
+	
     
     <select id="getPaperPartById" resultType="com.examstack.common.domain.exam.PaperPart">
-    	select id, name, pointPerQuestion, summary from paperPart where id=#{partId}
+    	select id, name, pointPerQuestion, summary,questionCount from paperPart where id=#{partId}
+    </select>
+    
+    <insert id="updateExamPartQuestions" parameterType="com.examstack.common.domain.exam.PaperPart">
+		
+		replace into
+		examPart_2_question(examPartId,questionId)
+		values
+		<foreach collection="part.questions" item="item" separator=",">
+			(#{part.id},#{item.id})
+		</foreach>
+		
+	</insert>
+	
+	<select id="getPaperPartsByPaperId" resultType="com.examstack.common.domain.exam.PaperPart">
+		select id, name, pointPerQuestion, summary,questionCount from paperPart
+		where id in (select paperPartId from examPaper_2_part where paperId=#{exampaperId});
+	
+	</select>
+    
+    <select id="getQuestionIdListByPaperPartId" resultType="java.lang.Integer">
+    	select questionId from examPart_2_question where examPartId = #{paperPartId};
     </select>
 </mapper>

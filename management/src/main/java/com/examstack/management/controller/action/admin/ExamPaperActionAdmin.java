@@ -1,7 +1,5 @@
 package com.examstack.management.controller.action.admin;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -227,7 +225,7 @@ public class ExamPaperActionAdmin {
 			
 			examPaperService.updateExamPaper(examPaper);
 		}catch(Exception e){
-			message.setResult(e.getLocalizedMessage());
+			message.setResult(e.getMessage());
 		}
 		return message;
 	}

@@ -29,6 +29,7 @@ import com.examstack.common.domain.exam.ExamPaper;
 import com.examstack.common.domain.exam.Paper;
 import com.examstack.common.domain.exam.Paper2Part;
 import com.examstack.common.domain.exam.PaperPart;
+import com.examstack.common.domain.question.Question;
 import com.examstack.common.domain.question.QuestionContent;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.domain.question.QuestionStruts;
@@ -130,13 +131,17 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 
 	}
 
+	/*
+	 * 已经获取part内容，以及part下面所属的questions内容
+	 * @see com.examstack.management.service.ExamPaperService#getExamPaperById(int)
+	 */
 	@Override
 	public ExamPaper getExamPaperById(int examPaperId) {
 		// TODO Auto-generated method stub
 		ExamPaper ep = new ExamPaper();
 		ep = examPaperMapper.getExamPaperById(examPaperId);
-		// 获取ep的parts
-		List<PaperPart> ppList= examPaperMapper.getParts(examPaperId);
+		// 获取ep的parts getPaperPartsByPaperId
+		List<PaperPart> ppList= getPaperPartsByPaperId(examPaperId);
 		ep.setPaperParts(ppList);
 		return ep;
 	}
@@ -340,7 +345,31 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 	@Override
 	public void updateExamPartQuestions(PaperPart pp) {
 		
-		examPaperMapper.updateExamPartQuestions();
-		
+		examPaperMapper.updateExamPartQuestions(pp);
+	
+	}
+
+	/*
+	 * 根据paperId获取其不同的part，同时附上其questions内容
+	 * @see com.examstack.management.service.ExamPaperService#getPaperPartsByPaperId(int)
+	 */
+	@Override
+	public List<PaperPart> getPaperPartsByPaperId(int exampaperId) {
+		// TODO Auto-generated method stub
+		List<PaperPart> parts = examPaperMapper.getPaperPartsByPaperId(exampaperId);
+		// 获取questions
+		for(PaperPart pp : parts)
+		{
+			List<Integer> questionIds = examPaperMapper.getQuestionIdListByPaperPartId(pp.getId());
+			// 根据ID，获取question
+			List<Question> questions = null;
+			if(questionIds != null && questionIds.size() > 0)
+			{
+				questions = questionMapper.getQuestionListByIdList(questionIds);
+			}
+			
+			pp.setQuestions(questions);
+		}
+		return parts;
 	}
 }
