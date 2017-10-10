@@ -22,7 +22,7 @@ exampaper_add = {
 				$('#partName').val('');
 				$('#partSummary').val('');
 				$('#pointPerQuestion').val('');
-				 $('#questionNumber').val('');
+				$('#questionNumber').val('');
 			});
 			$("#form-exampaper-add").submit(function() {
 				

@@ -50,13 +50,22 @@ var examing = {
 		},
 		/**
 		 * 对题目重新编号排序
+		 * 对一类题目，其顺序从1重新开始
 		 */
 		addNumber : function addNumber() {
-			var questions = $("li.question");
-
-			questions.each(function(index) {
-				$(this).find(".question-no").text(index + 1 + ".");
-			});
+			
+			var parts = $("#exampaper-body div.part");
+			var partLength = parts.length;
+			for(var pIndex = 0; pIndex < partLength; pIndex++)
+			{
+				// 浏览每一部分的题目
+				var currentPart = parts[pIndex];
+				var questions = $(currentPart).find("li.question");
+			
+				questions.each(function(index) {
+					$(this).find(".question-no").text(index + 1 + ".");
+				});
+			}
 		},
 		/**
 		 * 切换考题类型事件
@@ -72,13 +81,24 @@ var examing = {
 		 * 刷新试题导航
 		 */
 		refreshNavi : function refreshNavi() {
-			$("#question-navi-content").empty();
-			var questions = $("li.question");
-
-			questions.each(function(index) {
-				var btnhtml = "<a class=\"question-navi-item\">" + (index + 1) + "</a>";
-				$("#question-navi-content").append(btnhtml);
-			});
+			$("div.mftm_con").empty();
+			// 浏览每个part
+			var parts = $("#exampaper-body div.part");
+			var partLength = parts.length;
+			for(var pIndex = 0; pIndex < partLength; pIndex++)
+			{
+				// 浏览每一部分的题目
+				var currentPart = parts[pIndex];
+				var questions = $(currentPart).find("li.question");
+				var partId = $(currentPart).attr("id");
+				partId = partId.substr(partId.lastIndexOf('_')+1);
+				questions.each(function(index) {
+					var questionId = $(this).find(".question-id").text();
+					var btnhtml = "<a class=\"question-navi-item\"  data-href=\"#" +questionId+ "\">" + (index + 1) + "</a>";
+					$("#question-navi-content div.mkrf_item#answersheet_"+partId + " div.mftm_con").append(btnhtml);
+				});
+			}
+			
 		},
 		/**
 		 * 更新题目简介信息
@@ -252,6 +272,7 @@ var examing = {
 			{
 				var thisPart = $(parts[index]);
 				var partId = $(thisPart).attr('id');
+				partId = partId.substr(partId.lastIndexOf('_')+1);
 				partObj.id = partId;
 				var questions4part = $(thisPart).find('li.question');
 				var partQuestiodArray=new Array();
@@ -344,7 +365,7 @@ var examing = {
 							newquestion.find(".question-title").append(deletehtml);
 							// 找到此行对应的partId，根据此id，定位到相应div
 							var partId=$('#partIdSpanInModelDailog').text();
-							$("#exampaper-body div#"+partId+" div.questions4part").append(newquestion);
+							$("#exampaper-body div#part_"+partId+" div.questions4part").append(newquestion);
 						}
 						examing.refreshNavi();
 						examing.addNumber();

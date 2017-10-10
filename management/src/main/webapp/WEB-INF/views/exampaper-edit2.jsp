@@ -32,14 +32,14 @@ request.setAttribute("leftMenuId",list[3]);
 		<link href="resources/css/exam.css" rel="stylesheet">
 		<link href="resources/chart/morris.css" rel="stylesheet">
 		<style>
-			#add-more-qt-to-paper{
+			.add-more-qt-to-paper{
 				cursor: pointer;
 				color: #1ba1e2;
 			}
-			#add-more-qt-to-paper:hover{
+			.add-more-qt-to-paper:hover{
 				color:#ff7f74;
 			}
-			#add-more-qt-to-paper i{
+			.add-more-qt-to-paper i{
 				color: #47a447;
 				cursor: pointer;
 				margin-right:5px;	
@@ -149,15 +149,16 @@ request.setAttribute("leftMenuId",list[3]);
 											</div>
 										</div>
 										<table class="table">
-										<thead><tr><th>选择</th><th>ID</th><th>名称</th><th>每题分数</th><th>题目数量</th><th>添加题目</th></tr></thead>
+										<thead><tr><th>选择</th><th>ID</th><th>名称</th><th>每题分数</th><th>设计题目数量</th><th>已经添加题目数量</th><th>添加题目</th></tr></thead>
 										<tbody>
 											<c:forEach items="${paperParts}" var="PaperPart">
 											 <tr>
 											     <td><input type='checkbox' name='ckb'/></td>
 											     <td>${PaperPart.id}</td>
-	                                             <td>${PaperPart.name}</td>
+	                                             <td><a data-href="#part_${PaperPart.id}">${PaperPart.name}</a></td>
 	                                             <td>${PaperPart.pointPerQuestion}</td>
 	                                             <td>${PaperPart.questionCount}</td>
+	                                             <td></td>
 	                                             <td>
 	                                             	  <span class="add-more-qt-to-paper">
 	                                                     <i class="small-icon fa fa-plus-square" title="添加选项"></i>
@@ -169,17 +170,37 @@ request.setAttribute("leftMenuId",list[3]);
 										</tbody>
 										</table>
 									</div>
+									
+									
 									<div id="exampaper-body" style="padding:0px;">
+									<div class="mk_optionsbox">
+                                    <h2>切换题目</h2>
+                                        <div class="mk_options">
+                                               <c:forEach items="${paperParts}" var="PaperPart">
+                                                <a data-href="#part_${PaperPart.id}">${PaperPart.name}</a>
+                                               </c:forEach>                                 
+                                        </div>
+                                    </div>
 										${paperPartsStr}
 									</div>
 									<div id="exampaper-footer">
 										<div id="question-navi">
-										<div id="question-navi-controller">
-											<i class="fa fa-arrow-circle-down"></i>
-											<span>答题卡[点击可展开]</span>
-										</div>
-										<div id="question-navi-content">
-										</div>
+											<div id="question-navi-controller">
+												<i class="fa fa-arrow-circle-down"></i>
+												<span>答题卡[点击可展开]</span>
+											</div>
+											<!-- 答题卡的内容 ,分段表示-->
+											<div id="question-navi-content">
+											    <c:forEach items="${paperParts}" var="PaperPart">
+                                                     <div class="mkrf_item" id="answersheet_${PaperPart.id }">
+                                                         <div class="mftm_tt">${PaperPart.name }
+                                                              <span class="mf_tip">(共${PaperPart.questionCount}题)</span>
+                                                         </div>
+                                                         <div class="mftm_con">
+                                                         </div>
+                                                     </div>
+                                                </c:forEach>
+											</div>
 										</div>
 										
 										

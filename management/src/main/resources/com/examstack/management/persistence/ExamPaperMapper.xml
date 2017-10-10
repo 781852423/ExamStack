@@ -36,8 +36,8 @@
 	<insert id="insertPaperPart" parameterType="com.examstack.common.domain.exam.PaperPart"
         useGeneratedKeys="true" keyProperty="id">
     	      
-	    insert into paperPart (name,pointPerQuestion,summary)   
-	    values (#{name},#{pointPerQuestion},#{summary}) 
+	    insert into paperPart (name,pointPerQuestion,summary,questionCount)   
+	    values (#{name},#{pointPerQuestion},#{summary},#{questionCount}) 
 	   
     </insert>
     

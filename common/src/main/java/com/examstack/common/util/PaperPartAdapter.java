@@ -37,10 +37,12 @@ public class PaperPartAdapter {
 		List<Question> questions = paperPart.getQuestions();
 		
 		// 先把此部分的title放进去
-		sb.append("<div id=\"" + paperPart.getId() + "\" class=\"part\">");
-		sb.append("<div class=\"partTitle\">");
-		sb.append("<span class=\"partName\">"+paperPart.getName() + "</span>");
-		sb.append("<span class=\"partSummary\">"+paperPart.getSummary() + "</span>");
+		sb.append("<div id=\"part_" + paperPart.getId() + "\" class=\"part\">");
+			sb.append("<div class=\"partTitle\">");
+			sb.append(paperPart.getName());
+			sb.append("<span class=\"partSummary\">"+paperPart.getSummary() + "每题"+paperPart.getPointPerQuestion()  + "分</span>");
+			sb.append("<span class=\"mkfs_rgt\">" + "</span>");
+			sb.append("</div>");
 		sb.append("<div class=\"questions4part\">");
 		// 下面开始铺试题
 		if(paperPart.getQuestions() != null && paperPart.getQuestions().size() >0)
