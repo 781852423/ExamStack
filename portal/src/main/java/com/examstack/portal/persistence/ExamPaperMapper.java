@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.examstack.common.domain.exam.ExamPaper;
+import com.examstack.common.domain.exam.PaperPart;
 import com.examstack.common.util.Page;
 
 public interface ExamPaperMapper {
@@ -20,4 +21,8 @@ public interface ExamPaperMapper {
 	public void deleteExamPaper(int id);
 	
 	public List<ExamPaper> getEnabledExamPaperList(@Param("userName") String userName,@Param("page") Page<ExamPaper> page);
+
+	public List<PaperPart> getPaperPartsByPaperId(int examPaperId);
+
+	public List<Integer> getQuestionIdListByPaperPartId(Integer paperPartId);
 }

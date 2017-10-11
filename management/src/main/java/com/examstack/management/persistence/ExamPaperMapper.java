@@ -35,4 +35,6 @@ public interface ExamPaperMapper {
 	public List<PaperPart> getPaperPartsByPaperId(int exampaperId);
 
 	public List<Integer> getQuestionIdListByPaperPartId(Integer paperPartId);
+
+	public void deletePartQuestionsByPartId(Integer partId);
 }

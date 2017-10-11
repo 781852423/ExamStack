@@ -113,4 +113,6 @@ public interface QuestionMapper {
 	public List<PersonalityScore> getPersonalityLst(int xuepaiId);
 
 	public PersonalityCharactor getPersonalityTestCharactorById(int charactorId);
+
+	public List<Question> getQuestionListByIdList(@Param("ids") List<Integer> ids);
 }

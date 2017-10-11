@@ -92,7 +92,8 @@
     
     <insert id="updateExamPartQuestions" parameterType="com.examstack.common.domain.exam.PaperPart">
 		
-		replace into
+		
+		insert into
 		examPart_2_question(examPartId,questionId)
 		values
 		<foreach collection="part.questions" item="item" separator=",">
@@ -100,6 +101,10 @@
 		</foreach>
 		
 	</insert>
+	
+	<delete id="deletePartQuestionsByPartId">
+		delete from examPart_2_question where examPartId=#{partId};
+	</delete>
 	
 	<select id="getPaperPartsByPaperId" resultType="com.examstack.common.domain.exam.PaperPart">
 		select id, name, pointPerQuestion, summary,questionCount from paperPart

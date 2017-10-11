@@ -61,4 +61,14 @@
 	<delete id="deleteExamPaper">
 		delete from et_exam_paper where id=#{id} and status=0
 	</delete>
+	
+		<select id="getPaperPartsByPaperId" resultType="com.examstack.common.domain.exam.PaperPart">
+		select id, name, pointPerQuestion, summary,questionCount from paperPart
+		where id in (select paperPartId from examPaper_2_part where paperId=#{examPaperId});
+	
+	</select>
+    
+    <select id="getQuestionIdListByPaperPartId" resultType="java.lang.Integer">
+    	select questionId from examPart_2_question where examPartId = #{paperPartId};
+    </select>
 </mapper>

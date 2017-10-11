@@ -155,7 +155,7 @@ request.setAttribute("leftMenuId",list[3]);
 											 <tr>
 											     <td><input type='checkbox' name='ckb'/></td>
 											     <td>${PaperPart.id}</td>
-	                                             <td><a data-href="#part_${PaperPart.id}">${PaperPart.name}</a></td>
+	                                             <td><a href="#part_${PaperPart.id}" class="partNavi">${PaperPart.name}</a></td>
 	                                             <td>${PaperPart.pointPerQuestion}</td>
 	                                             <td>${PaperPart.questionCount}</td>
 	                                             <td></td>
@@ -177,7 +177,7 @@ request.setAttribute("leftMenuId",list[3]);
                                     <h2>切换题目</h2>
                                         <div class="mk_options">
                                                <c:forEach items="${paperParts}" var="PaperPart">
-                                                <a data-href="#part_${PaperPart.id}">${PaperPart.name}</a>
+                                                <a href="#part_${PaperPart.id}" class="partNavi">${PaperPart.name}</a>
                                                </c:forEach>                                 
                                         </div>
                                     </div>

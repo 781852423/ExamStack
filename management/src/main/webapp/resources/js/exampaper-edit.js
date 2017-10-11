@@ -10,8 +10,6 @@ var examing = {
 			this.addNumber();
 
 			this.updateSummery();
-			this.bindQuestionFilter();
-			this.bindfocus();
 			this.bindOpenModal();
 			this.addRemoveBtn();
 			this.bindRemoveQustionFromPaper();
@@ -67,16 +65,7 @@ var examing = {
 				});
 			}
 		},
-		/**
-		 * 切换考题类型事件
-		 */
-		bindQuestionFilter : function bindQuestionFilter() {
 
-			$("#exampaper-desc").delegate("span.exampaper-filter-item", "click", function() {
-				var qtype = $(this).find(".efi-qcode").text();
-				examing.doQuestionFilt(qtype);
-			});
-		},
 		/**
 		 * 刷新试题导航
 		 */
@@ -94,12 +83,22 @@ var examing = {
 				partId = partId.substr(partId.lastIndexOf('_')+1);
 				questions.each(function(index) {
 					var questionId = $(this).find(".question-id").text();
-					var btnhtml = "<a class=\"question-navi-item\"  data-href=\"#" +questionId+ "\">" + (index + 1) + "</a>";
+					var btnhtml = "<a class=\"question-navi-item\"  href=\"" + window.location.href +"#question_" +questionId+ "\">" + (index + 1) + "</a>";
 					$("#question-navi-content div.mkrf_item#answersheet_"+partId + " div.mftm_con").append(btnhtml);
 				});
 			}
 			
+			// 针对题目part切换的a标签，也重新写
+			// $("#myId").attr("href","www.xxx.com"); 
+			$('a.partNavi').each(function()
+			{
+				$(this).attr("href",window.location.href+$(this).attr("href")); 
+			}
+			);
+			
+			
 		},
+
 		/**
 		 * 更新题目简介信息
 		 */
@@ -124,22 +123,7 @@ var examing = {
 			$("#exampaper-total-point").text(question_sum_p_all/10);
 		},
 		
-		/**
-		 *切换到指定的题目部分
-		 */
-		doQuestionFilt : function doQuestionFilt(questiontype) {
-			
-			if($("#exampaper-desc .efi-" + questiontype).hasClass("efi-selected")){
-				return false;
-			}else{
-				var questions = $("li.question");
-				questions.hide();
-				$("#exampaper-body ." + questiontype).show();
-				
-				$(".exampaper-filter-item").removeClass("efi-selected");
-				$("#exampaper-desc .efi-" + questiontype).addClass("efi-selected");
-			}
-		},
+		
 		questiontypes : new Array({
 			"name" : "单选题",
 			"code" : "qt-singlechoice"
@@ -173,23 +157,7 @@ var examing = {
 				
 				});
 		},
-		/**
-		 * 绑定考题focus事件(点击考题导航)
-		 */
-		bindfocus : function bindfocus() {
-			$("#question-navi").delegate("a.question-navi-item ", "click", function() {
-				var clickindex = $("a.question-navi-item").index(this);
-				var questions = $("li.question");
-				var targetQuestion = questions[clickindex];
-				
-				var targetQuestionType = $(questions[clickindex]).find(".question-type").text();
-				
-				examing.doQuestionFilt("qt-" + targetQuestionType);
-//				$(targetQuestion).focus();
-				
-				examing.scrollToElement($(targetQuestion));
-			});
-		},
+		
 		
 		addRemoveBtn : function(){
 			var deletehtml = "<a class=\"tmp-ques-remove\" title=\"删除此题\">删除</a>";

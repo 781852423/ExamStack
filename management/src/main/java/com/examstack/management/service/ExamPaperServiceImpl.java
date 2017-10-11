@@ -342,9 +342,13 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 		return examPaperMapper.getPaperPartById(partId);
 	}
 
+	/*
+	 * 先删除之前的关系，然后添加新的关系
+	 * @see com.examstack.management.service.ExamPaperService#updateExamPartQuestions(com.examstack.common.domain.exam.PaperPart)
+	 */
 	@Override
 	public void updateExamPartQuestions(PaperPart pp) {
-		
+		examPaperMapper.deletePartQuestionsByPartId(pp.getId());
 		examPaperMapper.updateExamPartQuestions(pp);
 	
 	}

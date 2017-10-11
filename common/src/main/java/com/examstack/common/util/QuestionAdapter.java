@@ -107,34 +107,34 @@ public class QuestionAdapter {
 
 		switch (questionQueryResult.getQuestionTypeId()) {
 		case 1:
-			sb.append("<li class=\"question qt-singlechoice\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-singlechoice\">");
 			break;
 		case 2:
-			sb.append("<li class=\"question qt-multiplechoice\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-multiplechoice\">");
 			break;
 		case 3:
-			sb.append("<li class=\"question qt-trueorfalse\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-trueorfalse\">");
 			break;
 		case 4:
-			sb.append("<li class=\"question qt-fillblank\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-fillblank\">");
 			break;
 		case 5:
-			sb.append("<li class=\"question qt-shortanswer\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-shortanswer\">");
 			break;
 		case 6:
-			sb.append("<li class=\"question qt-essay\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-essay\">");
 			break;
 		case 7:
-			sb.append("<li class=\"question qt-analytical\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-analytical\">");
 			break;
 		case 8:
-			sb.append("<li class=\"question qt-shortanswer\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-shortanswer\">");
 			break;
 		case 9:
-			sb.append("<li class=\"question qt-rawTitle\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-rawTitle\">");
 			break;
 		case 10:
-			sb.append("<li class=\"question qt-singlechoice\">"); // 目前考虑性格测试也是单选题
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-singlechoice\">"); // 目前考虑性格测试也是单选题
 			break;
 		default:
 			break;
@@ -439,28 +439,28 @@ public class QuestionAdapter {
 
 		switch (questionQueryResult.getQuestionTypeId()) {
 		case 1:
-			sb.append("<li class=\"question qt-singlechoice\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-singlechoice\">");
 			break;
 		case 2:
-			sb.append("<li class=\"question qt-multiplechoice\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-multiplechoice\">");
 			break;
 		case 3:
-			sb.append("<li class=\"question qt-trueorfalse\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-trueorfalse\">");
 			break;
 		case 4:
-			sb.append("<li class=\"question qt-fillblank\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-fillblank\">");
 			break;
 		case 5:
-			sb.append("<li class=\"question qt-shortanswer\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-shortanswer\">");
 			break;
 		case 6:
-			sb.append("<li class=\"question qt-essay\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-essay\">");
 			break;
 		case 7:
-			sb.append("<li class=\"question qt-analytical\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-analytical\">");
 			break;
 		case 8:
-			sb.append("<li class=\"question qt-shortanswer\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-shortanswer\">");
 			break;
 		
 		default:
@@ -738,31 +738,30 @@ public class QuestionAdapter {
 
 		switch (questionQueryResult.getQuestionTypeId()) {
 		case 1:
-			sb.append("<li class=\"question qt-singlechoice\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-singlechoice\">");
 			break;
 		case 2:
-			sb.append("<li class=\"question qt-multiplechoice\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-multiplechoice\">");
 			break;
 		case 3:
-			sb.append("<li class=\"question qt-trueorfalse\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-trueorfalse\">");
 			break;
 		case 4:
-			sb.append("<li class=\"question qt-fillblank\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-fillblank\">");
 			break;
 		case 5:
-			sb.append("<li class=\"question qt-shortanswer\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-shortanswer\">");
 			break;
 		case 6:
-			sb.append("<li class=\"question qt-essay\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-essay\">");
 			break;
 		case 7:
-			sb.append("<li class=\"question qt-analytical\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-analytical\">");
 			break;
 		case 8:
-			sb.append("<li class=\"question qt-shortanswer\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-shortanswer\">");
 			break;
-		case 9: // 只是一个提干，类似阅读理解或者综合分析的正文部分
-			sb.append("<li class=\"question qt-rawTitle\">");
+
 		default:
 			break;
 		}
@@ -1056,34 +1055,34 @@ public class QuestionAdapter {
 
 		switch (questionQueryResult.getQuestionTypeId()) {
 		case 1:
-			sb.append("<li class=\"question qt-singlechoice\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-singlechoice\">");
 			break;
 		case 2:
-			sb.append("<li class=\"question qt-multiplechoice\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-multiplechoice\">");
 			break;
 		case 3:
-			sb.append("<li class=\"question qt-trueorfalse\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-trueorfalse\">");
 			break;
 		case 4:
-			sb.append("<li class=\"question qt-fillblank\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-fillblank\">");
 			break;
 		case 5:
-			sb.append("<li class=\"question qt-shortanswer\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-shortanswer\">");
 			break;
 		case 6:
-			sb.append("<li class=\"question qt-essay\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-essay\">");
 			break;
 		case 7:
-			sb.append("<li class=\"question qt-analytical\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-analytical\">");
 			break;
 		case 8:
-			sb.append("<li class=\"question qt-shortanswer\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-shortanswer\">");
 			break;
 		case 9:
-			sb.append("<li class=\"question qt-rawTitle\">");
+			sb.append("<li class=\"qt-rawTitle\">");
 			break;	
 		case 10:
-			sb.append("<li class=\"question qt-singlechoice\">");
+			sb.append("<li id=\"question_" +questionQueryResult.getQuestionId()+  "\" class=\"question qt-singlechoice\">");
 			break;
 		default:
 			break;

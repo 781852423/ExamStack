@@ -230,9 +230,11 @@ public class ExamPage {
 		}
 
 		ExamPaper examPaper = examPaperService.getExamPaperById(exam.getExamPaperId());
+		
 		ExamHistory examHistory = examService
 				.getUserExamHistByUserIdAndExamId(userInfo.getUserid(), examId, 0, 1, 2, 3);
 		int historyId = 0;
+		
 		if (examHistory == null) {
 			//练习默认审核通过
 			historyId = examService.addUserExamHist(userInfo.getUserid(), examId, examPaper.getId(),1);
