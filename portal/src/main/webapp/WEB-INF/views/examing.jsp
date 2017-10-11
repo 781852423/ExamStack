@@ -89,7 +89,9 @@
 									<div id="exampaper-header">
 										<div id="exampaper-title">
 											<i class="fa fa-send"></i>
-											<span id="exampaper-title-name"> 模拟试卷 [每页展示同类题型，点击下行题目类型可以预览题目]</span>
+											<div id="exampaper-title-name" class="mk_kstm"> ${examPaper.name}
+											<span class="tot_score"><span class="tot_fs">分</span></span>
+											</div>
 
 											<span style="display:none;" id="exampaper-id">1</span>
 										</div>
@@ -105,7 +107,18 @@
 									<input type="hidden" id="paper-id" value="${examPaperId }">
 									<input type="hidden" id="exam-id" value="${examId }">
 									<ul id="exampaper-body">
-										${htmlStr }
+									<div class="mk_optionsbox">
+                                    <h2>切换题目</h2>
+                                        <div class="mk_options">
+                                               <c:forEach items="${examPaper.paperParts}" var="PaperPart">
+                                                <a href="#part_${PaperPart.id}" class="partNavi">${PaperPart.name}</a>
+                                               </c:forEach>                                 
+                                        </div>
+                                    </div>
+                                    <div>
+                                        ${htmlStr }
+                                    </div>
+										
 									</ul>
 									<div id="exampaper-footer">
 										<div id="question-navi">
@@ -114,6 +127,16 @@
 												<span>答题卡[点击可展开]</span>
 											</div>
 											<div id="question-navi-content">
+												<c:forEach items="${examPaper.paperParts}" var="PaperPart">
+	                                                     <div class="mkrf_item" id="answersheet_${PaperPart.id }">
+	                                                         <div class="mftm_tt">${PaperPart.name }
+	                                                              <span class="mf_tip">(共${PaperPart.questionCount}题)</span>
+	                                                               <span class="PointPerQuestion" style="display:none;">${PaperPart.pointPerQuestion }</span>
+	                                                         </div>
+	                                                         <div class="mftm_con">
+	                                                         </div>
+	                                                     </div>
+	                                                </c:forEach>
 											</div>
 										</div>
 	

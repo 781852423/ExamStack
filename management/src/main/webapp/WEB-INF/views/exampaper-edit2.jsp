@@ -181,6 +181,7 @@ request.setAttribute("leftMenuId",list[3]);
                                                </c:forEach>                                 
                                         </div>
                                     </div>
+                                    <div>
 										${paperPartsStr}
 									</div>
 									<div id="exampaper-footer">

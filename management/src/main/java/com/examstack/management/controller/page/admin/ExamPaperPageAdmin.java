@@ -125,7 +125,7 @@ public class ExamPaperPageAdmin {
 		ExamPaperAdapter epa = new ExamPaperAdapter(examPaper);
 		// 展示题目的各个部分paperParts
 		model.addAttribute("paperParts", examPaper.getPaperParts());
-		model.addAttribute("paperPartsStr", epa.getPaper2String(strUrl));
+		model.addAttribute("paperPartsStr", epa.getPaper2String4CreatePaper(strUrl));
 		// 针对paperPart的adapter
 		model.addAttribute("exampaperid", exampaperId);
 		model.addAttribute("exampapername", examPaper.getName());

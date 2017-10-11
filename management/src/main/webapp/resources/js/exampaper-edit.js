@@ -83,7 +83,7 @@ var examing = {
 				partId = partId.substr(partId.lastIndexOf('_')+1);
 				questions.each(function(index) {
 					var questionId = $(this).find(".question-id").text();
-					var btnhtml = "<a class=\"question-navi-item\"  href=\"" + window.location.href +"#question_" +questionId+ "\">" + (index + 1) + "</a>";
+					var btnhtml = "<a class=\"question-navi-item\"  href=\"" + examing.getCurrentPageRawUrl() +"#question_" +questionId+ "\">" + (index + 1) + "</a>";
 					$("#question-navi-content div.mkrf_item#answersheet_"+partId + " div.mftm_con").append(btnhtml);
 				});
 			}
@@ -92,13 +92,23 @@ var examing = {
 			// $("#myId").attr("href","www.xxx.com"); 
 			$('a.partNavi').each(function()
 			{
-				$(this).attr("href",window.location.href+$(this).attr("href")); 
+				$(this).attr("href",examing.getCurrentPageRawUrl()+$(this).attr("href")); 
 			}
 			);
 			
 			
 		},
-
+    
+		getCurrentPageRawUrl:function getCurrentPageRawUrl()
+		{
+		    if(window.location.href.indexOf('#') >= 0)
+	    	{
+		    	return window.location.href.substr(0,window.location.href.indexOf('#'));
+	    	}else {
+				return window.location.href;
+			}
+			
+		},
 		/**
 		 * 更新题目简介信息
 		 */

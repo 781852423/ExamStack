@@ -141,7 +141,7 @@
 											<td><span class="span-info question-number"><fmt:formatDate value="${item.effTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></td>
 											<td><span class="span-success question-number-2"><fmt:formatDate value="${item.expTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></td>
 											<td>
-												<a href="student/model-test-start/${item.examId }/1" class="btn btn-success btn-sm join-practice-btn">参加考试</a>
+												<a href="student/model-test-start/${item.examId }" class="btn btn-success btn-sm join-practice-btn">参加考试</a>
 											</td>
 										</tr>
 									</c:forEach>

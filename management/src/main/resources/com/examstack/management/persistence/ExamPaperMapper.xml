@@ -18,8 +18,7 @@
 		select
 		id,name,content,duration,pass_point,total_point,status,summary,is_visible,answer_sheet,group_id,
 		is_subjective,creator,paper_type,field_id from et_exam_paper
-		where (creator=#{userName} or is_visible=1) and is_subjective=1
-		and answer_sheet is not null
+		where is_visible=1
 		order by id desc
 	</select>
 	

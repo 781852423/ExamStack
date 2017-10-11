@@ -27,7 +27,7 @@ public class ExamPaperAdapter {
 	/*
 	 * 必须保证此时examPaper对象不为空
 	 */
-	public String getPaper2String(String strUrl)
+	public String getPaper2String4CreatePaper(String strUrl)
 	{
 		StringBuilder sb = new StringBuilder();
 		List<PaperPart> parts = this.examPaper.getPaperParts();
@@ -37,7 +37,28 @@ public class ExamPaperAdapter {
 			for(PaperPart pp : parts)
 			{
 				PaperPartAdapter ppa = new PaperPartAdapter(pp);
-				sb.append(ppa.getPaperPartAndQuestionsAdhere(strUrl));
+				sb.append(ppa.getPaperPartAndQuestionsAdhere4CreatePaper(strUrl));
+			}
+		}
+		
+		
+		return sb.toString();
+	}
+	
+	/*
+	 * 必须保证此时examPaper对象不为空
+	 */
+	public String getPaper2String4ExamTest(String strUrl)
+	{
+		StringBuilder sb = new StringBuilder();
+		List<PaperPart> parts = this.examPaper.getPaperParts();
+		
+		if(parts != null && parts.size() > 0)
+		{
+			for(PaperPart pp : parts)
+			{
+				PaperPartAdapter ppa = new PaperPartAdapter(pp);
+				sb.append(ppa.getPaperPartAndQuestionsAdhere4ExamTest(strUrl));
 			}
 		}
 		

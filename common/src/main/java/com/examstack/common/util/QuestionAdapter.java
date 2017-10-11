@@ -387,7 +387,7 @@ public class QuestionAdapter {
 		}
 		sb.append("<div class=\"answer-desc\">");
 		sb.append("<div class=\"answer-desc-summary\">");
-		sb.append("<span class='answerResultDesc'></span></span><span>参考答案：</span>");
+		sb.append("<div class='answerResultDesc'></div><span>参考答案：</span>");
 		if (questionQueryResult.getQuestionTypeId() == 3) {
 			if (questionQueryResult.getAnswer().equals("T"))
 				sb.append("<span class=\"answer_value\">").append("正确").append("</span><br>");
@@ -667,7 +667,7 @@ public class QuestionAdapter {
 		}
 		sb.append("<div class=\"answer-desc\">");
 		sb.append("<div class=\"answer-desc-summary\">");
-		sb.append("<span class='answerResultDesc'></span><span>参考答案：</span>");
+		sb.append("<div class='answerResultDesc'></div><span>参考答案：</span>");
 		if (questionQueryResult.getQuestionTypeId() == 3) {
 			if (questionQueryResult.getAnswer().equals("T"))
 				sb.append("<span class=\"answer_value\">").append("正确").append("</span><br>");
@@ -983,7 +983,7 @@ public class QuestionAdapter {
 		sb.append("<div class=\"answer-desc-summary\">");
 		if (showAnswer) {
 
-			sb.append("<span class='answerResultDesc'></span><span>参考答案：</span>");
+			sb.append("<div class='answerResultDesc'></div><span>参考答案：</span>");
 			if (questionQueryResult.getQuestionTypeId() == 3) {
 				if (questionQueryResult.getAnswer().equals("T"))
 					sb.append("<span class=\"answer_value\">").append("正确").append("</span><br>");
@@ -1049,6 +1049,7 @@ public class QuestionAdapter {
 	/*
 	 * 学生选择模拟考试，系统提供的针对试卷试题的adapter
 	 * 针对性格测试，需要再修改代码，性格测试type=10
+	 * 学生考试专用
 	 */
 	public String getUserExamPaper() {
 		StringBuilder sb = new StringBuilder();
@@ -1338,7 +1339,7 @@ public class QuestionAdapter {
 		sb.append("<div class=\"answer-desc\">");
 		sb.append("<div class=\"answer-desc-summary\">");
 		// 显示答案
-			sb.append("<span class='answerResultDesc'></span><span>参考答案：</span>");
+			sb.append("<div class='answerResultDesc'></div><span>参考答案：</span>");
 			if (questionQueryResult.getQuestionTypeId() == 3) {
 				if (questionQueryResult.getAnswer().equals("T"))
 					sb.append("<span class=\"answer_value\">").append("正确").append("</span><br>");

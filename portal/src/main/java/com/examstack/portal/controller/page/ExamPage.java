@@ -34,6 +34,7 @@ import com.examstack.common.domain.question.KnowledgePoint;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.domain.question.QuestionStatistic;
 import com.examstack.common.domain.question.QuestionType;
+import com.examstack.common.util.ExamPaperAdapter;
 import com.examstack.common.util.Page;
 import com.examstack.common.util.QuestionAdapter;
 import com.examstack.portal.security.UserInfo;
@@ -115,39 +116,22 @@ public class ExamPage {
 			{
 				startTime = new Date();
 			}
-/*		switch (examHistory.getApproved()) {
-		case 0:
-			model.addAttribute("errorMsg", "考试未审核");
-			return "error";
-		case 2:
-			model.addAttribute("errorMsg", "已交卷，不能重复考试");
-			return "error";
-		case 3:
-			model.addAttribute("errorMsg", "已阅卷，不能重复考试");
-			return "error";
-		}*/
-		ExamPaper examPaper = examPaperService.getExamPaperById(examHistory.getExamPaperId());
-		String content = examPaper.getContent();
 
-		Gson gson = new Gson();
+		ExamPaper examPaper = examPaperService.getExamPaperById(examHistory.getExamPaperId());
+		
 		duration = examPaper.getDuration();
 
-		List<QuestionQueryResult> questionList = gson.fromJson(content, new TypeToken<List<QuestionQueryResult>>() {
-		}.getType());
-
-		StringBuilder sb = new StringBuilder();
-		for (QuestionQueryResult question : questionList) {
-			QuestionAdapter adapter = new QuestionAdapter(question, strUrl);
-			sb.append(adapter.getUserExamPaper());
-		}
+		String examString = (new ExamPaperAdapter(examPaper)).getPaper2String4ExamTest(strUrl);
 		//SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd HHmmss");
 		
 		model.addAttribute("startTime", startTime);
+		model.addAttribute("paperParts", examPaper.getPaperParts());
 		model.addAttribute("examHistoryId", examHistory.getHistId());
 		model.addAttribute("examId", examHistory.getExamId());
 		model.addAttribute("examPaperId", examHistory.getExamPaperId());
 		model.addAttribute("duration", duration * 60);
-		model.addAttribute("htmlStr", sb.toString());
+		model.addAttribute("htmlStr", examString);
+		model.addAttribute("examPaper", examPaper);
 
 		userInfo.setHistId(0);
 		return "examing";

@@ -19,12 +19,6 @@ var examing = {
 		this.addNumber();
 
 		this.bindOptClick();
-
-		this.updateSummery();
-	
-		this.bindQuestionFilter();
-
-		this.bindfocus();
 	
 		this.bindFinishOne();
 		
@@ -179,40 +173,46 @@ var examing = {
 	 * 刷新试题导航
 	 */
 	refreshNavi : function refreshNavi() {
-		$("#exam-control #question-navi").empty();
-		var questions = $("li.question");
-
-		questions.each(function(index) {
-			var btnhtml = "<a class=\"question-navi-item\">" + (index + 1) + "</a>";
-			$("#question-navi-content").append(btnhtml);
-		});
-	},
-
-	/**
-	 * 更新题目简介信息
-	 */
-	updateSummery : function updateSummery() {
-		if ($(".question").length === 0) {
-			return false;
+		$("div.mftm_con").empty();
+		// 浏览每个part
+		var parts = $("#exampaper-body div.part");
+		var partLength = parts.length;
+		for(var pIndex = 0; pIndex < partLength; pIndex++)
+		{
+			// 浏览每一部分的题目
+			var currentPart = parts[pIndex];
+			var questions = $(currentPart).find("li.question");
+			var partId = $(currentPart).attr("id");
+			partId = partId.substr(partId.lastIndexOf('_')+1);
+			questions.each(function(index) {
+				var questionId = $(this).find(".question-id").text();
+				var btnhtml = "<a class=\"question-navi-item\"  href=\"" + examing.getCurrentPageRawUrl() +"#question_" +questionId+ "\">" + (index + 1) + "</a>";
+				$("#question-navi-content div.mkrf_item#answersheet_"+partId + " div.mftm_con").append(btnhtml);
+			});
 		}
-		var questiontypes = this.questiontypes;
-		var summery = "";
-		for (var i = 0; i < questiontypes.length; i++) {
-			var question_sum_q = $("." + questiontypes[i].code).length;
-			if (question_sum_q == 0) {
-				continue;
-			} else {
-				summery = summery + "<span class=\"exampaper-filter-item efi-" + questiontypes[i].code + "\">" 
-				+ questiontypes[i].name + "[<span class=\"efi-fno\">0</span>/<span class=\"efi-tno\">" 
-				+ $("." + questiontypes[i].code).length + "</span>]<span class=\"efi-qcode\" style=\"display:none;\">" 
-				+ questiontypes[i].code + "</span></span>";
-			}
-		}
-		// summery = summery.substring(0, summery.length - 2);
-		$("#exampaper-desc").html(summery);
 		
-		examing.doQuestionFilt($($(".exampaper-filter-item")[0]).find(".efi-qcode").text());
+		// 针对题目part切换的a标签，也重新写
+		// $("#myId").attr("href","www.xxx.com"); 
+		$('a.partNavi').each(function()
+		{
+			$(this).attr("href",examing.getCurrentPageRawUrl()+$(this).attr("href")); 
+		}
+		);
+		
 	},
+	
+	getCurrentPageRawUrl:function getCurrentPageRawUrl()
+	{
+	    if(window.location.href.indexOf('#') >= 0)
+    	{
+	    	return window.location.href.substr(0,window.location.href.indexOf('#'));
+    	}else {
+			return window.location.href;
+		}
+		
+	},
+
+	
 
 	questiontypes : new Array({
 		"name" : "单选题",
@@ -236,22 +236,7 @@ var examing = {
 		"name" : "分析题",
 		"code" : "qt-analytical"
 	}),
-	/**
-	 * 绑定考题focus事件(点击考题导航)
-	 */
-	bindfocus : function bindfocus() {
-		$("#question-navi").delegate("a.question-navi-item ", "click", function() {
-			var clickindex = $("a.question-navi-item").index(this);
-			var questions = $("li.question");
-			var targetQuestion = questions[clickindex];
-			
-			var targetQuestionType = $(questions[clickindex]).find(".question-type").text();
-			
-			examing.doQuestionFilt("qt-" + targetQuestionType);
-			
-			examing.scrollToElement($(targetQuestion),0,-100);
-		});
-	},
+	
 
 	scrollToElement : function scrollToElement(selector, time, verticalOffset) {
 		time = typeof (time) != 'undefined' ? time : 500;
@@ -281,7 +266,7 @@ var examing = {
 				exam_clock.addClass("question-time-warning");
 			}
 			var period = timestamp % 60;
-			console.log("period :" + period);
+			
 			if(period == 0)
 				examing.saveAnswerSheet();
 			timestamp-- || examing.examTimeOut(int); 
@@ -332,43 +317,18 @@ var examing = {
 	 * 对题目重新编号排序
 	 */
 	addNumber : function addNumber() {
-		var questions = $("li.question");
-
-		questions.each(function(index) {
-			$(this).find(".question-no").text(index + 1 + ".");
-		});
-	},
-
-	/**
-	 * 切换考题类型事件
-	 */
-	bindQuestionFilter : function bindQuestionFilter() {
-
-		$("#exampaper-desc").delegate("span.exampaper-filter-item", "click", function() {
-			var qtype = $(this).find(".efi-qcode").text();
-
-			examing.doQuestionFilt(qtype);
-		});
-	},
-	
-	
-	/**
-	 *切换到指定的题型 
-	 */
-	doQuestionFilt : function doQuestionFilt(questiontype) {
+		var parts = $("#exampaper-body div.part");
+		var partLength = parts.length;
+		for(var pIndex = 0; pIndex < partLength; pIndex++)
+		{
+			// 浏览每一部分的题目
+			var currentPart = parts[pIndex];
+			var questions = $(currentPart).find("li.question");
 		
-		if($("#exampaper-desc .efi-" + questiontype).hasClass("efi-selected")){
-			return false;
-		}else{
-			var questions = $("li.question");
-			questions.hide();
-			$("#exampaper-body ." + questiontype).show();
-			
-			$(".exampaper-filter-item").removeClass("efi-selected");
-			$("#exampaper-desc .efi-" + questiontype).addClass("efi-selected");
+			questions.each(function(index) {
+				$(this).find(".question-no").text(index + 1 + ".");
+			});
 		}
-		
-		
 	},
 
 	// 显示题目的正确答案和答题是否正确，同时在panel上显示出合适的标志
@@ -376,6 +336,8 @@ var examing = {
 	ShowAnswerResult: function ShowAnswerResult()
 	{
 		// 遍历每一个题目的答题情况
+		// 根据每个part计算得分
+		
 		var allQuestion = $("li.question");
 		var allQuestionLength = allQuestion.length;
 		
@@ -391,8 +353,7 @@ var examing = {
 			var ActiveQuestionTypeId = thisquestion.find(".question-type-id").text();
 			var myAnswer = examing.getAnswerValue(thisquestion);
 			var correctAnswer = thisquestion.find(".answer_value").text();
-			console.log("你的答案:" + myAnswer + " 参考答案：" + correctAnswer);
-			
+		
 			if(ActiveQuestionTypeId <= 3 )
 			{
 				// 本题正确、错误的选项标注颜色
@@ -406,14 +367,14 @@ var examing = {
 				    	{
 					    	if( myAnswer == correctAnswer)
 							{
-				        	    console.log("第" + (index+1) + "题回答正确");
-								$(thisquestion).find(".answerResultDesc").html("<strong>回答正确</strong><br/>");
+				        	   
+								$(thisquestion).find(".answerResultDesc").html("回答正确");
 								$(thisquestion).find(".answer-desc-summary").addClass("answer-desc-success");
 								$($("a.question-navi-item")[index]).addClass("qni-success");
 							}else
 							{
-								 console.log("第" + (index+1) + "题回答错误");
-								$(thisquestion).find(".answerResultDesc").html("<strong>回答错误</strong><br/>" +
+								
+								$(thisquestion).find(".answerResultDesc").html("回答错误" +
 				                 "你的回答：" + myAnswer);	
 								$(thisquestion).find(".answer-desc-summary").addClass("answer-desc-error");
 								$($("a.question-navi-item")[index]).addClass("qni-error");
@@ -423,7 +384,7 @@ var examing = {
 			           
 			}else
 			{
-			    $(thisquestion).find(".answerResultDesc").html("<strong>此题为客观题，请根据以下参考答案自行判断答题是否正确</strong><br/>");	
+			    $(thisquestion).find(".answerResultDesc").html("此题为客观题，请根据以下参考答案自行判断答题是否正确");	
 			}
 			
 		}
@@ -456,6 +417,50 @@ var examing = {
 			}
 		}
 		
+	},
+	
+	calculateTotalPoint: function calculateTotalPoint()
+	{
+		// 遍历答题卡内容
+		var answerSheet4Parts = $("#question-navi-content .mkrf_item");
+		var totalPoint = 0.0;
+		var thisPartTotalPoint = 0.0;
+		answerSheet4Parts.each(function()
+		{
+			thisPartTotalPoint = 0.0;
+			
+			// 找到对应的partId
+			var partId = $(this).attr("id"); // 格式answersheet_2
+			
+		     partId = partId.substr(partId.lastIndexOf('_')+1); // 获取partId
+		     // 获取每个partId对应的每道题分数
+		     var eachQuestionPoint = $(this).find('.PointPerQuestion').text();
+		     
+		     var answerSheetItemATags = $(this).find("a.question-navi-item");
+		   // 看其样式是否是正确答题的
+		     answerSheetItemATags.each(function()
+    		 {
+    	 		var aClassStr = $(this).attr("class");
+    	 		if(aClassStr.indexOf("qni-success") >=0)
+	 			{
+    	 			// 答题正确
+    	 			thisPartTotalPoint += parseFloat(eachQuestionPoint);
+	 			}
+    		 }
+
+		     );
+		     // 把这个part的分数标记到part标题右侧
+		     $("div#part_"+partId).find(".mkfs_rgt").text(thisPartTotalPoint+"分");
+		     console.log("partId_" + partId + "获得总分:" + thisPartTotalPoint);
+		  // 把所有part分数加起来
+		     totalPoint += thisPartTotalPoint;
+		}
+		 
+		),
+	    
+		// 显示到试卷上面
+		$('#exampaper-title-name .tot_score').text(totalPoint+"分");
+		console.log('总分：' + totalPoint);
 	},
 	
 	getAnswerValue : function getAnswerValue(questionVar) {
@@ -522,6 +527,7 @@ var examing = {
 		$("#question-submit button").click(function() {
 			if (confirm("确认交卷吗？")) {
 				examing.ShowAnswerResult();
+				examing.calculateTotalPoint();
 				examing.finishExam();
 			}
 		});

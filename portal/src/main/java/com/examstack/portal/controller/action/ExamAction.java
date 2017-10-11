@@ -97,7 +97,7 @@ public class ExamAction {
 	}
 	
 	/*
-	 * 前台做完试卷后，提交到此函数
+	 * 前台做完试卷后，提交到此函数,去掉消息队列的逻辑，直接提交给后台处理函数
 	 */
 	@RequestMapping(value = "/student/exam-submit", method = RequestMethod.POST)
 	public @ResponseBody Message finishExam(@RequestBody AnswerSheet answerSheet) {

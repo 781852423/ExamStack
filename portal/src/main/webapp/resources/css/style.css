@@ -2615,3 +2615,100 @@ pre {
     font-weight:bold;
 }
 
+.partTitle
+{
+    background: #fff4e6;
+    padding: 12px 20px;
+    line-height: 26px;
+    color: #333;
+    font-size: 26px;
+    font-weight: bold;
+    position: relative;
+}
+.partSummary
+{
+    color: #888888;
+    font-size: 14px;
+    font-weight: normal;
+}
+.mkfs_rgt {
+    position: absolute;
+    right: 20px;
+    color: #f1241a;
+    font-size: 22px;
+}
+
+ .mkrf_item:first-child {
+    border-top: none;
+}
+
+.mkrf_item {
+    padding: 5px 5px 5px;
+}
+
+.mftm_tt {
+    border-left: 3px solid #f7332b;
+    line-height: 14px;
+    height: 14px;
+    color: #666666;
+    font-size: 14px;
+    padding-left: 5px;
+}
+
+.mftm_con {
+    padding: 10px 0 0;
+}
+.mk_optionsbox {
+    bottom: 5px;
+    left: 0;
+    z-index: 99;
+}
+
+.mk_options {
+    text-align: center;
+    padding: 20px 0;
+    z-index: 99;
+    display: block;
+    
+}
+
+.partNavi
+{
+	background: #008000;
+    padding: 12px 20px;
+    line-height: 36px;
+    color: #333;
+    font-size: 26px;
+    font-weight: bold;
+}
+.answerResultDesc
+{
+	font-size: 20px;
+    font-weight: bold;
+}
+.mkfs_rgt {
+    position: absolute;
+    right: 20px;
+    color: #f1241a;
+    font-size: 22px;
+}
+
+.mk_kstm {
+    background: #fff;
+    position: relative;
+    z-index: 999;
+    padding-bottom: 85px;
+}
+
+.tot_score {
+    position: absolute;
+    top: -90px;
+    right: 30px;
+    color: #db2b23;
+    font-size: 100px;
+    font-family: "NUmFour";
+}
+
+.tot_fs {
+    font-size: 16px;
+}
