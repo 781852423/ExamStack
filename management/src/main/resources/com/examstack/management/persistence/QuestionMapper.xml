@@ -280,8 +280,7 @@
 		</where>
 		group by
 		a.id,a.content,a.answer,a.analysis,a.question_type_id,a.reference,
-		a.examing_point
-		order by a.question_type_id,a.id desc) z left join et_question_parent f on z.parentId=f.id
+		a.examing_point) z left join et_question_parent f on z.parentId=f.id
 	</select>
 	
 	<delete id="deleteQuestionByQuestionId">
@@ -393,6 +392,6 @@
 		</where>
 		group by a.id,a.name,a.content,a.question_type_id,a.creator,a.answer,a.analysis,a.reference,a.examing_point,e.`name`,a.examing_point,tags)
 		 z left join et_question_parent f
-        on z.parentId=f.id order by z.id desc;
+        on z.parentId=f.id;
 	</select>
 </mapper>

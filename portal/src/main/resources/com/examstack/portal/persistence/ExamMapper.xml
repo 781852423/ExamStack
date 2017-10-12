@@ -159,8 +159,7 @@
 		</where>
 		group by
 		a.id,a.content,a.answer,a.analysis,a.question_type_id,a.reference,
-		a.examing_point,b.point_id
-		order by a.question_type_id,a.id
+		a.examing_point,b.point_id;
 	</select>
 	
 	<!-- 根据questionId获取该性格测试题对应的性格特征参数 -->
