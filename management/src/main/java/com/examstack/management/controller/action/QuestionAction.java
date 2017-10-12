@@ -62,19 +62,13 @@ public class QuestionAction {
 		QuestionContent qContent = question.getQuestionContent();
 		
 		
-		if(question.getQuestion_type_id() == 9)
-		{
-			qContent.setTitle(qContent.getTitle().replaceAll("\n", "<br/>").replaceAll("\r\n", "<br/>").replaceAll(" ", "&nbsp;&nbsp;") + "<br/>");
-		}else
-		{
-			qContent.setTitle(qContent.getTitle().replaceAll("\n", "<br/>").replaceAll("\r\n", "<br/>").replaceAll(" ", "&nbsp;&nbsp;"));
-		}
+	    qContent.setTitle(qContent.getTitle().replaceAll("\n", "<br/>").replaceAll("\r\n", "<br/>"));
+		
 		String rawQuestionContentString = gson.toJson(qContent);
 		
-		//question.setContent(gson.toJson(question.getQuestionContent()));
-		
 		question.setContent(rawQuestionContentString);
-		question.setAnalysis(question.getAnalysis().replaceAll("\r\n", "<br/>").replaceAll("\n", "<br/>").replaceAll(" ", "&nbsp;&nbsp;"));
+		question.setAnalysis(question.getAnalysis().replaceAll("\r\n", "<br/>").replaceAll("\n", "<br/>"));
+		
 		question.setCreate_time(new Date());
 		question.setCreator(userDetails.getUsername());
 		
