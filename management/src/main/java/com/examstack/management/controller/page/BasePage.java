@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -104,15 +104,15 @@ public class BasePage {
 		//保存角色字典，用于根据角色代码返回角色id
 		userInfo.setRoleMap(userService.getRoleMap());
 		//这里获取用户的菜单信息
-		if (grantedAuthorities.contains(new GrantedAuthorityImpl("ROLE_ADMIN"))) {
+		if (grantedAuthorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
 			LinkedHashMap<String,MenuItem> map = (LinkedHashMap<String, MenuItem>) systemService.getMenuItemsByAuthority("ROLE_ADMIN");
 			userInfo.setMenuMap(map);
 			return "redirect:admin/home";
-		} else if (grantedAuthorities.contains(new GrantedAuthorityImpl("ROLE_TEACHER"))) {
+		} else if (grantedAuthorities.contains(new SimpleGrantedAuthority("ROLE_TEACHER"))) {
 			LinkedHashMap<String,MenuItem> map = (LinkedHashMap<String, MenuItem>) systemService.getMenuItemsByAuthority("ROLE_TEACHER");
 			userInfo.setMenuMap(map);
 			return "redirect:teacher/home";
-		} else if (grantedAuthorities.contains(new GrantedAuthorityImpl("ROLE_STUDENT"))) {
+		} else if (grantedAuthorities.contains(new SimpleGrantedAuthority("ROLE_STUDENT"))) {
 			
 			return "login";
 		} else {

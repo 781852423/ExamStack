@@ -38,7 +38,7 @@
                             <h5>登陆 </h5>
                             <div class="form">
                                 
-                                <form class="form-horizontal" id= "form-login-account" action="j_spring_security_check" method="post">
+                                <form:form class="form-horizontal" id= "form-login-account" action="j_spring_security_check" method="post">
                                     <!-- Username -->
                                     <div class="form-group">
                                         <label class="control-label col-md-3" for="username">用户名</label>
@@ -71,7 +71,7 @@
                                             <span class="form-message">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</span>
                                         </div>
                                     </div>
-                                </form>
+                                </form:form>
                                 没有账号? <a href="user-register">注册</a>
                             </div>
                         </div>

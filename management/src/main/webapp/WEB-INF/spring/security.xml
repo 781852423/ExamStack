@@ -53,7 +53,7 @@
 		/> </security:password-encoder> </security:authentication-provider> -->
 	<bean id="loginUrlAuthenticationEntryPoint"
 		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
-		<property name="loginFormUrl" value="/user-login-page" />
+		<constructor-arg value="/user-login-page"/>
 	</bean>
 	<!-- <bean id="userDetailsServiceImpl" class="com.extr.security.UserDetailsServiceImpl"> 
 		<property name="userService" ref="userService"/> </bean> -->

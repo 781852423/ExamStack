@@ -14,6 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java-version>1.8</java-version>
         <org.springframework-version>4.1.4.RELEASE</org.springframework-version>
+        <org.springframework.security-version>4.0.2.RELEASE</org.springframework.security-version>
         <org.aspectj-version>1.8.4</org.aspectj-version>
         <org.slf4j-version>1.7.8</org.slf4j-version>
     </properties>
@@ -189,27 +190,27 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>3.1.4.RELEASE</version>
+            <version>${org.springframework.security-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>3.1.3.RELEASE</version>
+            <version>${org.springframework.security-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>3.1.3.RELEASE</version>
+            <version>${org.springframework.security-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
-            <version>3.1.3.RELEASE</version>
+            <version>${org.springframework.security-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
-            <version>3.1.3.RELEASE</version>
+            <version>${org.springframework.security-version}</version>
         </dependency>
 
         <!-- File Upload -->

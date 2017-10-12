@@ -49,10 +49,10 @@
 			user-service-ref="userDetailsServiceImpl2" />
 	</security:authentication-manager>
 	
-	<bean id="loginUrlAuthenticationEntryPoint"
-		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
-		<property name="loginFormUrl" value="/user-login-page" />
-	</bean>
+    <bean id="loginUrlAuthenticationEntryPoint"
+        class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <constructor-arg value="/user-login-page"/>
+    </bean>
 	<!-- <bean id="userDetailsServiceImpl" class="com.extr.security.UserDetailsServiceImpl"> 
 		<property name="userService" ref="userService"/> </bean> -->
 	
