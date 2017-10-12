@@ -2678,7 +2678,7 @@ pre {
     padding: 12px 20px;
     line-height: 36px;
     color: #333;
-    font-size: 26px;
+    font-size: 20px;
     font-weight: bold;
 }
 .answerResultDesc
@@ -2697,6 +2697,7 @@ pre {
     background: #fff;
     position: relative;
     z-index: 999;
+    font-size: 20px;
     padding-bottom: 85px;
 }
 

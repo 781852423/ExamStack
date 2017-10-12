@@ -349,7 +349,11 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 	@Override
 	public void updateExamPartQuestions(PaperPart pp) {
 		examPaperMapper.deletePartQuestionsByPartId(pp.getId());
-		examPaperMapper.updateExamPartQuestions(pp);
+		if(pp != null && pp.getQuestions() != null && pp.getQuestions().size() > 0)
+		{
+			examPaperMapper.updateExamPartQuestions(pp);
+		}
+		
 	
 	}
 

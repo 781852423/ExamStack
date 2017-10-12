@@ -621,4 +621,9 @@ a.navi-item-success{
     font-size: 14px;
     font-weight: normal;
 }
-
+div.parentQuestion
+{
+word-break: break-all;
+word-wrap: break-word;
+white-space:normal; 
+}

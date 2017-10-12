@@ -37,7 +37,7 @@
 				<div class="row">
 					<div class="col-xs-6">
 						<div style="border-bottom: 1px solid #ddd;">
-							<h3 class="title"><i class="fa fa-cloud-upload"></i> 最近发布的考试</h3>
+							<h3 class="title"><i class="fa fa-cloud-upload"></i> 最近发布的考试(系统最新发布的考试试卷)</h3>
 							
 						</div>
 
@@ -57,14 +57,14 @@
 											<td><span class="span-info question-number"><fmt:formatDate value="${item.effTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></td>
 											<td><span class="span-success question-number-2"><fmt:formatDate value="${item.expTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></td>
 											<td>
-												<c:choose>
+												<%-- <c:choose>
 													<c:when test="${userId == 0 }">
 														<a class="btn btn-success btn-sm" href="user-login-page">申请</a>
 													</c:when>
 													<c:otherwise>
 														<button class="btn btn-success btn-sm join-practice-btn apply-exam-btn" data-id="${item.examId }">申请</button>
 													</c:otherwise>
-												</c:choose>
+												</c:choose> --%>
 											</td>
 										</tr>
 									</c:forEach>
@@ -79,7 +79,7 @@
 					</div>
 					<div class="col-xs-6">
 						<div style="border-bottom: 1px solid #ddd;">
-							<h3 class="title"><i class="fa fa-paper-plane-o"></i> 我的考试</h3>
+							<h3 class="title"><i class="fa fa-paper-plane-o"></i> 我的考试(我有权限参加的考试)</h3>
 							
 						</div>
 						<div class="question-list">
@@ -122,7 +122,7 @@
 
 						</div>
 						<div style="border-bottom: 1px solid #ddd;">
-							<h3 class="title"><i class="fa fa-paper-plane-o"></i> 模拟考试</h3>
+							<h3 class="title"><i class="fa fa-paper-plane-o"></i> 模拟考试(我有权限参加的考试)</h3>
 							
 						</div>
 						<div class="question-list">
