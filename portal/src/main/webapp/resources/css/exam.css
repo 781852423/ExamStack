@@ -623,7 +623,7 @@ a.navi-item-success{
 }
 div.parentQuestion
 {
-word-break: break-all;
+witdh:100%;
 word-wrap: break-word;
-white-space:normal; 
+
 }

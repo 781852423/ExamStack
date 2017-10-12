@@ -459,7 +459,7 @@ var examing = {
 		),
 	    
 		// 显示到试卷上面
-		$('#exampaper-title-name .tot_score').text(totalPoint+"分");
+		$('#exampaper-title-name .tot_score').text("得分："+ totalPoint+"分");
 		console.log('总分：' + totalPoint);
 	},
 	
@@ -566,7 +566,7 @@ var examing = {
 				return false;
 			if (message.result == "success") {
 				$(window).unbind('beforeunload');
-				util.success("交卷成功,可以查看页面参考答案！", function() {
+				util.success("交卷成功,总分在页面顶部显示，可以查看页面参考答案！", function() {
 					// window.location.replace(document.getElementsByTagName('base')[0].href + 'student/finished-submit');
 					$("#question-submit button").text("已完成交卷");
 				});
