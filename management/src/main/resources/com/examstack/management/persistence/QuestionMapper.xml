@@ -6,15 +6,16 @@
 
 	<!-- 试题列表部分 -->
 	<select id="getQuestionList" resultType="com.examstack.common.domain.question.Question">
-		select z.*,  f.content parentContent from  (select a.id,a.parentId, a.name,a.content,a.question_type_id,a.creator,a.answer,a.analysis,a.reference referenceName,group_concat(concat(d.field_name,'-',c.point_name)) pointName,
-		e.name
-		questionTypeName, examing_point examingPoint,
-		(select group_concat(m.tag_name,' ') from et_tag m,et_question_2_tag n
-		where m.tag_id=n.tag_id and n.question_id=a.id) tags from et_question
-		a,et_question_2_point
-		b,et_knowledge_point
-		c,et_field d,et_question_type
-		e
+		select z.* from 
+                (select a.id,a.parentId, a.name,
+        e.name
+        questionTypeName, d.field_name fieldName,
+        (select group_concat(m.tag_name,' ') from et_tag m,et_question_2_tag n
+        where m.tag_id=n.tag_id and n.question_id=a.id) tags from et_question
+        a,et_question_2_point
+        b,et_knowledge_point
+        c,et_field d,et_question_type
+        e
 		<where>
 			a.id=b.question_id and b.point_id=c.point_id and
 			c.field_id=d.field_id
@@ -37,8 +38,8 @@
 				and instr(a.name,#{filter.searchParam})&lt;&gt;0
 			</if>
 		</where>
-		group by a.id,a.name,a.content,a.question_type_id,a.creator,a.answer,a.analysis,a.reference,a.examing_point,e.`name`,a.examing_point,tags)
-		 z left join et_question_parent f
+        group by a.id)
+         z left join et_question_parent f
         on z.parentId=f.id order by z.id desc
 	</select>
 

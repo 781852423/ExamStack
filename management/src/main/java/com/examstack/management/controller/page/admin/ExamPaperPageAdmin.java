@@ -78,39 +78,7 @@ public class ExamPaperPageAdmin {
 	}
 	
 	
-	/**
-	 * 修改试卷
-	 * @param model
-	 * @param request
-	 * @param exampaperId
-	 * @return
-	 */
-	/*
-	@RequestMapping(value = "/admin/exampaper/exampaper-edit/{exampaperId}", method = RequestMethod.GET)
-	private String examPaperEditPage(Model model, HttpServletRequest request, @PathVariable int exampaperId){
-		String strUrl = "http://" + request.getServerName() // 服务器地址
-				+ ":" + request.getServerPort() + "/";
-		
-		ExamPaper examPaper = examPaperService.getExamPaperById(exampaperId);
-		StringBuilder sb = new StringBuilder();
-		if(examPaper.getContent() != null && !examPaper.getContent().equals("")){
-			Gson gson = new Gson();
-			List<QuestionQueryResult> questionList = gson.fromJson(examPaper.getContent(), new TypeToken<List<QuestionQueryResult>>(){}.getType());
-			for(QuestionQueryResult question : questionList){
-				AnswerSheetItem as = new AnswerSheetItem();
-				as.setAnswer(question.getAnswer());
-				as.setQuestion_type_id(question.getQuestionTypeId());
-				as.setPoint(question.getQuestionPoint());
-				QuestionAdapter adapter = new QuestionAdapter(question,strUrl);
-				sb.append(adapter.getStringFromXML());
-			}
-		}
-		
-		model.addAttribute("htmlStr", sb);
-		model.addAttribute("exampaperid", exampaperId);
-		model.addAttribute("exampapername", examPaper.getName());
-		return "exampaper-edit";
-	}*/
+	
 	
 	/*
 	 * 展示题目

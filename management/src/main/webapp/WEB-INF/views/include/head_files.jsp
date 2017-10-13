@@ -2,7 +2,7 @@
 <base href="<%=basePath%>">
     <meta http-equiv="pragma" content="Pragma">
     <meta http-equiv="cache-control" content="public">
-    
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta charset="utf-8">
     
     <meta name="keywords" content="银行招聘,烟草招聘,中石油招聘,中石化招聘,进出口银行,求职辅导培训,烟草公司招聘笔试面试,真题分享,模拟训练,笔试面试经验分享">
