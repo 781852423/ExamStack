@@ -429,9 +429,16 @@ var examing = {
 					$("#question-submit button").text("已完成交卷");
 					form = $("<form method='post' action='student/getPersonalityTestReport'></form>");
 				    str = JSON.stringify(message.object);
-				    console.log('str:' + str);
-					input = $("<input type='text'>").val(str).attr('name','PersonalityScoreListStr')
+				  
+					var input = $("<input type='text'>").val(str).attr('name','PersonalityScoreListStr')
 					form.append(input);
+					
+					// 提娜佳對csrf的支持
+					var token = $("meta[name='_csrf']").attr("content");
+					// var header = $("meta[name='_csrf_header']").attr("content");
+					var header="_csrf";
+					var input4Token = $("<input type='text'>").val(token).attr('name',header);
+					form.append(input4Token);
 					$(document.body).append(form);
 					form.submit()
 				});

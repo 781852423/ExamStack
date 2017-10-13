@@ -11,17 +11,10 @@ String basePath = request.getScheme() + "://"
 <!DOCTYPE html>
 <html>
 	<head>
-		<base href="<%=basePath%>">
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>ExamStack 登录系统</title>
 		
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="keywords" content="">
-		<link rel="shortcut icon" href="<%=basePath%>resources/images/favicon.ico" />
-		<link href="resources/bootstrap/css/bootstrap-huan.css" rel="stylesheet">
-		<link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-		<link href="resources/css/style.css" rel="stylesheet">
+		<title>在线考试登录系统</title>
+		
+		<%@include file="include/head_files.jsp" %>
 		<style type="text/css">
 			.form-group {
 				margin-bottom: 5px;

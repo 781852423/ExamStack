@@ -18,17 +18,12 @@ request.setAttribute("leftMenuId",list[3]);
 <!DOCTYPE html>
 <html>
   	<head>
-   		<base href="<%=basePath%>">
-   	 	<meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
 		<title>试题管理</title>
-		<meta name="keywords" content="">
-		<link rel="shortcut icon" href="<%=basePath%>resources/images/favicon.ico" />
-		<link href="resources/bootstrap/css/bootstrap-huan.css" rel="stylesheet">
-		<link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-		<link href="resources/css/style.css" rel="stylesheet">
+        <%@include file="include/head_files.jsp" %>
 		
 		<link href="resources/css/question-add.css" rel="stylesheet">
-		<link href="resources/chart/morris.css" rel="stylesheet">
+		
 	</head>
 	<body>
 		<header>

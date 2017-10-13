@@ -18,19 +18,9 @@ request.setAttribute("leftMenuId",list[3]);
 <!DOCTYPE html>
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>51jobpass</title>
-		<meta name="keywords" content="">
-		<link rel="shortcut icon" href="<%=basePath%>resources/images/favicon.ico" />
-		<link href="resources/bootstrap/css/bootstrap-huan.css" rel="stylesheet">
-		<link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-		<link href="resources/css/style.css" rel="stylesheet">
-		
-		<link href="resources/css/exam.css" rel="stylesheet">
-		<link href="resources/chart/morris.css" rel="stylesheet">
+ 
+		<title>试卷编辑</title>
+          <%@include file="include/head_files.jsp" %>
 		<style>
 			#add-more-qt-to-paper{
 				cursor: pointer;

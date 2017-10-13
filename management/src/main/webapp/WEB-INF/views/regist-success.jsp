@@ -13,17 +13,9 @@ request.setAttribute("leftMenuId",list[3]);
 <!DOCTYPE html>
 <html>
 	<head>
-		<base href="<%=basePath%>">
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>ExamStack 注册成功</title>
 		
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="keywords" content="">
-		<link rel="shortcut icon" href="<%=basePath%>resources/images/favicon.ico" />
-		<link href="resources/bootstrap/css/bootstrap-huan.css" rel="stylesheet">
-		<link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-		<link href="resources/css/style.css" rel="stylesheet">
+		<title>ExamStack 注册成功</title>
+		<%@include file="include/head_files.jsp" %>
 		
 	</head>
 	<body>

@@ -11,27 +11,9 @@ String basePath = request.getScheme() + "://"
 <!DOCTYPE html>
 <html>
 	<head>
-		<base href="<%=basePath%>">
-		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="cache-control" content="no-cache">
-		<meta http-equiv="expires" content="0">
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="This is my page">
-		<meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<!--
-		<link rel="stylesheet" type="text/css" href="styles.css">
-		-->
+
 		<title>51jobpass</title>
-		<meta name="viewport"
-		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="keywords" content="">
-		<link rel="shortcut icon" href="<%=basePath%>resources/images/favicon.ico" />
-		<link href="resources/bootstrap/css/bootstrap-huan.css" rel="stylesheet">
-		<link href="resources/font-awesome/css/font-awesome.min.css"
-		rel="stylesheet">
-		<link href="resources/css/style.css" rel="stylesheet">
-		<!-- Javascript files -->
+		<%@include file="include/head_files.jsp" %>
 		<style type="text/css">
 			.form-group {
 				margin-bottom: 5px;

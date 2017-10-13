@@ -18,18 +18,9 @@ request.setAttribute("leftMenuId",list[3]);
 <!DOCTYPE html>
 <html>
 	<head>
-		<base href="<%=basePath%>">
-
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		
 		<title>我的学员</title>
-		<meta name="keywords" content="">
-		<link rel="shortcut icon" href="<%=basePath%>resources/images/favicon.ico" />
-		<link href="resources/bootstrap/css/bootstrap-huan.css" rel="stylesheet">
-		<link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-		<link href="resources/css/style.css" rel="stylesheet">
-
+		<%@include file="include/head_files.jsp" %>
 		<style type="text/css">
 			.disable-btn, .enable-btn {
 				text-decoration: underline;
