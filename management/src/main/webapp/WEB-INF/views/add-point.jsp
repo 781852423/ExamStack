@@ -1,19 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
-<%-- <%@taglib uri="spring.tld" prefix="spring"%> --%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String servletPath = (String)request.getAttribute("javax.servlet.forward.servlet_path");
-String[] list = servletPath.split("\\/");
-request.setAttribute("role",list[1]);
-request.setAttribute("topMenuId",list[2]);
-request.setAttribute("leftMenuId",list[3]);
-%>
+<%@include file="include/before_html.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -119,29 +105,7 @@ request.setAttribute("leftMenuId",list[3]);
 			</div>
 		</div>
 
-		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="copy">
-							<p>
-								51jobpass.com Copyright © <a href="http://www.51jobpass.com/" target="_blank">51jobpass</a> - <a href="." target="_blank">主页</a> | <a href="http://www.51jobpass.com/" target="_blank">关于我们</a> | <a href="http://www.51jobpass.com/" target="_blank">FAQ</a> | <a href="http://www.51jobpass.com/" target="_blank">联系我们</a>
-							</p>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-		</footer>
-
-		<!-- Slider Ends -->
-
-		<!-- Javascript files -->
-		<!-- jQuery -->
-		<script type="text/javascript" src="resources/js/jquery/jquery-1.9.0.min.js"></script>
-		<!-- Bootstrap JS -->
-		<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+	    <%@include file="include/footer_cm_js.jsp"%>
 		<script type="text/javascript" src="resources/chart/raphael-min.js"></script>
 		<script type="text/javascript" src="resources/chart/morris.js"></script>
 		<script type="text/javascript" src="resources/js/add-point.js"></script>

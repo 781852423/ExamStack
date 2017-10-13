@@ -1,19 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
-<%-- <%@taglib uri="spring.tld" prefix="spring"%> --%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String servletPath = (String)request.getAttribute("javax.servlet.forward.servlet_path");
-String[] list = servletPath.split("\\/");
-request.setAttribute("role",list[1]);
-request.setAttribute("topMenuId",list[2]);
-request.setAttribute("leftMenuId",list[3]);
-%>
+<%@include file="include/before_html.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -174,228 +160,206 @@ request.setAttribute("leftMenuId",list[3]);
 			</div>
 		</div>
 
-		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="copy">
-							<p>
-								51jobpass.com Copyright © <a href="http://www.51jobpass.com/" target="_blank">51jobpass</a> - <a href="." target="_blank">主页</a> | <a href="http://www.51jobpass.com/" target="_blank">关于我们</a> | <a href="http://www.51jobpass.com/" target="_blank">FAQ</a> | <a href="http://www.51jobpass.com/" target="_blank">联系我们</a>
-							</p>
-						</div>
-					</div>
-				</div>
+        <div class="modal fade" id="add-teacher-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h6 class="modal-title" id="myModalLabel">创建教师账号</h6>
+                        </div>
+                        <div class="modal-body">
+                            <form id="teacher-add-form" style="margin-top:40px;"  action="admin/add-user-ROLE_TEACHER-0">
+                                <div class="form-line form-username" style="display: block;">
+                                    <span class="form-label"><span class="warning-label">*</span>用户名：</span>
+                                    <input type="text" class="df-input-narrow" id="name-add" maxlength="20">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-password" style="display: block;">
+                                    <span class="form-label"><span class="warning-label">*</span>密码：</span>
+                                    <input type="text" class="df-input-narrow" id="password-add" maxlength="20">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-truename" style="display: block;">
+                                    <span class="form-label"><span class="warning-label">*</span>真实姓名：</span>
+                                    <input type="text" class="df-input-narrow" id="truename-add" maxlength="20">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-national-id" style="display: block;">
+                                    <span class="form-label"><span class="warning-label">*</span>身份证号：</span>
+                                    <input type="text" class="df-input-narrow" id="national-id-add" maxlength="18">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-phone" style="display: block;">
+                                    <span class="form-label"><span class="warning-label">*</span>手机：</span>
+                                    <input type="text" class="df-input-narrow" id="phone-add" maxlength="18">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-email" style="display: block;">
+                                    <span class="form-label"><span class="warning-label">*</span>邮箱：</span>
+                                    <input type="text" class="df-input-narrow" id="email-add" maxlength="90">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-company" style="display: none;">
+                                    <span class="form-label"><span class="warning-label"></span>单位：</span>
+                                    <input type="text" class="df-input-narrow" id="company-add" maxlength="30">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-department" style="display: none;">
+                                    <span class="form-label"><span class="warning-label"></span>部门单位：</span>
+                                    <select id="department-input-select" class="df-input-narrow">
+                                        <option value="-1">--请选择--</option>
+                                        <c:forEach items="${depList }" var="item">
+                                            <option value="${item.depId }">${item.depName }</option>
+                                        </c:forEach>
+                                    </select>
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                关闭窗口
+                            </button>
+                            <button id="add-user-btn" data-action="admin/add-user-ROLE_TEACHER" data-url="admin/user/teacher-list" data-group="0" type="button" class="btn btn-primary">
+                                确定添加
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="reset-pwd-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h6 class="modal-title" >重置密码</h6>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="reset-pwd-form" style="margin-top:40px;" action="secure/reset-pwd-user">
+                                                <div class="form-line form-user-name-reset">
+                                                    <span class="form-label"><span class="warning-label">*</span>用户名：</span>
+                                                    <input type="text" class="df-input-narrow" id="username-reset" maxlength="20" disabled="disabled">
+                                                    <span class="form-message"></span>
+                                                    <br>
+                                                </div>
+                                                <div class="form-line form-user-pwd-reset">
+                                                    <span class="form-label"><span class="warning-label">*</span>新密码：</span>
+                                                    <input type="text" class="df-input-narrow" id="pwd-reset" maxlength="20">
+                                                    <span class="form-message"></span>
+                                                    <br>
+                                                </div>
+                                            </form>
+                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                关闭窗口
+                                            </button>
+                                            <button id="reset-pwd-btn" type="button" class="btn btn-primary">
+                                                确定修改
+                                            </button>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+            </div>  
+            <div class="modal fade" id="update-teacher-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h6 class="modal-title" id="myModalLabel">修改教师账号</h6>
+                        </div>
+                        <div class="modal-body">
+                            <form id="teacher-update-form" style="margin-top:40px;"  action="admin/update-teacher">
+                                <div class="form-line form-user-id" style="display: none;">
+                                    <span class="form-label"><span class="warning-label">*</span>用户名：</span>
+                                    <input type="text" class="df-input-narrow" id="id-update">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-username-u" style="display: block;">
+                                    <span class="form-label"><span class="warning-label">*</span>用户名：</span>
+                                    <input type="text" class="df-input-narrow" id="name-update" disabled="disabled">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-password-u" style="display: none;">
+                                    <span class="form-label"><span class="warning-label">*</span>密码：</span>
+                                    <input type="text" class="df-input-narrow" id="password-update" maxlength="20">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-truename-u" style="display: block;">
+                                    <span class="form-label"><span class="warning-label">*</span>真实姓名：</span>
+                                    <input type="text" class="df-input-narrow" id="truename-update" maxlength="20">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-national-id-u" style="display: block;">
+                                    <span class="form-label"><span class="warning-label">*</span>身份证号：</span>
+                                    <input type="text" class="df-input-narrow" id="national-id-update" maxlength="18">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-phone-u" style="display: block;">
+                                    <span class="form-label"><span class="warning-label">*</span>手机：</span>
+                                    <input type="text" class="df-input-narrow" id="phone-update" maxlength="18">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-email-u" style="display: block;">
+                                    <span class="form-label"><span class="warning-label">*</span>邮箱：</span>
+                                    <input type="text" class="df-input-narrow" id="email-update" maxlength="90">
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-company-u" style="display: none;">
+                                    <span class="form-label"><span class="warning-label"></span>单位：</span>
+                                    <input type="text" class="df-input-narrow" id="company-update" maxlength=30>
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                                <div class="form-line form-department-u" style="display: none;">
+                                    <span class="form-label"><span class="warning-label"></span>部门单位：</span>
+                                    <select id="department-input-select-u" class="df-input-narrow">
+                                        <option value="-1">--请选择--</option>
+                                        <c:forEach items="${depList }" var="item">
+                                            <option value="${item.depId }">${item.depName }</option>
+                                        </c:forEach>
+                                    </select>
+                                    <span class="form-message"></span>
+                                    <br>
+                                </div>
+                            </form>
 
-			</div>
-			<div class="modal fade" id="add-teacher-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-								&times;
-							</button>
-							<h6 class="modal-title" id="myModalLabel">创建教师账号</h6>
-						</div>
-						<div class="modal-body">
-							<form id="teacher-add-form" style="margin-top:40px;"  action="admin/add-user-ROLE_TEACHER-0">
-								<div class="form-line form-username" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>用户名：</span>
-									<input type="text" class="df-input-narrow" id="name-add" maxlength="20">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-password" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>密码：</span>
-									<input type="text" class="df-input-narrow" id="password-add" maxlength="20">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-truename" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>真实姓名：</span>
-									<input type="text" class="df-input-narrow" id="truename-add" maxlength="20">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-national-id" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>身份证号：</span>
-									<input type="text" class="df-input-narrow" id="national-id-add" maxlength="18">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-phone" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>手机：</span>
-									<input type="text" class="df-input-narrow" id="phone-add" maxlength="18">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-email" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>邮箱：</span>
-									<input type="text" class="df-input-narrow" id="email-add" maxlength="90">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-company" style="display: none;">
-									<span class="form-label"><span class="warning-label"></span>单位：</span>
-									<input type="text" class="df-input-narrow" id="company-add" maxlength="30">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-department" style="display: none;">
-									<span class="form-label"><span class="warning-label"></span>部门单位：</span>
-									<select id="department-input-select" class="df-input-narrow">
-										<option value="-1">--请选择--</option>
-										<c:forEach items="${depList }" var="item">
-											<option value="${item.depId }">${item.depName }</option>
-										</c:forEach>
-									</select>
-									<span class="form-message"></span>
-									<br>
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">
-								关闭窗口
-							</button>
-							<button id="add-user-btn" data-action="admin/add-user-ROLE_TEACHER" data-url="admin/user/teacher-list" data-group="0" type="button" class="btn btn-primary">
-								确定添加
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal fade" id="reset-pwd-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-												&times;
-											</button>
-											<h6 class="modal-title" >重置密码</h6>
-										</div>
-										<div class="modal-body">
-											<form id="reset-pwd-form" style="margin-top:40px;" action="secure/reset-pwd-user">
-												<div class="form-line form-user-name-reset">
-													<span class="form-label"><span class="warning-label">*</span>用户名：</span>
-													<input type="text" class="df-input-narrow" id="username-reset" maxlength="20" disabled="disabled">
-													<span class="form-message"></span>
-													<br>
-												</div>
-												<div class="form-line form-user-pwd-reset">
-													<span class="form-label"><span class="warning-label">*</span>新密码：</span>
-													<input type="text" class="df-input-narrow" id="pwd-reset" maxlength="20">
-													<span class="form-message"></span>
-													<br>
-												</div>
-											</form>
-											
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">
-												关闭窗口
-											</button>
-											<button id="reset-pwd-btn" type="button" class="btn btn-primary">
-												确定修改
-											</button>
-										</div>
-										
-									</div>
-								</div>
-			</div>	
-			<div class="modal fade" id="update-teacher-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-								&times;
-							</button>
-							<h6 class="modal-title" id="myModalLabel">修改教师账号</h6>
-						</div>
-						<div class="modal-body">
-							<form id="teacher-update-form" style="margin-top:40px;"  action="admin/update-teacher">
-								<div class="form-line form-user-id" style="display: none;">
-									<span class="form-label"><span class="warning-label">*</span>用户名：</span>
-									<input type="text" class="df-input-narrow" id="id-update">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-username-u" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>用户名：</span>
-									<input type="text" class="df-input-narrow" id="name-update" disabled="disabled">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-password-u" style="display: none;">
-									<span class="form-label"><span class="warning-label">*</span>密码：</span>
-									<input type="text" class="df-input-narrow" id="password-update" maxlength="20">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-truename-u" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>真实姓名：</span>
-									<input type="text" class="df-input-narrow" id="truename-update" maxlength="20">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-national-id-u" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>身份证号：</span>
-									<input type="text" class="df-input-narrow" id="national-id-update" maxlength="18">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-phone-u" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>手机：</span>
-									<input type="text" class="df-input-narrow" id="phone-update" maxlength="18">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-email-u" style="display: block;">
-									<span class="form-label"><span class="warning-label">*</span>邮箱：</span>
-									<input type="text" class="df-input-narrow" id="email-update" maxlength="90">
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-company-u" style="display: none;">
-									<span class="form-label"><span class="warning-label"></span>单位：</span>
-									<input type="text" class="df-input-narrow" id="company-update" maxlength=30>
-									<span class="form-message"></span>
-									<br>
-								</div>
-								<div class="form-line form-department-u" style="display: none;">
-									<span class="form-label"><span class="warning-label"></span>部门单位：</span>
-									<select id="department-input-select-u" class="df-input-narrow">
-										<option value="-1">--请选择--</option>
-										<c:forEach items="${depList }" var="item">
-											<option value="${item.depId }">${item.depName }</option>
-										</c:forEach>
-									</select>
-									<span class="form-message"></span>
-									<br>
-								</div>
-							</form>
-
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">
-								关闭窗口
-							</button>
-							<button id="update-teacher-btn" type="button" class="btn btn-primary">
-								确定修改
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
-
-		<!-- Slider Ends -->
-
-		<!-- Javascript files -->
-		<!-- jQuery -->
-		<script type="text/javascript" src="resources/js/jquery/jquery-1.9.0.min.js"></script>
-		<!-- Bootstrap JS -->
-		<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="resources/js/all.js"></script>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                关闭窗口
+                            </button>
+                            <button id="update-teacher-btn" type="button" class="btn btn-primary">
+                                确定修改
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		 <%@include file="include/footer_cm_js.jsp"%>
 		<script type="text/javascript" src="resources/js/teacher-list.js"></script>
 		<script type="text/javascript" src="resources/js/add-teacher.js"></script>
 		<script type="text/javascript" src="resources/js/update-teacher.js"></script>

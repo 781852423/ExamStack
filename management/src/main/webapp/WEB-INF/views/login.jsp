@@ -1,13 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri='http://www.springframework.org/security/tags' prefix='sec'  %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://"
 + request.getServerName() + ":" + request.getServerPort()
 + path + "/";
 %>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,6 +23,7 @@ String basePath = request.getScheme() + "://"
 			}
 
 		</style>
+		<sec:csrfMetaTags/>
 	</head>
 	<body>
 		<header>
@@ -79,7 +81,7 @@ String basePath = request.getScheme() + "://"
 							<h5>登陆网站管理系统</h5>
 							<div class="form">
 								<!-- Login form (not working)-->
-								<form class="form-horizontal" action="j_spring_security_check" method="post">
+								<form:form class="form-horizontal" action="j_spring_security_check" method="post">
 									<!-- Username -->
 									<div class="form-group">
 										<label class="control-label col-md-3" for="username">用户名</label>
@@ -107,7 +109,7 @@ String basePath = request.getScheme() + "://"
 											<span class="form-message">${result}</span>
 										</div>
 									</div>
-								</form>
+								</form:form>
 								<i class="fa fa-info"></i> 
 								通过教师/管理员账号登陆系统
 							</div>
@@ -119,31 +121,7 @@ String basePath = request.getScheme() + "://"
 			</div>
 
 		</div>
-		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="copy">
-							<p>
-								51jobpass.com Copyright © <a href="http://www.51jobpass.com/" target="_blank">51jobpass</a> - <a href="." target="_blank">主页</a> | <a href="http://www.51jobpass.com/" target="_blank">关于我们</a> | <a href="http://www.51jobpass.com/" target="_blank">FAQ</a> | <a href="http://www.51jobpass.com/" target="_blank">联系我们</a>
-							</p>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-		</footer>
-
-		<!-- Slider Ends -->
-
-		<!-- Javascript files -->
-		<!-- jQuery -->
-		<script type="text/javascript"
-		src="resources/js/jquery/jquery-1.9.0.min.js"></script>
-		<!-- Bootstrap JS -->
-		<script type="text/javascript"
-		src="resources/bootstrap/js/bootstrap.min.js"></script>
+		 <%@include file="include/footer_cm_js.jsp"%>
 
 	</body>
 </html>
