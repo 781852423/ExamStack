@@ -1,6 +1,7 @@
 package com.examstack.listener;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -18,12 +19,15 @@ public class SessionListener implements HttpSessionListener{
              sessionSet=new HashSet<HttpSession>();  
              context.setAttribute("sessionSet", sessionSet);  
          }  
-        //这里主要是为了检验用户是否登录，登录的话强制移除该session，加入新session  
-         for(HttpSession s : sessionSet){  
+        //这里主要是为了检验用户是否登录，登录的话强制移除该session，加入新session
+         Iterator<HttpSession> it = sessionSet.iterator();
+         while(it.hasNext()) {
+        	 HttpSession s = it.next();
              if(session.getAttribute("username")==s.getAttribute("username")){  
-                 sessionSet.remove(s);  
+            	 it.remove();  
              }  
-         }  
+         }
+         
          sessionSet.add(session);  
         //存储在线人数，利用了set集合不重复的特性，避免了重复登录  
          context.setAttribute("lineCount", sessionSet.size()); 
