@@ -32,9 +32,9 @@
 					<ul class="nav default-sidenav">
 						<li class="active"><a> <i class="fa fa-cogs"></i> 基本资料
 						</a></li>
-						<li><a href="student/change-password"> <i
+						<!--  <li><a href="student/change-password"> <i
 								class="fa fa-wrench"></i> 修改密码
-						</a></li>
+						</a></li>-->
 
 					</ul>
 

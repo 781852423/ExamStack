@@ -29,6 +29,15 @@ $(function() {
 	         
 		});
 	});
+	
+	// 增加对考试时候时钟的收缩和隐藏
+	$(function() {
+	    $("#toggleClock").click(function() {
+	        $(this).text($("#question-time").is(":hidden") ? "收起时钟" : "展开时钟");
+	        $("#question-time").slideToggle();
+	    });
+	});
+	
 	});
 
 var util = {

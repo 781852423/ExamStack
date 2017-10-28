@@ -27,13 +27,11 @@
 				<div class="row">
 					<div class="col-xs-6 col-md-3 firstrow-col1" style="padding:10px;">
 						<div class="def-bk" id="bk-exam-control">
-
+							<button class="btn btn-primary btn-lg" id="toggleClock">隐藏或者显示时钟</button>
 							<div class="def-bk-content" id="exam-control">
 
 								<div id="question-time" class="question-time-normal">
-									<div style="height:140px;text-align: center;">
-										<i id="time-icon" class="fa fa-clock-o"> </i>
-									</div>
+
 
 									<span style="margin-right:10px;color: #B8B8B8;">倒计时</span>
 									<span id="exam-clock">&nbsp;</span>
@@ -149,9 +147,7 @@
 
 		</div> <!--  ends content -->
 		 <%@include file="include/footer_cm_js.jsp" %>
-		<script type="text/javascript" src="resources/js/all.js?v=0712"></script>
 		<script type="text/javascript" src="resources/js/paper-examing.js"></script>
-
 		
 
 	</body>
