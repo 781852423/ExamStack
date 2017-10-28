@@ -344,4 +344,34 @@ public class PracticePage {
 		}
 	}
 	
+
+	/*
+	 * 
+	 * 前台获取关于空间记忆容量的测试内容（属于认知能力测试）
+	 */
+	@RequestMapping(value = "/student/cognitive-test/memory-space-capacity", method = RequestMethod.GET)
+	public String cognitivetestMemorySpaceCapacity(Model model, HttpServletRequest request)
+	{
+		
+		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		
+		
+	    return "memory-pace-capacity";
+	}
+	
+	/*
+	 * 
+	 * 前台获取关于粗加工的测试内容（属于认知能力测试）
+	 */
+	@RequestMapping(value = "/student/cognitive-test/memory-space-capacity", method = RequestMethod.GET)
+	public String cognitivetestWideMake(Model model, HttpServletRequest request)
+	{
+		
+		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		
+		
+	    return "cujiagong";
+	}
 }

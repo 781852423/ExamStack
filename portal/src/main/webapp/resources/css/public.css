@@ -1,0 +1,68 @@
+@charset "gb2312";
+/*公共样式*/
+*{margin:0;padding:0;}
+body{font-size:14px;color:#333;font-family:"Microsoft Yahei";background:#f8f8f8;}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}
+progress{display:inline-block;vertical-align:baseline;}
+button,input,optgroup,select,textarea{border:1px solid #ededed;}
+input,select{vertical-align:middle;}
+textarea,input{word-wrap:break-word;word-break:break-all;}
+button,input[type="button"],input[type="reset"],input[type="submit"],input[type="radio"],input[type="checkbox"],input[type="file"]{cursor:pointer;}
+li,ul,dl,ol{list-style-type:none;vertical-align:middle;}
+img{border:0 none;}
+textarea{overflow:auto}
+textarea:focus,input:focus{outline:none;}
+table{border-collapse:collapse;border-spacing:0}
+em,i{font-style:normal}
+::selection{color:#fff;background-color:#333}
+::-moz-selection{color:#fff;background-color:#333}
+a{text-decoration:none;color:#333;cursor:pointer;}
+a:hover,a:active{color:#2897e8;text-decoration:none;}
+h1,h2,h3,h4,h5,h6{ }
+
+/* 浮动定义 */
+.fl{float:left;}
+.fr{float:right;}
+.clear{clear:both;zoom:1;}
+.clear:after{content:"\0020";display:block;height:0;clear:both;visibility:hidden;}
+label.txtLabel{color:#a0a0a0;cursor:text;font-size:14px;left:11px;position:absolute;top:1px;line-height:35px;}
+.relative{position:relative;}
+.btn.bg-blue{background:#2897e8;}
+.btn.bg-yellow{background:#f19114;}
+.btn.bg-gray{background:#ededed;}
+.btn.bg-blue:hover{background:#1c88d5; text-decoration: none;}
+.btn.bg-yellow:hover{background:#e5860a;text-decoration: none;}
+.btn.bg-gray:hover{background:#e8e8e8;}
+
+.yellow{color: #f19114;}
+.green{color: #7bba40;}
+.red{color:#ff0000;}
+.blue{color:#2897e8;}
+.gray{color: #999;}
+
+.hide{display: none;}
+
+.link_bk a {color: #666;text-decoration: none;}
+.link_bk a:hover {text-decoration: underline;color: #2897e8;}
+
+/* width */
+.W610{ width: 610px;}
+.W250{ width: 250px;}
+.W240{ width: 240px;}
+.W220{ width: 220px;}
+.W180{ width: 180px;}
+.W130{ width: 130px;}
+.W110{ width: 110px;}
+.W100{ width: 100px;}
+.W90{ width: 90px;}
+.W80{ width: 80px;}
+.W40{ width: 40px;}
+
+/**/
+
+.Pr10{padding-right: 10px;}
+.Mr10{margin-right: 10px;}
+
+
+
+

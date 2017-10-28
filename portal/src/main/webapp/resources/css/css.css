@@ -1,0 +1,62 @@
+#wrap { margin: 0 auto; overflow: hidden; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; width: 100%; background: url(../picture/images/top.jpg) top repeat-x; }
+#wrapper { text-align: left; width: 1000px; margin: 0 auto; }
+#footer { margin-top: 10px; border-top: 2px solid #cb0708; background: #e3e3e3; }
+#header { height: 137px;   }
+
+
+.headtop { height: 132px; }
+.headtop .top { height: 34px; line-height: 34px; font-size: 13px; color: #d10002; }
+.headtop .top .hd { float: left; font-weight: none; color:#666 }
+
+.headtop .top span { float: right; }
+.headtop .top span a { color: #d10002; }
+
+.login { position:relative; width:970px; margin:0 auto; color:#666; line-height:34px; float: left; }
+.login a:link { color:#666; }
+.login_L { position:absolute; left:0; top:0; }
+.login input, .login select { margin-top:-1px; _margin-top:1px; vertical-align:middle; }
+.login form a { color:#666; }
+.login form a:hover { color:#c00; }
+.login label input { width:80px; height:14px; }
+.login .siderNav { position:absolute; right:0; top:0; width:390px; _width:400px; float: right; }
+.btnLogin { width:40px; height:20px; border:none; cursor:pointer; color:#666; }
+.btnLogin:hover { color:#333; }
+.topmenu li, .topmenu strong.icon_arr, .topmenu li.weibo strong, .topmenu li.weixin strong, .topmenu .focusht, .topmenu .wxht { background:url(../picture/images/topmenu.gif) no-repeat; }
+.topmenu { margin-top:5px; line-height:22px; color:#333; }
+.topmenu li { float:left; position:relative; background-position:right top; }
+.topmenu strong { display:block; position:relative; height:25px; padding:0 10px; font-weight:normal; cursor:default; z-index:20; }
+.topmenu .jq_hidebox { display:none; position:absolute; left:0; top:25px; padding:10px; border:1px solid #dfdfdf; box-shadow:0 1px 2px #ccc; background:#fff; z-index:10; }
+.topmenu li.hover strong { border:1px solid #dfdfdf; border-bottom:none; background-color:#fff; }
+.topmenu li.hover { margin:-1px -1px 0 -1px; _width:66px; }
+.topmenu li.htphone { _width:83px; }
+.topmenu li.htphone .jq_hidebox { width:90px; padding:1px 0px 0; }
+.topmenu .htphonebox { padding:5px; border-top:1px solid #f3f3f3; }
+.topmenu strong.icon_arr { padding-right:23px; background-position:right -23px; width: 52px; }
+.topmenu li.hover strong.icon_arr { background-position:right -46px; }
+.topmenu li.weibo { _width:65px; }
+.topmenu li.weibo strong { padding-left:29px; background-position:0 -75px; }
+.topmenu li.weibo .jq_hidebox { width:160px; }
+.topmenu li.weixin { _width:66px; }
+.topmenu li.weixin strong { padding-left:30px; background-position:0 -46px; }
+.topmenu li.webnav { _width:83px; }
+.topmenu li.webnav .jq_hidebox { width:190px; left:-119px; }
+.topmenu li.qxpp { background:none; }
+.topmenu li.qxpp .jq_hidebox { width:160px; left:-99px; }
+.jq_hidebox a { color:#666 }
+.topmenu li.nojq { margin:0; background:none; }
+.topmenu .focusht { display:block; width:155px; height:50px; background-position:0 -106px; text-indent:-100em; overflow:hidden; }
+.topmenu .wxht { height:70px; width:90px; padding-left:70px; background-position:0 -167px; }
+.topmenu .wxht span { display:inline-block; padding-top:3px; color:#666; }
+.aSty01 { margin:0; font-size:12px; color:#666; }
+.aSty01 dt { margin-top:6px; padding:5px 0 2px 0; border-top:1px solid #e5e5e5; }
+.aSty01 dd { margin:0; }
+.aSty01 dd a { color:#666; }
+.aSty01 dd a:hover { color:#c00; }
+
+.logo { width: 190px; height: 92px; margin: 6px 40px 0 0px; float: left; display:inline; }
+.weibo_old { width: 334px; height: 70px; float: left; margin: 10px 0 0 10px;  }
+.foot { text-align: center; margin-top: 20px; padding: 20px 0; }
+.foot a { color: #333; }
+.foot a:hover { color: #d10002; }
+.foot p { margin-bottom: 10px; color: #333; }
+.foot p span a { color: #d10002; }
