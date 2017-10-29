@@ -142,7 +142,7 @@ public class UserPage {
 		return "news-detail";
 	}
 	
-	@RequestMapping(value = { "logout" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();  
 		    if (auth != null){      

@@ -221,7 +221,7 @@ public class UserPageAdmin {
 		    if (auth != null){      
 		        new SecurityContextLogoutHandler().logout(request, response, auth);  
 		    }  
-		return "home";
+		return "login";
 	}
 	
 	
