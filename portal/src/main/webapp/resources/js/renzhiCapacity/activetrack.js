@@ -19,12 +19,12 @@ $(document).ready(function() {
     var limit_secs = 0;
     var limit_m = 0;
     var limit_s = 0;
-    var totalQuestionNumber = 3;
+    var TOTAL_QUESTION_NUMBER = 6;
+    var settime = '';
     
-    initBalls();
-
-    drawBall(1);
-    startNewGame( false );
+     initBalls();
+     drawBall(1);	 
+	 startNewGame(false);
 	 
     function showtime() {
         $('#limit_m').html(limit_m);
@@ -34,11 +34,12 @@ $(document).ready(function() {
             limit_m = limit_m - 1;
             limit_s = 59;
         }
-        if (limit_m < 0) {
+        if (limit_m < 0) 
+        {
         	if(settime != null)
-        		{
-        		  clearInterval(settime);
-        		}
+    		{
+    		  clearInterval(settime);
+    		}
           
             endAnswer();
         }
@@ -48,7 +49,6 @@ $(document).ready(function() {
     {
     	   
     	        balls = [];
-    	        initBalls();
     	        isMove = false;
     	        themeColor = '#30302F';
     	        addCountPer = 10; // 每几个增加一个球。
@@ -61,17 +61,18 @@ $(document).ready(function() {
     	        rightNum = 0;
     	        totalNum = 0;
     	        moveSecs = 6;
-    	        limit_secs = totalQuestionNumber*10; // 每道题给10秒钟时间
+    	        limit_secs = TOTAL_QUESTION_NUMBER*15; // 每道题给10秒钟时间
     	        limit_m = parseInt(limit_secs / 60);
     	        limit_s = parseInt(limit_secs % 60);
+    	        initBalls();
     }
 
     function showAnswerResult()
     {
     	 
-    	$('#questionNumber').html(totalNum);
+    	$('#questionNumber').html(TOTAL_QUESTION_NUMBER);
     	$('#correctNumber').html(rightNum);
-    	$('#incorrectNumber').html(totalNum-rightNum);
+    	$('#incorrectNumber').html(TOTAL_QUESTION_NUMBER-rightNum);
     	$('#gotest').text('再来一发');
     	$('#test-result').modal('show');
     
@@ -81,8 +82,9 @@ $(document).ready(function() {
     {
     	console.log('beginExam---');
     	 initParas();
+    	 
     	 gameStatus = 'go';
-         var settime = setInterval(function () {
+         settime = setInterval(function () {
             showtime();
         }, 1000);
         startNewGame(true);
@@ -202,7 +204,7 @@ $(document).ready(function() {
         }
     }
 
-    // 10个小球初始化
+    // 10个小球初始化,但还没有画图，只是存储了位置
     function initBalls()
     {
     	canvas = document.getElementById("canvas");
@@ -236,7 +238,8 @@ $(document).ready(function() {
             context.clearRect(0, 0, width, height);
             context.fillStyle = themeColor;
             context.fillRect(0, 0, width, height);
-            for(var i=0; i<balls.length; i++){
+            for(var i=0; i<balls.length; i++)
+            {
                 balls[i].x = Math.random() * (width - 2 * radius) + radius;
                 balls[i].y = Math.random() * (height - 2 * radius) + radius;
             }
@@ -261,7 +264,7 @@ $(document).ready(function() {
     }
     
    
-
+    // 初步判断，如果传入参数1，则会添加canvas的click参数
     function drawBall(first_flag) {
         context.clearRect(0, 0, width, height);
         context.fillStyle = themeColor;
@@ -276,39 +279,40 @@ $(document).ready(function() {
             context.fill();
         }
         if (first_flag == 1) {
-            canvas.addEventListener('click', function (e) {
-                if (!isEnd) {
-                    return;
-                }
-                var flag = isInPath(e.offsetX, e.offsetY);
-                if (flag > -1) {
-                    if (!balls[flag].check) {
-                        balls[flag].check = 1;
-                    } else {
-                        balls[flag].check = 0;
-                    }
-                    context.globalCompositeOperation = "source-over";
-                    context.beginPath();
-                    if (balls[flag].check == 1) {
-                        context.strokeStyle = '#EA9618';
-                    } else {
-                        context.strokeStyle = balls[flag].color;
-                    }
-                    context.lineWidth = 4;
-                    context.strokeRect(balls[flag].x - 20, balls[flag].y - 20, balls[flag].radius * 2, balls[flag].radius * 2);
-                    context.closePath();
-                    if( checkConfirmBtn()){
-                        $('#gotest').attr('class', 'yes-confirm');
-                    }
-                    if (balls[flag].check) {
-                        if (flag < 3) {
-                            //alert('选择正确');
-                        } else {
-                            //alert('选择错误');
-                        }
-                    }
-                }
-            })
+            canvas.addEventListener('click', 
+            	function (e) {
+				                if (!isEnd) {
+				                    return;
+				                }
+				                var flag = isInPath(e.offsetX, e.offsetY);
+				                if (flag > -1) {
+				                    if (!balls[flag].check) {
+				                        balls[flag].check = 1;
+				                    } else {
+				                        balls[flag].check = 0;
+				                    }
+				                    context.globalCompositeOperation = "source-over";
+				                    context.beginPath();
+				                    if (balls[flag].check == 1) {
+				                        context.strokeStyle = '#EA9618';
+				                    } else {
+				                        context.strokeStyle = balls[flag].color;
+				                    }
+				                    context.lineWidth = 4;
+				                    context.strokeRect(balls[flag].x - 20, balls[flag].y - 20, balls[flag].radius * 2, balls[flag].radius * 2);
+				                    context.closePath();
+				                    if( checkConfirmBtn()){
+				                        $('#gotest').attr('class', 'yes-confirm');
+				                    }
+				                    if (balls[flag].check) {
+				                        if (flag < 3) {
+				                            //alert('选择正确');
+				                        } else {
+				                            //alert('选择错误');
+				                        }
+				                    }
+				                }
+				            })
         }
     }
 
@@ -321,7 +325,8 @@ $(document).ready(function() {
                 context.beginPath();
                 context.arc(balls[i].x, balls[i].y, balls[i].radius, 0, Math.PI * 2, true);
                 context.closePath();
-                context.fillStyle = '#7E7E7D';
+                //context.fillStyle = '#7E7E7D';
+                context.fillStyle = 'red';
                 context.fill();
             }
         }, 100);
@@ -425,10 +430,11 @@ $(document).ready(function() {
         $('table td.check').removeClass('check');
         
         // 检查是否结束，如果结束，就提醒
-        if(totalNum > totalQuestionNumber)
+        if(totalNum > TOTAL_QUESTION_NUMBER)
         	{
-        	var msg = '此部分答题完毕，共计有' + totalNum +'题，你答对了' + rightNum +"道题" + "答错了" + (totalNum-rightNum) +'道题，请选择其它题型再练习';
+        	var msg = '此部分答题完毕，共计有' + TOTAL_QUESTION_NUMBER +'题，你答对了' + rightNum +"道题" + "答错了" + (TOTAL_QUESTION_NUMBER-rightNum) +'道题，请选择其它题型再练习';
         	console.log(msg);
+        	
         	showAnswerResult();
         	$('table td.check').removeClass('check');
         	}else {
@@ -443,12 +449,21 @@ $(document).ready(function() {
             return;
         }
         showTipStep(0, 0, '即将进入正式测试。', 3);
-        
+       
         setTimeout(function () {
        	 beginExam();
        }, 5000);
     });
     
-    $("#gotip").click(function () {showTips()});
+    $("#gotip").click(function () {
+    	showTips();
+    	 $('#gotip').attr('disabled','disabled');
+    	 if(settime != null)
+	 		{
+	 		  clearInterval(settime);
+	 		}
+    	});
 
+    $('#WideBtn').click(function (){showTipStep(0, 0, '请到<span style="color: red;">"题库练习"</span>模块，找<span style="color: red;">"认知能力->粗加工模块"</span>进行练习', 4);});
+    $('#ThinBtn').click(function (){showTipStep(0, 0, '请到<span style="color: red;">"题库练习"</span>模块,找<span style="color: red;">"认知能力->粗加工模块"</span>进行练习', 4);});
 });

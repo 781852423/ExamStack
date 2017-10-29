@@ -25,7 +25,7 @@
 			access="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT')" />
 		<security:custom-filter position="FORM_LOGIN_FILTER"
 			ref="securityFilter" />
-		<security:logout logout-url="/j_spring_security_logout"
+		<security:logout logout-url="/logout"
 			logout-success-url="/home" delete-cookies="true" invalidate-session="true" />
 		<security:session-management
 			invalid-session-url="/user-login-page"

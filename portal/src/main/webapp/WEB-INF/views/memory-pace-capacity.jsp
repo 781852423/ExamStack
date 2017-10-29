@@ -25,17 +25,15 @@
 
 		<div class="header" id="gohere">
 		    <span style="font-size: 16px;font-weight: bold;line-height: 40px;padding-left: 20px;">
-		               空间记忆容量测试，每次<span id="totalQuestionNumber">12</span>题
+		               空间记忆容量测试，每次<span id="totalQuestionNumber">12</span>题,点击右下角按钮查看说明，点击“开始测试”则开始正式做题
 		    </span>
-		    <span id="limit_m" style="color:#E57517;font-size: 14px;margin-left:20px;"></span>
+		    剩余时间：<span id="limit_m" style="color:red;font-size: 14px;margin-left:20px;"></span>分
 		    <span style="color:#E57517;font-size: 14px;">：</span>
-		    <span id="limit_s" style="color:#E57517;font-size: 14px;"></span>
+		    <span id="limit_s" style="color:red;font-size: 14px;"></span>秒
 		</div>
 		<!-- Slider starts -->
 		<div id="container" style="margin-bottom: 100px;">
-		       <div style="left: 60px;color: #E5EC43;font-size: 16px;">
-                     <span>这里就是练习题</span>
-                </div>
+		      
 		        <table id="grid-table">
 			        <tbody><tr>
 			            <td></td><td></td><td></td><td></td><td></td><td></td>
@@ -60,14 +58,14 @@
 			    <div style="float:left;left: 85%;bottom:45px;position: absolute;">
 			        <button id="confirm" class="no-confirm">确认选择</button>
 			        <button id="gotest" class="yes-confirm">开始测试</button>
-			        <button id="gotip">指导语</button>
+			        <button id="gotip">点击这里看看怎么玩</button>
 			     </div>
 			     
                    <div class="footer">
-                                <a href="javascript:;" class="current">空间记忆容量</a>
-                                <a href="guide/atip.htm">粗加工</a>
-                                <a href="guide/atip.htm?type=3">细加工</a>
-                                <a href="ball/atip.htm">目标动态追踪MOT</a>
+                                <a href="student/cognitive-test/memory-space-capacity"  class="current">空间记忆容量</a>
+                                <button id="WideBtn">粗加工</button>
+                                <button id="ThinBtn">细加工</button>
+                                <a href="student/cognitive-test/activeTrack">目标动态追踪MOT</a>
                     </div>
 				    <input type="hidden" id="act" value="test">
 				    <input type="hidden" id="limit_secs" value="150">

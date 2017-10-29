@@ -1,7 +1,7 @@
 #container{background-color:#E8E8E7; position: relative;width: 1000px;margin:0 auto;height: 100%;}
 .header{background-color: #E9FBFA; position: relative; margin: 0 auto;height: 40px;width: 1000px;border-bottom: 1px solid #E57517}
 .footer{background-color: #E9FBFA; position: relative; margin: 0 auto;width: 1000px;border-top: 1px solid #E57517;border-bottom: 1px solid #E57517;text-align: center;z-index: 1000;}
-.footer a{white-space: nowrap;padding: 10px; background: #E57517; color: #fff;display: inline-block;margin-left: 50px; width: 110px;cursor: pointer;}
+.footer a,#WideBtn,#ThinBtn{white-space: nowrap;padding: 10px; background: #E57517; color: #fff;display: inline-block;margin-left: 50px;cursor: pointer;}
 .footer a.current{background: #e9fbfa; color: #E57517;border: 1px solid #E57517;}
 #canvas{display: block;border: 6px solid #9D9D9C;margin:15px auto;}
 h2{text-align: center;}
@@ -32,7 +32,7 @@ h2{text-align: center;}
     font-size: 14px;
     text-decoration: none;
     display: inline-block;
-    width: 80px;
+   
     height: 31px;
     margin: 10px 0;
     text-align: center;

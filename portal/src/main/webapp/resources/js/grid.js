@@ -8,12 +8,14 @@ $(document).ready(function() {
     var tdNums = [];
     var gameStatus = '';
     var addCountPer = 6; // 增加阶数
-    var limit_secs = 0;
-    var limit_m = 0;
-    var limit_s = 0;
-    var totalQuestionNumber = parseInt($('#totalQuestionNumber').val());
-    
+    var settime = '';
+    var totalQuestionNumber = parseInt($('#totalQuestionNumber').text());
+    var limit_secs = totalQuestionNumber*6; // 每道题给10秒钟时间
+	var limit_m = parseInt(limit_secs / 60);
+    var limit_s = parseInt(limit_secs % 60);
+     
     function showtime() {
+    	console.log("剩余：" + limit_m + '分,' + limit_s + '秒');
         $('#limit_m').html(limit_m);
         $('#limit_s').html(limit_s);
         limit_s--;
@@ -41,11 +43,10 @@ $(document).ready(function() {
          cancheck = false;
          tdNums = [];
          gameStatus = '';
-         addCountPer = 6; // 增加阶数
-         limit_secs = totalQuestionNumber*5; // 每道题给10秒钟时间
-         
+         addCountPer = 6; // 增加阶数 
     	 limit_m = parseInt(limit_secs / 60);
          limit_s = parseInt(limit_secs % 60);
+         console.log('init 中时间' + limit_m + ":" + limit_s);
          for (var i = 0; i < 36; i++) {
              tdNums.push(i);
          }
@@ -56,7 +57,7 @@ $(document).ready(function() {
     {
     	 gameStatus = 'go';
     	 initParas();
-         var settime = setInterval(function () {
+         settime = setInterval(function () {
             showtime();
         }, 1000);
         setStar();
@@ -237,5 +238,6 @@ $(document).ready(function() {
     });
     
     $("#gotip").click(function () {showTips()});
-
+    $('#WideBtn').click(function (){showTipStep(0, 0, '请到<span style="color: red;">"题库练习"</span>模块，找<span style="color: red;">"认知能力->粗加工模块"</span>进行练习', 4);});
+    $('#ThinBtn').click(function (){showTipStep(0, 0, '请到<span style="color: red;">"题库练习"</span>模块,找<span style="color: red;">"认知能力->粗加工模块"</span>进行练习', 4);});
 });

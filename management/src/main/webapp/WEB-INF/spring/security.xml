@@ -12,7 +12,8 @@
 	<!-- <security:http use-expressions="true"> -->
 	<security:http pattern="/start" security="none" />
 	<security:http auto-config="false" use-expressions="true"
-		entry-point-ref="loginUrlAuthenticationEntryPoint">
+				  
+				   entry-point-ref="loginUrlAuthenticationEntryPoint">
 		<security:intercept-url pattern="/admin/**"
 			access="hasAnyRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/teacher/**"
@@ -25,7 +26,7 @@
 			access="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT')" />
 		<security:custom-filter position="FORM_LOGIN_FILTER"
 			ref="securityFilter" />
-		<security:logout logout-url="/j_spring_security_logout"
+		<security:logout logout-url="/logout" invalidate-session="true" 
 			logout-success-url="/home" delete-cookies="true" />
 		<security:session-management
 			invalid-session-url="/user-login-page"
@@ -33,6 +34,8 @@
 			<security:concurrency-control
 				max-sessions="1" expired-url="/home" error-if-maximum-exceeded="false" />
 		</security:session-management>
+		
+		<!-- <security:csrf disabled="true" /> -->
 	</security:http>
 
 	<security:authentication-manager alias="authenticationManager">

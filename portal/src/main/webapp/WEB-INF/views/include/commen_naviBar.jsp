@@ -17,6 +17,11 @@
                         <li>
                             <a href="student/personality-list"><i class="fa  fa-paper-plane-o"></i>职业性格测试</a>
                         </li>
+                        
+                        <li>
+                            <a href="student/cognitive-test/memory-space-capacity"><i class="fa  fa-paper-plane-o"></i>认知能力测试</a>
+                        </li>
+                        
                         <li>
                             <a href="training-list"><i class="fa fa-book"></i>培训资料</a>
                         </li>

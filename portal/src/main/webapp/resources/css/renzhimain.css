@@ -60,3 +60,4 @@
 .foot a:hover { color: #d10002; }
 .foot p { margin-bottom: 10px; color: #333; }
 .foot p span a { color: #d10002; }
+#questionNumber,#correctNumber,#incorrectNumber{color:red;}
