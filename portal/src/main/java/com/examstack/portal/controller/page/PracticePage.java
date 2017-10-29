@@ -364,14 +364,14 @@ public class PracticePage {
 	 * 
 	 * 前台获取关于粗加工的测试内容（属于认知能力测试）
 	 */
-	@RequestMapping(value = "/student/cognitive-test/memory-space-capacity", method = RequestMethod.GET)
-	public String cognitivetestWideMake(Model model, HttpServletRequest request)
+	@RequestMapping(value = "/student/cognitive-test/activeTrack", method = RequestMethod.GET)
+	public String cognitivetestActiveTrack(Model model, HttpServletRequest request)
 	{
 		
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		
 		
-	    return "cujiagong";
+	    return "activeTrack";
 	}
 }

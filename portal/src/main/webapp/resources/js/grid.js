@@ -22,7 +22,11 @@ $(document).ready(function() {
             limit_s = 59;
         }
         if (limit_m < 0) {
-            clearInterval(settime)
+        	if(settime != null)
+        		{
+        		  clearInterval(settime)
+        		}
+          
             endAnswer();
         }
     }
@@ -116,7 +120,8 @@ $(document).ready(function() {
 	}
 
 
-    function showTipStep(tipTotal, tipCount, tipContent, timeout) {
+    function showTipStep(tipTotal, tipCount, tipContent, timeout) 
+    {
         var paginationHtml = '';
         for (var i = 0; i < tipTotal; i++) {
             if (i < tipCount) {
@@ -202,7 +207,7 @@ $(document).ready(function() {
     }
 
     $('#gotest').click(function () {
-        showTipStep(0, 0, '练习时间结束，即将进入正式测试。', 3);
+        showTipStep(0, 0, '即将进入正式测试。', 3);
         setTimeout(function () {
         	 beginExam();
         }, 5000);
