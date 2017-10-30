@@ -323,8 +323,8 @@ a.pressed:hover {
 }
 
 .question-opt-img {
-	width: 300px;
-	height: 150px;
+/* 	width: 300px;
+	height: 150px; */
 	border: 1px solid #EEE;
 	vertical-align: top;
 	display: block;

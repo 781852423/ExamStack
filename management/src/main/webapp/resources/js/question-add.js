@@ -237,7 +237,7 @@ question_add = {
 				$(".form-question-opt .form-message").text("请输入选项内容");
 				$(question_opt_items[i]).focus();
 				$(question_opt_items[i]).addClass("has-error");
-				result = false;
+				result = true; // 只提示，还是允许通过
 				break;
 			} else if (item_value.length > 300) {
 				$(".form-question-opt .form-message").text("选项内容请保持在300个字符以内");
