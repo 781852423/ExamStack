@@ -18,8 +18,9 @@ request.setAttribute("leftMenuId",list[3]);
 <!DOCTYPE html>
 <html>
 	<head>
+	<base href="<%=basePath%>">
 		<title>用户管理</title>
-	    <%@include file="include/head_files.jsp" %>
+	    <%@include file="../include/head_files.jsp" %>
 	</head>
 	<body>
 		<span style="display:none;" id="rule-role-val"><%=list[1]%></span>

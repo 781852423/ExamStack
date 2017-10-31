@@ -34,6 +34,7 @@
 			<security:concurrency-control
 				max-sessions="1" expired-url="/home" error-if-maximum-exceeded="false" />
 		</security:session-management>
+		<security:csrf disabled="true"/>
 		
 		<!-- <security:csrf disabled="true" /> -->
 	</security:http>

@@ -9,7 +9,7 @@ $(document).ready(function() {
     var gameStatus = '';
     var addCountPer = 6; // 增加阶数
     var settime = '';
-    var totalQuestionNumber = parseInt($('#totalQuestionNumber').text());
+    var totalQuestionNumber = 12;
     var limit_secs = totalQuestionNumber*6; // 每道题给10秒钟时间
 	var limit_m = parseInt(limit_secs / 60);
     var limit_s = parseInt(limit_secs % 60);
@@ -183,9 +183,9 @@ $(document).ready(function() {
         
         var question_count = answers.length;
     	
-        if(question_count >= 4) 
+        if(question_count >= totalQuestionNumber) 
         {
-        	var msg = '此部分答题完毕，共计有' + question_count +'题，你答对了' + rightNums +"道题" + "答错了" + errorNums +'道题，请选择其它题型再练习';
+        	var msg = '此部分答题完毕，共计有' + totalQuestionNumber +'题，你答对了' + rightNums +"道题" + "答错了" + (totalQuestionNumber-rightNums) +'道题，请选择其它题型再练习';
         	console.log(msg);
         	showAnswerResult();
         	$('table td.check').removeClass('check');
@@ -200,7 +200,7 @@ $(document).ready(function() {
     
     function showAnswerResult()
     {
-    	$('#questionNumber').html(question_count);
+    	$('#questionNumber').html(totalQuestionNumber);
     	$('#correctNumber').html(rightNums);
     	$('#incorrectNumber').html(errorNums);
     	$('#gotest').text('再来一发');
