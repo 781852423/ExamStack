@@ -17,7 +17,7 @@ $(function() {
 	
 	util.oddRowPrinter();
 	
-	// 添加對於csrf的支持
+	/*// 添加對於csrf的支持
 	$(function(){
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
@@ -28,7 +28,7 @@ $(function() {
 	                           }
 	         
 		});
-	});
+	});*/
 	
 	// 增加对考试时候时钟的收缩和隐藏
 	$(function() {

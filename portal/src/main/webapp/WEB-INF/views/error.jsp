@@ -4,7 +4,7 @@
 <html>
 	<head>
 		
-		<title>不好意思，页面出现错误或者访问受限!</title>
+		<title>不好意思，页面出现错误或者访问权限不够!</title>
 		<%@include file="include/head_files.jsp"%>
 		
 		<style>

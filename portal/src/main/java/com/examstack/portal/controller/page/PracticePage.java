@@ -356,6 +356,10 @@ public class PracticePage {
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		
+		if(userInfo.getUsername().equalsIgnoreCase("interview"))
+		{
+			return "error";
+		}
 		
 	    return "memory-pace-capacity";
 	}
