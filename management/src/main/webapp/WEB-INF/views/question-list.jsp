@@ -240,8 +240,8 @@
 															<a class="change-property btn-sm btn-info"><i class="ace-icon fa fa-pencil bigger-120"></i></a>
 															<a class="delete-question-btn btn-sm btn-danger"><i class="ace-icon fa fa-trash-o bigger-120"></i></a>
 															
-															<!--  <i class="fa fa-pencil change-property"></i>
-															 <i class="fa fa-trash-o delete-question-btn"></i> -->
+															 <i class="fa fa-pencil change-property"></i>
+															 <i class="fa fa-trash-o delete-question-btn"></i>
 														</c:when>
 														<c:otherwise>
 															

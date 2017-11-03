@@ -2713,3 +2713,8 @@ pre {
 .tot_fs {
     font-size: 16px;
 }
+
+.warn-Notice{
+	font-weight: bold;
+	color:red;
+}

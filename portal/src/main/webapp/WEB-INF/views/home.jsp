@@ -101,6 +101,10 @@
 									<p>
 										如果有任何意见或者建议，请通过顶部“在线客服”留言给我们。
 									</p>
+									
+									<p class="warn-Notice">
+                                                                                                                 通知：  目前市面上已经出现假冒或者盗版本平台产品的不法分子，向用户二次出售过期或者没有矫正的电子档文件、题库、题目等，请买家不要相信，如需购买产品，请从页面右上角进入本站淘宝店铺咨询客服购买！
+                                    </p>
 
 									<!-- Button -->
 									<a class="btn btn-default btn-cta" href="user-register"><i class="fa fa-arrow-circle-down"></i> 注册网站看看</a>
