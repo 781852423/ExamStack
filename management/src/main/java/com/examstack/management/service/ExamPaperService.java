@@ -66,14 +66,15 @@ public interface ExamPaperService {
 	 */
 	public List<ExamPaper> getEnabledExamPaperList(String userName, Page<ExamPaper> page);
 	
+
+	public PaperPart getPaperPartById(int partId);
+	public void updateExamPartQuestions(PaperPart pp);
+	public List<PaperPart> getPaperPartsByPaperId(int exampaperId);
 	/**
 	 * 生成导出试卷
 	 * @param examPaper
 	 * @param path
 	 * @throws Exception
 	 */
-	public void generateDoc(ExamPaper examPaper,String path) throws Exception;
-	public PaperPart getPaperPartById(int partId);
-	public void updateExamPartQuestions(PaperPart pp);
-	public List<PaperPart> getPaperPartsByPaperId(int exampaperId);
+	void generateDoc(ExamPaper examPaper, String path, boolean togetherWithAnswerAndAnalysis) throws Exception;
 }

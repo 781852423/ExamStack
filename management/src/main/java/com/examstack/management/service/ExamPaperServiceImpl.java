@@ -1,5 +1,8 @@
 package com.examstack.management.service;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -165,7 +168,8 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 	}
 
 	@Override
-	public void generateDoc(ExamPaper examPaper, String path) throws Exception {
+	// 还需要完善导出答案的部分+文件的位置需要重新休整
+	public void generateDoc(ExamPaper examPaper, String path, boolean togetherWithAnswerAndAnalysis) throws Exception {
 		// TODO Auto-generated method stub
 		String basePath = System.getProperty("catalina.base") + ",webapps,";
 		String filePath = basePath + "Management,resources,template,doc_tmp.docx";
@@ -175,8 +179,7 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 		OPCPackage pack = POIXMLDocument.openPackage(filePath);
 		CustomXWPFDocument doc = new CustomXWPFDocument(pack);
 		Gson gson = new Gson();
-		String content = examPaper.getContent();
-		List<QuestionQueryResult> questionList = gson.fromJson(content, new TypeToken<List<QuestionQueryResult>>(){}.getType());
+		
 		// 设置标题
 		XWPFParagraph p1 = doc.createParagraph();
 		// 设置字体对齐方式
@@ -192,130 +195,176 @@ public class ExamPaperServiceImpl implements ExamPaperService {
 		// 设置上下两行之间的间距
 		r1.setTextPosition(40);
 		r1.setText(examPaper.getName());
+		// 一个部分接着一个部分，输出试卷每个部分的题目：
+		List<Question> questionList = null;
 		
-		if(questionList == null ) return;
-		for(QuestionQueryResult question : questionList){
-			QuestionContent questionContent = gson.fromJson(question.getContent(), QuestionContent.class);
-			QuestionContent questionParentContent = gson.fromJson(question.getParentContent(), QuestionContent.class);
-			// 设置试题标题
-			XWPFParagraph t = doc.createParagraph(); // 代表一个段落
-			// 设置字体对齐方式
-			t.setAlignment(ParagraphAlignment.LEFT);
-			t.setVerticalAlignment(TextAlignment.TOP);
+		List<PaperPart> paperParts = examPaper.getPaperParts();
+		
+		if(paperParts == null || paperParts.size() == 0)
+		{
+			return;
+		}
+		
+		for(int i = 0; i < paperParts.size(); i++)
+		{
 			
-			XWPFRun rt = t.createRun(); // 代表具有相同属性的一段文本
-			// 设置字体是否加粗
-			rt.setBold(false);
-			rt.setFontSize(15);
-			// 设置使用何种字体
-			rt.setFontFamily("Courier");
-			// 设置上下两行之间的间距
-			rt.setTextPosition(40);
-			
-			// 设置题目主干的内容
-			if(questionParentContent != null)
-			{
-				rt.setText(questionParentContent.getTitle());
-				if( (! "".equals(questionParentContent.getTitleImg())) && (questionParentContent.getTitleImg() != null) )
-				{
-					String parentTitlePicPath = basePath.replace(',',File.separatorChar);
-					File parentTitlePic = new File(parentTitlePicPath + questionParentContent.getTitleImg());
-					
-					if(parentTitlePic.exists())
-					{
-						BufferedImage sourceImg = ImageIO.read(new FileInputStream(parentTitlePic));
-						
-						String ind = doc.addPictureData(new FileInputStream(parentTitlePic), XWPFDocument.PICTURE_TYPE_JPEG);
-						rt.setText(parentTitlePic.getAbsolutePath());
-						System.out.println("parentPic: " + parentTitlePic.getAbsolutePath());
-						doc.createPicture(ind,doc.getAllPictures().size() -1, sourceImg.getWidth()/2, sourceImg.getHeight()/2);
-						sourceImg.flush();
-					}
-				}
-			}
-			  
-			// 设置试题标题
-			XWPFParagraph t2 = doc.createParagraph();
-			// 设置字体对齐方式
-			t2.setAlignment(ParagraphAlignment.LEFT);
-			t2.setVerticalAlignment(TextAlignment.TOP);
-			
-			XWPFRun rt2 = t2.createRun();
-			// 设置字体是否加粗
-			rt2.setBold(false);
-			rt2.setFontSize(15);
-			// 设置使用何种字体
-			rt2.setFontFamily("Courier");
-			// 设置上下两行之间的间距
-			rt2.setTextPosition(40);
-						
-			if(questionContent != null)
-			{
-				rt2.setText(questionContent.getTitle() + "(" + question.getQuestionPoint() + "分)");
+			for (PaperPart paperPart : paperParts) {
+				questionList = paperPart.getQuestions();
+				r1.addCarriageReturn(); // 换行
+				r1.setText(paperPart.getName() == null? "" :  paperPart.getName() + " " + paperPart.getName() == null? "":  paperPart.getName());
 				
-				if(!"".equals(questionContent.getTitleImg()) && questionContent.getTitleImg() != null){
-					String titlePicPath = basePath.replace(',', File.separatorChar);
-					File titlePic = new File(titlePicPath + questionContent.getTitleImg());
+				if(questionList == null ) return;
+				for(int questionNumber = 0 ; questionNumber < questionList.size(); questionNumber++){
+					Question question = questionList.get(questionNumber);
 					
-					if(titlePic.exists())
-					{
-						BufferedImage sourceImg = ImageIO.read(new FileInputStream(titlePic));
-	
-						String ind = doc.addPictureData(new FileInputStream(titlePic),
-								XWPFDocument.PICTURE_TYPE_JPEG);
-						doc.createPicture(ind, doc.getAllPictures().size() - 1,
-								sourceImg.getWidth() / 2, sourceImg.getHeight() / 2);
-						sourceImg.flush();
-					}
-				}
-			}
-			
-			XWPFParagraph crt = doc.createParagraph();
-			XWPFRun cr = crt.createRun();
-			cr.setText("");
-			//选择题和判断题增加选项
-			if(question.getQuestionTypeId() == 1 || question.getQuestionTypeId() == 2 || question.getQuestionTypeId() == 3){
-				for(Map.Entry<String, String> entry : questionContent.getChoiceList().entrySet()){
+					QuestionContent questionContent = gson.fromJson(question.getContent() == null? "" : question.getContent().replaceAll("<br/>", "\r\n"), QuestionContent.class);
+					QuestionContent questionParentContent = gson.fromJson(question.getParentContent() == null? "": question.getParentContent().replaceAll("<br/>", "\r\n"), QuestionContent.class);
+					
 					// 设置试题标题
-					XWPFParagraph c = doc.createParagraph();
+					XWPFParagraph t = doc.createParagraph(); // 代表一个段落
 					// 设置字体对齐方式
-					c.setAlignment(ParagraphAlignment.LEFT);
-					c.setVerticalAlignment(TextAlignment.TOP);
+					t.setAlignment(ParagraphAlignment.LEFT);
+					t.setVerticalAlignment(TextAlignment.TOP);
 					
-					XWPFRun rc = c.createRun();
+					XWPFRun rt = t.createRun(); // 代表具有相同属性的一段文本
 					// 设置字体是否加粗
-					rc.setBold(false);
-					rc.setFontSize(15);
+					rt.setBold(false);
+					rt.setFontSize(15);
 					// 设置使用何种字体
-					rc.setFontFamily("Courier");
+					rt.setFontFamily("Courier");
 					// 设置上下两行之间的间距
-					rc.setTextPosition(40);
-					rc.setText(entry.getKey() + " " + entry.getValue());
-					
-					if(questionContent !=null && questionContent.getChoiceImgList() != null && questionContent.getChoiceImgList().containsKey(entry.getKey())){
-						String picPath = basePath.replace(',', File.separatorChar) + questionContent.getChoiceImgList().get(entry.getKey());
-						System.out.println(picPath);
-						File picture = new File(picPath);
-						if(picture.exists())
+					rt.setTextPosition(40);
+					rt.setText("[" + (questionNumber+1) + "]. ");
+					// 设置题目主干的内容
+					if(questionParentContent != null)
+					{
+						rt.setText(questionParentContent.getTitle());
+						if( (! "".equals(questionParentContent.getTitleImg())) && (questionParentContent.getTitleImg() != null) )
 						{
-						    BufferedImage sourceImg = ImageIO.read(new FileInputStream(picture));
-						
-						
-							String ind = doc.addPictureData(new FileInputStream(picture),
-									XWPFDocument.PICTURE_TYPE_JPEG);
-							doc.createPicture(ind,doc.getAllPictures().size() - 1,
-									sourceImg.getWidth() / 2, sourceImg.getHeight() / 2);
-							sourceImg.flush();
+							String parentTitlePicPath = basePath.replace(',',File.separatorChar);
+							File parentTitlePic = new File(parentTitlePicPath + questionParentContent.getTitleImg());
+							
+							if(parentTitlePic.exists())
+							{
+								BufferedImage sourceImg = ImageIO.read(new FileInputStream(parentTitlePic));
+								
+								String ind = doc.addPictureData(new FileInputStream(parentTitlePic), XWPFDocument.PICTURE_TYPE_JPEG);
+								rt.setText(parentTitlePic.getAbsolutePath());
+								System.out.println("parentPic: " + parentTitlePic.getAbsolutePath());
+								doc.createPicture(ind,doc.getAllPictures().size() -1, sourceImg.getWidth()/2, sourceImg.getHeight()/2);
+								sourceImg.flush();
+							}
 						}
 					}
-					XWPFParagraph crta = doc.createParagraph();
-					XWPFRun cra = crta.createRun();
-					cra.setText("");
+					  
+								
+					if(questionContent != null)
+					{
+						rt.setText(questionContent.getTitle() + "(" + paperPart.getPointPerQuestion() + "分)");
+						
+						if(!"".equals(questionContent.getTitleImg()) && questionContent.getTitleImg() != null){
+							String titlePicPath = basePath.replace(',', File.separatorChar);
+							File titlePic = new File(titlePicPath + questionContent.getTitleImg());
+							
+							if(titlePic.exists())
+							{
+								BufferedImage sourceImg = ImageIO.read(new FileInputStream(titlePic));
+			
+								String ind = doc.addPictureData(new FileInputStream(titlePic),
+										XWPFDocument.PICTURE_TYPE_JPEG);
+								doc.createPicture(ind, doc.getAllPictures().size() - 1,
+										sourceImg.getWidth() / 2, sourceImg.getHeight() / 2);
+								sourceImg.flush();
+							}
+						}
+					}
+					
+					XWPFParagraph crt = doc.createParagraph();
+					XWPFRun cr = crt.createRun();
+					cr.setText("");
+					//选择题和判断题增加选项
+					int questionType = question.getQuestion_type_id();
+					
+					if(questionType == 1 || questionType == 2 ||questionType == 3){
+						for(Map.Entry<String, String> entry : questionContent.getChoiceList().entrySet()){
+							// 设置试题标题
+							XWPFParagraph c = doc.createParagraph();
+							// 设置字体对齐方式
+							c.setAlignment(ParagraphAlignment.LEFT);
+							c.setVerticalAlignment(TextAlignment.TOP);
+							
+							XWPFRun rc = c.createRun();
+							// 设置字体是否加粗
+							rc.setBold(false);
+							rc.setFontSize(15);
+							// 设置使用何种字体
+							rc.setFontFamily("Courier");
+							// 设置上下两行之间的间距
+							rc.setTextPosition(40);
+							rc.setText(entry.getKey() + " " + entry.getValue());
+							
+							if(questionContent !=null && questionContent.getChoiceImgList() != null && questionContent.getChoiceImgList().containsKey(entry.getKey())){
+								String picPath = basePath.replace(',', File.separatorChar) + questionContent.getChoiceImgList().get(entry.getKey());
+								System.out.println(picPath);
+								File picture = new File(picPath);
+								if(picture.exists())
+								{
+								    BufferedImage sourceImg = ImageIO.read(new FileInputStream(picture));
+								
+								
+									String ind = doc.addPictureData(new FileInputStream(picture),
+											XWPFDocument.PICTURE_TYPE_JPEG);
+									doc.createPicture(ind,doc.getAllPictures().size() - 1,
+											sourceImg.getWidth() / 2, sourceImg.getHeight() / 2);
+									sourceImg.flush();
+								}
+							}
+							
+						
+							
+							
+						}
+					}
+					
+					if(togetherWithAnswerAndAnalysis == true)
+					{
+						XWPFParagraph crta = doc.createParagraph();
+						XWPFRun cra = crta.createRun();
+						// 设置字体是否加粗
+						cra.setBold(false);
+						cra.setFontSize(15);
+						// 设置使用何种字体
+						cra.setFontFamily("Courier");
+						// 设置上下两行之间的间距
+						cra.setTextPosition(40);
+						cra.setColor("FF0000");
+						cra.setText("");
+						String answer = "";
+						
+						if( question.getAnswer() != null)
+						{
+							if(question.getAnswer().equalsIgnoreCase("T"))
+							{
+								answer = "正确";
+							}else if(question.getAnswer().equalsIgnoreCase("F"))
+							{
+								answer = "错误";
+							}else {
+								answer = question.getAnswer();
+							}
+						}
+						
+						cra.setText("答案:" + answer + "  " );
+						
+						if(question.getAnalysis() != null && !question.getAnalysis().isEmpty())
+						{
+							cra.setText(question.getAnalysis());
+						}
+					}
 				}
 			}
-			
-			
 		}
+		
 		
 		FileOutputStream out;
 		try {
