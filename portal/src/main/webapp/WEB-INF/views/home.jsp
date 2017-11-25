@@ -469,6 +469,33 @@
 
                     </div> </a>
                     
+                    <a class="field-category-div col-xs-3 home-link-anchor" href="https://item.taobao.com/item.htm?spm=a230r.1.14.26.487905979po78G&id=561840479925&ns=1&abbucket=6#detail" 
+                    target="blank" alt="点击进入淘宝店铺">
+                    <div class="field-category-title" style="background-color: #FF6433;">
+                        <div class="field-category-inner">
+                            <i class="fa fa-line-chart" aria-hidden="true"></i>
+                        </div>
+                        <div class="field-category-text ">
+                            <p>
+                                                                                            香港证券与期货行业
+                            </p>
+                        </div>
+                    </div>
+                    <div class="field-category-footer">
+                        <div class="field-category-footer-sub">
+                            <p class="field-student-subtitle">
+                                                                              参加香港HKSI证券与期货协会职业资格考试的学员
+                            </p>
+
+                        </div>
+                        <div class="field-category-footer-sub">
+                            <i class="fa fa-users"></i>
+                            <span class="field-student-num">1820</span>
+                            名学员
+                        </div>
+
+                    </div> </a>
+                    
                 </div><!-- New Line End -->
 			</div>
 		</div>
