@@ -235,18 +235,13 @@
 												<td>${items.questionTypeName }</td>
 												<td>${items.fieldName }</td>
 												<td>
-													<c:choose>
-														<c:when test="${items.creator == sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}">
+													
 															<a class="change-property btn-sm btn-info"><i class="ace-icon fa fa-pencil bigger-120"></i></a>
 															<a class="delete-question-btn btn-sm btn-danger"><i class="ace-icon fa fa-trash-o bigger-120"></i></a>
 															
 															 <i class="fa fa-pencil change-property"></i>
 															 <i class="fa fa-trash-o delete-question-btn"></i>
-														</c:when>
-														<c:otherwise>
-															
-														</c:otherwise>
-													</c:choose>
+														
 												
 												</td>
 											</tr>

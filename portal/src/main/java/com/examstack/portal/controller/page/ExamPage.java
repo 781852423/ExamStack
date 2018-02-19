@@ -69,7 +69,7 @@ public class ExamPage {
 		}
 		
 		Page<Exam> page = new Page<Exam>();
-		page.setPageSize(10);
+		page.setPageSize(50);
 		page.setPageNo(1);
 		List<Exam> examListToApply = examService.getExamListToApply(userId, page);
 		List<Exam> examListToStart = examService.getExamListToStart(userId, null, 1, 2);

@@ -215,7 +215,7 @@ public class ExamPaperActionTeacher {
 		String relativePath = "files,tmp," + userInfo.getUsername() + "," + dateStr;
 		ExamPaper examPaper = examPaperService.getExamPaperById(examPaperId);
 		try {
-			examPaperService.generateDoc(examPaper, filePath.replace(",", File.separator));
+			examPaperService.generateDoc(examPaper, filePath.replace(",", File.separator),true);
 			msg.setMessageInfo((relativePath + "," + examPaper.getName() + ".docx").replace(",", File.separator));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

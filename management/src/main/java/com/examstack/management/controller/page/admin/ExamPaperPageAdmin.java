@@ -43,7 +43,7 @@ public class ExamPaperPageAdmin {
 	private String examPaperListPage(Model model, HttpServletRequest request, @PathVariable("paperType") String paperType, @RequestParam(value="searchStr",required=false,defaultValue="") String searchStr,  @RequestParam(value="page",required=false,defaultValue="1") int page){
 		Page<ExamPaper> pageModel = new Page<ExamPaper>();
 		pageModel.setPageNo(page);
-		pageModel.setPageSize(8);
+		pageModel.setPageSize(50);
 		List<ExamPaper> paper = examPaperService.getExamPaperList(searchStr, paperType, pageModel);
 		List<Field> fieldList = questionService.getAllField(null);
 		

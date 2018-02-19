@@ -46,7 +46,7 @@ public class UserPageAdmin {
 			index = Integer.parseInt(request.getParameter("page"));
 		Page<User> page = new Page<User>();
 		page.setPageNo(index);
-		page.setPageSize(20);
+		page.setPageSize(50);
 		int groupId = 0;
 		String searchStr = "";
 		if(request.getParameter("groupId") != null){
@@ -101,7 +101,7 @@ public class UserPageAdmin {
 			index = Integer.parseInt(request.getParameter("page"));
 		Page<User> page = new Page<User>();
 		page.setPageNo(index);
-		page.setPageSize(10);
+		page.setPageSize(50);
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<Department> depList = userService.getDepList(null);
 		List<User> userList = userService.getUserListByRoleId(userInfo.getRoleMap().get("ROLE_TEACHER").getRoleId(), page);
@@ -120,7 +120,7 @@ public class UserPageAdmin {
 			index = Integer.parseInt(request.getParameter("page"));
 		Page<User> page = new Page<User>();
 		page.setPageNo(index);
-		page.setPageSize(100);
+		page.setPageSize(50);
 		
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
@@ -144,7 +144,7 @@ public class UserPageAdmin {
 			index = Integer.parseInt(request.getParameter("page"));
 		Page<User> page = new Page<User>();
 		page.setPageNo(index);
-		page.setPageSize(100);
+		page.setPageSize(50);
 
 		List<Group2Field> user2GroupList = userService.getGroup2FieldById(groupId);
 		List<Group> groupList = userService.getAllGroups(null);
@@ -182,7 +182,7 @@ public class UserPageAdmin {
 			index = Integer.parseInt(request.getParameter("page"));
 		Page<User> page = new Page<User>();
 		page.setPageNo(index);
-		page.setPageSize(15);
+		page.setPageSize(50);
 		String searchStr = "";
 		if(request.getParameter("searchStr") != null){
 			searchStr = request.getParameter("searchStr");

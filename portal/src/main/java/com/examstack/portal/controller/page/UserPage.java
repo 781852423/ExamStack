@@ -92,7 +92,7 @@ public class UserPage {
 		
 		Page<News> pageModel = new Page<News>();
 		pageModel.setPageNo(1);
-		pageModel.setPageSize(2);
+		pageModel.setPageSize(50);
 		List<News> newsList = newsService.getNewsList(pageModel);
 		model.addAttribute("newsList", newsList);
 		

@@ -41,7 +41,7 @@ public class SystemPageAdmin {
 			index = Integer.parseInt(request.getParameter("page"));
 		Page<User> page = new Page<User>();
 		page.setPageNo(index);
-		page.setPageSize(10);
+		page.setPageSize(50);
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<Department> depList = userService.getDepList(null);
 		List<User> userList = userService.getUserListByRoleId(userInfo.getRoleMap().get("ROLE_ADMIN").getRoleId(), page);
@@ -85,7 +85,7 @@ public class SystemPageAdmin {
 		
 		Page<News> pageModel = new Page<News>();
 		pageModel.setPageNo(page);
-		pageModel.setPageSize(10);
+		pageModel.setPageSize(50);
 		List<News> newsList = newsService.getNewsList(pageModel);
 		
 		String pageStr = PagingUtil.getPagelink(page, pageModel.getTotalPage(), "", "admin/system/news-list");

@@ -490,7 +490,7 @@
                         </div>
                         <div class="field-category-footer-sub">
                             <i class="fa fa-users"></i>
-                            <span class="field-student-num">1820</span>
+                            <span class="field-student-num">826</span>
                             名学员
                         </div>
 

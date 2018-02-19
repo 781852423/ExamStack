@@ -12,6 +12,16 @@
 		and exists(select 1 from et_training_section c where c.training_id=a.training_id)
 		order by a.create_time desc,a.state_time desc
 	</select>
+	<!-- 根据页码和userid来返回课程-->
+	<select id="getTrainingListByUserId" resultType="com.examstack.common.domain.training.Training">
+        select a.training_id trainingId,a.training_name trainingName,a.training_desc trainingDesc,
+        a.create_time createTime,a.creator creatorId,b.user_name creatorName,a.status,a.state_time stateTime,a.exp_time expTime,a.is_private privatee
+        from et_training a,et_user b
+        where a.creator=b.user_id
+        and exists(select 1 from et_training_section c where c.training_id=a.training_id)
+        and a.training_id in (select d.trainingId from user2TrainingAuthMap d where d.userId= #{userId})
+        order by a.create_time desc,a.state_time desc
+    </select>
 	
 	<select id="getTrainingSectionByTrainingId" resultType="com.examstack.common.domain.training.TrainingSection">
 		select section_id sectionId,section_name sectionName,section_desc sectionDesc,training_id trainingId,

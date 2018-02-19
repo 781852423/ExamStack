@@ -184,7 +184,7 @@ public class UserCenterPage {
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		Page<ExamHistory> pageModel = new Page<ExamHistory>();
-		//pageModel.setPageSize(1);
+		//pageModel.setPageSize(50);
 		pageModel.setPageNo(index);
 		List<ExamHistory> hisList = examService.getUserExamHistByUserId(userInfo.getUserid(), pageModel, 1,2,3);
 		model.addAttribute("hisList", hisList);

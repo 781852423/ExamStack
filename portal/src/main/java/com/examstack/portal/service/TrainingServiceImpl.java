@@ -76,4 +76,10 @@ public class TrainingServiceImpl implements TrainingService {
 		
 		return false;
 	}
+
+	@Override
+	public List<Training> getTrainingList(Page<Training> page, int userId) {
+		// TODO Auto-generated method stub
+		return trainingMapper.getTrainingListByUserId(page,  userId);
+	}
 }

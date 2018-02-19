@@ -58,7 +58,7 @@ public class QuestionPageTeacher {
 
 		Page<Question> pageModel = new Page<Question>();
 		pageModel.setPageNo(page);
-		pageModel.setPageSize(20);
+		pageModel.setPageSize(50);
 
 		//TODO 查找questionlist的时候需要tag
 		List<Question> questionList = questionService.getQuestionList(
@@ -117,7 +117,7 @@ public class QuestionPageTeacher {
 
 		Page<Question> pageModel = new Page<Question>();
 		pageModel.setPageNo(page);
-		pageModel.setPageSize(20);
+		pageModel.setPageSize(50);
 
 		List<Question> questionList = questionService.getQuestionList(
 				pageModel, qf);

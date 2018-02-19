@@ -40,7 +40,7 @@ public class UserPageTeacher {
 			index = Integer.parseInt(request.getParameter("page"));
 		Page<User> page = new Page<User>();
 		page.setPageNo(index);
-		page.setPageSize(20);
+		page.setPageSize(50);
 		int groupId = 0;
 		String searchStr = "";
 		if(request.getParameter("groupId") != null){
@@ -87,7 +87,7 @@ public class UserPageTeacher {
 			index = Integer.parseInt(request.getParameter("page"));
 		Page<User> page = new Page<User>();
 		page.setPageNo(index);
-		page.setPageSize(15);
+		page.setPageSize(50);
 		String searchStr = "";
 		if(request.getParameter("searchStr") != null){
 			searchStr = request.getParameter("searchStr");

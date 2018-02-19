@@ -1,11 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@include file="include/before_html.jsp"%>
+<%@include file="../include/before_html.jsp"%>
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>题库管理</title>
-		 <%@include file="include/head_files.jsp" %>
+		 <%@include file="../include/head_files.jsp" %>
 	</head>
 	<body>
 		<header>
@@ -359,7 +359,7 @@
                     </div>
                 </div>
             </div>
-		 <%@include file="include/footer_cm_js.jsp"%>
+		 <%@include file="../include/footer_cm_js.jsp"%>
 		<script type="text/javascript" src="resources/js/teacher-list.js"></script>
 		<script type="text/javascript" src="resources/js/add-teacher.js"></script>
 		<script type="text/javascript" src="resources/js/update-teacher.js"></script>

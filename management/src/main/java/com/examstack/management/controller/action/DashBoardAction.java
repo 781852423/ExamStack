@@ -44,12 +44,12 @@ public class DashBoardAction {
 			    .getPrincipal();
 		Page<User> pageUser = new Page<User>();
 		pageUser.setPageNo(1);
-		pageUser.setPageSize(1);
+		pageUser.setPageSize(50);
 		userService.getUserListByRoleId(userInfo.getRoleMap().get("ROLE_STUDENT").getRoleId(), pageUser);
 		
 		Page<Question> pageQuestion = new Page<Question>();
 		pageQuestion.setPageNo(1);
-		pageQuestion.setPageSize(1);
+		pageQuestion.setPageSize(50);
 		QuestionFilter qf = new QuestionFilter();
 		qf.setFieldId(0);
 		qf.setKnowledge(0);
@@ -60,7 +60,7 @@ public class DashBoardAction {
 		
 		Page<ExamPaper> pageExamPaper = new Page<ExamPaper>();
 		pageExamPaper.setPageNo(1);
-		pageExamPaper.setPageSize(1);
+		pageExamPaper.setPageSize(50);
 		examPaperService.getEnabledExamPaperList(userInfo.getUsername(), pageExamPaper);
 		List<Integer> l = new ArrayList<Integer>();
 		l.add(pageQuestion.getTotalRecord());
@@ -73,7 +73,7 @@ public class DashBoardAction {
 	public @ResponseBody List<ExamHistory> studentApprovedList(Model model) {
 		Page<ExamHistory> page = new Page<ExamHistory>();
 		page.setPageNo(1);
-		page.setPageSize(4);
+		page.setPageSize(50);
 		List<ExamHistory> histList = examService.getUserExamHistList(page, 0);
 		
 		return histList;
@@ -83,7 +83,7 @@ public class DashBoardAction {
 	public @ResponseBody List<ExamHistory> studentMarkList(Model model) {
 		Page<ExamHistory> page = new Page<ExamHistory>();
 		page.setPageNo(1);
-		page.setPageSize(4);
+		page.setPageSize(50);
 		List<ExamHistory> histList = examService.getUserExamHistList(page, 2);
 		
 		return histList;

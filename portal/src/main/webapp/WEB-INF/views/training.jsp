@@ -173,7 +173,7 @@ body, html {
 			<input type="hidden" value="${section.trainingId}" id="training-id">
 			<input type="hidden" value="${section.trainingId}" id="training-id">	
 			<video id="my_video" class="video-js vjs-default-skin" controls preload="none" width="100%" height="100%" style="width:100%;height:100%;"
-		      poster="resources/images/bg.png"
+		      poster="resources/images/bg.png" controlsList="nodownload"
 		      data-setup="{}">
 		      	<c:choose>
 		      		<c:when test="${section.fileType eq '.mp4' }">
@@ -263,6 +263,7 @@ body, html {
     <script type="text/javascript" src="resources/js/mediaelement/mediaelement-and-player.min.js"></script>
     <script type="text/javascript" src="resources/js/videojs/video.js"></script>
     <script type="text/javascript">
+    $('#my_video').bind('contextmenu',function() { return false; });
         videojs.options.flash.swf="resources/js/videojs/video-js.swf";
         $(function(){
             var myPlayer = _V_("my_video");

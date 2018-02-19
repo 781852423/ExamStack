@@ -1,5 +1,7 @@
 package com.examstack.portal.controller.page;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.util.List;
 import java.util.Map;
 
@@ -36,11 +38,22 @@ public class TrainingPage {
 	}
 	@RequestMapping(value = "/training-list/{page}", method = RequestMethod.GET)
 	public String trainingListPage(Model model, HttpServletRequest request, @PathVariable("page") int page) {
-		
 		Page<Training> pageModel = new Page<Training>();
 		pageModel.setPageNo(page);
-		pageModel.setPageSize(10);
-		List<Training> trainingList = trainingService.getTrainingList(pageModel);
+		pageModel.setPageSize(50);
+		List<Training> trainingList = null;
+		//没有登录，让你看到全部的目录
+		if (SecurityContextHolder.getContext().getAuthentication() == null || SecurityContextHolder.getContext().getAuthentication().isAuthenticated() == false
+																		|| SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser") 
+				){
+			trainingList = trainingService.getTrainingList(pageModel);
+		}else {
+			// 已经登录，让你看到具体的科目
+			UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			trainingList = trainingService.getTrainingList(pageModel,userInfo.getUserid());
+		}
+		
+		
 		String pageStr = PagingUtil.getPageBtnlink(page,
 				pageModel.getTotalPage());
 		model.addAttribute("trainingList", trainingList);
@@ -61,10 +74,11 @@ public class TrainingPage {
 		 *检查这个人有没有权限看视屏或者文件 
 		 */
 		boolean isAuthorized = trainingService.checkWatchAuthByUserIdAndTrainingId(userInfo.getUserid(), trainingId);
-		if(userInfo.getUsername().equalsIgnoreCase("interview"))
+		
+	/*	if(userInfo.getUsername().equalsIgnoreCase("interview"))
 		{
 			isAuthorized = true;
-		}
+		}*/
 		if(!isAuthorized)
 		{
 			model.addAttribute("errorMsg", "不好意思，你的访问受限，你需要联系客服购买培训视屏、课件的观看权限");
@@ -121,7 +135,7 @@ public class TrainingPage {
 			    .getPrincipal();
 		Page<Training> pageModel = new Page<Training>();
 		pageModel.setPageNo(page);
-		pageModel.setPageSize(10);
+		pageModel.setPageSize(50);
 		List<Training> trainingList = trainingService.getTrainingList(pageModel);
 		Map<Integer,List<TrainingSectionProcess>> processMap = trainingService.getTrainingSectionProcessMapByUserId(userInfo.getUserid());
 		String pageStr = PagingUtil.getPageBtnlink(page,

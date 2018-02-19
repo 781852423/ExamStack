@@ -18,7 +18,7 @@ question_add = {
 	
 	commonInit: function commonInit()
 	{
-		$("div.form-line.form-question-answer1.correct-answer").hide();
+		//$("div.form-line.form-question-answer1.correct-answer").hide();
 		$("div.form-line.form-question-reference").hide();
 		$("div.form-line.form-question-examingpoint").hide();
 		$("div.form-line.form-question-keyword").hide();

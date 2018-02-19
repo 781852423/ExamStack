@@ -54,6 +54,7 @@ span.form-label {
 
 .add-opt-item input.form-question-opt-item{
 	float: left;
+	width: 80%;
 }
 
 .form-question-answer-muti input[type=checkbox] {

@@ -48,7 +48,7 @@ public class TrainingPageAdmin {
 	
 		Page<Training> pageModel = new Page<Training>();
 		pageModel.setPageNo(page);
-		pageModel.setPageSize(10);
+		pageModel.setPageSize(50);
 		List<Training> trainingList = trainingService.getTrainingList(-1, pageModel);
 		String pageStr = PagingUtil.getPageBtnlink(page,
 				pageModel.getTotalPage());
@@ -142,7 +142,7 @@ public class TrainingPageAdmin {
 		
 		Page<UserTraining> pageModel = new Page<UserTraining>();
 		pageModel.setPageNo(page);
-		pageModel.setPageSize(10);
+		pageModel.setPageSize(50);
 		List<UserTraining> userTrainingList = trainingService.getUserTrainingList(trainingId, -1,searchStr, pageModel);
 		List<Integer> idList = new ArrayList<Integer>();
 		for(UserTraining userTraining : userTrainingList){

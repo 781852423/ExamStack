@@ -36,11 +36,11 @@ public class CommentAction {
 		Page<Comment> page = new Page<Comment>();
 		if(index == 1){
 			page.setPageNo(index);
-			page.setPageSize(6);
+			page.setPageSize(50);
 		}else{
 			index = index + 2;
 			page.setPageNo(index);
-			page.setPageSize(2);
+			page.setPageSize(50);
 		}
 		
 		try {

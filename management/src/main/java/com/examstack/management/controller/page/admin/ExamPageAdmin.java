@@ -49,7 +49,7 @@ public class ExamPageAdmin {
 		
 		Page<Exam> pageModel = new Page<Exam>();
 		pageModel.setPageNo(page);
-		pageModel.setPageSize(8);
+		pageModel.setPageSize(50);
 		List<Exam> examList = examService.getExamList(pageModel,1,2);
 		String pageStr = PagingUtil.getPagelink(page, pageModel.getTotalPage(), "", "admin/exam/exam-list");
 
@@ -70,7 +70,7 @@ public class ExamPageAdmin {
 		
 		Page<Exam> pageModel = new Page<Exam>();
 		pageModel.setPageNo(page);
-		pageModel.setPageSize(10);
+		pageModel.setPageSize(50);
 		List<Exam> examList = examService.getExamList(pageModel,3);
 		String pageStr = PagingUtil.getPageBtnlink(page,
 				pageModel.getTotalPage());
@@ -133,7 +133,7 @@ public class ExamPageAdmin {
 			    .getPrincipal();
 		Page<ExamHistory> pageModel = new Page<ExamHistory>();
 		pageModel.setPageNo(page);
-		pageModel.setPageSize(10);
+		pageModel.setPageSize(50);
 		if("".equals(searchStr))
 			searchStr = null;
 		if("".equals(order) || (!"desc".equals(order) && !"asc".equals(order)))

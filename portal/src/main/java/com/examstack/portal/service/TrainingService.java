@@ -19,6 +19,10 @@ public interface TrainingService {
 	 */
 	public List<Training> getTrainingList(Page<Training> page);
 	
+	/*
+	 * 获取某用户的培训列表,不同用户根据权限返回不同的列表
+	 */
+	public List<Training> getTrainingList(Page<Training> page, int userId);
 	/**
 	 * 获取培训章节
 	 * @param trainingId

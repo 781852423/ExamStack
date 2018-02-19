@@ -40,7 +40,7 @@ public class CommonPageAdmin {
 		
 		Page<Tag> page = new Page<Tag>();
 		page.setPageNo(index);
-		page.setPageSize(8);
+		page.setPageSize(50);
 		List<Tag> tagList = questionService.getTags(page);
 		String pageStr = PagingUtil.getPagelink(index, page.getTotalPage(), "", "admin/common/tag-list");
 		model.addAttribute("tagList", tagList);
@@ -70,7 +70,7 @@ public class CommonPageAdmin {
 		
 		Page<Field> page = new Page<Field>();
 		page.setPageNo(index);
-		page.setPageSize(8);
+		page.setPageSize(50);
 		List<Field> fieldList = questionService.getAllField(page);
 		String pageStr = PagingUtil.getPagelink(index, page.getTotalPage(), "", "admin/common/field-list");
 		model.addAttribute("fieldList", fieldList);
@@ -102,7 +102,7 @@ public class CommonPageAdmin {
 		
 		Page<KnowledgePoint> page = new Page<KnowledgePoint>();
 		page.setPageNo(index);
-		page.setPageSize(8);
+		page.setPageSize(50);
 		
 		List<Field> fieldList = questionService.getAllField(null);
 		
@@ -141,7 +141,7 @@ public class CommonPageAdmin {
 		
 		Page<Department> page = new Page<Department>();
 		page.setPageNo(index);
-		page.setPageSize(8);
+		page.setPageSize(50);
 		List<Department> depList = userService.getDepList(page);
 		String pageStr = PagingUtil.getPagelink(index, page.getTotalPage(), "", "admin/common/dep-list");
 		model.addAttribute("depList", depList);
