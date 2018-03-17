@@ -92,7 +92,7 @@ body, html {
 
 .section-list li div {
 	padding: 10px;
-	margin-left: 20px;
+	margin-left: 10px;
 	border-left: 1px solid #FFF;
 	padding-left: 10px;
 }

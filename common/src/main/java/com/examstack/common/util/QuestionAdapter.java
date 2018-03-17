@@ -420,14 +420,14 @@ public class QuestionAdapter {
 		sb.append("<p>");
 		sb.append(questionQueryResult.getAnalysis());
 		sb.append("</p></div></div>");
-		sb.append("<div class=\"answer-desc-detail\">");
+		/*sb.append("<div class=\"answer-desc-detail\">");
 		sb.append("<label class=\"label label-success\">");
 		sb.append("<i class=\"fa fa-bookmark\"></i><span> 考点</span>");
 		sb.append("</label>");
 		sb.append("<div class=\"answer-desc-content\">");
 		sb.append("<p>");
 		sb.append(questionQueryResult.getPointName());
-		sb.append("</p></div></div>");
+		sb.append("</p></div></div>");*/
 		sb.append("</div>");
 
 		sb.append("</li>");
@@ -709,14 +709,14 @@ public class QuestionAdapter {
 		sb.append("<p>");
 		sb.append(questionQueryResult.getAnalysis());
 		sb.append("</p></div></div>");
-		sb.append("<div class=\"answer-desc-detail\">");
+		/*sb.append("<div class=\"answer-desc-detail\">");
 		sb.append("<label class=\"label label-success\">");
 		sb.append("<i class=\"fa fa-bookmark\"></i><span> 考点</span>");
 		sb.append("</label>");
 		sb.append("<div class=\"answer-desc-content\">");
 		sb.append("<p>");
 		sb.append(questionQueryResult.getPointName());
-		sb.append("</p></div></div>");
+		sb.append("</p></div></div>");*/
 		sb.append("</div>");
 
 		sb.append("</li>");
@@ -1031,14 +1031,14 @@ public class QuestionAdapter {
 			sb.append("<p>");
 			sb.append(questionQueryResult.getAnalysis());
 			sb.append("</p></div></div>");
-			sb.append("<div class=\"answer-desc-detail\">");
+			/*sb.append("<div class=\"answer-desc-detail\">");
 			sb.append("<label class=\"label label-success\">");
 			sb.append("<i class=\"fa fa-bookmark\"></i><span> 考点</span>");
 			sb.append("</label>");
 			sb.append("<div class=\"answer-desc-content\">");
 			sb.append("<p>");
 			sb.append(questionQueryResult.getPointName());
-			sb.append("</p></div></div>");
+			sb.append("</p></div></div>");*/
 			sb.append("</div>");
 		}
 
@@ -1388,14 +1388,14 @@ public class QuestionAdapter {
 			sb.append("<p>");
 			sb.append(questionQueryResult.getAnalysis());
 			sb.append("</p></div></div>");
-			sb.append("<div class=\"answer-desc-detail\">");
+			/*sb.append("<div class=\"answer-desc-detail\">");
 			sb.append("<label class=\"label label-success\">");
 			sb.append("<i class=\"fa fa-bookmark\"></i><span> 考点</span>");
 			sb.append("</label>");
 			sb.append("<div class=\"answer-desc-content\">");
 			sb.append("<p>");
 			sb.append(questionQueryResult.getPointName());
-			sb.append("</p></div></div>");
+			sb.append("</p></div></div>");*/
 			sb.append("</div>");
 		
 
