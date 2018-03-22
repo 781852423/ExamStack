@@ -186,4 +186,6 @@ public interface UserMapper {
 	 */
 	public List<User> getUserListByGroupIdList(@Param("array") List<Integer> idList,@Param("page") Page<User> user);
 	public List<Group> getAllGroups(@Param("page") Page<Group> pageGroups);
+
+	
 }

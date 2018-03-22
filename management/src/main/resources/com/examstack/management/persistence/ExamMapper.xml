@@ -101,7 +101,7 @@
 				#{item}
 			</foreach>
 		</if>
-		 order by start_time desc
+		 order by exam_name desc
 	</select>
 	
 	<delete id="deleteExamById">
