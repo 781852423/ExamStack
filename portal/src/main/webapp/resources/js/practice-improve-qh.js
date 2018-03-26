@@ -18,6 +18,7 @@ var examing = {
 //		this.startTimer();
 		this.bindSwitchQuestion();
 		this.bindSubmitQuestion();
+		this.bindSubmitFavoriteQuestion();
 		this.loadStatus();
 	},
 	
@@ -139,6 +140,25 @@ var examing = {
 			var btnhtml = "<a class=\"question-navi-item\">" + (index + 1) + "</a>";
 			$("#question-navi-content").append(btnhtml);
 		});
+		/*jie 添加代码去更新被收藏的题目*/
+		// 发起查询，看这个questionId是否是被收藏,thisquestion.find(".question-id").text();
+		var questionHistoryList = examing.GetAllQUestions();
+		var data = examing.getFavoriteQuestionStatus(questionHistoryList);
+		// 解析status
+		console.log("data:" + data);
+		var  questionsWithStatus = JSON.parse(data);
+		if(questionsWithStatus != null && questionsWithStatus != "{}")
+		{
+			for (var index = 0 ; index < questionsWithStatus.length; index++)
+			{
+				 if(questionsWithStatus[index].favorite == "true")
+				 {
+					 Console.log("question id: " + questionsWithStatus[index].questionId + " is favorite\n");
+				 }
+			}
+		}
+		
+		
 	},
 
 	/**
@@ -241,7 +261,7 @@ var examing = {
 	// 只要点击了选项，就调用这个函数去按下答题板和更新进度条
 	updateAswerPanelAndProgress: function updateAswerPanelAndProgress()
 	{
-		console.log("检测到答题了！\n");
+		
 	    var thisquestion  = $(".question:visible");
 	    
 		var answer = examing.getAnswerValue(thisquestion);
@@ -250,7 +270,7 @@ var examing = {
 		{
 			// 根据题号更精确的锁定press
 			var questionNo = examing.getQuestionNo(thisquestion);
-			console.log("第"+questionNo+'答题了\n');
+			
 			
 			$($("a.question-navi-item")[questionNo-1]).addClass("pressed");
 		}
@@ -326,9 +346,43 @@ var examing = {
 		
 	},
 	
-	SendQuestionPractiveResult2Server: function SendQuestionPractiveResult2Server()
+	GetAllQUestions: function GetAllQUestions()
 	{
 		// 遍历所有的问题
+		var allQuestion = $("li.question");
+		var allQuestionLength = allQuestion.length;
+		var questionHistoryList = new Array();
+		
+		for(var index = 0 ; index < allQuestionLength; index++)
+		{
+			var thisquestion = $(allQuestion[index]);
+			
+			if(thisquestion == null || thisquestion == undefined || thisquestion == "")
+			{
+				util.error("没有找到需要发送的题目信息");
+				return false;
+			}
+			var data = new Object();
+			var myAnswer = examing.getAnswerValue(thisquestion)
+			if( myAnswer == undefined || myAnswer == "" || myAnswer == null)
+			{
+				myAnswer = "";
+				
+			}
+			data.myAnswer = myAnswer;
+			data.questionId = thisquestion.find(".question-id").text();
+			data.questionTypeId = thisquestion.find(".question-type-id").text();
+			data.pointId = thisquestion.find(".knowledge-point-id").text();
+			data.answer = thisquestion.find(".answer_value").text();
+			questionHistoryList.push(data);	
+		}
+		
+		return questionHistoryList;
+	},
+	
+	SendQuestionPractiveResult2Server: function SendQuestionPractiveResult2Server()
+	{
+		/*// 遍历所有的问题
 		var allQuestion = $(".question");
 		var allQuestionLength = allQuestion.length;
 		var questionHistoryList = new Array();
@@ -354,7 +408,9 @@ var examing = {
 			data.pointId = thisquestion.find(".knowledge-point-id").text();
 			data.answer = thisquestion.find(".answer_value").text();
 			questionHistoryList.push(data);		
-		}
+		}*/
+		
+		var questionHistoryList = examing.GetAllQUestions();
 		
 		var request = $.ajax({
 			headers : {
@@ -738,7 +794,78 @@ var examing = {
 			examing.updateAswerPanelAndProgress();
 		});
 		
-	}
+	},
+	bindSubmitFavoriteQuestion : function bindSubmitFavoriteQuestion(){
+		$("#submit-q-favorite").click(function(){
+			var thisquestion  = $("li.question:visible");
+			
+			var data = new Object();
+			data.id = thisquestion.find(".question-id").text();
+			
+			var request = $.ajax({
+				headers : {
+					'Accept' : 'application/json',
+					'Content-Type' : 'application/json'
+				},
+				async: false,
+				type : "POST",
+				url : "student/putFavoriteQuestion",
+				data : JSON.stringify(data)
+			});
+
+			request.done(function(message, tst, jqXHR) {
+				if (!util.checkSessionOut(jqXHR))
+					return false;
+				if (message.result == "success") {
+					$(window).unbind('beforeunload');
+					util.success("收藏成功！");
+					var thisquestion  = $(".question:visible"); // 继续做判断
+				} else {
+					util.error(message.result);
+				}
+			});
+			request.fail(function(jqXHR, textStatus) {
+				util.error("系统繁忙请稍后尝试");
+			});
+			
+		});
+  },
+  
+  getFavoriteQuestionStatus : function getFavoriteQuestionStatus (questionIdArray)
+  {
+  	//console.log(JSON.stringify(questionIdArray));
+	  var questionFavoriteStatus = "";
+  	var request = $.ajax({
+  		headers : {
+  			'Accept' : 'application/json',
+  			'Content-Type' : 'application/json'
+  		},
+  		async:false,
+  		type : "POST",
+  		url : "student/getFavoriteQuestionStatus",
+  		data : JSON.stringify(questionIdArray)
+  	});
+
+  	request.done(function(message, tst, jqXHR) {
+  		if (!util.checkSessionOut(jqXHR))
+  			return false;
+  		if (message.result == "success") {
+  			$(window).unbind('beforeunload');
+  			// 先做提醒，然后解析这个字符串，最后把收藏夹更新
+  			//console.log("先做提醒，然后解析这个字符串，最后把收藏夹更新:" + message.messageInfo);
+  			
+  		} else {
+  			util.error(message.result);
+  		}
+  		questionFavoriteStatus = message.messageInfo;
+  		
+  	});
+  	request.fail(function(jqXHR, textStatus) {
+  		util.error("系统繁忙请稍后尝试");
+  	});
+  	
+  	return questionFavoriteStatus;
+  }
 };
 
 var modal = {

@@ -35,6 +35,7 @@
 			<security:concurrency-control
 				max-sessions="1" expired-url="/home" error-if-maximum-exceeded="false" />
 		</security:session-management>
+		<security:csrf disabled="true" />
 	</security:http>
 
 <!-- authentication-manager 用来配置用户管理,这里指定userDetailsServiceImpl实现springUserDetails接口，实现方法Spring框架中该接口的loadUserByUsername()方法 -->

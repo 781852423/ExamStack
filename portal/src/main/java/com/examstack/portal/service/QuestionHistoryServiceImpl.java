@@ -73,4 +73,32 @@ public class QuestionHistoryServiceImpl implements QuestionHistoryService {
 		}
 		return map;
 	}
+	@Override
+	public void addUserFavoriteQuestion(Integer questionId, Integer userId) {
+		
+		questionHistoryMapper.addUserFavoriteQuestion(questionId, userId);
+	}
+	@Override
+	public List<UserQuestionHistory> getFavoriteQuestionStatus(List<UserQuestionHistory> userHistoryList) {
+		List<UserQuestionHistory> userHistoryListWithFavoriteStatus = new ArrayList<UserQuestionHistory>();
+		
+		for (UserQuestionHistory userQuestionHistory : userHistoryList) 
+		{
+			UserQuestionHistory e = questionHistoryMapper.getFavoriteQuestionStatus(userQuestionHistory.getQuestionId(),userQuestionHistory.getUserId());
+			UserQuestionHistory eCopy = new UserQuestionHistory();
+			if(e != null)
+			{
+				eCopy.setQuestionId(e.getQuestionId());
+				eCopy.setUserId(e.getUserId());
+				eCopy.setFavorite(e.isFavorite());
+				
+			}else {
+				eCopy.setQuestionId(userQuestionHistory.getQuestionId());
+				eCopy.setUserId(userQuestionHistory.getUserId());
+				eCopy.setFavorite(false);
+			}
+			userHistoryListWithFavoriteStatus.add(eCopy);
+		}
+		return userHistoryListWithFavoriteStatus;
+	}
 }

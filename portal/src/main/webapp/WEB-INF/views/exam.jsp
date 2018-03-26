@@ -88,15 +88,14 @@
 								<thead>
 									
 									<tr>
-										<td>考试名称</td><td>开始日期</td><td>截止日期</td><td></td>
+										<td>考试名称</td><td></td>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${examListToStart }" var="item">
 										<tr>
 											<td>${item.examName }</td>
-											<td><span class="span-info question-number"><fmt:formatDate value="${item.effTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></td>
-											<td><span class="span-success question-number-2"><fmt:formatDate value="${item.expTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></td>
+											
 											<td>
 												<c:choose>
 													<c:when test="${item.approved == 1 }">
@@ -121,35 +120,7 @@
 							</table>
 
 						</div>
-						<div style="border-bottom: 1px solid #ddd;">
-							<h3 class="title"><i class="fa fa-paper-plane-o"></i> 模拟考试(我有权限参加的考试)</h3>
-							
-						</div>
-						<div class="question-list">
 
-							<table class="table-striped table">
-								<thead>
-									
-									<tr>
-										<td>考试名称</td><td>开始日期</td><td>截止日期</td><td></td>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${modelTestToStart }" var="item">
-										<tr>
-											<td>${item.examName }</td>
-											<td><span class="span-info question-number"><fmt:formatDate value="${item.effTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></td>
-											<td><span class="span-success question-number-2"><fmt:formatDate value="${item.expTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></td>
-											<td>
-												<a href="student/model-test-start/${item.examId }" class="btn btn-success btn-sm join-practice-btn">参加考试</a>
-											</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-								<tfoot></tfoot>
-							</table>
-
-						</div>
 					</div>
 
 				</div>

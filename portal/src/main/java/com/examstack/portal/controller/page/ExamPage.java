@@ -73,10 +73,10 @@ public class ExamPage {
 		page.setPageNo(1);
 		List<Exam> examListToApply = examService.getExamListToApply(userId, page);
 		List<Exam> examListToStart = examService.getExamListToStart(userId, null, 1, 2);
-		List<Exam> modelTestToStart = examService.getExamList(null, 3);
-		model.addAttribute("examListToApply", examListToApply);
+		
+		//model.addAttribute("examListToApply", examListToApply);
 		model.addAttribute("examListToStart", examListToStart);
-		model.addAttribute("modelTestToStart", modelTestToStart);
+
 		model.addAttribute("userId", userId);
 		return "exam";
 	}

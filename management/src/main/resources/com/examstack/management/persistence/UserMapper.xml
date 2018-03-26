@@ -207,11 +207,4 @@
 		delete from et_user_2_department where user_id=#{userId}
 	</delete>
 	
-	<!--addUsersGroupExams -->
-	<insert id="addUsers2Group">
-        replace into et_user_2_group(user_id,group_id) values 
-        <foreach collection="array" open="" close="" index="index" item="item" separator=",">
-            (#{item},#{groupId})
-        </foreach>
-    </insert>
 </mapper>

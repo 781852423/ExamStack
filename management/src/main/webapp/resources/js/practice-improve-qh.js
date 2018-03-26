@@ -18,6 +18,7 @@ var examing = {
 //		this.startTimer();
 		this.bindSwitchQuestion();
 		this.bindSubmitQuestion();
+		this.bindSubmitFavoriteQuestion();
 		this.loadStatus();
 	},
 	
@@ -79,37 +80,6 @@ var examing = {
 			"z-index" : '1'	
 		});
 
-		// nav.attr("style", "position : \"fixed\";bottom:-" + naviheight +
-		// "px;");
-
-		/*$(window).scroll(function() {
-			var nav = $("#question-navi");
-			var scrollBottom = document.body.scrollHeight - $(this).scrollTop() - $(window).height();
-			if (scrollBottom > scrollBottomRated) {
-				// nav.addClass("fixed-navi");
-				var naviheight = $("#question-navi").height() - 33;
-				// nav.attr("style", "bottom:-" + naviheight + "px;");
-				if (nav.css("position") == "relative") {
-					nav.css({
-						position : 'fixed',
-						bottom : "-" + naviheight + "px"
-					});
-				}
-				// nav.css({
-				// // position : 'fixed',
-				// bottom : "-" + naviheight + "px"
-				// });
-
-			} else {
-				// nav.removeClass("fixed-navi");
-				// nav.attr("style", "");
-				nav.css({
-					position : 'relative',
-					bottom : 0
-				});
-			}
-
-		});*/
 
 		$("#question-navi-controller").click(function() {
 			var scrollBottom = document.body.scrollHeight - $(window).scrollTop() - $(window).height();
@@ -623,6 +593,45 @@ var examing = {
 			$(this).addClass("question-list-item-selected");
 			$(this).find("input").prop("checked", true);
 		});
+		
+	},
+	bindSubmitFavoriteQuestion : function bindSubmitFavoriteQuestion(){
+		$("#submit-q-favorite").click(function(){
+			var thisquestion  = $(".question:visible");
+			
+			var data = new Object();
+			data.id = thisquestion.find(".question-id").text();
+			
+//			modal.showProgress();
+			//$(this).attr("disabled","disabled");
+			var request = $.ajax({
+				headers : {
+					'Accept' : 'application/json',
+					'Content-Type' : 'application/json'
+				},
+				async:false,
+				type : "POST",
+				url : "student/putFavoriteQuestion",
+				data : JSON.stringify(data)
+			});
+
+			request.done(function(message, tst, jqXHR) {
+				if (!util.checkSessionOut(jqXHR))
+					return false;
+				if (message.result == "success") {
+					$(window).unbind('beforeunload');
+					util.success("收藏成功！请看底部题版，有五角星表示被收藏的题目");
+					var thisquestion  = $(".question:visible"); // 继续做判断
+				} else {
+					util.error(message.result);
+				}
+			});
+			request.fail(function(jqXHR, textStatus) {
+				util.error("系统繁忙请稍后尝试");
+			});
+			
+		});
+		
 		
 	}
 };

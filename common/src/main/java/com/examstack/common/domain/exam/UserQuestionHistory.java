@@ -14,6 +14,7 @@ public class UserQuestionHistory {
 	private String fieldName;
 	private int questionTypeId;
 	private String questionTypeName;
+	private boolean favorite;
 	
 	public int getQuestionTypeId() {
 		return questionTypeId;
@@ -81,6 +82,12 @@ public class UserQuestionHistory {
 				+ ", createTime=" + createTime + ", pointId=" + pointId + ", pointName=" + pointName + ", fieldId="
 				+ fieldId + ", fieldName=" + fieldName + ", questionTypeId=" + questionTypeId + ", questionTypeName="
 				+ questionTypeName + "]";
+	}
+	public boolean isFavorite() {
+		return favorite;
+	}
+	public void setFavorite(boolean favorite) {
+		this.favorite = favorite;
 	}
 	
 }

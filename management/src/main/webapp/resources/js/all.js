@@ -16,19 +16,7 @@ $(function() {
 	});
 	
 	util.oddRowPrinter();
-	
-	/*// 添加對於csrf的支持
-	$(function(){
-		var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
-		$.ajaxSetup({ 
-			      beforeSend: function (xhr) 
-			                   {
-	                               xhr.setRequestHeader(header, token);
-	                           }
-	         
-		});
-	});*/
+
 	
 	// 增加对考试时候时钟的收缩和隐藏
 	$(function() {
@@ -36,8 +24,6 @@ $(function() {
 	        $(this).text($("#question-time").is(":hidden") ? "收起时钟" : "展开时钟");
 	        $("#question-time").slideToggle();
 	    });
-	});
-	
 	});
 
 var util = {

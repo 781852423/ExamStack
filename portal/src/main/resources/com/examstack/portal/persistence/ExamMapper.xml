@@ -108,7 +108,7 @@
 				#{item}
 			</foreach>
 		</if>
-		order by a.start_time desc
+		order by a.id desc
 	</select>
 	<select id="getExamList" resultType="com.examstack.common.domain.exam.Exam">
 		select id examId,exam_name examName,exam_subscribe

@@ -43,4 +43,18 @@ public interface QuestionHistoryService {
 	 * @return
 	 */
 	public Map<Integer,Map<Integer,QuestionStatistic>> getTypeQuestionHistStaticByFieldId(int fieldId, int userId);
+
+	/**
+	 * 添加用户的收藏questionId
+	 * @param questionId
+	 * @param userId
+	 */
+	public void addUserFavoriteQuestion(Integer questionId, Integer userId);
+
+	/**
+	 * 获得用户favorite状态（收藏）
+	 * @param List<UserQuestionHistory> userHistoryList
+	 * 
+	 */
+	public List<UserQuestionHistory> getFavoriteQuestionStatus(List<UserQuestionHistory> userHistoryList);
 }

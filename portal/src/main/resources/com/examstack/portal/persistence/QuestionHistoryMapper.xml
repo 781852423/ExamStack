@@ -56,4 +56,17 @@
 		b.point_id=c.point_id and c.field_id=#{fieldId} and
 		a.user_id=#{userId} group by c.field_id,c.point_id,c.point_name,a.question_type_id
 	</select>
+	
+	<!--Jie add this function on 20180325 -->
+	<insert id="addUserFavoriteQuestion">
+        replace into et_user_favorite_question(userId,questionId) values(#{userId},#{questionId})
+    </insert>
+    
+    <!-- getFavoriteQuestionStatus Jie add this function on 20180325 -->
+    <select id="getFavoriteQuestionStatus"
+        resultType="com.examstack.common.domain.exam.UserQuestionHistory">
+        select b.questionId, b.userId, true as favorite from et_user_favorite_question b
+        where b.userId=#{userId} and
+        b.questionId=#{questionId}
+    </select>
 </mapper>

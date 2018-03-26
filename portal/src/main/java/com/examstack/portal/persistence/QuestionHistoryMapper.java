@@ -38,4 +38,8 @@ public interface QuestionHistoryMapper {
 	 * @return
 	 */
 	public List<QuestionStatistic> getTypeQuestionHistStaticByFieldId(@Param("fieldId") int fieldId,@Param("userId") int userId);
+
+	public void addUserFavoriteQuestion(@Param("questionId") Integer questionId, @Param("userId")  Integer userId);
+
+	public UserQuestionHistory getFavoriteQuestionStatus(@Param("questionId") Integer questionId, @Param("userId")  Integer userId);
 }

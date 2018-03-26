@@ -112,6 +112,11 @@
 										<button class="btn-success btn" id="next-q-btn" style="margin-left:60px;width:160px;">
 												下一题 <i class="fa fa-chevron-circle-right"></i>
 										</button>
+										
+										<button class="btn-success btn" id="submit-q-favorite" style="margin-left:60px;width:160px;">
+                                                <i class="fa fa-chevron-circle-right"></i>收藏这道题
+                                        </button>
+                                        
 										<button class="btn-warning btn" id="submit-q-btn" style="width:160px;float:right;">
 												<i class="fa fa-check-circle-o"></i>交卷并查看结果
 										</button>
