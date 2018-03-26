@@ -82,13 +82,13 @@
 
 .question-navi-item {
 	display: inline-block;
-	height: 24px;
-	width: 24px;
+	height: 33px;
+	width: 33px;
 	background: rgb(239,237,237);
-	margin: 3px;
+	margin:1px;
 	font-family: arial;
 	text-align: center;
-	line-height: 24px;
+	line-height: 30px;
 	color: #428bca;
 	font-size: 12px;
 	cursor: pointer;
@@ -435,7 +435,7 @@ a.pressed:hover {
 	position: fixed;
 	bottom: 0;
 	z-index: 100;
-	width: 958px;
+	width: 900px; 
 }
 
 #question-navi {
@@ -444,7 +444,7 @@ a.pressed:hover {
 	margin: 0px auto;
 	overflow: hidden;
 	/* max-height: 250px; */
-	width: 959px;
+	width: 905px;
 }
 
 

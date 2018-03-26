@@ -107,7 +107,10 @@ public class PracticeAction {
 			history.setQuestionId(qh.getQuestionId());
 			history.setUserId(userInfo.getUserid());
 			history.setQuestionTypeId(qh.getQuestionTypeId());
-			// 分情况，如果答案是空的，则默认表示没有做题，不妨到历史记录里面
+			// 分情况，如果答案是空的，则默认表示没有做题，不方到历史记录里面
+			/*
+			 * replace into et_user_question_history(question_id,user_id,question_type_id,is_right)
+			 */
 			if(qh.getMyAnswer() != "")
 			{
 				boolean isRight = qh.getAnswer().equals(qh.getMyAnswer()) ? true : false;
@@ -159,11 +162,13 @@ public class PracticeAction {
 		
 		
 		try {
-			System.out.println("收到前台提交的题目Id等信息：" + userHistoryList);
-			List<UserQuestionHistory> userHistoryListWithFavoriteStatus = questionHistoryService.getFavoriteQuestionStatus(userHistoryList);
-			if(userHistoryListWithFavoriteStatus != null)
+			
+			List<Integer> questionIdsFavorite = questionHistoryService.getFavoriteQuestionStatus(userHistoryList);
+			if(questionIdsFavorite != null)
 			{
-				msg.setMessageInfo(new Gson().toJson(userHistoryListWithFavoriteStatus));
+				String questionIdsFavoriteString = new Gson().toJson(questionIdsFavorite);
+				System.out.println(questionIdsFavoriteString);
+				msg.setMessageInfo(questionIdsFavoriteString);
 			}else {
 				msg.setMessageInfo("");
 			}

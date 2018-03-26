@@ -61,12 +61,27 @@
 	<insert id="addUserFavoriteQuestion">
         replace into et_user_favorite_question(userId,questionId) values(#{userId},#{questionId})
     </insert>
+ 
     
-    <!-- getFavoriteQuestionStatus Jie add this function on 20180325 -->
-    <select id="getFavoriteQuestionStatus"
-        resultType="com.examstack.common.domain.exam.UserQuestionHistory">
-        select b.questionId, b.userId, true as favorite from et_user_favorite_question b
-        where b.userId=#{userId} and
-        b.questionId=#{questionId}
+    <!-- getBulkFavoriteQuestionStatus -->
+     <select id="getBulkFavoriteQuestionStatus"
+        resultType="java.lang.Integer">
+        select b.questionId from et_user_favorite_question b
+        where b.userId=#{userId} 
+        <if test="array != null">
+            and b.questionId in
+            <foreach collection="array" open="(" close=")" separator=","
+                index="index" item="item">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+    <!-- 获取某知识点下面user对应的收藏题目数量 -->
+    <select id="getUserFavoiteQuestionAmountByPointId"
+        resultType="java.lang.Integer">
+        select sum(1) as favoriteAmount from et_user_favorite_question a
+         where a.userId=#{userId} 
+                and a.questionId in (select question_id from et_question_2_point b where b.point_id=#{pointId})
+        
     </select>
 </mapper>

@@ -288,14 +288,22 @@ public class PracticePage {
 				ta.setQuestionTypeName(entry1.getValue().getQuestionTypeName());
 				int rightAmount = 0;
 				int wrongAmount = 0;
+				int favoriteAmount = 0;
 				try {
 					rightAmount = historyMap.get(entry.getKey()).get(entry1.getKey()).getRightAmount();
 				} catch (Exception e) {}
+				
 				try {
 					wrongAmount = historyMap.get(entry.getKey()).get(entry1.getKey()).getWrongAmount();
 				} catch (Exception e) {}
+				
+				try {
+					favoriteAmount = questionHistoryService.getUserFavoiteQuestionAmountByPointId(entry1.getValue().getPointId(),userInfo.getUserid());
+				} catch (Exception e) {}
+				
 				ta.setRightAmount(rightAmount);
 				ta.setWrongAmount(wrongAmount);
+				ta.setFavoriteAmount(favoriteAmount); // 针对收藏的题目数量
 				ta.setRestAmount(entry1.getValue().getAmount() - rightAmount - wrongAmount);
 				tal.add(ta);
 				if(kpar.getKnowledgePointName() == null)
@@ -309,7 +317,7 @@ public class PracticePage {
 			kparl.add(kpar);
 		}
 		
-		model.addAttribute("kparl", kparl);
+		model.addAttribute("kparl", kparl); // 其typeAnalysis里面包含了tp.restAmount + tp.rightAmount + tp.wrongAmount
 		model.addAttribute("fieldId", fieldId);
 		model.addAttribute("historyMap", historyStatisticMap);
 		model.addAttribute("pointMap", pointMap);

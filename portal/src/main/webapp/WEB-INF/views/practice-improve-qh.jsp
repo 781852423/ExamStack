@@ -113,8 +113,8 @@
 												下一题 <i class="fa fa-chevron-circle-right"></i>
 										</button>
 										
-										<button class="btn-success btn" id="submit-q-favorite" style="margin-left:60px;width:160px;">
-                                                <i class="fa fa-chevron-circle-right"></i>收藏这道题
+										<button class="btn-primary btn" id="submit-q-favorite" style="margin-left:60px;width:160px;">
+                                                <span class="glyphicon glyphicon-star">收藏这道题</span>
                                         </button>
                                         
 										<button class="btn-warning btn" id="submit-q-btn" style="width:160px;float:right;">

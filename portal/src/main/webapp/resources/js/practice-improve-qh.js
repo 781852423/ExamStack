@@ -137,7 +137,8 @@ var examing = {
 		var questions = $("li.question");
 
 		questions.each(function(index) {
-			var btnhtml = "<a class=\"question-navi-item\">" + (index + 1) + "</a>";
+			var questionId = $(this).find(".question-id").text();
+			var btnhtml = "<a class=\"question-navi-item\" id=\"nav_" + questionId+  "\"><span id=\"navSp_" + questionId + "\">" + (index + 1) + "</span></a>";
 			$("#question-navi-content").append(btnhtml);
 		});
 		/*jie 添加代码去更新被收藏的题目*/
@@ -145,20 +146,31 @@ var examing = {
 		var questionHistoryList = examing.GetAllQUestions();
 		var data = examing.getFavoriteQuestionStatus(questionHistoryList);
 		// 解析status
-		console.log("data:" + data);
+		// console.log("data:" + data);
 		var  questionsWithStatus = JSON.parse(data);
+		console.log("questionsWithStatus:" + questionsWithStatus);
 		if(questionsWithStatus != null && questionsWithStatus != "{}")
 		{
 			for (var index = 0 ; index < questionsWithStatus.length; index++)
 			{
-				 if(questionsWithStatus[index].favorite == "true")
-				 {
-					 Console.log("question id: " + questionsWithStatus[index].questionId + " is favorite\n");
-				 }
+				
+			  // console.log("question id: " + questionsWithStatus[index] + " is favorite\n");
+			   // 把这些favorite的题目，打上标记
+				 examing.markFavoriteQuestion(questionsWithStatus[index]);
 			}
-		}
+		}else
+			{
+			 console.log("questionsWithStatus is null");
+			}
 		
 		
+	},
+	
+	markFavoriteQuestion: function markFavoriteQuestion(questionId)
+	{
+		// 找到对应的panel值和question背景，加上标记
+		var idStr = "span#navSp_" + questionId;
+		$(idStr).addClass("glyphicon glyphicon-star favorite");
 	},
 
 	/**
@@ -382,33 +394,6 @@ var examing = {
 	
 	SendQuestionPractiveResult2Server: function SendQuestionPractiveResult2Server()
 	{
-		/*// 遍历所有的问题
-		var allQuestion = $(".question");
-		var allQuestionLength = allQuestion.length;
-		var questionHistoryList = new Array();
-		
-		for(var index = 0 ; index < allQuestionLength; index++)
-		{
-			var thisquestion = $(allQuestion[index]);
-			
-			if(thisquestion == null || thisquestion == undefined || thisquestion == "")
-			{
-				util.error("没有找到需要发送的题目信息");
-				return false;
-			}
-			var data = new Object();
-			var myAnswer = examing.getAnswerValue(thisquestion)
-			if( myAnswer == undefined || myAnswer == "" || myAnswer == null)
-			{
-			   continue;
-			}
-			data.myAnswer = myAnswer;
-			data.questionId = thisquestion.find(".question-id").text();
-			data.questionTypeId = thisquestion.find(".question-type-id").text();
-			data.pointId = thisquestion.find(".knowledge-point-id").text();
-			data.answer = thisquestion.find(".answer_value").text();
-			questionHistoryList.push(data);		
-		}*/
 		
 		var questionHistoryList = examing.GetAllQUestions();
 		
@@ -819,7 +804,8 @@ var examing = {
 				if (message.result == "success") {
 					$(window).unbind('beforeunload');
 					util.success("收藏成功！");
-					var thisquestion  = $(".question:visible"); // 继续做判断
+					// 继续做判断,更新题版
+					examing.markFavoriteQuestion(data.id);
 				} else {
 					util.error(message.result);
 				}
@@ -851,19 +837,19 @@ var examing = {
   			return false;
   		if (message.result == "success") {
   			$(window).unbind('beforeunload');
-  			// 先做提醒，然后解析这个字符串，最后把收藏夹更新
-  			//console.log("先做提醒，然后解析这个字符串，最后把收藏夹更新:" + message.messageInfo);
+  		
+  			questionFavoriteStatus = message.messageInfo;
   			
   		} else {
   			util.error(message.result);
   		}
-  		questionFavoriteStatus = message.messageInfo;
+  		
   		
   	});
   	request.fail(function(jqXHR, textStatus) {
   		util.error("系统繁忙请稍后尝试");
   	});
-  	
+  	console.log("先做提醒，然后解析这个字符串，最后把收藏夹更新:" +questionFavoriteStatus);
   	return questionFavoriteStatus;
   }
 };

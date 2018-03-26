@@ -42,4 +42,8 @@ public interface QuestionHistoryMapper {
 	public void addUserFavoriteQuestion(@Param("questionId") Integer questionId, @Param("userId")  Integer userId);
 
 	public UserQuestionHistory getFavoriteQuestionStatus(@Param("questionId") Integer questionId, @Param("userId")  Integer userId);
+
+	public List<Integer> getBulkFavoriteQuestionStatus(@Param("array") List<Integer> questionIdList, @Param("userId") int userId);
+
+	public int getUserFavoiteQuestionAmountByPointId(@Param("pointId") int pointId, @Param("userId") int userId);
 }

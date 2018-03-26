@@ -6,9 +6,18 @@ public class TypeAnalysis {
 	private int restAmount;
 	private int rightAmount;
 	private int wrongAmount;
+	private int favoriteAmount;
 
 	public int getQuestionTypeId() {
 		return questionTypeId;
+	}
+
+	public int getFavoriteAmount() {
+		return favoriteAmount;
+	}
+
+	public void setFavoriteAmount(int favoriteAmount) {
+		this.favoriteAmount = favoriteAmount;
 	}
 
 	public void setQuestionTypeId(int questionTypeId) {

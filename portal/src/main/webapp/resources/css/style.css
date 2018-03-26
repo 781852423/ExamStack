@@ -2727,3 +2727,6 @@ video::-webkit-media-controls-enclosure {
 video::-webkit-media-controls-panel {
     width: calc(100% + 30px); 
 }
+.favorite{
+	color:red;
+}

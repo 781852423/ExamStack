@@ -1,5 +1,7 @@
 package com.examstack.portal.service;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,26 +81,28 @@ public class QuestionHistoryServiceImpl implements QuestionHistoryService {
 		questionHistoryMapper.addUserFavoriteQuestion(questionId, userId);
 	}
 	@Override
-	public List<UserQuestionHistory> getFavoriteQuestionStatus(List<UserQuestionHistory> userHistoryList) {
+	public List<Integer> getFavoriteQuestionStatus(List<UserQuestionHistory> userHistoryList) {
 		List<UserQuestionHistory> userHistoryListWithFavoriteStatus = new ArrayList<UserQuestionHistory>();
 		
+		if(userHistoryList == null || userHistoryList.size() == 0)
+		{
+			return null;
+		}
+		
+		List<Integer> questionIdList = new ArrayList<Integer>();
 		for (UserQuestionHistory userQuestionHistory : userHistoryList) 
 		{
-			UserQuestionHistory e = questionHistoryMapper.getFavoriteQuestionStatus(userQuestionHistory.getQuestionId(),userQuestionHistory.getUserId());
-			UserQuestionHistory eCopy = new UserQuestionHistory();
-			if(e != null)
-			{
-				eCopy.setQuestionId(e.getQuestionId());
-				eCopy.setUserId(e.getUserId());
-				eCopy.setFavorite(e.isFavorite());
-				
-			}else {
-				eCopy.setQuestionId(userQuestionHistory.getQuestionId());
-				eCopy.setUserId(userQuestionHistory.getUserId());
-				eCopy.setFavorite(false);
-			}
-			userHistoryListWithFavoriteStatus.add(eCopy);
+			
+			questionIdList.add(userQuestionHistory.getQuestionId());
 		}
-		return userHistoryListWithFavoriteStatus;
+		// 一般前台就一个userId进来
+		List<Integer> favotiteQuestionList = questionHistoryMapper.getBulkFavoriteQuestionStatus(questionIdList,userHistoryList.get(0).getUserId());
+		return favotiteQuestionList;
+	}
+	@Override
+	public int getUserFavoiteQuestionAmountByPointId(int pointId, int userId) {
+		// TODO Auto-generated method stub
+		int favoriteAmount = questionHistoryMapper.getUserFavoiteQuestionAmountByPointId(pointId, userId);
+		return favoriteAmount;
 	}
 }

@@ -56,5 +56,12 @@ public interface QuestionHistoryService {
 	 * @param List<UserQuestionHistory> userHistoryList
 	 * 
 	 */
-	public List<UserQuestionHistory> getFavoriteQuestionStatus(List<UserQuestionHistory> userHistoryList);
+	public List<Integer> getFavoriteQuestionStatus(List<UserQuestionHistory> userHistoryList);
+
+	/**
+	 * 获得用户在某个知识点下的favorite题目数量
+	 * @param List<UserQuestionHistory> userHistoryList
+	 * 
+	 */
+	public int getUserFavoiteQuestionAmountByPointId(int pointId, int userid);
 }
