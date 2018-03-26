@@ -181,4 +181,53 @@ public class PracticeAction {
 
 		return msg;
 	}
+	
+	/**
+	 * 根据questionIds，获取是否之前被做过
+	 * 
+	 * @param sp
+	 * @return
+	 */
+	@RequestMapping(value = "/student/getDoneQuestions", method = RequestMethod.POST)
+	public @ResponseBody Message getDoneQuestions(@RequestBody List<QuestionHistory> qhList) {
+		Message msg = new Message();
+		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		List<UserQuestionHistory> userHistoryList = new ArrayList<UserQuestionHistory>();
+		if(qhList == null || qhList.size() == 0)
+		{
+			msg.setMessageInfo("后台没有接到合适的数据");
+			System.out.println("后台没有接到合适的题目Id等信息");
+			return msg;
+		}
+		
+		for(QuestionHistory qh : qhList)
+		{
+			UserQuestionHistory history = new UserQuestionHistory();
+			history.setQuestionId(qh.getQuestionId());
+			history.setUserId(userInfo.getUserid());
+			
+			userHistoryList.add(history);
+		}
+		
+		try {
+			
+			List<Integer> DoneQuestions = questionHistoryService.getDoneQuestionIdsString(userHistoryList);
+			if(DoneQuestions != null)
+			{
+				String DoneQuestionIdsString = new Gson().toJson(DoneQuestions);
+			
+				msg.setMessageInfo(DoneQuestionIdsString);
+			}else {
+				msg.setMessageInfo("");
+			}
+			
+		} catch (Exception e) {
+			
+			msg.setResult(e.getClass().getName());
+			e.printStackTrace();
+		}
+
+		return msg;
+	}
 }

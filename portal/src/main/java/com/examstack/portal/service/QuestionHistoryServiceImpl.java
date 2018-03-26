@@ -105,4 +105,24 @@ public class QuestionHistoryServiceImpl implements QuestionHistoryService {
 		int favoriteAmount = questionHistoryMapper.getUserFavoiteQuestionAmountByPointId(pointId, userId);
 		return favoriteAmount;
 	}
+	@Override
+	public List<Integer> getDoneQuestionIdsString(List<UserQuestionHistory> userHistoryList) 
+	{
+        List<UserQuestionHistory> userHistoryListWithFavoriteStatus = new ArrayList<UserQuestionHistory>();
+		
+		if(userHistoryList == null || userHistoryList.size() == 0)
+		{
+			return null;
+		}
+		
+		List<Integer> questionIdList = new ArrayList<Integer>();
+		for (UserQuestionHistory userQuestionHistory : userHistoryList) 
+		{
+			
+			questionIdList.add(userQuestionHistory.getQuestionId());
+		}
+		// 一般前台就一个userId进来
+		List<Integer> BulkDoneQuestions = questionHistoryMapper.getBulkDoneQuestions(questionIdList,userHistoryList.get(0).getUserId());
+		return BulkDoneQuestions;
+	}
 }

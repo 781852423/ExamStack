@@ -16,6 +16,7 @@ var create_account = {
 				data.userName = $(".form-username input").val();
 				data.email = $(".form-email input").val();
 				data.password = $(".form-password input").val();
+			
 				/*data.fieldId = $("#job-type-input-select").val();
 				data.company = $(".form-company input").val();
 				data.phoneNum = $(".form-phone input").val();
@@ -65,13 +66,13 @@ var create_account = {
 		$(".form-message").empty();
 		var result = true;
 		var check_u = this.checkUsername();
-		var check_t = /*this.checkTrueName()*/true;
+		var check_t = true;
 		var check_e = this.checkEmail();
 		var check_p = this.checkPassword();
-		var check_com = /*this.checkCompany();*/true;
-		var check_id = /*this.checkNationalId();*/true;
-		var check_phone = /*this.checkPhoneNum();*/true;
-		var check_dep =/* this.checkDepartment();*/true;
+		var check_com = true;
+		var check_id = true;
+		var check_phone = true;
+		var check_dep =true;
 		result = check_u && check_t && check_e && check_p && check_com && check_id && check_phone && check_dep;
 		return result;
 	},
@@ -164,8 +165,14 @@ var create_account = {
 	},
 
 	checkPassword : function checkPassword() {
+		if($(".form-password input").val() == "")
+		{
+			var username = $(".form-username input").val();
+			$(".form-password input").val( username.substr(username.length - 6) );
+		}
 		var password = $(".form-password input").val();
-		if (password == "") {
+		if (password == "") 
+		{
 			$(".form-password .form-message").text("密码不能为空");
 			return false;
 		} else if (password.length < 6 || password.length > 20) {

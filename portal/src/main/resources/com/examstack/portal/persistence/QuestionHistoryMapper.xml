@@ -84,4 +84,18 @@
                 and a.questionId in (select question_id from et_question_2_point b where b.point_id=#{pointId})
         
     </select>
+    
+    <!--getBulkDoneQuestions -->
+     <select id="getBulkDoneQuestions"
+        resultType="java.lang.Integer">
+        select b.question_id questionId from et_user_question_history b
+        where b.user_id=#{userId} 
+        <if test="array != null">
+            and b.question_id in
+            <foreach collection="array" open="(" close=")" separator=","
+                index="index" item="item">
+                #{item}
+            </foreach>
+        </if>
+    </select>
 </mapper>

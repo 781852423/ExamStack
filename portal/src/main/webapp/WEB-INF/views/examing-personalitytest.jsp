@@ -94,7 +94,7 @@
 										<div id="question-navi">
 											<div id="question-navi-controller">
 												<i class="fa fa-arrow-circle-down"></i>
-												<span>答题卡[点击可展开]</span>
+												<span>答题卡[点击可展开]：深灰色：之前做过的题目，红色五角星：收藏过，答题后按钮显示红色：答错</span>
 											</div>
 											<div id="question-navi-content">
 											</div>

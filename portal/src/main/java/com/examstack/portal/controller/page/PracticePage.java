@@ -298,7 +298,7 @@ public class PracticePage {
 				} catch (Exception e) {}
 				
 				try {
-					favoriteAmount = questionHistoryService.getUserFavoiteQuestionAmountByPointId(entry1.getValue().getPointId(),userInfo.getUserid());
+					 favoriteAmount = questionHistoryService.getUserFavoiteQuestionAmountByPointId(entry1.getValue().getPointId(),userInfo.getUserid());
 				} catch (Exception e) {}
 				
 				ta.setRightAmount(rightAmount);

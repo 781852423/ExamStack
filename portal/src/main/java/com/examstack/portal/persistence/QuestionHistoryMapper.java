@@ -46,4 +46,6 @@ public interface QuestionHistoryMapper {
 	public List<Integer> getBulkFavoriteQuestionStatus(@Param("array") List<Integer> questionIdList, @Param("userId") int userId);
 
 	public int getUserFavoiteQuestionAmountByPointId(@Param("pointId") int pointId, @Param("userId") int userId);
+
+	public List<Integer> getBulkDoneQuestions(@Param("array") List<Integer> questionIdList, @Param("userId")  int userId);
 }

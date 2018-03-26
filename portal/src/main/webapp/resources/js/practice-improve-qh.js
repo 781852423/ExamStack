@@ -135,7 +135,7 @@ var examing = {
 	refreshNavi : function refreshNavi() {
 		$("#exam-control #question-navi").empty();
 		var questions = $("li.question");
-
+        
 		questions.each(function(index) {
 			var questionId = $(this).find(".question-id").text();
 			var btnhtml = "<a class=\"question-navi-item\" id=\"nav_" + questionId+  "\"><span id=\"navSp_" + questionId + "\">" + (index + 1) + "</span></a>";
@@ -146,9 +146,12 @@ var examing = {
 		var questionHistoryList = examing.GetAllQUestions();
 		var data = examing.getFavoriteQuestionStatus(questionHistoryList);
 		// 解析status
-		// console.log("data:" + data);
+
 		var  questionsWithStatus = JSON.parse(data);
-		console.log("questionsWithStatus:" + questionsWithStatus);
+		// 获得已经做过的题目，然后标记上去
+		var doneQuestions = JSON.parse(examing.getDoneQuestions(questionHistoryList));
+		
+		
 		if(questionsWithStatus != null && questionsWithStatus != "{}")
 		{
 			for (var index = 0 ; index < questionsWithStatus.length; index++)
@@ -159,9 +162,20 @@ var examing = {
 				 examing.markFavoriteQuestion(questionsWithStatus[index]);
 			}
 		}else
+		{
+		  console.log("questionsWithStatus is null");
+		}
+		
+		if(doneQuestions != null && doneQuestions != "{}")
+		{
+			for (var index = 0 ; index < doneQuestions.length; index++)
 			{
-			 console.log("questionsWithStatus is null");
+				 examing.markDoneQuestion(doneQuestions[index]);
 			}
+		}else
+		{
+		  console.log("questionsWithStatus is null");
+		}
 		
 		
 	},
@@ -171,6 +185,13 @@ var examing = {
 		// 找到对应的panel值和question背景，加上标记
 		var idStr = "span#navSp_" + questionId;
 		$(idStr).addClass("glyphicon glyphicon-star favorite");
+	},
+	
+	markDoneQuestion: function markDoneQuestion(questionId)
+	{
+		// 找到对应的panel值和question背景，加上标记
+		var idStr = "a#nav_" + questionId;
+		$(idStr).addClass("pressed");
 	},
 
 	/**
@@ -851,6 +872,43 @@ var examing = {
   	});
   	console.log("先做提醒，然后解析这个字符串，最后把收藏夹更新:" +questionFavoriteStatus);
   	return questionFavoriteStatus;
+  },
+  
+  getDoneQuestions : function getDoneQuestions (questionIdArray)
+  {
+  	//console.log(JSON.stringify(questionIdArray));
+	  var DoneQuestions = "";
+  	var request = $.ajax({
+  		headers : {
+  			'Accept' : 'application/json',
+  			'Content-Type' : 'application/json'
+  		},
+  		async:false,
+  		type : "POST",
+  		url : "student/getDoneQuestions",
+  		data : JSON.stringify(questionIdArray)
+  	});
+
+  	request.done(function(message, tst, jqXHR) {
+  		if (!util.checkSessionOut(jqXHR))
+  			return false;
+  		if (message.result == "success") {
+  			$(window).unbind('beforeunload');
+  		
+  			DoneQuestions = message.messageInfo;
+  			
+  		} else {
+  			util.error(message.result);
+  		}
+  		
+  		
+  	});
+  	request.fail(function(jqXHR, textStatus) {
+  		util.error("系统繁忙请稍后尝试");
+  	});
+  	console.log("已经做过的题目:" +DoneQuestions);
+  	
+  	return DoneQuestions;
   }
 };
 

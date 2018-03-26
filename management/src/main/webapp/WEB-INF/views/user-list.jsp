@@ -195,7 +195,7 @@
 												</div>
 												<div class="form-line form-email" style="display: block;">
 													<span class="form-label"><span class="warning-label">*</span>邮箱：</span>
-													<input type="text" class="df-input-narrow" id="email-add" maxlength="90">
+													<input type="text" class="df-input-narrow" id="email-add" maxlength="90" value="abc@abc.com">
 													<span class="form-message"></span>
 													<br>
 												</div>

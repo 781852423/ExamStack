@@ -64,6 +64,8 @@ a.join-practice-btn {
 										<td>题型</td>
 										<td>全部</td>
 										<td>已做题目</td>
+										<td>做错题目</td>
+										<td>收藏题目</td>
 										<td></td>
 									</tr>
 								</thead>
@@ -73,6 +75,8 @@ a.join-practice-btn {
 											<td>${tp.questionTypeName }</td>
 											<td><span class="span-info question-number">${tp.restAmount + tp.rightAmount + tp.wrongAmount }</span></td>
 											<td><span class="span-success question-number-2">${tp.rightAmount + tp.wrongAmount }</span></td>
+											<td><span class="span-success question-number-2">${tp.wrongAmount }</span></td>
+											<td><span class="span-success question-number-2">${tp.favoriteAmount}</span></td>
 											<td><a href="student/practice-improve/${fieldId }/${item.knowledgePointId }/${tp.questionTypeId }"
 												class="btn btn-success btn-sm join-practice-btn">参加练习</a></td>
 										</tr>
