@@ -31,3 +31,4 @@
         src="resources/bootstrap/js/bootstrap.min.js"></script>
      <!--  all.js -->
 	<script type="text/javascript" src="resources/js/all.js?v=0712"></script>
+	<script type="text/javascript" src="resources/js/jquery/jquery-confirm/jquery-confirm.min.js"></script>

@@ -19,4 +19,5 @@
     <link href="resources/font-awesome/css/font-awesome.min.css"
         rel="stylesheet">
     <link href="resources/css/style.css" rel="stylesheet">
+    <link href="resources/css/jquery-confirm.min.css" rel="stylesheet">
     <sec:csrfMetaTags/>

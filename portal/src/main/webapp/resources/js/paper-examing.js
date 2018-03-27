@@ -44,11 +44,36 @@ var examing = {
 		
 		$(function(){
 			$("#recyleExambtn").click(function(){
-				//window.location.reload();
-				var currentURL = window.location.href;
-				window.location.href= currentURL.substring(0,currentURL.lastIndexOf('/')) + '/0';
-				console.log('访问新的地址' + window.location.href);
-				window.location.load();
+				
+				$.confirm({
+				    title: '确定清除此考试的记录重新开始做题吗？',
+				    content: '清除后会重新计时并清除之前答题记录，确认继续，取消返回',
+				    buttons: {
+						        confirm: {
+								            text: '确定',
+								            btnClass: 'btn-blue',
+								            keys: ['enter', 'shift'],
+								            action: function(){
+										            	var currentURL = window.location.href;
+														window.location.href= currentURL.substring(0,currentURL.lastIndexOf('/')) + '/0';
+														window.location.load();
+									            	    $.alert('完成');
+						                            }
+					               
+					                       },
+				      
+							        cancel: {
+									            text: '取消',
+									            btnClass: 'btn-blue',
+									            keys: ['enter', 'shift'],
+									            action: function(){
+								                   $.alert('已取消');
+							                     }
+				                             } 
+				              }
+				           }
+				       );
+				
 			});
 		});
 	},

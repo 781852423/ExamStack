@@ -21,4 +21,4 @@
             
     <link href="resources/css/exam.css" rel="stylesheet">
     <link href="resources/chart/morris.css" rel="stylesheet">
-    <sec:csrfMetaTags/>
+    <link href="resources/css/jquery-confirm.min.css" rel="stylesheet">
