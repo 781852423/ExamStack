@@ -97,12 +97,12 @@ public class ExamAction {
 	}
 	
 	/*
-	 * 前台做完试卷后，提交到此函数,去掉消息队列的逻辑，直接提交给后台处理函数
+	 * 前台做完试卷后，提交到此函数,去掉消息队列的逻辑，直接提交给后台处理函数，20190327
 	 */
 	@RequestMapping(value = "/student/exam-submit", method = RequestMethod.POST)
 	public @ResponseBody Message finishExam(@RequestBody AnswerSheet answerSheet) {
 
-		Message message = new Message();
+		/*Message message = new Message();
 		ObjectMapper om = new ObjectMapper();
 		try {
 			qmqpTemplate.convertAndSend(Constants.ANSWERSHEET_DATA_QUEUE, om.writeValueAsBytes(answerSheet));
@@ -115,6 +115,29 @@ public class ExamAction {
 			message.setResult("交卷失败");
 			message.setMessageInfo(e.toString());
 		}
+		return message;*/
+		Message message = new Message();
+		ObjectMapper om = new ObjectMapper();
+		int questionId = 0;
+		String answer = "";
+		// 初始化其大小为128，一般性格测试的题目也够多了	
+		try {
+			// 获取answerSheet的内容，然后匹配分数
+			List<AnswerSheetItem> aSheetItems= answerSheet.getAnswerSheetItems();
+			
+			// 题目和答案都有了，开始进行计算，丢给examService处理
+			// TODO 把获得的分数按照不同性格参照进行排列，并在前台页面展示出来，用个大饼图？可以参照网上方案试试
+
+			float totalScore = examService.AddExamResult(aSheetItems);
+		
+			message.setMessageInfo("交卷成功");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			message.setResult("交卷失败");
+			message.setMessageInfo(e.toString());
+		}
+		
 		return message;
 	}
 	

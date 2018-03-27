@@ -3,6 +3,7 @@ package com.examstack.portal.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.examstack.common.domain.exam.AnswerSheetItem;
 import com.examstack.common.domain.exam.Exam;
 import com.examstack.common.domain.exam.ExamHistory;
 import com.examstack.common.domain.personality.PersonalityQuestionItem;
@@ -84,4 +85,6 @@ public interface ExamService {
 	public List<QuestionQueryResult> getPersonalityTestQuestionQueryResultByXuepaiId(int xuepaiId);
 
 	List<PersonalityScore> getPersonalityTestingResult(List<PersonalityQuestionItem> pQuestionScoreList, int xuepaiId);
+
+	public float AddExamResult(List<AnswerSheetItem> aSheetItems);
 }

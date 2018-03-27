@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.examstack.common.domain.exam.AnswerSheetItem;
 import com.examstack.common.domain.exam.Exam;
 import com.examstack.common.domain.exam.ExamHistory;
 import com.examstack.common.domain.exam.ExamPaper;
@@ -161,5 +162,10 @@ public class ExamServiceImpl implements ExamService {
         	ps.setDanxiangScore(danxiangScore);
         }
 		return pScoreLst;
+	}
+	@Override
+	public float AddExamResult(List<AnswerSheetItem> aSheetItems) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
