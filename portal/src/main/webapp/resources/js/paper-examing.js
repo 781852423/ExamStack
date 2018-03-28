@@ -724,12 +724,14 @@ var examing = {
 	
 	mergeQuestionAnswer : function mergeQuestionAnswer(answerSheet){
 		// 如果做试卷的人希望从头开始做,endsWith 0,那么也不要启用localStorage
-		if (answerSheet==null || answerSheet.examHistroyId != $("#hist-id").val() || window.location.href.endsWith("0"))
+		var hrefLength = window.location.href.length;
+		var lastNo = window.location.href.substring(hrefLength-1);
+		if (answerSheet==null || answerSheet.examHistroyId != $("#hist-id").val() || lastNo == "0")
 			return false;
 		var questions = $("li.question");
 
 		// 如果是从新开始的计算时间，则不要本地存储的duration
-		if(!window.location.href.endsWith("0"))
+		if(lastNo != "0")
 		{
 		    $("#exam-timestamp").text(answerSheet.duration);
 		}
