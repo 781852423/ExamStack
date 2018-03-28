@@ -120,9 +120,9 @@
         a.end_time expTime,a.exam_paper_id
         examPaperId,a.creator,a.creator_id creatorId, 1 as approved,(select name
         from et_exam_paper m where a.exam_paper_id=m.id) examPaperName
-        from et_exam a, et_user_exam_history b where
+        from et_exam a  where
         a.approved=1 and a.end_time &gt; sysdate()
-        and ( (a.id=b.exam_id and b.user_id=#{userId}) or 
+        and ( (a.id in  ( select b.exam_id from et_user_exam_history b where b.user_id=#{userId} )  ) or 
         ( a.id in (select c.examId from et_userGroup_2_Exam c where c.userGroupId in (select d.group_id from et_user_2_group d where d.user_id=#{userId} ) ) ) ) 
         <if test="array != null">
             and a.exam_type in
