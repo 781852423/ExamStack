@@ -36,7 +36,7 @@ public class ExamActionAdmin {
 	private org.springframework.amqp.core.AmqpTemplate qmqpTemplate;
 
 	/**
-	 * 添加考试
+	 * 添加考试:页面添加考试触发的URL：/exam/add-exam
 	 * @param exam
 	 * @return
 	 */

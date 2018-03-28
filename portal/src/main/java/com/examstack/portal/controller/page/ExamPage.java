@@ -45,6 +45,8 @@ import com.examstack.portal.service.QuestionService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.sf.ehcache.search.expression.And;
+
 @Controller
 public class ExamPage {
 
@@ -109,15 +111,16 @@ public class ExamPage {
 				.getUserExamHistByUserIdAndExamId(userInfo.getUserid(), examId, 0, 1, 2, 3);
 		Date startTime;
 		
-		if(bfromhistory == 1)
-			{
-				startTime = examHistory.getStartTime() == null ? new Date() : examHistory.getStartTime();
-			}else
-			{
-				startTime = new Date();
-			}
+		if((bfromhistory == 1) && !(examHistory == null))
+		{
+			startTime = examHistory.getStartTime() == null ? new Date() : examHistory.getStartTime();
+		}
+		else
+		{
+			startTime = new Date();
+		}
 
-		ExamPaper examPaper = examPaperService.getExamPaperById(examHistory.getExamPaperId());
+		ExamPaper examPaper = examPaperService.getExamPaperById(exam.getExamPaperId());
 		
 		duration = examPaper.getDuration();
 

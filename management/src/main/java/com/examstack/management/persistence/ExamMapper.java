@@ -111,5 +111,10 @@ public interface ExamMapper {
 	 * @return
 	 */
 	public List<ExamHistory> getUserExamHistList(@Param("array") int[] approvedType, @Param("page") Page<ExamHistory> page);
+    
+	/*
+	 * 创建考试，同时把考试权限放给这些groupList
+	 */
+	public void addExam2userGroups(@Param("array") List<Integer> groupList, @Param("examId") int examId);
 		
 }

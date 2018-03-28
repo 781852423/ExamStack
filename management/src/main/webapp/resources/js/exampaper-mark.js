@@ -24,6 +24,7 @@ var examing = {
 			this.bindChangePoint();
 
 		},
+		// 需要修改这里的逻辑Todo
 		loadAnswerSheet : function loadAnswerSheet(){
 			$.ajax({
 				headers : {

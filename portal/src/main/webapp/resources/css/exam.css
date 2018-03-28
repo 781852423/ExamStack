@@ -586,6 +586,9 @@ a.navi-item-success{
 .question-navi-item-marked{
 	/* border:1px solid #d9534f; */
 	position:relative;
+	background-image: url(images/full_star.png);
+	background-repeat: no-repeat;
+	background-position: left top; 
 	
 }
 .question-navi-item-marked:before{

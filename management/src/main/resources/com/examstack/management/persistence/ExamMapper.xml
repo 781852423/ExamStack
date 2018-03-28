@@ -107,4 +107,13 @@
 	<delete id="deleteExamById">
 		delete from et_exam where id=#{examId}
 	</delete>
+	
+	<!--addExam2userGroups 创建考试并且把它添加到对应的userGroups -->
+	<insert id="addExam2userGroups" useGeneratedKeys="true">
+        insert into et_userGroup_2_Exam(userGroupId,examId) values
+        <foreach collection="array" index="index" item="item" open=""
+            close="" separator=",">
+            (#{item},#{examId})
+        </foreach>
+    </insert>
 </mapper>

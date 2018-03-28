@@ -32,30 +32,22 @@ public class ExamServiceImpl implements ExamService {
 	private ExamPaperMapper examPaperMapper;
 	@Transactional
 	@Override
+	/*
+	 * 前台页面：添加考试触发的动作
+	 * @see com.examstack.management.service.ExamService#addExam(com.examstack.common.domain.exam.Exam)
+	 */
 	public void addExam(Exam exam) {
 		// TODO Auto-generated method stub
 		try {
-			examMapper.addExam(exam);
-			if(exam.getGroupIdList() != null && exam.getGroupIdList().size() > 0){
-				List<User> userList = userMapper.getUserListByGroupIdList(exam.getGroupIdList(), null);
+			    examMapper.addExam(exam);
+			    if(exam.getGroupIdList() != null && exam.getGroupIdList().size() > 0){
+				List<Integer> groupList = exam.getGroupIdList();
 				ExamPaper examPaper = examPaperMapper.getExamPaperById(exam.getExamPaperId());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
 				Date now = new Date();
-				for(User user : userList){
-					ExamHistory history = new ExamHistory();
-					history.setExamId(exam.getExamId());
-					history.setExamPaperId(exam.getExamPaperId());
-					history.setContent(examPaper.getContent());
-					history.setDuration(examPaper.getDuration());
-					//默认创建的记录都是审核通过的
-					history.setApproved(1);
-					//TO-DO:用户名,密码,开始时间,结束时间 进行md5
-					String seriNo = sdf.format(now) + StringUtil.format(user.getUserId(), 3) + StringUtil.format(exam.getExamId(), 3);
-					history.setSeriNo(seriNo);
-					history.setVerifyTime(new Date());
-					history.setUserId(user.getUserId());
-					examMapper.addUserExamHist(history);
-				}
+              
+			    examMapper.addExam2userGroups(groupList,exam.getExamId());
+				
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -64,6 +56,10 @@ public class ExamServiceImpl implements ExamService {
 	}
 	@Transactional
 	@Override
+	/*
+	 * 添加用户，这里变成添加组，默认添加组-将要做
+	 * @see com.examstack.management.service.ExamService#addExamUser(int, java.lang.String, java.util.HashMap)
+	 */
 	public void addExamUser(int examId,String userNameStr,HashMap<String,Role> roleMap){
 		
 		try {
