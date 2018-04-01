@@ -14,6 +14,7 @@ import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.domain.question.QuestionStatistic;
 import com.examstack.common.domain.question.QuestionStruts;
 import com.examstack.common.domain.question.QuestionType;
+import com.examstack.common.domain.user.Group;
 import com.examstack.common.util.Page;
 
 /**
@@ -68,7 +69,7 @@ public interface QuestionMapper {
 	 * @param page
 	 * @return
 	 */
-	public List<Field> getAllField(@Param("array") List<Integer> groupIdList);
+	public List<Field> getAllField(@Param("userId") int userId);
 
 	/**
 	 * 获取Field下的知识点
@@ -115,4 +116,7 @@ public interface QuestionMapper {
 	public PersonalityCharactor getPersonalityTestCharactorById(int charactorId);
 
 	public List<Question> getQuestionListByIdList(@Param("ids") List<Integer> ids);
+
+	public List<QuestionQueryResult> getQuestionAnalysisListByIdListAndKnowLedgePointId(@Param("array") List<Integer> idList,
+			@Param("knowledgePointId") int knowledgePointId);
 }

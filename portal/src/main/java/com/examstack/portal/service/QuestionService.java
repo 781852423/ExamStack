@@ -11,6 +11,7 @@ import com.examstack.common.domain.question.Question;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.domain.question.QuestionStatistic;
 import com.examstack.common.domain.question.QuestionType;
+import com.examstack.common.domain.user.Group;
 import com.examstack.common.util.Page;
 
 
@@ -32,7 +33,7 @@ public interface QuestionService {
 	 * @return
 	 */
 	//public List<Field> getAllField(Page<Field> page);
-	public List<Field> getAllField(List<Integer> groupIdList);
+	public List<Field> getAllField(int userId);
 	
 	/**
 	 * 获取Field下的知识点
@@ -49,6 +50,15 @@ public interface QuestionService {
 	 * @return
 	 */
 	public Map<Integer,Map<Integer,List<QuestionQueryResult>>> getQuestionMapByFieldId(int fieldId,Page<QuestionQueryResult> page);
+	
+	/**
+	 * 根据试题id获取试题清单(解决重复的knowledge显示重复的问题)
+	 * @param idList
+	 * @param knowledgePointId 
+	 * @param fieldId 
+	 * @return
+	 */
+	List<QuestionQueryResult> getQuestionAnalysisListByIdListAndKnowLedgePointId(List<Integer> idList, int knowledgePointId);
 	
 	/**
 	 * 根据试题id获取试题清单

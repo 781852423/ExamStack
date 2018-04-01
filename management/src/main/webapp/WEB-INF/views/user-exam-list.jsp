@@ -146,110 +146,22 @@
 								<table class="table-striped table">
 									<thead>
 										<tr>
-											<td>学员ID</td>
-											<!-- <td>学员姓名</td> -->
-											<!-- <td style="width: 150px;">准考证号</td> -->
-											<td>单位部门</td>
-											<td>总分</td>
-											<td style="width: 90px;">得分 
-												<a class="fa fa-sort-numeric-asc" href="<%=list[1]%>/exam/exam-student-list/${examId }?order=asc&limit=${limit}&searchStr=${searchStr}"></a>
-												<a class="fa fa-sort-numeric-desc" href="<%=list[1]%>/exam/exam-student-list/${examId }?order=desc&limit=${limit}&searchStr=${searchStr}"></a>
-											</td>
-											<td>是否通过</td>
-											<td>考试时间</td>
-											<td>交卷时间</td>
-											<td style="width: 100px;">审核状态</td>
-											<!-- <td>审核时间</td> -->
-											<td>
-												操作
-											</td>
+											<td>学员ID</td>									
+											<td>过期时间</td>	
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${histList }" var="item">
+										<c:forEach items="${user2ExamList}" var="item">
 											<tr>
-												<td>${item.userName } ${item.trueName }
-												<br>
-												准考证:${item.seriNo }
-												<br>
-												身份证:${item.nationalId }
+												<td>									 
+												  ${item.userName }
 												</td>
-												<%-- <td>${item.trueName }</td>
-												<td>${item.seriNo }</td> --%>
-												<td>${item.depName }</td>
 												<td>
-													
-													${item.point }
-													<br>
-													<c:if test="${item.approved == 2 }">
-														<a target="_blank" href="<%=list[1]%>/exam/mark-exampaper/${item.histId}">阅卷</a>
-													</c:if>
-													<c:if test="${item.approved == 3 }">
-														<a target="_blank" href="<%=list[1]%>/exam/mark-exampaper/${item.histId}">重复阅卷</a>
-													</c:if>
+												  <fmt:formatDate value="${item.expiredTime}" pattern="yyyy-MM-dd HH:mm"/>
+												 
+												  
 												</td>
 												
-												
-												<td>
-													<c:choose>
-														<c:when test="${item.pointGet < item.passPoint }">
-															<span style="color:#d9534f">
-																${item.pointGet }
-															</span>
-															
-														</c:when>
-														<c:otherwise>
-																<span style="color:#5cb85c">
-																${item.pointGet }
-															</span>
-														</c:otherwise>
-													</c:choose>
-												</td>
-												<td>
-													<c:choose>
-														<c:when test="${item.pointGet < item.passPoint }">
-															<span style="color:#d9534f">
-																未通过
-															</span>
-															
-														</c:when>
-														<c:otherwise>
-															<span style="color:#5cb85c">
-																通过
-															</span>
-														</c:otherwise>
-													</c:choose>
-												</td>
-												<td><fmt:formatDate value="${item.startTime}" pattern="yyyy-MM-dd HH:mm"/></td>
-												<td><fmt:formatDate value="${item.submitTime}" pattern="yyyy-MM-dd HH:mm"/></td>
-												<td>
-													<c:choose>
-														<c:when test="${item.approved == 0 }">
-															未审核
-														</c:when>
-														<c:when test="${item.approved == 1 }">
-															通过
-														</c:when>
-														<c:when test="${item.approved == 2 }">
-															已交卷
-														</c:when>
-														<c:when test="${item.approved == 3 }">
-															已阅卷
-														</c:when>
-													</c:choose>
-												</td>
-												<%-- <td><fmt:formatDate value="${item.verifyTime}" pattern="yyyy-MM-dd HH:mm"/></td> --%>
-												<td>
-													<c:choose>
-														<c:when test="${item.approved == 0 }">
-															<button class="approved-btn btn btn-success" data-id="${item.histId }">通过</button>
-															<button class="disapproved-btn btn btn-warning" data-id="${item.histId }">拒绝</button>
-														</c:when>
-													</c:choose>
-													<c:if test="${item.approved == 3 }">
-														<a target="_blank" href="<%=list[1]%>/exam/student-answer-sheet/${item.histId}">查看答卷</a>
-													</c:if>
-												</td>
 											</tr>
 										</c:forEach>
 									</tbody>

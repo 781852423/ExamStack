@@ -35,11 +35,35 @@ a.join-practice-btn {
 	<div class="content" style="margin-bottom: 100px;">
 
 		<div class="container">
-			<ul class="nav nav-pills " style="margin: 20px 0;">
+			<%-- <ul class="nav nav-pills " style="margin: 20px 0;">
 				<c:forEach items="${fieldList }" var="item">
-					<li role="presentation" <c:if test="${item.fieldId == fieldId }"> class="active"</c:if>><a href="student/practice-list?fieldId=${item.fieldId }">${item.fieldName }</a></li>
+					<li role="presentation" <c:if test="${item.fieldId == fieldId }"> class="active"</c:if>><a href="student/practice-list?fieldId=${item.fieldId }">${item.fieldName } - 题库有效期直到：${item.expiredTime } </a></li>
 				</c:forEach>
-			</ul>
+			</ul> --%>
+			<table class="table-bordered table" id="fieldListTable">
+                            <thead>
+
+                                <tr>
+                                    <td>题库名称</td>
+                                    <td>有效期至</td>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${fieldList }" var="item">
+                                    <tr <c:if test="${item.fieldId == fieldId }"> class="active"</c:if>>
+                                        <td><a href="student/practice-list?fieldId=${item.fieldId }">${item.fieldName }</a></td>
+                                        <td>
+                                        <fmt:formatDate value="${item.expiredTime }" pattern="yyyy-MM-dd HH:mm"/>
+                                        </td>
+                                       
+                                    </tr>
+                                </c:forEach>
+
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
 			<div class="row">
 				<div class="col-xs-6">
 					<div style="border-bottom: 1px solid #ddd;">

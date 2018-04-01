@@ -6,6 +6,7 @@ import java.util.List;
 import com.examstack.common.domain.exam.AnswerSheet;
 import com.examstack.common.domain.exam.Exam;
 import com.examstack.common.domain.exam.ExamHistory;
+import com.examstack.common.domain.exam.User2ExamMap;
 import com.examstack.common.domain.exam.UserQuestionHistory;
 import com.examstack.common.domain.user.Role;
 import com.examstack.common.util.Page;
@@ -43,7 +44,7 @@ public interface ExamService {
 	 * @param page
 	 * @return
 	 */
-	public List<ExamHistory> getUserExamHistListByExamId(int examId, String searchStr, String order, int limit, Page<ExamHistory> page);
+	public List<User2ExamMap> getUser2ExamListByExamId(int examId, String searchStr, String order, int limit, Page<User2ExamMap> page);
 	
 	/**
 	 * 删除一门考试
@@ -113,5 +114,8 @@ public interface ExamService {
 	 * @param approved
 	 * @return
 	 */
-	public List<ExamHistory> getUserExamHistList(Page<ExamHistory> page, int ... approved);
+
+	List<User2ExamMap> getUser2ExamList(Page<User2ExamMap> page, int approved);
+
+	List<ExamHistory> getUserExamHistList(Page<ExamHistory> page, int approved);
 }

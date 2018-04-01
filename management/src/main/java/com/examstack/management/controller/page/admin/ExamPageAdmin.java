@@ -1,5 +1,6 @@
 package com.examstack.management.controller.page.admin;
 
+import com.examstack.common.domain.exam.User2ExamMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -131,19 +132,19 @@ public class ExamPageAdmin {
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext()
 			    .getAuthentication()
 			    .getPrincipal();
-		Page<ExamHistory> pageModel = new Page<ExamHistory>();
+		Page<User2ExamMap> pageModel = new Page<User2ExamMap>();
 		pageModel.setPageNo(page);
 		pageModel.setPageSize(50);
 		if("".equals(searchStr))
 			searchStr = null;
 		if("".equals(order) || (!"desc".equals(order) && !"asc".equals(order)))
 			order = null;
-		List<ExamHistory> histList = examService.getUserExamHistListByExamId(examId, searchStr, order, limit, pageModel);
+		List<User2ExamMap> user2ExamList = examService.getUser2ExamListByExamId(examId, searchStr, order, limit, pageModel);
 		String pageStr = PagingUtil.getPageBtnlink(page,
 				pageModel.getTotalPage());
 		List<Group> groupList = userService.getGroupListByUserId(userInfo.getUserid(), null);
 		model.addAttribute("groupList", groupList);
-		model.addAttribute("histList", histList);
+		model.addAttribute("user2ExamList", user2ExamList);
 		model.addAttribute("pageStr", pageStr);
 		model.addAttribute("examId", examId);
 		model.addAttribute("limit", limit);

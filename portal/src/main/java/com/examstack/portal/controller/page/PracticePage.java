@@ -131,7 +131,7 @@ public class PracticePage {
 		
 		List<QuestionQueryResult> qqrList = new ArrayList<QuestionQueryResult>();
 		if(idList.size() > 0)
-			qqrList = questionService.getQuestionAnalysisListByIdList(idList);
+			qqrList = questionService.getQuestionAnalysisListByIdListAndKnowLedgePointId(idList,knowledgePointId);
 		
 		int amount = idList.size();
 		StringBuilder sb = new StringBuilder();
@@ -229,17 +229,7 @@ public class PracticePage {
 		 */
 		List<Group> userGroups = userService.getGroupListByUserId(userInfo.getUserid(), null);
 		
-		
-		List<Integer> groupList = new ArrayList<Integer>();
-		
-		if(userGroups != null)
-		{
-			for(Group g : userGroups)
-			{
-				groupList.add(g.getGroupId());
-			}
-		}
-		List<Field> fieldList = questionService.getAllField(groupList);
+		List<Field> fieldList = questionService.getAllField(userInfo.getUserid());
 		
 		// fieldList剔除那些没有相应题目的题库,只要其removeable为1就可以不显示
 		// 剔除掉性格测试的题目

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.examstack.common.domain.exam.AnswerSheet;
 import com.examstack.common.domain.exam.Exam;
 import com.examstack.common.domain.exam.ExamHistory;
+import com.examstack.common.domain.exam.User2ExamMap;
 import com.examstack.common.util.Page;
 
 public interface ExamMapper {
@@ -40,7 +41,7 @@ public interface ExamMapper {
 	 * @param page
 	 * @return
 	 */
-	public List<ExamHistory> getUserExamHistListByExamId(@Param("examId") int examId,@Param("searchStr") String searchStr,@Param("order") String order,@Param("limit") int limit,@Param("page") Page<ExamHistory> page);
+	public List<User2ExamMap> getUser2ExamListByExamId(@Param("examId") int examId,@Param("searchStr") String searchStr,@Param("order") String order,@Param("limit") int limit,@Param("page") Page<User2ExamMap> page);
 	
 	/**
 	 * 删除一门考试
@@ -110,11 +111,13 @@ public interface ExamMapper {
 	 * @param page
 	 * @return
 	 */
-	public List<ExamHistory> getUserExamHistList(@Param("array") int[] approvedType, @Param("page") Page<ExamHistory> page);
+	public List<ExamHistory> getUserExamHistList(@Param("page") Page<ExamHistory> page,@Param("array") int approvedType);
     
 	/*
 	 * 创建考试，同时把考试权限放给这些groupList
 	 */
 	public void addExam2userGroups(@Param("array") List<Integer> groupList, @Param("examId") int examId);
+
+	public List<User2ExamMap> getUser2ExamList(Page<User2ExamMap> page, int approved);
 		
 }

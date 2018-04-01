@@ -1,5 +1,7 @@
 package com.examstack.common.domain.question;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -10,6 +12,14 @@ public class Field {
 	private String memo;
 	private boolean state;
 	private boolean removeable;
+	private Date expiredTime;
+	
+	public Date getExpiredTime() {
+		return expiredTime;
+	}
+	public void setExpiredTime(Date expiredTime) {
+		this.expiredTime = expiredTime;
+	}
 	public boolean isRemoveable() {
 		return removeable;
 	}

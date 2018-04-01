@@ -29,19 +29,21 @@
 		</set>
 		where id=#{answerSheet.examHistroyId}
 	</update>
-	<select id="getUserExamHistListByExamId" resultType="com.examstack.common.domain.exam.ExamHistory">
-		select m.*,p.dep_name depName from (select a.id histId,a.user_id userId,b.user_name userName,b.true_name trueName,b.phone_num phoneNum,b.email,b.national_id nationalId,a.start_time startTime,a.exam_id examId,a.exam_paper_id examPaperId,a.enabled,c.total_point point,a.seri_no seriNo,a.content,
-		a.answer_sheet answerSheet,a.duration,a.point_get pointGet,a.submit_time submitTime,a.approved,a.verify_time verifyTime,c.pass_point passPoint from et_user_exam_history a,et_user b,et_exam_paper c
-		where a.user_id=b.user_id and a.exam_id=#{examId} and a.exam_paper_id=c.id
+	<!-- 查找这个ExamId 对应的哪些人可以参加考试-->
+	<select id="getUser2ExamListByExamId" resultType="com.examstack.common.domain.exam.User2ExamMap">
+		select a.user_id userId,a.user_name userName,b.expired_time expiredTime , 
+		b.group_id groupId, c.examId,d.exam_name examName  from et_user a inner join  et_user_2_group b 
+		on a.user_id = b.user_id inner join et_userGroup_2_Exam c on  b.group_id = c.userGroupId 
+		inner join et_exam d on c.examId=d.id
 		<if test="order != null">
-			order by a.point_get ${order}
+			order by a.user_id ${order}
 		</if>
 		<if test="limit != 0">
 			limit 0,#{limit}
 		</if>
-		) m left join et_user_2_department n on m.userId = n.user_id left join et_department p on n.dep_id=p.dep_id
+		where d.id = #{examId}
 		<if test="searchStr != null">
-			where (instr(m.trueName,#{searchStr}) &lt;&gt; 0 or instr(m.userName,#{searchStr}) &lt;&gt; 0 or instr(m.phoneNum,#{searchStr}) &lt;&gt; 0 or instr(m.nationalId,#{searchStr}) &lt;&gt; 0 or instr(m.email,#{searchStr}) &lt;&gt;0 or instr(m.seriNo,#{searchStr}) &lt;&gt; 0 or instr(p.dep_name,#{searchStr}) &lt;&gt; 0)
+			and (instr(a.true_name,#{searchStr}) &lt;&gt; 0 or instr(a.user_name,#{searchStr}) &lt;&gt; 0)
 		</if>
 	</select>
 	<select id="getUserExamHistList" resultType="com.examstack.common.domain.exam.ExamHistory">

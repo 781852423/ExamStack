@@ -65,8 +65,8 @@
 	
 	<!-- group -->
 	<select id="getGroupListByUserId" resultType="com.examstack.common.domain.user.Group">
-		select a.group_id groupId, a.user_id userId, b.group_name groupName from et_user_2_group a left join et_group b 
-		on a.group_id=b.id  where a.user_id=#{userId}
+		select a.group_id groupId, a.user_id userId,a.expired_time expiredTime, b.group_name groupName from et_user_2_group a left join et_group b 
+		on a.group_id=b.id  where a.user_id=#{userId} and Now() &lt; a.expired_time
 	</select>
 	
 	<insert id="addUserGroup">

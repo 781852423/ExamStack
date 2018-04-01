@@ -90,29 +90,8 @@
 		a.id=b.exam_id and b.user_id=#{userId}) or #{userId}=0)
 		order by start_time desc
 	</select>
-	<!--
-	<select id="getExamListToStart" resultType="com.examstack.common.domain.exam.Exam">
-		select a.id
-		examId,a.exam_name examName,a.exam_subscribe examSubscribe,a.exam_type
-		examType,a.start_time effTime,
-		a.end_time expTime,a.exam_paper_id
-		examPaperId,a.creator,a.creator_id creatorId,b.approved,(select name
-		from et_exam_paper m where a.exam_paper_id=m.id) examPaperName,
-		b.seri_no seriNo
-		from et_exam a,et_user_exam_history b where
-		a.approved=1 and a.end_time &gt; sysdate()
-		and a.id=b.exam_id and
-		b.user_id=#{userId}
-		<if test="array != null">
-			and a.exam_type in
-			<foreach collection="array" index="index" item="item" open="(" close=")" separator=",">
-				#{item}
-			</foreach>
-		</if>
-		order by a.id desc
-	</select>
-	-->
 	
+	<!--前台用户获取自己的可以考试的列表 -->
 	<select id="getExamListToStart" resultType="com.examstack.common.domain.exam.Exam">
         select a.id
         examId,a.exam_name examName,a.exam_subscribe examSubscribe,a.exam_type
@@ -122,7 +101,7 @@
         from et_exam_paper m where a.exam_paper_id=m.id) examPaperName
         from et_exam a  where
         a.approved=1 and a.end_time &gt; sysdate()
-        and ( (a.id in  ( select b.exam_id from et_user_exam_history b where b.user_id=#{userId} )  ) or 
+        and ( (a.id in  ( select b.examId from et_exam_2_user b where b.userId=#{userId} )  ) or 
         ( a.id in (select c.examId from et_userGroup_2_Exam c where c.userGroupId in (select d.group_id from et_user_2_group d where d.user_id=#{userId} ) ) ) ) 
         <if test="array != null">
             and a.exam_type in

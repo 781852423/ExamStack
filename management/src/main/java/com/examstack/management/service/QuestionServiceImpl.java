@@ -56,7 +56,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public List<Field> getAllField(Page<Field> page) {
-		// TODO Auto-generated method stub
+		
 		return questionMapper.getAllField(page);
 	}
 

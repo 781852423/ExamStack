@@ -73,9 +73,9 @@ public class ExamPage {
 		Page<Exam> page = new Page<Exam>();
 		page.setPageSize(50);
 		page.setPageNo(1);
-		List<Exam> examListToApply = examService.getExamListToApply(userId, page);
-		List<Exam> examListToStart = examService.getExamListToStart(userId, null, 1, 2);
 		
+		List<Exam> examListToStart = examService.getExamListToStart(userId, null, 1, 2);
+	
 		//model.addAttribute("examListToApply", examListToApply);
 		model.addAttribute("examListToStart", examListToStart);
 
@@ -102,7 +102,7 @@ public class ExamPage {
 		int duration = 0;
 		Exam exam = examService.getExamById(examId);
 
-		if (exam.getApproved() != 1 || exam.getExpTime().before(new Date()) || exam.getExamType() == 3) {
+		if (exam == null || exam.getApproved() != 1 || exam.getExpTime().before(new Date()) || exam.getExamType() == 3) {
 			model.addAttribute("errorMsg", "考试未审核或当前时间不能考试或考试类型错误");
 			return "error";
 		}
@@ -111,7 +111,8 @@ public class ExamPage {
 				.getUserExamHistByUserIdAndExamId(userInfo.getUserid(), examId, 0, 1, 2, 3);
 		Date startTime;
 		
-		if((bfromhistory == 1) && !(examHistory == null))
+		/* 预留改动给将来需要暂停考试，保存之前的做题答案 */
+		if((bfromhistory == 1) && (examHistory != null))
 		{
 			startTime = examHistory.getStartTime() == null ? new Date() : examHistory.getStartTime();
 		}
@@ -129,9 +130,15 @@ public class ExamPage {
 		
 		model.addAttribute("startTime", startTime);
 		model.addAttribute("paperParts", examPaper.getPaperParts());
-		model.addAttribute("examHistoryId", examHistory.getHistId());
-		model.addAttribute("examId", examHistory.getExamId());
-		model.addAttribute("examPaperId", examHistory.getExamPaperId());
+		if(examHistory != null && examHistory.getHistId() > 0) // 有历史记录
+		{
+			model.addAttribute("examHistoryId", examHistory.getHistId());
+		}else {
+			model.addAttribute("examHistoryId", "");
+		}
+		
+		model.addAttribute("examId", examId);
+		model.addAttribute("examPaperId", exam.getExamPaperId());
 		model.addAttribute("duration", duration * 60);
 		model.addAttribute("htmlStr", examString);
 		model.addAttribute("examPaper", examPaper);

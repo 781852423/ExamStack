@@ -16,6 +16,7 @@ import com.examstack.common.domain.question.Question;
 import com.examstack.common.domain.question.QuestionQueryResult;
 import com.examstack.common.domain.question.QuestionStatistic;
 import com.examstack.common.domain.question.QuestionType;
+import com.examstack.common.domain.user.Group;
 import com.examstack.common.util.Page;
 import com.examstack.portal.persistence.QuestionMapper;
 
@@ -53,9 +54,9 @@ public class QuestionServiceImpl implements QuestionService {
 
 	// 修改此处的做法，把Page<FieldId>修改成List<Integer> groupIdList
 	@Override
-	public List<Field> getAllField(List<Integer> groupIdList) {
+	public List<Field> getAllField(int userId) {
 		// TODO Auto-generated method stub
-		return questionMapper.getAllField(groupIdList);
+		return questionMapper.getAllField(userId);
 	}
 
 	@Override
@@ -135,6 +136,13 @@ public class QuestionServiceImpl implements QuestionService {
 	public PersonalityCharactor getPersonalityTestCharactor(int charactorId) {
 		// TODO Auto-generated method stub
 		return questionMapper.getPersonalityTestCharactorById(charactorId);
+	}
+
+	@Override
+	public List<QuestionQueryResult> getQuestionAnalysisListByIdListAndKnowLedgePointId(List<Integer> idList,
+			int knowledgePointId) {
+		// TODO Auto-generated method stub
+		return questionMapper.getQuestionAnalysisListByIdListAndKnowLedgePointId(idList,knowledgePointId);
 	}
 
 }

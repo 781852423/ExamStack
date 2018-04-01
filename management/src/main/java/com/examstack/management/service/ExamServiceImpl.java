@@ -1,5 +1,7 @@
 package com.examstack.management.service;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,6 +15,7 @@ import com.examstack.common.domain.exam.AnswerSheet;
 import com.examstack.common.domain.exam.Exam;
 import com.examstack.common.domain.exam.ExamHistory;
 import com.examstack.common.domain.exam.ExamPaper;
+import com.examstack.common.domain.exam.User2ExamMap;
 import com.examstack.common.domain.user.Role;
 import com.examstack.common.domain.user.User;
 import com.examstack.common.util.Page;
@@ -107,9 +110,9 @@ public class ExamServiceImpl implements ExamService {
 		return examMapper.getExamList(typeIdList,page);
 	}
 	@Override
-	public List<ExamHistory> getUserExamHistListByExamId(int examId, String searchStr, String order, int limit, Page<ExamHistory> page) {
+	public List<User2ExamMap> getUser2ExamListByExamId(int examId, String searchStr, String order, int limit, Page<User2ExamMap> page) {
 		// TODO Auto-generated method stub
-		return examMapper.getUserExamHistListByExamId(examId, searchStr, order, limit, page);
+		return examMapper.getUser2ExamListByExamId(examId, searchStr, order, limit, page);
 	}
 	@Override
 	public void deleteExamById(int examId) throws Exception {
@@ -199,11 +202,22 @@ public class ExamServiceImpl implements ExamService {
 		}
 	}
 	@Override
-	public List<ExamHistory> getUserExamHistList(Page<ExamHistory> page, int... approved) {
+	public List<ExamHistory> getUserExamHistList(Page<ExamHistory> page, int approved) {
 		// TODO Auto-generated method stub
-		if(approved.length == 0)
-			approved = null;
-		return examMapper.getUserExamHistList(approved, page);
+		//return examMapper.getUserExamHistList(page,approved);这里暂时去掉这个功能 2018-4-1
+		return null;
 	}
+	@Override
+	public List<User2ExamMap> getUser2ExamList(Page<User2ExamMap> page, int approved) {
+		// TODO Auto-generated method stub
+		if(page != null)
+		{
+			return examMapper.getUser2ExamList(page, approved);
+		}
+		else {
+			return null;
+		}
+	}
+
 
 }

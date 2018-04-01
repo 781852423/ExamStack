@@ -2730,3 +2730,9 @@ video::-webkit-media-controls-panel {
 .favorite{
 	color:red;
 }
+
+#fieldListTable > tbody > tr.active > td,#fieldListTable > tbody > tr.active > td > a
+{
+	color: #fff;
+	background-color: #428bca;
+}

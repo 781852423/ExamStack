@@ -1,6 +1,7 @@
 package com.examstack.common.domain.user;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -11,6 +12,7 @@ public class Group implements Serializable {
 	private int groupId;
 	private String groupName;
 	private int userId;
+	private Date expiredTime;
 	private boolean defaultt;
 	public boolean isDefaultt() {
 		return defaultt;
@@ -35,6 +37,17 @@ public class Group implements Serializable {
 	}
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
+	}
+	public Date getExpiredTime() {
+		return expiredTime;
+	}
+	public void setExpiredTime(Date expiredTime) {
+		this.expiredTime = expiredTime;
+	}
+	@Override
+	public String toString() {
+		return "Group [groupId=" + groupId + ", groupName=" + groupName + ", userId=" + userId + ", expiredTime="
+				+ expiredTime + ", defaultt=" + defaultt + "]";
 	}
 	
 }

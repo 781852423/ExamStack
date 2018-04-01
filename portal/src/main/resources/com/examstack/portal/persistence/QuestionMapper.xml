@@ -60,6 +60,44 @@
 		a.id,a.content,a.answer,a.analysis,a.question_type_id,a.reference,
 		a.examing_point,b.point_id;
 	</select>
+	<!-- 针对错题的显示，修正问题，提供针对knowledgePoint的查询 -->
+	<select id="getQuestionAnalysisListByIdListAndKnowLedgePointId"
+        resultType="com.examstack.common.domain.question.QuestionQueryResult">
+        SELECT a.id
+        questionId,a.content,a.answer,a.analysis,a.question_type_id
+        questionTypeId,a.reference
+        referenceName,a.examing_point
+        examingPoint,b.point_id knowledgePointId,GROUP_CONCAT(d.field_name,'
+        &gt; ',c.point_name,' &gt; ',
+        a.examing_point ,case when a.keyword is
+        null then '' else
+        CONCAT('
+        知识关键点：',a.keyword) end)
+        pointName,GROUP_CONCAT(d.field_name)
+        fieldName
+        from et_question
+        a,et_question_2_point
+        b,et_knowledge_point
+        c,et_field d
+        <where>
+            a.id=b.question_id and
+            b.point_id = #{knowledgePointId} and
+            b.point_id=c.point_id and
+            c.field_id=d.field_id
+            <if test="array != null">
+                and
+                a.id in
+                <foreach collection="array" open="(" close=")" index="index"
+                    item="item" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+
+        </where>
+        group by
+        a.id,a.content,a.answer,a.analysis,a.question_type_id,a.reference,
+        a.examing_point,b.point_id;
+    </select>
 	<select id="getQuestionAnalysisListByPointIdAndTypeId"
 		resultType="com.examstack.common.domain.question.QuestionQueryResult">
 		select z.*, f.content parentContent from  (SELECT a.id
@@ -93,24 +131,17 @@
 	</select>
 
 	<select id="getAllField" resultType="com.examstack.common.domain.question.Field">
-        select field_id
-        fieldId,field_name fieldName,memo,state,
-        case when exists(select 1 from
-        et_knowledge_point m where m.field_id=a.field_id) then 0
-        else 1 end
-        removeable
-        from et_field a where 
-        a.field_id in (
-        select fieldId from et_group_2_field where 1=1 
-        <if test="array != null">
-		     and  groupId in 
-		        <foreach collection="array" index="index" item="item" open="("
-		                close=")" separator=",">
-		                #{item}
-		        </foreach>
-        </if>
-        )
-        order by field_id desc
+        select a.field_id fieldId,
+           a.field_name fieldName,
+           a. memo,
+           a.state,
+            case when exists(select 1 from
+            et_knowledge_point m where m.field_id=a.field_id) then 0
+            else 1 end
+            removeable,
+           c.expired_time expiredTime
+            from et_field a inner join  et_group_2_field b on a.field_id=b.fieldId
+           inner join  et_user_2_group  c on  b.groupId = c.group_id  and c.user_id = #{userId} and NOW() &lt; c.expired_time
 	</select>
 
 	<select id="getKnowledgePointByFieldId" resultType="com.examstack.common.domain.question.KnowledgePoint">
