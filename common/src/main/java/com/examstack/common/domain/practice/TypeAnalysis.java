@@ -7,6 +7,15 @@ public class TypeAnalysis {
 	private int rightAmount;
 	private int wrongAmount;
 	private int favoriteAmount;
+    private int amount;
+    
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
 
 	public int getQuestionTypeId() {
 		return questionTypeId;

@@ -81,7 +81,7 @@ a.join-practice-btn {
 								<thead>
 									<tr>
 										<td colspan="4"><h6>${item.knowledgePointName }</h6>
-											<span style="color: #428bca;">学习进度：<fmt:formatNumber
+											<span style="color: #428bca;">学习进度（做正确题目/题目总数,同一题之后的做题结果会覆盖之前的做题结果，例如第一次做错，下次做对，那就算此题做对）：<fmt:formatNumber
 													value="${item.finishRate }" type="percent" /></span></td>
 									</tr>
 									<tr>
@@ -97,7 +97,7 @@ a.join-practice-btn {
 									<c:forEach items="${item.typeAnalysis }" var="tp">
 										<tr>
 											<td>${tp.questionTypeName }</td>
-											<td><span class="span-info question-number">${tp.restAmount + tp.rightAmount + tp.wrongAmount }</span></td>
+											<td><span class="span-info question-number">${tp.amount }</span></td>
 											<td><span class="span-success question-number-2">${tp.rightAmount + tp.wrongAmount }</span></td>
 											<td><span class="span-success question-number-2">${tp.wrongAmount }</span></td>
 											<td><span class="span-success question-number-2">${tp.favoriteAmount}</span></td>

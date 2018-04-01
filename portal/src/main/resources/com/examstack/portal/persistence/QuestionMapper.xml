@@ -190,9 +190,12 @@
 		where a.id=b.question_id and b.point_id=c.point_id and c.field_id=#{fieldId} group by c.field_id,c.point_id,c.point_name
 	</select>
 	
+	<!--题目总数来自这里 -->
 	<select id="getTypeQuestionStaticByFieldId" resultType="com.examstack.common.domain.question.QuestionStatistic">
-		select c.field_id fieldId,c.point_id pointId,c.point_name pointName,d.id questionTypeId,d.name questionTypeName,count(1) amount from et_question a,et_question_2_point b,et_knowledge_point c,et_question_type d
-		where a.id=b.question_id and b.point_id=c.point_id and c.field_id=#{fieldId} and a.question_type_id=d.id group by c.field_id,c.point_id,c.point_name,d.id,d.name
+		select c.field_id fieldId,c.point_id pointId,c.point_name pointName,d.id questionTypeId,d.name questionTypeName,
+		count(1) amount from et_question a,et_question_2_point b,et_knowledge_point c,et_question_type d
+		where a.id=b.question_id and b.point_id=c.point_id and c.field_id=#{fieldId} and 
+		a.question_type_id=d.id group by c.field_id,c.point_id,c.point_name,d.id,d.name
 	</select>
 	
 	<select id="getPersonalityTestXuepai" resultType="com.examstack.common.domain.personality.PersonalityTestXuepai">

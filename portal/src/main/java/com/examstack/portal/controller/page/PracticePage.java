@@ -222,13 +222,7 @@ public class PracticePage {
 		
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
-		
-		/*
-		 * 对应questionMapper的getAllField SQL 查询出的是题库的列表：例如5	商业银行基础知识	商业银行基础知识	0	0
-		 *
-		 */
-		List<Group> userGroups = userService.getGroupListByUserId(userInfo.getUserid(), null);
-		
+	
 		List<Field> fieldList = questionService.getAllField(userInfo.getUserid());
 		
 		// fieldList剔除那些没有相应题目的题库,只要其removeable为1就可以不显示
@@ -246,8 +240,7 @@ public class PracticePage {
 		
 		fieldList = NonRemoveableFieldList;
 				
-        System.out.println("用户获取的题库名称、ID" + fieldList);
-		// 目前没有fieldID =0的选项
+      
 		if(fieldId == 0 || fieldList == null)
 		{
 			if(fieldList != null && fieldList.size() > 0)		
@@ -259,13 +252,17 @@ public class PracticePage {
 				return "noPracticeAvailable";
 			}
 		}
-			
-		Map<Integer, Map<Integer, QuestionStatistic>> questionMap = questionService.getTypeQuestionStaticByFieldId(fieldId);
+		// 此函数xml文件已更新	
+		Map<Integer, Map<Integer, QuestionStatistic>> questionMap = questionService.getTypeQuestionStaticByFieldId(fieldId); 
+		// 此函数xml文件已更新
 		Map<Integer, Map<Integer, QuestionStatistic>> historyMap = questionHistoryService.getTypeQuestionHistStaticByFieldId(fieldId, userInfo.getUserid());
+		//  此函数xml文件已更新
 		Map<Integer, QuestionStatistic> historyStatisticMap = questionHistoryService.getQuestionHistStaticByFieldId(fieldId, userInfo.getUserid());
+		
 		Map<Integer, KnowledgePoint> pointMap = questionService.getKnowledgePointByFieldId(null, fieldId);
 		
 		List<KnowledgePointAnalysisResult> kparl = new ArrayList<KnowledgePointAnalysisResult>();
+		
 		for(Map.Entry<Integer, Map<Integer, QuestionStatistic>> entry : questionMap.entrySet()){
 			KnowledgePointAnalysisResult kpar = new KnowledgePointAnalysisResult();
 			kpar.setKnowledgePointId(entry.getKey());
@@ -279,6 +276,7 @@ public class PracticePage {
 				int rightAmount = 0;
 				int wrongAmount = 0;
 				int favoriteAmount = 0;
+				int amount = 0;
 				try {
 					rightAmount = historyMap.get(entry.getKey()).get(entry1.getKey()).getRightAmount();
 				} catch (Exception e) {}
@@ -291,15 +289,23 @@ public class PracticePage {
 					 favoriteAmount = questionHistoryService.getUserFavoiteQuestionAmountByPointId(entry1.getValue().getPointId(),userInfo.getUserid());
 				} catch (Exception e) {}
 				
+				try {
+					 amount = questionMap.get(entry.getKey()).get(entry1.getKey()).getAmount();
+				} catch (Exception e) {}
+				
 				ta.setRightAmount(rightAmount);
+				ta.setAmount(amount);
 				ta.setWrongAmount(wrongAmount);
 				ta.setFavoriteAmount(favoriteAmount); // 针对收藏的题目数量
-				ta.setRestAmount(entry1.getValue().getAmount() - rightAmount - wrongAmount);
+				ta.setRestAmount(amount - rightAmount - wrongAmount);
+				
 				tal.add(ta);
+				
 				if(kpar.getKnowledgePointName() == null)
 					kpar.setKnowledgePointName(entry1.getValue().getPointName());
 				totalRightAmount += rightAmount;
-				totalAmount += entry1.getValue().getAmount();
+				
+				totalAmount += amount;
 			}
 			kpar.setTypeAnalysis(tal);
 			if(totalAmount > 0)
@@ -315,7 +321,21 @@ public class PracticePage {
 		
 		
 		model.addAttribute("fieldList", fieldList);// 只显示有题目的题库
-		
+	
+		for(KnowledgePointAnalysisResult kpr : kparl)
+		{
+			List<TypeAnalysis> tpList = kpr.getTypeAnalysis();
+			for(TypeAnalysis tp : tpList)
+			{
+				System.out.println("userId:" + userInfo.getUserid());
+				System.out.println("fieldId:" + fieldId);
+				System.out.println("pointId:" + kpr.getKnowledgePointId());
+				System.out.println("KnowledgePointName:" + kpr.getKnowledgePointName());
+				System.out.println("RestAmount:" + tp.getRestAmount());
+				System.out.println("RightAmount:" + tp.getRightAmount());
+				System.out.println("WrongAmount:" + tp.getWrongAmount());
+			}
+		}
 		return "practice";
 	}
 	

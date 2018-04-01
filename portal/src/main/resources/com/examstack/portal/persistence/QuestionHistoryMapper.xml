@@ -44,6 +44,7 @@
 		a.user_id=#{userId} group by c.field_id,c.point_id,c.point_name
 	</select>
 
+    <!--页面数据来自这里 -->
 	<select id="getTypeQuestionHistStaticByFieldId"
 		resultType="com.examstack.common.domain.question.QuestionStatistic">
 		select c.field_id fieldId,c.point_id pointId,c.point_name
