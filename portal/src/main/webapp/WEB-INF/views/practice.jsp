@@ -43,9 +43,9 @@ a.join-practice-btn {
 			<table class="table-bordered table" id="fieldListTable">
                             <thead>
 
-                                <tr>
-                                    <td>题库名称(点击以下题库名称切换)</td>
-                                    <td>有效期至</td>
+                                <tr  class="success">
+                                    <th>题库名称(点击以下题库名称切换)</th>
+                                    <th>有效期至</th>
 
                                 </tr>
                             </thead>
