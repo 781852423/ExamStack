@@ -80,9 +80,13 @@ a.join-practice-btn {
 							<table class="table-striped table">
 								<thead>
 									<tr>
-										<td colspan="4"><h6>${item.knowledgePointName }</h6>
-											<span style="color: #428bca;">学习进度（做正确题目/题目总数,同一题之后的做题结果会覆盖之前的做题结果<fmt:formatNumber
-													value="${item.finishRate }" type="percent" /></span></td>
+										<td colspan="6"><h6>${item.knowledgePointName }</h6>
+											<span style="color: #428bca;">学习进度：<fmt:formatNumber
+													value="${item.finishRate }" type="percent" />
+											
+											</span>
+											（做正确题目/题目总数,同一题之后的做题结果会覆盖之前的做题结果）
+											</td>
 									</tr>
 									<tr>
 										<td>题型</td>
