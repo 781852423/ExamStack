@@ -44,7 +44,7 @@ a.join-practice-btn {
                             <thead>
 
                                 <tr>
-                                    <td>题库名称</td>
+                                    <td>题库名称(点击以下题库名称切换)</td>
                                     <td>有效期至</td>
 
                                 </tr>
@@ -81,7 +81,7 @@ a.join-practice-btn {
 								<thead>
 									<tr>
 										<td colspan="4"><h6>${item.knowledgePointName }</h6>
-											<span style="color: #428bca;">学习进度（做正确题目/题目总数,同一题之后的做题结果会覆盖之前的做题结果，例如第一次做错，下次做对，那就算此题做对）：<fmt:formatNumber
+											<span style="color: #428bca;">学习进度（做正确题目/题目总数,同一题之后的做题结果会覆盖之前的做题结果<fmt:formatNumber
 													value="${item.finishRate }" type="percent" /></span></td>
 									</tr>
 									<tr>

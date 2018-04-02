@@ -576,7 +576,7 @@ a.navi-item-success{
 .question-mark{
 	margin-left: 20px;
 	cursor:pointer;
-	color:#1ba1e2;
+	color:#ff0000;
 }
 
 .question-mark:hover{
@@ -586,21 +586,20 @@ a.navi-item-success{
 .question-navi-item-marked{
 	/* border:1px solid #d9534f; */
 	position:relative;
-	background-image: url(images/full_star.png);
-	background-repeat: no-repeat;
-	background-position: left top; 
-	
+	Z-index:200;
 }
 .question-navi-item-marked:before{
 	content:"";
 	display:block;
 	border-width:0 10px 10px 0;
-	border-color:#1ba1e2 #1ba1e2 transparent transparent; background:transparent;
+	border-color:#ff0000 #ff0000 #ff0000 #ff0000; 
+	background:transparent;
 	border-style:solid; 
 	width:0; 
 	position:absolute; 
 	top:0;
 	right:0;
+	Z-index:200;
 }
 
 .correctAnswer{
