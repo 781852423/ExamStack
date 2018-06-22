@@ -105,16 +105,20 @@
 										
 									
 									<div id="question-switch">
-										<button class="btn-success btn" id="previous-q-btn" style="width:160px;">
+										<button class="btn-success btn" id="previous-q-btn" style="width:100px;">
 												<i class="fa fa-chevron-circle-left"></i>上一题
 
 										</button>
-										<button class="btn-success btn" id="next-q-btn" style="margin-left:60px;width:160px;">
+										<button class="btn-success btn" id="next-q-btn" style="margin-left:30px;width:100px;">
 												下一题 <i class="fa fa-chevron-circle-right"></i>
 										</button>
 										
-										<button class="btn-primary btn" id="submit-q-favorite" style="margin-left:60px;width:160px;">
-                                                <span class="glyphicon glyphicon-star">收藏这道题</span>
+										<button class="btn-primary btn" id="submit-q-favorite" style="margin-left:30px;width:100px;">
+                                                <span class="glyphicon glyphicon-star">收藏这题</span>
+                                        </button>
+                                        
+                                        <button class="btn-warning btn" id="submit-q-unfavorite" style="margin-left:30px;width:100px;">
+                                                <span class="glyphicon glyphicon-star">取消收藏</span>
                                         </button>
                                         
 										<button class="btn-warning btn" id="submit-q-btn" style="width:160px;float:right;">

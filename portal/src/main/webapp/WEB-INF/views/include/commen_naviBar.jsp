@@ -23,7 +23,7 @@
                         </li>
                         
                         <li>
-                            <a href="training-list"><i class="fa fa-book"></i>培训资料</a>
+                            <a href="training-list"><i class="fa fa-book"></i>视频培训</a>
                         </li>
                         <li>
                             <a href="student/usercenter"><i class="fa fa-dashboard"></i>会员中心</a>

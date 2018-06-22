@@ -397,22 +397,23 @@ var examing = {
 			}
 			var data = new Object();
 			var myAnswer = examing.getAnswerValue(thisquestion)
-			if( myAnswer == undefined || myAnswer == "" || myAnswer == null)
+			
+			if( myAnswer !== null || myAnswer !== undefined || myAnswer !== '')
 			{
-				myAnswer = "";
-				
+			    // 只有不是空的答案，才会添加进去
+				data.myAnswer = myAnswer;
+				data.questionId = thisquestion.find(".question-id").text();
+				data.questionTypeId = thisquestion.find(".question-type-id").text();
+				data.pointId = thisquestion.find(".knowledge-point-id").text();
+				data.answer = thisquestion.find(".answer_value").text();
+				questionHistoryList.push(data);	
 			}
-			data.myAnswer = myAnswer;
-			data.questionId = thisquestion.find(".question-id").text();
-			data.questionTypeId = thisquestion.find(".question-type-id").text();
-			data.pointId = thisquestion.find(".knowledge-point-id").text();
-			data.answer = thisquestion.find(".answer_value").text();
-			questionHistoryList.push(data);	
+			
 		}
 		
 		return questionHistoryList;
 	},
-	
+	// 提交“交卷并查看结果”按钮后出发的动作
 	SendQuestionPractiveResult2Server: function SendQuestionPractiveResult2Server()
 	{
 		

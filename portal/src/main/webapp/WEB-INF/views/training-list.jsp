@@ -36,7 +36,8 @@
 				<div class="row">
 						<div class="col-xs-12">
 							<div style="border-bottom: 1px solid #ddd;">
-							<h3 class="title"><i class="fa fa-book"></i>培训资料</h3>
+							<h3 class="title"><i class="fa fa-book"></i>视频培训
+							</h3>
 							
 							</div>
 							<div id="training-list">
