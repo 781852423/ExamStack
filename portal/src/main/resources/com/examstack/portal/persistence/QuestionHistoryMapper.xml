@@ -99,4 +99,9 @@
             </foreach>
         </if>
     </select>
+    
+    <!--Jie add this function on 20180623 取消收藏某题目 -->
+    <insert id="cancelUserFavoriteQuestion">
+        delete from  et_user_favorite_question where userId=#{userId} and questionId=#{questionId};
+    </insert>
 </mapper>

@@ -83,6 +83,32 @@ public class PracticeAction {
 		return msg;
 	}
 	
+	// student/putUnFavoriteQuestion
+		/**
+		 * 取消收藏一道题
+		 * @param sp
+		 * @return
+		 */
+		@RequestMapping(value = "/student/putUnFavoriteQuestion", method = RequestMethod.POST)
+		public @ResponseBody Message putUnFavoriteQuestion(@RequestBody Question qh) {
+			Message msg = new Message();
+			UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			Question qt = new Question();
+			qt.setId(qh.getId());
+			//qt.setUserId(userInfo.getUserid());
+			
+			try {
+				  questionHistoryService.cancelUserFavoriteQuestion(qh.getId(), userInfo.getUserid());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				msg.setResult(e.getClass().getName());
+				e.printStackTrace();
+			}
+
+			return msg;
+		}
+	
 	/**
 	 * 练习模式处理答案提交，处理多道题目回答情况
 	 * 

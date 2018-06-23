@@ -66,4 +66,6 @@ public interface QuestionHistoryService {
 	public int getUserFavoiteQuestionAmountByPointId(int pointId, int userid);
 
 	public List<Integer> getDoneQuestionIdsString(List<UserQuestionHistory> userHistoryList);
+
+	public void cancelUserFavoriteQuestion(int questionId, int userid);
 }

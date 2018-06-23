@@ -125,4 +125,9 @@ public class QuestionHistoryServiceImpl implements QuestionHistoryService {
 		List<Integer> BulkDoneQuestions = questionHistoryMapper.getBulkDoneQuestions(questionIdList,userHistoryList.get(0).getUserId());
 		return BulkDoneQuestions;
 	}
+	@Override
+	public void cancelUserFavoriteQuestion(int questionId, int userid) {
+		
+		questionHistoryMapper.cancelUserFavoriteQuestion(questionId, userid);
+	}
 }

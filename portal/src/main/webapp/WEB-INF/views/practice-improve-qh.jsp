@@ -117,8 +117,8 @@
                                                 <span class="glyphicon glyphicon-star">收藏这题</span>
                                         </button>
                                         
-                                        <button class="btn-warning btn" id="submit-q-unfavorite" style="margin-left:30px;width:100px;">
-                                                <span class="glyphicon glyphicon-star">取消收藏</span>
+                                        <button class="btn-danger btn" id="submit-q-unfavorite" style="margin-left:30px;width:100px;">
+                                                <span class="glyphicon">取消收藏</span>
                                         </button>
                                         
 										<button class="btn-warning btn" id="submit-q-btn" style="width:160px;float:right;">

@@ -48,4 +48,6 @@ public interface QuestionHistoryMapper {
 	public int getUserFavoiteQuestionAmountByPointId(@Param("pointId") int pointId, @Param("userId") int userId);
 
 	public List<Integer> getBulkDoneQuestions(@Param("array") List<Integer> questionIdList, @Param("userId")  int userId);
+
+	public void cancelUserFavoriteQuestion(@Param("questionId") Integer questionId,  @Param("userId") Integer userId);
 }

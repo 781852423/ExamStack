@@ -19,6 +19,7 @@ var examing = {
 		this.bindSwitchQuestion();
 		this.bindSubmitQuestion();
 		this.bindSubmitFavoriteQuestion();
+		this.bindSubmitUnFavoriteQuestion();
 		this.loadStatus();
 	},
 	
@@ -75,9 +76,15 @@ var examing = {
 
 		$("#exampaper-footer").height($("#question-navi").height());
 
-		nav.css({
+		/*nav.css({
 			position : 'fixed',
 			bottom : "-" + naviheight + "px",
+			"z-index" : '1'	
+		});
+		*/
+		nav.css({
+			position : 'fixed',
+			bottom : "0px",
 			"z-index" : '1'	
 		});
 
@@ -159,7 +166,7 @@ var examing = {
 				
 			  // console.log("question id: " + questionsWithStatus[index] + " is favorite\n");
 			   // 把这些favorite的题目，打上标记
-				 examing.markFavoriteQuestion(questionsWithStatus[index]);
+				 examing.markFavoriteQuestion(questionsWithStatus[index],true);
 			}
 		}else
 		{
@@ -180,11 +187,18 @@ var examing = {
 		
 	},
 	
-	markFavoriteQuestion: function markFavoriteQuestion(questionId)
+	markFavoriteQuestion: function markFavoriteQuestion(questionId, add)
 	{
 		// 找到对应的panel值和question背景，加上标记
 		var idStr = "span#navSp_" + questionId;
-		$(idStr).addClass("glyphicon glyphicon-star favorite");
+		if(add == true)
+		{
+			$(idStr).addClass("glyphicon glyphicon-star favorite");
+		}else
+		{
+			$(idStr).removeClass("glyphicon glyphicon-star favorite");
+		}
+		
 	},
 	
 	markDoneQuestion: function markDoneQuestion(questionId)
@@ -827,7 +841,7 @@ var examing = {
 					$(window).unbind('beforeunload');
 					util.success("收藏成功！");
 					// 继续做判断,更新题版
-					examing.markFavoriteQuestion(data.id);
+					examing.markFavoriteQuestion(data.id,true);
 				} else {
 					util.error(message.result);
 				}
@@ -838,6 +852,44 @@ var examing = {
 			
 		});
   },
+  
+  bindSubmitUnFavoriteQuestion : function bindSubmitUnFavoriteQuestion(){
+	  //取消收藏
+		$("#submit-q-unfavorite").click(function(){
+			var thisquestion  = $("li.question:visible");
+			
+			var data = new Object();
+			data.id = thisquestion.find(".question-id").text();
+			
+			var request = $.ajax({
+				headers : {
+					'Accept' : 'application/json',
+					'Content-Type' : 'application/json'
+				},
+				async: false,
+				type : "POST",
+				url : "student/putUnFavoriteQuestion",
+				data : JSON.stringify(data)
+			});
+
+			request.done(function(message, tst, jqXHR) {
+				if (!util.checkSessionOut(jqXHR))
+					return false;
+				if (message.result == "success") {
+					$(window).unbind('beforeunload');
+					util.success("取消收藏成功！");
+					// 继续做判断,更新题版
+					examing.markFavoriteQuestion(data.id,false);
+				} else {
+					util.error(message.result);
+				}
+			});
+			request.fail(function(jqXHR, textStatus) {
+				util.error("系统繁忙请稍后尝试");
+			});
+			
+		});
+},
   
   getFavoriteQuestionStatus : function getFavoriteQuestionStatus (questionIdArray)
   {
