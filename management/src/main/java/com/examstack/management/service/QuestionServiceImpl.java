@@ -283,6 +283,7 @@ public class QuestionServiceImpl implements QuestionService {
 	public void uploadQuestions(String filePath, String username, int fieldId) {
 		// comment below line on 2017-06-20解决题库导入的时候文件找不到的问题
 		// String strPath = ",webapps,files,question," + username + ",tmp";
+		// 2018-7-12 修改question的name字段，保留50个字，而不是10个字
 		String strPath = ",webapps,files,training," + username;
 		filePath = System.getProperty("catalina.base") + strPath.replace(',', File.separatorChar) + File.separatorChar
 				+ filePath.substring(filePath.lastIndexOf("/")+1);
@@ -294,7 +295,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 				System.out.println(map);
 				Question question = new Question();
-				question.setName(map.get("题目").length() > 10 ? map.get("题目").substring(0, 10) + "..." : map.get("题目"));
+				question.setName(map.get("题目").length() > 50 ? map.get("题目").substring(0, 50) + "..." : map.get("题目"));
 				if (map.get("类型").equals("单选题") || map.get("类型").equals("单项选择题"))
 					question.setQuestion_type_id(1);
 				else if (map.get("类型").equals("多选题") || map.get("类型").equals("多项选择题"))
