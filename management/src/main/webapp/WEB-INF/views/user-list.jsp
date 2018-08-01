@@ -407,6 +407,62 @@
 									</div>
 								</div>
 							</div>
+							
+							<!-- 添加视频权限到相应的用户 -->
+                            <div class="modal fade" id="add-video2user-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h6 class="modal-title" id="myModalLabel">添加视频权限到相应的用户</h6>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="video-add2user-form" style="margin-top:40px;"  action="admin/common/video2group-add">
+                                                <!-- 这里是显示用户id -->
+                                                <div class="form-line form-group-id" style="display: none;">
+                                                    <span class="form-label"><span class="warning-label">*</span>id：</span>
+                                                    <input type="text" class="df-input-narrow" id="userId" value="" disabled="disabled">
+                                                    <span class="form-message"></span>
+                                                    <br>
+                                                </div>
+                                                <!-- 这里是添加到的userName,显示出来 -->
+                                                <div class="form-line form-group" style="display: block;">
+                                                    <span class="form-label"><span class="warning-label">*</span>添加视频到此用户：</span>
+                                                    <input type="text" class="df-input-narrow" id="userName" value="用户名" disabled="disabled">
+                                                    <span class="form-message"></span>
+                                                    <br>
+                                                </div>
+                                                <!-- 添加视频部分 -->
+                                                <div class="form-line exampaper-type" id="aq-field">
+                                                        <span class="form-label"><span class="warning-label">*</span>视频：</span>
+                                                        <select id="field-from-select" class="df-input-narrow">
+                                                            <c:forEach items="${videoList }" var="item">
+                                                                <option value="${item.videoId }" >${item.videoName } </option>
+                                                            </c:forEach>
+                                                    
+                                                        </select><a class="add-field-btn">添加</a><span id="messageforAddVideo" class="form-message"></span>
+                                                    
+                                                        <div class="q-label-list" id="videolist2user">
+                                                        </div>
+                                                </div>
+
+                                            </form>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                关闭窗口
+                                            </button>
+                                            <!-- data-action被后台js获取到，作为点击后提交的地址 -->
+                                            <button id="add-video2user-modal-btn" data-action="admin/common/video2user-add"  type="button" class="btn btn-primary">
+                                                确定添加
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 						</div>
 					</div>
 				</div>

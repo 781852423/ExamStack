@@ -136,6 +136,7 @@ public class UserPageAdmin {
 		return "admin/group2field-list";
 	}
 	
+	
 	@RequestMapping(value = { "admin/user/inner/group2field-list/{groupId}" }, method = RequestMethod.GET)
 	public String showGroup2FieldListInnerAdminPage(Model model, HttpServletRequest request, @PathVariable Integer groupId) {
 		UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

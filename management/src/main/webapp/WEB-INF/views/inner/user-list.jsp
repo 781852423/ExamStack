@@ -113,7 +113,9 @@ request.setAttribute("leftMenuId",list[3]);
 								</c:choose>
 							</td>
 							<td>
-								<span class="r-update-btn btn-sm btn-success" data-id="21321" data-depid="${item.depId }">修改</span><span class="disable-btn btn-sm btn-danger" data-id="${item.userId }"
+							    <span class="r-update-btn btn-sm btn-success" id="video2user">视频权限</span>
+								<span class="r-update-btn btn-sm btn-success" data-id="21321" data-depid="${item.depId }">修改</span>
+								<span class="disable-btn btn-sm btn-danger" data-id="${item.userId }"
 								data-status="${!item.enabled }">
 								<c:choose>
 									<c:when test="${!item.enabled }">

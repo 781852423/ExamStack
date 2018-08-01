@@ -5,7 +5,7 @@ $(function() {
 	
 	var selectGroupId = $(".user-group-nav .active", parent.document).data("id");
 	
-	$("#add-field2group-modal-btn").click(function() {
+	$("#6yccyyyy").click(function() {
 		 // 获取活动的点击组
 		var selectGroupId = $(".user-group-nav .active", parent.document).data("id");
 		if(selectGroupId == 0 || selectGroupId == "0")
