@@ -161,12 +161,12 @@
 		delete from et_group where id=#{group}
 	</delete>
 	<insert id="addUserGroup">
-		replace into et_user_2_group(user_id,group_id,expired_time) values (#{userId},#{groupId},DATE_ADD(NOW(), INTERVAL 1 YEAR))
+		replace into et_user_2_group(user_id,group_id,expired_time) values (#{userId},#{groupId},DATE_ADD(NOW(), INTERVAL 6 MONTH))
 	</insert>
 	<insert id="addUsers2Group">
 		replace into et_user_2_group(user_id,group_id,expired_time) values 
 		<foreach collection="array" open="" close="" index="index" item="item" separator=",">
-			(#{item},#{groupId},DATE_ADD(NOW(), INTERVAL 1 YEAR))
+			(#{item},#{groupId},DATE_ADD(NOW(), INTERVAL 6 MONTH))
 		</foreach>
 	</insert>
 	<delete id="deleteUserGroup">
