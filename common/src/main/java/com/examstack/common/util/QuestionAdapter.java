@@ -695,7 +695,7 @@ public class QuestionAdapter {
 		sb.append("</div>");
 		sb.append("<div class=\"answer-desc-detail\">");
 		sb.append("<label class=\"label label-info\">");
-		sb.append("<i class=\"fa fa-paw\"></i><span> 来源</span>");
+		sb.append("<i class=\"fa fa-paw\"></i><span> 发表时间</span>");
 		sb.append("</label>");
 		sb.append("<div class=\"answer-desc-content\">");
 		sb.append("<p>");
@@ -1017,7 +1017,7 @@ public class QuestionAdapter {
 		if (showAnalysis) {
 			sb.append("<div class=\"answer-desc-detail\">");
 			sb.append("<label class=\"label label-info\">");
-			sb.append("<i class=\"fa fa-paw\"></i><span> 来源</span>");
+			sb.append("<i class=\"fa fa-paw\"></i><span> 发表时间</span>");
 			sb.append("</label>");
 			sb.append("<div class=\"answer-desc-content\">");
 			sb.append("<p>");
@@ -1374,7 +1374,7 @@ public class QuestionAdapter {
 		// 显示答题分析
 			sb.append("<div class=\"answer-desc-detail\">");
 			sb.append("<label class=\"label label-info\">");
-			sb.append("<i class=\"fa fa-paw\"></i><span> 来源</span>");
+			sb.append("<i class=\"fa fa-paw\"></i><span> 发表时间</span>");
 			sb.append("</label>");
 			sb.append("<div class=\"answer-desc-content\">");
 			sb.append("<p>");
